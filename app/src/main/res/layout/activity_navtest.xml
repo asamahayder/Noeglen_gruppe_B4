@@ -4,13 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#ffffff"
     tools:context=".View.View.navtest">
 
 
     <FrameLayout
         android:id="@+id/content_frame"
-        android:layout_width="407dp"
-        android:layout_height="508dp"
+        android:layout_width="416dp"
+        android:layout_height="731dp"
         android:background="#323232"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -18,11 +19,10 @@
 
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="412dp"
-        android:layout_height="70dp"
+        android:layout_width="422dp"
+        android:layout_height="66.5dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="1.0"
@@ -97,6 +97,7 @@
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:textColor="#ffffff"
         android:text="Artikler"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -110,6 +111,7 @@
         android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:textColor="#ffffff"
         android:text="Dagbog"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -123,6 +125,7 @@
         android:id="@+id/textView3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:textColor="#ffffff"
         android:text="Home Page"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -135,6 +138,7 @@
         android:id="@+id/textView4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:textColor="#ffffff"
         android:text="Meditation"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -148,6 +152,7 @@
         android:id="@+id/textView5"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:textColor="#ffffff"
         android:text="Chat"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -156,13 +161,5 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="1.0" />
-
-    <Button
-        android:id="@+id/button7"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:clickable="false"
-        tools:layout_editor_absoluteX="126dp"
-        tools:layout_editor_absoluteY="542dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
