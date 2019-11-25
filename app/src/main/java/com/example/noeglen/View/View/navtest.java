@@ -33,6 +33,11 @@ public class navtest extends AppCompatActivity implements View.OnClickListener {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_navtest);
 
+        int[] state = new int[] {android.R.attr.state_window_focused, android.R.attr.state_focused};
+
+        StateListAnimator var = new StateListAnimator();
+
+
         //Text for buttons
         articletw = findViewById(R.id.textView);
         diarytw = findViewById(R.id.textView2);
@@ -54,17 +59,11 @@ public class navtest extends AppCompatActivity implements View.OnClickListener {
         btn4 = findViewById(R.id.button4);
         btn5 = findViewById(R.id.button5);
 
-        btn.setElevation(0);
-
-        /*
-        btn.setStateListAnimator(null);
-        btn2.setStateListAnimator(null);
-        btn3.setStateListAnimator(null);
-        btn4.setStateListAnimator(null);
-        btn5.setStateListAnimator(null);
-
-         */
-
+        btn.setSelected(false);
+        btn2.setSelected(false);
+        btn3.setSelected(false);
+        btn4.setSelected(false);
+        btn5.setSelected(false);
 
         btn.setOnClickListener(this);
         btn2.setOnClickListener(this);
@@ -93,14 +92,18 @@ public class navtest extends AppCompatActivity implements View.OnClickListener {
             btn4.animate().translationY(0).setDuration(200).setInterpolator(new DecelerateInterpolator());
             btn5.animate().translationY(0).setDuration(200).setInterpolator(new DecelerateInterpolator());
 
-
-
             //Button Relative position
             btn.setTranslationY(-85);
             btn2.setTranslationY(0);
             btn3.setTranslationY(0);
             btn4.setTranslationY(0);
             btn5.setTranslationY(0);
+
+            btn.setSelected(true);
+            btn2.setSelected(false);
+            btn3.setSelected(false);
+            btn4.setSelected(false);
+            btn5.setSelected(false);
 
             //Texview animation
             articletw.animate().translationY(-40).setDuration(200).setInterpolator(new DecelerateInterpolator());
@@ -134,6 +137,12 @@ public class navtest extends AppCompatActivity implements View.OnClickListener {
             btn4.setTranslationY(0);
             btn5.setTranslationY(0);
 
+            btn.setSelected(false);
+            btn2.setSelected(true);
+            btn3.setSelected(false);
+            btn4.setSelected(false);
+            btn5.setSelected(false);
+
             diarytw.animate().translationY(-40).setDuration(200).setInterpolator(new DecelerateInterpolator());
             articletw.animate().translationY(0).setDuration(200).setInterpolator(new DecelerateInterpolator());
             dashboardtw.animate().translationY(0).setDuration(200).setInterpolator(new DecelerateInterpolator());
@@ -146,8 +155,6 @@ public class navtest extends AppCompatActivity implements View.OnClickListener {
             dashboardtw.setVisibility(View.INVISIBLE);
             meditationtw.setVisibility(View.INVISIBLE);
             chattw.setVisibility(View.INVISIBLE);
-
-
 
             selectedFragment = new FavFragment();
 
@@ -164,6 +171,12 @@ public class navtest extends AppCompatActivity implements View.OnClickListener {
             btn2.setTranslationY(0);
             btn4.setTranslationY(0);
             btn5.setTranslationY(0);
+
+            btn.setSelected(false);
+            btn2.setSelected(false);
+            btn3.setSelected(true);
+            btn4.setSelected(false);
+            btn5.setSelected(false);
 
             dashboardtw.animate().translationY(-40).setDuration(200).setInterpolator(new DecelerateInterpolator());
             articletw.animate().translationY(0).setDuration(200).setInterpolator(new DecelerateInterpolator());
@@ -194,6 +207,12 @@ public class navtest extends AppCompatActivity implements View.OnClickListener {
             btn3.setTranslationY(0);
             btn5.setTranslationY(0);
 
+            btn.setSelected(false);
+            btn2.setSelected(false);
+            btn3.setSelected(false);
+            btn4.setSelected(true);
+            btn5.setSelected(false);
+
             chattw.animate().translationY(-40).setDuration(200).setInterpolator(new DecelerateInterpolator());
             articletw.animate().translationY(0).setDuration(200).setInterpolator(new DecelerateInterpolator());
             diarytw.animate().translationY(0).setDuration(200).setInterpolator(new DecelerateInterpolator());
@@ -222,6 +241,12 @@ public class navtest extends AppCompatActivity implements View.OnClickListener {
             btn2.setTranslationY(0);
             btn3.setTranslationY(0);
             btn4.setTranslationY(0);
+
+            btn.setSelected(false);
+            btn2.setSelected(false);
+            btn3.setSelected(false);
+            btn4.setSelected(false);
+            btn5.setSelected(true);
 
             meditationtw.animate().translationY(-40).setDuration(200).setInterpolator(new DecelerateInterpolator());
             articletw.animate().translationY(0).setDuration(200).setInterpolator(new DecelerateInterpolator());
