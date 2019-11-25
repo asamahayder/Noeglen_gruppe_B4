@@ -5,7 +5,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
 import android.os.Bundle;
+import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 
 import com.example.noeglen.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -19,6 +22,7 @@ public class MainActivity extends AppCompatActivity {
 
         BottomNavigationView bottomNav = findViewById(R.id.bottom_navigation);
         bottomNav.setOnNavigationItemSelectedListener(navList);
+
 
         getSupportFragmentManager().beginTransaction().replace(R.id.mainContent, new HomeFragment()).commit();
 
