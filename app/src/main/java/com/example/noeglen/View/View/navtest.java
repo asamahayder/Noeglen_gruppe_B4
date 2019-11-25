@@ -33,11 +33,6 @@ public class navtest extends AppCompatActivity implements View.OnClickListener {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_navtest);
 
-        int[] state = new int[] {android.R.attr.state_window_focused, android.R.attr.state_focused};
-
-        StateListAnimator var = new StateListAnimator();
-
-
         //Text for buttons
         articletw = findViewById(R.id.textView);
         diarytw = findViewById(R.id.textView2);
@@ -59,6 +54,7 @@ public class navtest extends AppCompatActivity implements View.OnClickListener {
         btn4 = findViewById(R.id.button4);
         btn5 = findViewById(R.id.button5);
 
+        //Highlighter function
         btn.setSelected(false);
         btn2.setSelected(false);
         btn3.setSelected(false);
@@ -99,6 +95,7 @@ public class navtest extends AppCompatActivity implements View.OnClickListener {
             btn4.setTranslationY(0);
             btn5.setTranslationY(0);
 
+            //Highlights the selected
             btn.setSelected(true);
             btn2.setSelected(false);
             btn3.setSelected(false);
