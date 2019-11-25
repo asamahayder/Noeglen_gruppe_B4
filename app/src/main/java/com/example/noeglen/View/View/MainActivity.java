@@ -20,7 +20,7 @@ public class MainActivity extends AppCompatActivity {
         BottomNavigationView bottomNav = findViewById(R.id.bottom_navigation);
         bottomNav.setOnNavigationItemSelectedListener(navList);
 
-        getSupportFragmentManager().beginTransaction().replace(R.id.mainContent, new HomeFragment()).commit();
+        getSupportFragmentManager().beginTransaction().replace(R.id.mainContent, new DashFragment()).commit();
 
     }
     private BottomNavigationView.OnNavigationItemSelectedListener navList = new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -29,16 +29,21 @@ public class MainActivity extends AppCompatActivity {
             Fragment selectedFragment = null;
 
             switch (item.getItemId()){
-                case R.id.nav_home:
-                    selectedFragment = new HomeFragment();
+                case R.id.nav_dash:
+                    selectedFragment = new DashFragment();
                     break;
                 case R.id.nav_fav:
                     selectedFragment = new FavFragment();
                     break;
-                case R.id.nav_search:
-                    selectedFragment = new SearchFragment();
+                case R.id.nav_diary:
+                    selectedFragment = new DiaryFragment();
                     break;
-
+                case R.id.nav_info:
+                    selectedFragment = new InfoFragment();
+                    break;
+                case R.id.nav_exer:
+                    selectedFragment = new ExerFragment();
+                    break;
             }
             getSupportFragmentManager().beginTransaction().replace(R.id.mainContent, selectedFragment).commit();
             return true;

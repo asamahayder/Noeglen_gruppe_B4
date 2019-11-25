@@ -1,14 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-
     <item
-        android:id="@+id/nav_home"
+        android:id="@+id/nav_info"
+        android:title="Viden" />
+    <item
+        android:id="@+id/nav_diary"
+        android:title="Dagbog"/>
+    <item
+        android:id="@+id/nav_dash"
         android:title="Home"/>
     <item
         android:id="@+id/nav_fav"
-        android:title="Favorites"/>
+        android:title="Favoritter"/>
     <item
-        android:id="@+id/nav_search"
-        android:title="Search"/>
+        android:id="@+id/nav_exer"
+        android:title="Øvelser"/>
 
 </menu>
