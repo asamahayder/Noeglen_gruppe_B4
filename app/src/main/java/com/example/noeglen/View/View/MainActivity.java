@@ -1,4 +1,4 @@
-package com.example.noeglen.View;
+package com.example.noeglen.View.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 
