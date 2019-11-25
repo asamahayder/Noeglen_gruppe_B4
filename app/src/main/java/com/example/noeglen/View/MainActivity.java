@@ -1,8 +1,10 @@
-package com.example.noeglen;
+package com.example.noeglen.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+
+import com.example.noeglen.R;
 
 public class MainActivity extends AppCompatActivity {
 
