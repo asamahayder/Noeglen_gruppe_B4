@@ -24,10 +24,12 @@
         tools:ignore="HardcodedText" />
 
     <TextView
-        android:id="@+id/tDashVid"
+        android:id="@+id/tDashVid1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="TextView"
-        tools:layout_editor_absoluteX="189dp"
-        tools:layout_editor_absoluteY="404dp" />
+        android:text="Dag 1"
+        android:textSize="50sp"
+        android:textColor="#ffffff"
+        tools:layout_editor_absoluteX="141dp"
+        tools:layout_editor_absoluteY="107dp" />
 </androidx.constraintlayout.widget.ConstraintLayout>
