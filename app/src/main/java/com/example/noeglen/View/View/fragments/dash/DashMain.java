@@ -1,5 +1,6 @@
-package com.example.noeglen.View.View;
+package com.example.noeglen.View.View.fragments.dash;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,16 +13,20 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.example.noeglen.R;
+import com.example.noeglen.View.View.IMainActivity;
 
-public class DashFragment extends Fragment implements View.OnClickListener {
+public class DashMain extends Fragment implements View.OnClickListener {
 
+    private IMainActivity iMain;
     private ImageView iVidDash;
     private TextView tVidDash1, tVidDash2;
+    private String fragmentTag;
+    private boolean addToBackStack;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_dash, container, false);
+        return inflater.inflate(R.layout.fragment_dashmain, container, false);
     }
 
     @Override
@@ -41,10 +46,21 @@ public class DashFragment extends Fragment implements View.OnClickListener {
     @Override
     public void onClick(View v) {
 
+        Fragment selectedFragment = null;
 
-        if (v == iVidDash){
-            Fragment selectedFragment = new VidFragment();
-            getChildFragmentManager().beginTransaction().replace(R.id.content_frame,selectedFragment).addToBackStack(null).commit();
+        switch (v.getId()){
+            case R.id.iDashVid:
+                selectedFragment = new Video();
+                fragmentTag = getString(R.string.fragment_exer);
+                addToBackStack = true;
+                break;
         }
+        iMain.setFragment(selectedFragment,fragmentTag,addToBackStack);
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        iMain = (IMainActivity) getActivity();
     }
 }
