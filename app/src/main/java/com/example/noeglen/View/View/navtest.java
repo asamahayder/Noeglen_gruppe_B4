@@ -217,18 +217,18 @@ public class navtest extends AppCompatActivity implements View.OnClickListener {
             btn4.setSelected(true);
             btn5.setSelected(false);
 
-            chattw.animate().translationY(-40).setDuration(200).setInterpolator(new DecelerateInterpolator());
+            meditationtw.animate().translationY(-40).setDuration(200).setInterpolator(new DecelerateInterpolator());
             articletw.animate().translationY(0).setDuration(200).setInterpolator(new DecelerateInterpolator());
             diarytw.animate().translationY(0).setDuration(200).setInterpolator(new DecelerateInterpolator());
-            meditationtw.animate().translationY(0).setDuration(200).setInterpolator(new DecelerateInterpolator());
+            chattw.animate().translationY(0).setDuration(200).setInterpolator(new DecelerateInterpolator());
             dashboardtw.animate().translationY(0).setDuration(200).setInterpolator(new DecelerateInterpolator());
 
-            chattw.setVisibility(View.VISIBLE);
-            chattw.startAnimation(in);
+            meditationtw.setVisibility(View.VISIBLE);
+            meditationtw.startAnimation(in);
             articletw.setVisibility(View.INVISIBLE);
             diarytw.setVisibility(View.INVISIBLE);
             dashboardtw.setVisibility(View.INVISIBLE);
-            meditationtw.setVisibility(View.INVISIBLE);
+            chattw.setVisibility(View.INVISIBLE);
 
             selectedFragment = new FavFragment();
 
@@ -252,18 +252,18 @@ public class navtest extends AppCompatActivity implements View.OnClickListener {
             btn4.setSelected(false);
             btn5.setSelected(true);
 
-            meditationtw.animate().translationY(-40).setDuration(200).setInterpolator(new DecelerateInterpolator());
+            chattw.animate().translationY(-40).setDuration(200).setInterpolator(new DecelerateInterpolator());
             articletw.animate().translationY(0).setDuration(200).setInterpolator(new DecelerateInterpolator());
             diarytw.animate().translationY(0).setDuration(200).setInterpolator(new DecelerateInterpolator());
-            chattw.animate().translationY(0).setDuration(200).setInterpolator(new DecelerateInterpolator());
+            meditationtw.animate().translationY(0).setDuration(200).setInterpolator(new DecelerateInterpolator());
             dashboardtw.animate().translationY(0).setDuration(200).setInterpolator(new DecelerateInterpolator());
 
-            meditationtw.setVisibility(View.VISIBLE);
-            meditationtw.startAnimation(in);
+            chattw.setVisibility(View.VISIBLE);
+            chattw.startAnimation(in);
             articletw.setVisibility(View.INVISIBLE);
             diarytw.setVisibility(View.INVISIBLE);
             dashboardtw.setVisibility(View.INVISIBLE);
-            chattw.setVisibility(View.INVISIBLE);
+            meditationtw.setVisibility(View.INVISIBLE);
 
             selectedFragment = new ExerFragment();
         }
