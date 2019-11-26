@@ -54,12 +54,19 @@ public class navtest extends AppCompatActivity implements View.OnClickListener {
         btn4 = findViewById(R.id.button4);
         btn5 = findViewById(R.id.button5);
 
-        //Highlighter function
-        btn.setSelected(false);
+        //Which highlighter function?
+        /*btn.setSelected(false);
         btn2.setSelected(false);
         btn3.setSelected(false);
         btn4.setSelected(false);
         btn5.setSelected(false);
+        */
+        // -||-
+        btn.setStateListAnimator(null);
+        btn2.setStateListAnimator(null);
+        btn3.setStateListAnimator(null);
+        btn4.setStateListAnimator(null);
+        btn5.setStateListAnimator(null);
 
         btn.setOnClickListener(this);
         btn2.setOnClickListener(this);
@@ -82,14 +89,14 @@ public class navtest extends AppCompatActivity implements View.OnClickListener {
         if(view.equals(btn)){
 
             //Button Animations
-            btn.animate().translationY(-85).setDuration(200).setInterpolator(new DecelerateInterpolator());
+            btn.animate().translationY(-77).setDuration(200).setInterpolator(new DecelerateInterpolator());
             btn2.animate().translationY(0).setDuration(200).setInterpolator(new DecelerateInterpolator());
             btn3.animate().translationY(0).setDuration(200).setInterpolator(new DecelerateInterpolator());
             btn4.animate().translationY(0).setDuration(200).setInterpolator(new DecelerateInterpolator());
             btn5.animate().translationY(0).setDuration(200).setInterpolator(new DecelerateInterpolator());
 
             //Button Relative position
-            btn.setTranslationY(-85);
+            btn.setTranslationY(-77);
             btn2.setTranslationY(0);
             btn3.setTranslationY(0);
             btn4.setTranslationY(0);
@@ -122,13 +129,13 @@ public class navtest extends AppCompatActivity implements View.OnClickListener {
 
         } else if (view.equals(btn2)){
 
-            btn2.animate().translationY(-85).setDuration(200).setInterpolator(new DecelerateInterpolator());
+            btn2.animate().translationY(-77).setDuration(200).setInterpolator(new DecelerateInterpolator());
             btn.animate().translationY(0).setDuration(200).setInterpolator(new DecelerateInterpolator());
             btn3.animate().translationY(0).setDuration(200).setInterpolator(new DecelerateInterpolator());
             btn4.animate().translationY(0).setDuration(200).setInterpolator(new DecelerateInterpolator());
             btn5.animate().translationY(0).setDuration(200).setInterpolator(new DecelerateInterpolator());
 
-            btn2.setTranslationY(-85);
+            btn2.setTranslationY(-77);
             btn.setTranslationY(0);
             btn3.setTranslationY(0);
             btn4.setTranslationY(0);
@@ -157,13 +164,13 @@ public class navtest extends AppCompatActivity implements View.OnClickListener {
 
         } else if (view.equals(btn3)){
 
-            btn3.animate().translationY(-85).setDuration(200).setInterpolator(new DecelerateInterpolator());
+            btn3.animate().translationY(-77).setDuration(200).setInterpolator(new DecelerateInterpolator());
             btn.animate().translationY(0).setDuration(200).setInterpolator(new DecelerateInterpolator());
             btn2.animate().translationY(0).setDuration(200).setInterpolator(new DecelerateInterpolator());
             btn4.animate().translationY(0).setDuration(200).setInterpolator(new DecelerateInterpolator());
             btn5.animate().translationY(0).setDuration(200).setInterpolator(new DecelerateInterpolator());
 
-            btn3.setTranslationY(-85);
+            btn3.setTranslationY(-77);
             btn.setTranslationY(0);
             btn2.setTranslationY(0);
             btn4.setTranslationY(0);
@@ -192,13 +199,13 @@ public class navtest extends AppCompatActivity implements View.OnClickListener {
 
         } else if (view.equals(btn4)) {
 
-            btn4.animate().translationY(-85).setDuration(200).setInterpolator(new DecelerateInterpolator());
+            btn4.animate().translationY(-77).setDuration(200).setInterpolator(new DecelerateInterpolator());
             btn.animate().translationY(0).setDuration(200).setInterpolator(new DecelerateInterpolator());
             btn2.animate().translationY(0).setDuration(200).setInterpolator(new DecelerateInterpolator());
             btn3.animate().translationY(0).setDuration(200).setInterpolator(new DecelerateInterpolator());
             btn5.animate().translationY(0).setDuration(200).setInterpolator(new DecelerateInterpolator());
 
-            btn4.setTranslationY(-85);
+            btn4.setTranslationY(-77);
             btn.setTranslationY(0);
             btn2.setTranslationY(0);
             btn3.setTranslationY(0);
@@ -227,13 +234,13 @@ public class navtest extends AppCompatActivity implements View.OnClickListener {
 
         } else if (view.equals(btn5)) {
 
-            btn5.animate().translationY(-85).setDuration(200).setInterpolator(new DecelerateInterpolator());
+            btn5.animate().translationY(-77).setDuration(200).setInterpolator(new DecelerateInterpolator());
             btn.animate().translationY(0).setDuration(200).setInterpolator(new DecelerateInterpolator());
             btn2.animate().translationY(0).setDuration(200).setInterpolator(new DecelerateInterpolator());
             btn3.animate().translationY(0).setDuration(200).setInterpolator(new DecelerateInterpolator());
             btn4.animate().translationY(0).setDuration(200).setInterpolator(new DecelerateInterpolator());
 
-            btn5.setTranslationY(-85);
+            btn5.setTranslationY(-77);
             btn.setTranslationY(0);
             btn2.setTranslationY(0);
             btn3.setTranslationY(0);
