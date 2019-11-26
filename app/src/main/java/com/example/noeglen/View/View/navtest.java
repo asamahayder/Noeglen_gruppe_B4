@@ -74,7 +74,7 @@ public class navtest extends AppCompatActivity implements View.OnClickListener {
         btn4.setOnClickListener(this);
         btn5.setOnClickListener(this);
 
-        getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, new HomeFragment()).commit();
+        getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, new DashFragment()).commit();
 
     }
 
@@ -125,7 +125,7 @@ public class navtest extends AppCompatActivity implements View.OnClickListener {
             chattw.setVisibility(View.INVISIBLE);
 
             //Fragment selector
-            selectedFragment = new HomeFragment();
+            selectedFragment = new InfoFragment();
 
         } else if (view.equals(btn2)){
 
@@ -160,7 +160,7 @@ public class navtest extends AppCompatActivity implements View.OnClickListener {
             meditationtw.setVisibility(View.INVISIBLE);
             chattw.setVisibility(View.INVISIBLE);
 
-            selectedFragment = new FavFragment();
+            selectedFragment = new DiaryFragment();
 
         } else if (view.equals(btn3)){
 
@@ -195,7 +195,7 @@ public class navtest extends AppCompatActivity implements View.OnClickListener {
             meditationtw.setVisibility(View.INVISIBLE);
             chattw.setVisibility(View.INVISIBLE);
 
-            selectedFragment = new SearchFragment();
+            selectedFragment = new DashFragment();
 
         } else if (view.equals(btn4)) {
 
@@ -230,7 +230,7 @@ public class navtest extends AppCompatActivity implements View.OnClickListener {
             dashboardtw.setVisibility(View.INVISIBLE);
             meditationtw.setVisibility(View.INVISIBLE);
 
-            selectedFragment = new HomeFragment();
+            selectedFragment = new FavFragment();
 
         } else if (view.equals(btn5)) {
 
@@ -265,7 +265,7 @@ public class navtest extends AppCompatActivity implements View.OnClickListener {
             dashboardtw.setVisibility(View.INVISIBLE);
             chattw.setVisibility(View.INVISIBLE);
 
-            selectedFragment = new FavFragment();
+            selectedFragment = new ExerFragment();
         }
 
         getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, selectedFragment).commit();
