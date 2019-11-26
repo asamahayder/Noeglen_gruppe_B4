@@ -2,6 +2,7 @@ package com.example.noeglen.View.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.os.Bundle;
@@ -14,6 +15,7 @@ import android.widget.TextView;
 
 import com.example.noeglen.R;
 import com.example.noeglen.View.View.fragments.dash.DashMain;
+import com.example.noeglen.View.View.fragments.dash.Video;
 import com.example.noeglen.View.View.fragments.diary.DiaryMain;
 import com.example.noeglen.View.View.fragments.exer.ExerMain;
 import com.example.noeglen.View.View.fragments.fav.FavMain;
@@ -28,7 +30,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private List<Button> navBarBtnList;
     private List<TextView> navBarTxtList;
     private String fragmentTag;
-    private boolean addToBackStack;
+    private FragmentManager fm;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,6 +73,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         DashMain fragment = new DashMain();
         setFragment(fragment,getString(R.string.fragment_dash),false);
+        fm = this.getSupportFragmentManager();
     }
 
 
@@ -101,36 +104,35 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     case 0:
                         selectedFragment = new InfoMain();
                         fragmentTag = getString(R.string.fragment_info);
-                        addToBackStack = false;
                         break;
                     case 1:
                         selectedFragment = new DiaryMain();
                         fragmentTag = getString(R.string.fragment_diary);
-                        addToBackStack = false;
                         break;
                     case 2:
                         selectedFragment = new DashMain();
                         fragmentTag = getString(R.string.fragment_dash);
-                        addToBackStack = false;
                         break;
                     case 3:
                         selectedFragment = new FavMain();
                         fragmentTag = getString(R.string.fragment_fav);
-                        addToBackStack = false;
                         break;
                     case 4:
                         selectedFragment = new ExerMain();
                         fragmentTag = getString(R.string.fragment_exer);
-                        addToBackStack = false;
                         break;
                 }
             }
         }
-        setFragment(selectedFragment,fragmentTag,addToBackStack);
+
+        for (int i = 0; i < fm.getBackStackEntryCount(); i++) {
+            fm.popBackStack();
+        }
+
+        setFragment(selectedFragment,fragmentTag,false);
     }
 
-    @Override
-    public void setFragment(Fragment f, String tag, boolean addToBackStack){
+    private void setFragment(Fragment f, String tag, boolean addToBackStack){
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
 
         transaction.replace(R.id.content_frame,f,tag);
@@ -139,5 +141,19 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             transaction.addToBackStack(tag);
         }
         transaction.commit();
+    }
+
+    @Override
+    public void inflateFragment(String tag) {
+        if (tag.equals(getString(R.string.fragment_vid))){
+            Fragment selectedFragment = new Video();
+            setFragment(selectedFragment,tag,true);
+        }
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        fm = this.getSupportFragmentManager();
     }
 }

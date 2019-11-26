@@ -21,7 +21,6 @@ public class DashMain extends Fragment implements View.OnClickListener {
     private ImageView iVidDash;
     private TextView tVidDash1, tVidDash2;
     private String fragmentTag;
-    private boolean addToBackStack;
 
     @Nullable
     @Override
@@ -46,16 +45,12 @@ public class DashMain extends Fragment implements View.OnClickListener {
     @Override
     public void onClick(View v) {
 
-        Fragment selectedFragment = null;
-
         switch (v.getId()){
             case R.id.iDashVid:
-                selectedFragment = new Video();
-                fragmentTag = getString(R.string.fragment_exer);
-                addToBackStack = true;
+                fragmentTag = getString(R.string.fragment_vid);
                 break;
         }
-        iMain.setFragment(selectedFragment,fragmentTag,addToBackStack);
+        iMain.inflateFragment(fragmentTag);
     }
 
     @Override
