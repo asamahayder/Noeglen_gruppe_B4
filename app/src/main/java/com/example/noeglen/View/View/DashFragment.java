@@ -13,7 +13,7 @@ import androidx.fragment.app.Fragment;
 
 import com.example.noeglen.R;
 
-public class DashFragment extends Fragment {
+public class DashFragment extends Fragment implements View.OnClickListener {
 
     private ImageView iVidDash;
     private TextView tVidDash1, tVidDash2;
@@ -25,7 +25,26 @@ public class DashFragment extends Fragment {
     }
 
     @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        initializeView();
+    }
+
+    private void initializeView() {
+        iVidDash = getView().findViewById(R.id.iDashVid);
+        iVidDash.setOnClickListener(this);
+
+        tVidDash1 = getView().findViewById(R.id.tDashVid1);
+        tVidDash1 = getView().findViewById(R.id.tDashVid2);
+    }
+
+    @Override
+    public void onClick(View v) {
+
+
+        if (v == iVidDash){
+            Fragment selectedFragment = new VidFragment();
+            getChildFragmentManager().beginTransaction().replace(R.id.content_frame,selectedFragment).addToBackStack(null).commit();
+        }
     }
 }
