@@ -262,5 +262,6 @@ public class navtest extends AppCompatActivity implements View.OnClickListener {
         }
 
         getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, selectedFragment).commit();
+        
     }
 }
