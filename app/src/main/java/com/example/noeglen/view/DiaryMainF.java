@@ -1,4 +1,4 @@
-package com.example.noeglen.View.View.view;
+package com.example.noeglen.view;
 
 import android.content.Context;
 import android.os.Bundle;

@@ -1,4 +1,4 @@
-package com.example.noeglen.View.View;
+package com.example.noeglen.view;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -11,7 +11,7 @@ import androidx.fragment.app.Fragment;
 
 import com.example.noeglen.R;
 
-public class EmptyFragment extends Fragment {
+public class ArtiklerF extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
