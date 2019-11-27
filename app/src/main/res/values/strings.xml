@@ -1,7 +1,13 @@
 <resources>
     <string name="app_name">Noeglen</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="NyttigViden">Nyttig Viden</string>
+    <!-- fragment tags -->
+    <string name="fragment_content">Fragment ContentFrame</string>
+        <string name="fragment_dash">Fragment Dash</string>
+            <string name="fragment_vid">Fragment Vid</string>
+        <string name="fragment_diary">Fragment Diary</string>
+        <string name="fragment_info">Fragment Info</string>
+        <string name="fragment_exer">Fragment Exer</string>
+        <string name="fragment_fav">Fragment Fav</string>
+
 </resources>
