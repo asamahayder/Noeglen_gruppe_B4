@@ -1,4 +1,4 @@
-package com.example.noeglen.View.View;
+package com.example.noeglen;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
