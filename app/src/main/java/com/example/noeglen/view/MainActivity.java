@@ -13,6 +13,7 @@ import android.view.animation.DecelerateInterpolator;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.example.noeglen.InfoVidenF;
 import com.example.noeglen.R;
 
 import java.util.ArrayList;
@@ -98,7 +99,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                 switch (i){
                     case 0:
-                        selectedFragment = new InfoVidenF();
+                        selectedFragment = new InfoMainF();
                         fragmentTag = getString(R.string.fragment_info);
                         break;
                     case 1:
