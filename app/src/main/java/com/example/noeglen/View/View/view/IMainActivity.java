@@ -1,4 +1,4 @@
-package com.example.noeglen.View.View;
+package com.example.noeglen.View.View.view;
 
 public interface IMainActivity {
 

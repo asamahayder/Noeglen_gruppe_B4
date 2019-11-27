@@ -1,4 +1,4 @@
-package com.example.noeglen.View.View;
+package com.example.noeglen.View.View.view;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
@@ -14,12 +14,6 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.noeglen.R;
-import com.example.noeglen.View.View.fragments.dash.DashMain;
-import com.example.noeglen.View.View.fragments.dash.Video;
-import com.example.noeglen.View.View.fragments.diary.DiaryMain;
-import com.example.noeglen.View.View.fragments.exer.ExerMain;
-import com.example.noeglen.View.View.fragments.fav.FavMain;
-import com.example.noeglen.View.View.fragments.info.InfoMain;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -60,6 +54,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             navButton.setStateListAnimator(null);
             navButton.setOnClickListener(this);
             navText.setVisibility(View.INVISIBLE);
+            navText.animate().translationY(0).setDuration(200).setInterpolator(new DecelerateInterpolator());
 
             if (bID.equals("bNav2")){
                 navButton.animate().translationY(-77).setDuration(200).setInterpolator(new DecelerateInterpolator());
@@ -67,15 +62,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 navButton.setSelected(true);
 
                 navText.setVisibility(View.VISIBLE);
+                navText.animate().translationY(-40).setDuration(200).setInterpolator(new DecelerateInterpolator());
                 navText.startAnimation(in);
             }
         }
 
-        DashMain fragment = new DashMain();
+        DashMainF fragment = new DashMainF();
         setFragment(fragment,getString(R.string.fragment_dash),false);
         fm = this.getSupportFragmentManager();
     }
-
 
     @Override
     public void onClick(View v) {
@@ -98,27 +93,28 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 b.setSelected(true);
 
                 t.setVisibility(View.VISIBLE);
+                t.animate().translationY(-40).setDuration(200).setInterpolator(new DecelerateInterpolator());
                 t.startAnimation(in);
 
                 switch (i){
                     case 0:
-                        selectedFragment = new InfoMain();
+                        selectedFragment = new InfoMainF();
                         fragmentTag = getString(R.string.fragment_info);
                         break;
                     case 1:
-                        selectedFragment = new DiaryMain();
+                        selectedFragment = new DiaryMainF();
                         fragmentTag = getString(R.string.fragment_diary);
                         break;
                     case 2:
-                        selectedFragment = new DashMain();
+                        selectedFragment = new DashMainF();
                         fragmentTag = getString(R.string.fragment_dash);
                         break;
                     case 3:
-                        selectedFragment = new FavMain();
+                        selectedFragment = new FavMainF();
                         fragmentTag = getString(R.string.fragment_fav);
                         break;
                     case 4:
-                        selectedFragment = new ExerMain();
+                        selectedFragment = new ExerMainF();
                         fragmentTag = getString(R.string.fragment_exer);
                         break;
                 }
@@ -146,7 +142,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public void inflateFragment(String tag) {
         if (tag.equals(getString(R.string.fragment_vid))){
-            Fragment selectedFragment = new Video();
+            Fragment selectedFragment = new DashVidF();
             setFragment(selectedFragment,tag,true);
         }
     }

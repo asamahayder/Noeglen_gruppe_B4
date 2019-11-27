@@ -1,4 +1,4 @@
-package com.example.noeglen.View.View.fragments.dash;
+package com.example.noeglen.View.View.view;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -11,9 +11,9 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.example.noeglen.R;
-import com.example.noeglen.View.View.IMainActivity;
+import com.example.noeglen.View.View.view.IMainActivity;
 
-public class Video extends Fragment {
+public class DashVidF extends Fragment {
 
     private IMainActivity iMain;
 
@@ -25,7 +25,7 @@ public class Video extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_video, container, false);
+        return inflater.inflate(R.layout.fragment_dashvid, container, false);
     }
 
     @Override
