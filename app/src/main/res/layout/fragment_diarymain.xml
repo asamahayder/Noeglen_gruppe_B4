@@ -12,19 +12,15 @@
         android:id="@+id/imageView2"
         android:layout_width="319dp"
         android:layout_height="138dp"
-
-
         android:layout_marginStart="59dp"
         android:layout_marginTop="158dp"
-
-
         android:layout_marginEnd="71dp"
         android:layout_marginBottom="443dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:src="@drawable/nyttig" />
+        tools:src="@drawable/imagenyt" />
 
 
     <ImageView
@@ -35,12 +31,10 @@
         android:layout_marginTop="380dp"
         android:layout_marginEnd="34dp"
         android:layout_marginBottom="201dp"
-
-        android:src="@drawable/articler"
+        android:src="@drawable/imageart"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="1.0" />
 
