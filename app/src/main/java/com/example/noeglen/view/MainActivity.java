@@ -98,7 +98,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                 switch (i){
                     case 0:
-                        selectedFragment = new InfoMainF();
+                        selectedFragment = new InfoVidenF();
                         fragmentTag = getString(R.string.fragment_info);
                         break;
                     case 1:
