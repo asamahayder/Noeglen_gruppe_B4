@@ -7,6 +7,7 @@
             <string name="fragment_vid">Fragment Vid</string>
         <string name="fragment_diarymain">Fragment Diary</string>
             <string name="fragment_artikler">Fragment Artikler</string>
+            <string name="fragment_artikel">Fragment Artikel</string>
             <string name="fragment_nyttigViden">Fragment NyttigViden</string>
         <string name="fragment_infomain">Fragment Info</string>
         <string name="fragment_exermain">Fragment Exer</string>
