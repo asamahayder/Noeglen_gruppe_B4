@@ -30,6 +30,4 @@ dependencies {
     androidTestImplementation 'androidx.test:runner:1.2.0'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.1'
 
-   implementation 'com.jcminarro:RoundKornerLayouts:0.2.0'
-
 }
