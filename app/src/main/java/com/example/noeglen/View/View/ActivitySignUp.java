@@ -17,6 +17,9 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.SetOptions;
 
@@ -36,9 +39,15 @@ public class ActivitySignUp extends AppCompatActivity {
     //hører til metode 1
     //private boolean loggedin;
 
+    //for trying to get videolist
+    private List<String> videoIDs;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        tryGetListFromFireStore();
+
 
         //hører til metode 2
         //mAuth = FirebaseAuth.getInstance();
@@ -132,4 +141,43 @@ public class ActivitySignUp extends AppCompatActivity {
         //Todo implement this
         //updateUI(currentUser);
     }*/
+
+
+    public void tryGetListFromFireStore(){
+        List<String> videoIDs;
+
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        DocumentReference documentReference = db.collection("videos").document("videolist");
+        documentReference.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if (task.isSuccessful()) {
+                    DocumentSnapshot document = task.getResult();
+                    if (document.exists()) {
+                        System.out.println("document exist");
+                        DocumentSnapshot documentSnapshot = task.getResult();
+                        setVideoIDs ((List<String>) documentSnapshot.get("videoIDs"));
+                        System.out.println("size of array: " + getVideoIDs().size());
+                        System.out.println("Here is the content:");
+                        for (int i = 0; i < getVideoIDs().size(); i++) {
+                            System.out.println(getVideoIDs().get(i));
+                        }
+                    } else {
+                        System.out.println("no such document");
+                    }
+                } else {
+                    System.out.println("failed: " + task.getException());
+                }
+            }
+        });
+    }
+
+
+    public List<String> getVideoIDs() {
+        return videoIDs;
+    }
+
+    public void setVideoIDs(List<String> videoIDs) {
+        this.videoIDs = videoIDs;
+    }
 }
