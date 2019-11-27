@@ -98,11 +98,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                 switch (i){
                     case 0:
-                        selectedFragment = new InfoMainF();
+                        selectedFragment = new InfoVidenF();
                         fragmentTag = getString(R.string.fragment_info);
                         break;
                     case 1:
-                        selectedFragment = new DiaryMainF();
+                        selectedFragment = new InfoMainF();
                         fragmentTag = getString(R.string.fragment_diary);
                         break;
                     case 2:
@@ -143,6 +143,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void inflateFragment(String tag) {
         if (tag.equals(getString(R.string.fragment_vid))){
             Fragment selectedFragment = new DashVidF();
+            setFragment(selectedFragment,tag,true);
+        }
+        if (tag.equals(getString(R.string.fragment_artikler))){
+            Fragment selectedFragment = new InfoArtiklerMainF();
+            setFragment(selectedFragment,tag,true);
+        }
+        if (tag.equals(getString(R.string.fragment_nyttigViden))){
+            Fragment selectedFragment = new InfoVidenF();
             setFragment(selectedFragment,tag,true);
         }
 

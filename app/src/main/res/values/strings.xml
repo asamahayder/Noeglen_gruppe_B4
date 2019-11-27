@@ -6,6 +6,8 @@
         <string name="fragment_dash">Fragment Dash</string>
             <string name="fragment_vid">Fragment Vid</string>
         <string name="fragment_diary">Fragment Diary</string>
+            <string name="fragment_artikler">Fragment Artikler</string>
+            <string name="fragment_nyttigViden">Fragment NyttigViden</string>
         <string name="fragment_info">Fragment Info</string>
         <string name="fragment_exer">Fragment Exer</string>
         <string name="fragment_fav">Fragment Fav</string>

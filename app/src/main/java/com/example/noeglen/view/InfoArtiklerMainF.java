@@ -11,7 +11,7 @@ import androidx.fragment.app.Fragment;
 
 import com.example.noeglen.R;
 
-public class ArtiklerF extends Fragment {
+public class InfoArtiklerMainF extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
