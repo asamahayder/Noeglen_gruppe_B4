@@ -145,6 +145,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             Fragment selectedFragment = new DashVidF();
             setFragment(selectedFragment,tag,true);
         }
+
     }
 
     @Override
