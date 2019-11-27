@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "163450930068",
+    "firebase_url": "https://noeglen-dde4e.firebaseio.com",
+    "project_id": "noeglen-dde4e",
+    "storage_bucket": "noeglen-dde4e.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:163450930068:android:6f6ae61914c31fcba50581",
+        "android_client_info": {
+          "package_name": "com.example.noeglen"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "163450930068-8d22arlbnks4ef3hsbp0gd3rf4ttuks8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDP25bUB4D6YaGuR2F2s3x1ZIYxg1PHhHc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "163450930068-8d22arlbnks4ef3hsbp0gd3rf4ttuks8.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
