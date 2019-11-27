@@ -1,4 +1,4 @@
-package com.example.noeglen.View.View.view;
+package com.example.noeglen;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -11,10 +11,10 @@ import androidx.fragment.app.Fragment;
 
 import com.example.noeglen.R;
 
-public class ArtiklerF extends Fragment {
+public class EmptyFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_artikler, container, false);
+        return inflater.inflate(R.layout.fragment_favmain, container, false);
     }
 }

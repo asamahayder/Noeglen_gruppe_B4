@@ -1,4 +1,4 @@
-package com.example.noeglen.View.View.view;
+package com.example.noeglen.view;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -13,7 +13,6 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.example.noeglen.R;
-import com.example.noeglen.View.View.view.IMainActivity;
 
 public class DashMainF extends Fragment implements View.OnClickListener {
 

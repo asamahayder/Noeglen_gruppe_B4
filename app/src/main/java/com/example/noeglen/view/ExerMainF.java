@@ -1,4 +1,4 @@
-package com.example.noeglen.View.View.view;
+package com.example.noeglen.view;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
