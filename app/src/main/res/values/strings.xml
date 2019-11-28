@@ -5,6 +5,7 @@
     <string name="fragment_content">Fragment ContentFrame</string>
     <string name="fragment_dashmain">Fragment Dashboard</string>
     <string name="fragment_dashvidmain">Fragment Videos</string>
+    <string name="fragment_dashvid">Fragment VideoList</string>
     <string name="fragment_diarymain">Fragment Diary</string>
     <string name="fragment_infomain">Fragment Info</string>
     <string name="fragment_infoarticlesmain">Fragment Articles</string>

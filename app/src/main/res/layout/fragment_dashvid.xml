@@ -2,6 +2,44 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_centerHorizontal="true"
     android:background="#ffffff">
+
+    <Button
+        android:id="@+id/returnButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="back" />
+
+    <com.google.android.youtube.player.YouTubePlayerView
+        android:id="@+id/youtubePlayerView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+    </com.google.android.youtube.player.YouTubePlayerView>
+
+    <TextView
+        android:id="@+id/videoTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="30sp"
+        android:textColor="@color/babyBlue"
+        android:fontFamily="@font/karla_regular"
+        android:text="loading video please wait" />
+
+    <TextView
+        android:id="@+id/videoDescription"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="25sp"
+        android:textColor="@color/babyBlue"
+        android:fontFamily="@font/karla_regular"
+        android:text="this will hold the video description. We need to add a description field to firestore" />
+
+    <Button
+        android:id="@+id/markSeenButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="mark as seen" />
 
 </LinearLayout>

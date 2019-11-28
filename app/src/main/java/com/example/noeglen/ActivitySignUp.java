@@ -1,27 +1,33 @@
 package com.example.noeglen;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.asynclayoutinflater.view.AsyncLayoutInflater;
 
 import android.os.Bundle;
 
+import com.example.noeglen.data.VideoDTO;
+import com.example.noeglen.logic.YoutubePlayer;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.youtube.player.YouTubeBaseActivity;
 import com.google.android.youtube.player.YouTubeInitializationResult;
 import com.google.android.youtube.player.YouTubePlayer;
 import com.google.android.youtube.player.YouTubePlayerView;
+import com.google.android.youtube.player.YouTubeThumbnailView;
+import com.google.firebase.FirebaseApp;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 
+import java.util.ArrayList;
 import java.util.List;
 
 //Denne klasse indeholder to måder at lave en login funktionalitet vha. google. Dene ene med onActivityResult kan både skabe brugere og login
 // på samme tid, hvilket er smart men også kan virke forvirrende. Den anden kan bare skabe brugere og måske logger den også automatisk ind bagefter.
 
-public class ActivitySignUp extends YouTubeBaseActivity implements YouTubePlayer.OnInitializedListener {
+public class ActivitySignUp extends YouTubeBaseActivity {
 
     //metode 2
     //private FirebaseAuth mAuth;
@@ -31,9 +37,7 @@ public class ActivitySignUp extends YouTubeBaseActivity implements YouTubePlayer
 
     //for trying to get videolist
     private List<String> videoIDs;
-
-    private YouTubePlayerView youTubePlayerView;
-    private String videoID;
+    private List<String> weekList;
 
 
 
@@ -42,8 +46,21 @@ public class ActivitySignUp extends YouTubeBaseActivity implements YouTubePlayer
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
 
-       // tryGetListFromFireStore();
-        initYoutubeVideo();
+        YouTubePlayerView youTubePlayerView = findViewById(R.id.player);
+        YoutubePlayer youtubePlayer = new YoutubePlayer();
+        YouTubeThumbnailView youTubeThumbnailView = findViewById(R.id.thumbnailView);
+        youtubePlayer.initYoutubeVideo("Do7Nai2oSZU", youTubePlayerView);
+        youtubePlayer.initVideoThumbNail("Do7Nai2oSZU", youTubeThumbnailView);
+
+        //tryGetListFromFireStore();
+
+        //downloadWeekList();
+
+        //addCustomObject();
+        //getVideo();
+
+        //getAllVideosFromWeek("Uge 1: Intro og grundlæggende viden");
+
 
 
 
@@ -64,6 +81,8 @@ public class ActivitySignUp extends YouTubeBaseActivity implements YouTubePlayer
                         .setIsSmartLockEnabled(false)
                         .build(),
                 1);*/
+
+
     }
 
     //hører til metode 1. Dette er hvad jeg går efter
@@ -89,8 +108,7 @@ public class ActivitySignUp extends YouTubeBaseActivity implements YouTubePlayer
                 System.out.println("OH no");
             }
         }
-
-        if (loggedin){
+        if (true){
             FirebaseFirestore db = FirebaseFirestore.getInstance();
             Map<String, String> map = new HashMap<>();
             map.put("lastName", "Hayder");
@@ -106,7 +124,8 @@ public class ActivitySignUp extends YouTubeBaseActivity implements YouTubePlayer
                 }
             });
         }
-    }*/
+     */
+
 
     //hører til metode to
     /*@Override
@@ -143,7 +162,7 @@ public class ActivitySignUp extends YouTubeBaseActivity implements YouTubePlayer
 
 
     public void tryGetListFromFireStore(){
-
+        FirebaseApp.initializeApp(this);
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         DocumentReference documentReference = db.collection("videos").document("videolist");
         documentReference.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
@@ -166,6 +185,61 @@ public class ActivitySignUp extends YouTubeBaseActivity implements YouTubePlayer
                 } else {
                     System.out.println("failed: " + task.getException());
                 }
+            }
+        });
+    }
+
+    public void getVideo(String week, String videoName){
+        FirebaseApp.initializeApp(this);
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        DocumentReference documentReference = db.collection(week).document(videoName);
+        documentReference.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+            @Override
+            public void onSuccess(DocumentSnapshot documentSnapshot) {
+                VideoDTO video = documentSnapshot.toObject(VideoDTO.class);
+                System.out.println(video.getTitle());
+                System.out.println(video.getVideoID());
+            }
+        });
+    }
+
+    public void addCustomObject(){
+        VideoDTO video = new VideoDTO("1 - Velkommen Til Noeglen", "kyci1wyxpOc",false);
+        FirebaseApp.initializeApp(this);
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        db.collection("Uge 1: Intro og grundlæggende viden").document(video.getTitle()).set(video);
+    }
+
+    public List<VideoDTO> getAllVideosFromWeek(final String week){
+        final List<VideoDTO> videoList = new ArrayList<>();
+        FirebaseApp.initializeApp(this);
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        db.collection(week).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if (task.isSuccessful()){
+                    for (QueryDocumentSnapshot snapshot: task.getResult()) {
+                        VideoDTO videoDTO = snapshot.toObject(VideoDTO.class);
+                        videoList.add(videoDTO);
+                     }
+                }else{
+                    System.out.println("Could not fetch videos from: " + week);
+                }
+            }
+        });
+        return videoList;
+    }
+
+    public void downloadWeekList(){
+        FirebaseApp.initializeApp(this);
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        db.collection("Weeks").document("ListOfAllWeeks").get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                DocumentSnapshot snapshot = task.getResult();
+                List<String> weekList = (List<String>) snapshot.get("list");
+                setWeekList(weekList);
+                //TODO lav en for-loop som opdatere UI samt kører getAllVideosFromWeek
             }
         });
     }
@@ -197,17 +271,11 @@ public class ActivitySignUp extends YouTubeBaseActivity implements YouTubePlayer
         this.videoIDs = videoIDs;
     }
 
-    @Override
-    public void onInitializationSuccess(YouTubePlayer.Provider provider, YouTubePlayer youTubePlayer, boolean b) {
-        if (!b) {
-            System.out.println("kommer vi her?");
-            youTubePlayer.cueVideo("Do7Nai2oSZU");
-        }
-
+    public void setWeekList(List<String> weekList){
+        this.weekList = weekList;
     }
 
-    @Override
-    public void onInitializationFailure(YouTubePlayer.Provider provider, YouTubeInitializationResult youTubeInitializationResult) {
-        System.out.println("oh no!");
+    public List<String> getWeekList() {
+        return weekList;
     }
 }
