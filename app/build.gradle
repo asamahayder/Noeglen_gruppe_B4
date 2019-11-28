@@ -38,4 +38,6 @@ dependencies {
 
     //RECYCLEVIEW
     implementation 'com.android.support:recyclerview-v7:28.0.2'
+    implementation 'com.github.bumptech.glide:glide:4.4.0'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.4.0'
 }
