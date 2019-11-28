@@ -30,11 +30,12 @@ public class DashVidF extends Fragment implements View.OnClickListener {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragment_dashvid, container, false);
+
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
+        /*super.onViewCreated(view, savedInstanceState);
         videoTitle = getView().findViewById(R.id.videoTitle);
         videoDescription = getView().findViewById(R.id.videoDescription);
         returnButton = getView().findViewById(R.id.returnButton);
@@ -53,7 +54,7 @@ public class DashVidF extends Fragment implements View.OnClickListener {
         //TODO this is just for testing. get description value from video
         videoDescription.setText("Denne video giver dig en introduktion til hvad denne app handler om.");
 
-        returnButton.setOnClickListener(this);
+        returnButton.setOnClickListener(this);*/
 
 
 

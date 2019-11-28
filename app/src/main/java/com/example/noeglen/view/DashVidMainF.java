@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.noeglen.R;
+import com.example.noeglen.activity_video;
 import com.example.noeglen.data.VideoDTO;
 import com.example.noeglen.logic.VideoListLogic;
 import com.example.noeglen.logic.YoutubePlayer;
@@ -39,14 +40,19 @@ public class DashVidMainF extends Fragment implements View.OnClickListener {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        initializeView();
         return inflater.inflate(R.layout.fragment_dashvidmain, container, false);
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        initializeView();
     }
 
     private void initializeView() {
 
-        iVIdeoLink = getView().findViewById(R.id.iVideoLink);
-        iVIdeoLink.setOnClickListener(DashVidMainF.this,DashVidF.class);
+        iVIdeoLink = (ImageView) getView().findViewById(R.id.iVideoLink);
+        iVIdeoLink.setOnClickListener(this);
 
     }
 
@@ -58,7 +64,7 @@ public class DashVidMainF extends Fragment implements View.OnClickListener {
     @Override
     public void onClick(View view) {
         if (view == iVIdeoLink){
-            startActivity(new Intent());
+            startActivity(new Intent(getActivity(), activity_video.class));
         }
     }
 }
