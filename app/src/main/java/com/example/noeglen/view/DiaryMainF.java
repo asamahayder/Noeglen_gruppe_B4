@@ -5,6 +5,8 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.SeekBar;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -15,8 +17,10 @@ import com.example.noeglen.logic.CurrentDate;
 
 public class DiaryMainF extends Fragment {
 
-    TextView textView;
-    CurrentDate currentDate;
+   private TextView textView1,textView2;
+   private CurrentDate currentDate;
+   private SeekBar seekBar;
+   private ImageView imageView;
 
     @Nullable
     @Override
@@ -25,12 +29,47 @@ public class DiaryMainF extends Fragment {
     }
 
     @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        textView = getView().findViewById(R.id.textView4);
-        textView.setText(currentDate.getDateString());
+    public void onViewCreated(@NonNull final View view, @Nullable Bundle savedInstanceState) {
+        textView1 = getView().findViewById(R.id.textView4);
+        textView1.setText(currentDate.getDateString());
+
+        seekBar = getView().findViewById(R.id.simpleSeekBar);
+        textView2 = getView().findViewById(R.id.textView5);
+        imageView = getView().findViewById(R.id.imageView3);
+        seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
+                seekBar.setMax(100);
+               // textView2.setText("Progress" + seekBar.getProgress() + " / " +  seekBar.getMax() + "%" );
+                if (seekBar.getProgress() > 0 && seekBar.getProgress() <= 20) {
+                    imageView.setBackground(getView().getResources().getDrawable(R.drawable.image_3));
+                }else if (seekBar.getProgress() > 20 && seekBar.getProgress() <= 40){
+                    imageView.setBackground(getView().getResources().getDrawable(R.drawable.image_4));
+                }else if (seekBar.getProgress() > 40 && seekBar.getProgress() <= 60){
+                    imageView.setBackground(getView().getResources().getDrawable(R.drawable.ja3kub));
+                }else if (seekBar.getProgress() > 60 && seekBar.getProgress() <= 80){
+                    imageView.setBackground(getView().getResources().getDrawable(R.drawable.imageart));
+                }else if (seekBar.getProgress() > 80 && seekBar.getProgress() <= 100){
+                    imageView.setBackground(getView().getResources().getDrawable(R.drawable.zimzum));
+                }
+
+
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+
+            }
+        });
 
 
     }
+
 
     @Override
     public void onAttach(Context context) {
