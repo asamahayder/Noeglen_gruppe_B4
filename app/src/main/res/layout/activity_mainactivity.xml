@@ -10,12 +10,12 @@
 
     <FrameLayout
         android:id="@+id/content_frame"
-        android:layout_width="413dp"
-        android:layout_height="732dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:background="#323232"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" >
+        app:layout_constraintTop_toTopOf="parent">
 
         <ScrollView
             android:layout_width="match_parent"
@@ -43,7 +43,7 @@
         android:id="@+id/bNav0"
         android:layout_width="57dp"
         android:layout_height="54dp"
-        android:background="@drawable/information"
+        android:background="@drawable/articles"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.044"
@@ -79,10 +79,10 @@
         android:id="@+id/bNav3"
         android:layout_width="57dp"
         android:layout_height="54dp"
-        android:background="@drawable/favorits"
+        android:background="@drawable/favorites"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.73"
+        app:layout_constraintHorizontal_bias="0.731"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.988" />
@@ -91,7 +91,7 @@
         android:id="@+id/bNav4"
         android:layout_width="57dp"
         android:layout_height="54dp"
-        android:background="@drawable/exercise"
+        android:background="@drawable/exercises"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.954"
@@ -103,69 +103,64 @@
         android:id="@+id/tNav0"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:text="@string/Viden"
         android:textColor="#ffffff"
-        android:text="Nyttig Viden"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.043"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/bNav0"
+        app:layout_constraintStart_toStartOf="@+id/bNav0"
+        app:layout_constraintTop_toBottomOf="@+id/bNav0"
         app:layout_constraintVertical_bias="1.0" />
 
     <TextView
         android:id="@+id/tNav1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="#ffffff"
         android:text="Dagbog"
+        android:textColor="#ffffff"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.259"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/bNav1"
+        app:layout_constraintStart_toStartOf="@+id/bNav1"
+        app:layout_constraintTop_toBottomOf="@+id/bNav1"
         app:layout_constraintVertical_bias="1.0" />
 
     <TextView
         android:id="@+id/tNav2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="#ffffff"
         android:text="Menu"
+        android:textColor="#ffffff"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/bNav2"
+        app:layout_constraintStart_toStartOf="@+id/bNav2"
+        app:layout_constraintTop_toBottomOf="@+id/bNav2"
         app:layout_constraintVertical_bias="1.0" />
 
     <TextView
         android:id="@+id/tNav3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="#ffffff"
         android:text="Favoritter"
+        android:textColor="#ffffff"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.74"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintEnd_toEndOf="@+id/bNav3"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="@+id/bNav3" />
 
     <TextView
         android:id="@+id/tNav4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:text="@string/Øvelser"
         android:textColor="#ffffff"
-        android:text="Øvesler"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.919"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/bNav4"
+        app:layout_constraintStart_toStartOf="@+id/bNav4"
+        app:layout_constraintTop_toBottomOf="@+id/bNav4"
         app:layout_constraintVertical_bias="1.0" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

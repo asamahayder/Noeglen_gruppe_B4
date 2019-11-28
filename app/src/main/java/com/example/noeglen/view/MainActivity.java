@@ -1,10 +1,5 @@
 package com.example.noeglen.view;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
-
 import android.os.Bundle;
 import android.view.View;
 import android.view.animation.AlphaAnimation;
@@ -12,6 +7,11 @@ import android.view.animation.Animation;
 import android.view.animation.DecelerateInterpolator;
 import android.widget.Button;
 import android.widget.TextView;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import com.example.noeglen.R;
 
@@ -68,7 +68,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
 
         DashMainF fragment = new DashMainF();
-        setFragment(fragment,getString(R.string.fragment_dash),false);
+        setFragment(fragment,getString(R.string.fragment_dashmain),false);
         fm = this.getSupportFragmentManager();
     }
 
@@ -99,23 +99,23 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 switch (i){
                     case 0:
                         selectedFragment = new InfoMainF();
-                        fragmentTag = getString(R.string.fragment_info);
+                        fragmentTag = getString(R.string.fragment_infomain);
                         break;
                     case 1:
                         selectedFragment = new DiaryMainF();
-                        fragmentTag = getString(R.string.fragment_diary);
+                        fragmentTag = getString(R.string.fragment_diarymain);
                         break;
                     case 2:
                         selectedFragment = new DashMainF();
-                        fragmentTag = getString(R.string.fragment_dash);
+                        fragmentTag = getString(R.string.fragment_dashmain);
                         break;
                     case 3:
                         selectedFragment = new FavMainF();
-                        fragmentTag = getString(R.string.fragment_fav);
+                        fragmentTag = getString(R.string.fragment_favmain);
                         break;
                     case 4:
                         selectedFragment = new ExerMainF();
-                        fragmentTag = getString(R.string.fragment_exer);
+                        fragmentTag = getString(R.string.fragment_exermain);
                         break;
                 }
             }
@@ -141,10 +141,27 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public void inflateFragment(String tag) {
-        if (tag.equals(getString(R.string.fragment_vid))){
-            Fragment selectedFragment = new DashVidF();
+        if (tag.equals(getString(R.string.fragment_dashvidmain))){
+            Fragment selectedFragment = new DashVidMainF();
             setFragment(selectedFragment,tag,true);
         }
+        if (tag.equals(getString(R.string.fragment_infoarticlesmain))){
+            Fragment selectedFragment = new InfoArticlesMainF();
+            setFragment(selectedFragment,tag,true);
+        }
+        if (tag.equals(getString(R.string.fragment_infoknowledge))){
+            Fragment selectedFragment = new InfoKnowledgeF();
+            setFragment(selectedFragment,tag,true);
+        }
+        if (tag.equals(getString(R.string.fragment_infoarticle))){
+            Fragment selectedFragment = new InfoArticleF();
+            setFragment(selectedFragment,tag,true);
+        }
+        if (tag.equals(getString(R.string.fragment_exerexer))){
+            Fragment selectedFragment = new ExerExerF();
+            setFragment(selectedFragment,tag,true);
+        }
+
     }
 
     @Override
