@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -16,6 +17,7 @@ public class ExerMainF extends Fragment implements View.OnClickListener {
 
     private IMainActivity iMain;
     private String fragmentTag;
+    private Button bExercise;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -37,6 +39,8 @@ public class ExerMainF extends Fragment implements View.OnClickListener {
 
     public void initializeView(){
 
+        bExercise = getView().findViewById(R.id.bExer1);
+        bExercise.setOnClickListener(this);
     }
 
     @Override
@@ -49,8 +53,8 @@ public class ExerMainF extends Fragment implements View.OnClickListener {
     public void onClick(View v) {
 
         switch (v.getId()){
-            case R.id.iDashVid:
-                fragmentTag = getString(R.string.fragment_exermain);
+            case R.id.bExer1:
+                fragmentTag = getString(R.string.fragment_exerexer);
                 break;
         }
         iMain.inflateFragment(fragmentTag);
