@@ -157,6 +157,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             Fragment selectedFragment = new InfoArticleF();
             setFragment(selectedFragment,tag,true);
         }
+        if (tag.equals(getString(R.string.fragment_exerexer))){
+            Fragment selectedFragment = new ExerExerF();
+            setFragment(selectedFragment,tag,true);
+        }
 
     }
 

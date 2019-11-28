@@ -154,7 +154,7 @@
         android:id="@+id/tNav4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Øvesler"
+        android:text="@string/Øvelser"
         android:textColor="#ffffff"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
