@@ -142,7 +142,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public void inflateFragment(String tag) {
         if (tag.equals(getString(R.string.fragment_vid))){
-            Fragment selectedFragment = new DashVidF();
+            Fragment selectedFragment = new DashVidMainF();
             setFragment(selectedFragment,tag,true);
         }
         if (tag.equals(getString(R.string.fragment_artikler))){
