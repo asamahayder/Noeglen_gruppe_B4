@@ -46,7 +46,7 @@ public class DashMainF extends Fragment implements View.OnClickListener {
 
         switch (v.getId()){
             case R.id.iDashVid:
-                fragmentTag = getString(R.string.fragment_vid);
+                fragmentTag = getString(R.string.fragment_dashvidmain);
                 break;
         }
         iMain.inflateFragment(fragmentTag);

@@ -12,12 +12,11 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.example.noeglen.R;
-import com.example.noeglen.view.IMainActivity;
 
 public class InfoMainF extends Fragment implements View.OnClickListener {
 
     private IMainActivity iMain;
-    private ImageView nyttigViden, artikler;
+    private ImageView iKnowledge, iArticles;
 
     @Nullable
     @Override
@@ -29,10 +28,10 @@ public class InfoMainF extends Fragment implements View.OnClickListener {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        nyttigViden = getView().findViewById(R.id.imageView2);
-        nyttigViden.setOnClickListener(this);
-        artikler = getView().findViewById(R.id.imageView5);
-        artikler.setOnClickListener(this);
+        iKnowledge = getView().findViewById(R.id.imageView2);
+        iKnowledge.setOnClickListener(this);
+        iArticles = getView().findViewById(R.id.imageView5);
+        iArticles.setOnClickListener(this);
     }
 
     @Override
@@ -45,11 +44,11 @@ public class InfoMainF extends Fragment implements View.OnClickListener {
     public void onClick(View view) {
         String tag = "";
 
-        if (view == artikler) {
-            tag = getString(R.string.fragment_artikler);
+        if (view == iArticles) {
+            tag = getString(R.string.fragment_infoarticlesmain);
 
-        } else if (view == nyttigViden){
-            tag = getString(R.string.fragment_nyttigViden);
+        } else if (view == iKnowledge){
+            tag = getString(R.string.fragment_infoknowledge);
         }
         iMain.inflateFragment(tag);
 
