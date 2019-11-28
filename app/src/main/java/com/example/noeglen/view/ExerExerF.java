@@ -1,6 +1,5 @@
 package com.example.noeglen.view;
 
-import android.animation.ValueAnimator;
 import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -8,8 +7,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
-import android.view.animation.DecelerateInterpolator;
-import android.view.animation.ScaleAnimation;
 import android.widget.Button;
 import android.widget.ImageView;
 
@@ -21,10 +18,11 @@ import com.example.noeglen.R;
 
 public class ExerExerF extends Fragment implements View.OnClickListener {
 
-    private IMainActivity iMain;
     private ImageView iAnim;
-    private Button bAnim;
-    Animation connectingAnimation;
+    private Animation connectingAnimation;
+    private Button bFav, bAnim;
+    private IMainActivity iMain;
+
 
     @Nullable
     @Override
@@ -39,8 +37,10 @@ public class ExerExerF extends Fragment implements View.OnClickListener {
     }
     public void initializeView(){
         iAnim = getView().findViewById(R.id.iExerAnim);
-        bAnim = getView().findViewById(R.id.startAnimbtn);
+        bAnim = getView().findViewById(R.id.bstartAnim);
+        bFav = getView().findViewById(R.id.bAddToFav);
         bAnim.setOnClickListener(this);
+        bFav.setOnClickListener(this);
         connectingAnimation = AnimationUtils.loadAnimation(getContext(), R.anim.scale);
 
     }
@@ -53,6 +53,11 @@ public class ExerExerF extends Fragment implements View.OnClickListener {
 
     @Override
     public void onClick(View v) {
-        iAnim.startAnimation(connectingAnimation);
+        if(v == bFav) {
+            //TODO: Adding functionality to add the exercise to favourites but beaware of animations and stuff
+        } else if( v == bAnim){
+            iAnim.startAnimation(connectingAnimation);
+        }
+
     }
 }

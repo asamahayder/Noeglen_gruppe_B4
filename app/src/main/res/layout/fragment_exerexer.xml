@@ -70,16 +70,28 @@
             app:srcCompat="@drawable/breatheanim" />
 
         <Button
-            android:id="@+id/startAnimbtn"
+            android:id="@+id/bstartAnim"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Button"
+            android:text="Start"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.498"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.783" />
+
+        <Button
+            android:id="@+id/bAddToFav"
+            android:layout_width="50dp"
+            android:layout_height="36dp"
+            android:text="Fav"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.914"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/imageView14"
+            app:layout_constraintVertical_bias="0.31" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </LinearLayout>
