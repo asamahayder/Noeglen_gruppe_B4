@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingTop="40dp"
+    android:paddingLeft="10dp"
+    android:paddingRight="10dp"
+    android:background="#ffffff">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="120"
+        android:id="@+id/dashvidmain_recyclerview_2rd_relative"
+
+        />
+
+    <RelativeLayout
+        android:id="@+id/dashvidmain_recyclerview_3rd_relative"
+        android:layout_width="match_parent"
+        android:layout_height="120"
+        android:layout_centerHorizontal="true">
+
+        <RelativeLayout
+            android:id="@+id/dashvidmain_recyclerview_4rd_relative"
+            android:layout_width="40"
+            android:layout_height="match_parent"
+            android:layout_alignParentStart="false"
+            android:layout_alignParentTop="false"
+            android:layout_marginStart="0dp"
+            android:layout_marginTop="0dp"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:layout_centerInParent="true"
+                android:gravity="center_vertical"
+                android:src="@drawable/circle"
+                android:visibility="visible" />
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_alignParentBottom="true"
+                android:src="@drawable/line"
+                android:visibility="visible" />
+        </RelativeLayout>
+
+        <ImageView
+            android:layout_width="300"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:layout_centerInParent="false"
+            android:layout_marginBottom="0dp"
+            android:layout_toRightOf="@id/dashvidmain_recyclerview_4rd_relative"
+            android:visibility="visible" />
+
+        <TextView
+            android:id="@+id/tVideoTitle"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:layout_centerInParent="false"
+            android:layout_toRightOf="@id/dashvidmain_recyclerview_4rd_relative"
+            android:width="match_parent"
+            android:gravity="center"
+            android:text="Video Title"
+            android:textColor="#000000"
+            android:textSize="40sp" />
+    </RelativeLayout>
+
+</RelativeLayout>

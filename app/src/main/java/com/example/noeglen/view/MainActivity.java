@@ -14,6 +14,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.example.noeglen.R;
+import com.example.noeglen.logic.CurrentDate;
 import com.google.android.youtube.player.YouTubeBaseActivity;
 import com.google.android.youtube.player.YouTubeInitializationResult;
 import com.google.android.youtube.player.YouTubePlayer;
@@ -28,8 +29,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private Animation in;
     private List<Button> navBarBtnList;
     private List<TextView> navBarTxtList;
-    private String fragmentTag;
+    private String fragmentTag, currDateString;
     private FragmentManager fm;
+    private CurrentDate currDate;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,6 +79,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         //setFragment(fragment,getString(R.string.fragment_dashmain),false);
         setFragment(fragment,getString(R.string.fragment_dashvid),false);
         fm = this.getSupportFragmentManager();
+
+        currDate = CurrentDate.getInstance();
+        currDateString = currDate.createCurrentDate();
     }
 
     @Override
@@ -166,6 +171,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
         if (tag.equals(getString(R.string.fragment_exerexer))){
             Fragment selectedFragment = new ExerExerF();
+            setFragment(selectedFragment,tag,true);
+        }
+        if (tag.equals("Fragment Diary1")){
+            Fragment selectedFragment = new Diary1F();
             setFragment(selectedFragment,tag,true);
         }
 

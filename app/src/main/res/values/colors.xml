@@ -5,4 +5,8 @@
     <color name="colorAccent">#D81B60</color>
     <color name="backGround">#8dcdff</color>
     <color name="babyBlue">#0797FF</color>
+
+    //VIDEO COLORS
+    <color name="vidNotWatched">#009AFF</color>
+    <color name="vidIsWatched">#24FF00</color>
 </resources>

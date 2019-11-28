@@ -27,35 +27,64 @@
 
         <SeekBar
             android:id="@+id/simpleSeekBar"
-            android:layout_width="339dp"
-            android:layout_height="24dp"
+            android:layout_width="357dp"
+            android:layout_height="62dp"
             android:layout_marginStart="36dp"
             android:layout_marginTop="377dp"
             android:layout_marginEnd="36dp"
             android:layout_marginBottom="330dp"
-            android:max="200"
+            android:max="100"
             android:progress="10"
             android:progressDrawable="@drawable/custom_progress"
+            android:scrollbarSize="100dp"
+
+            android:thumb="@drawable/custom_thumb"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <EditText
-            android:id="@+id/editText"
+        <TextView
+            android:id="@+id/textView4"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="99dp"
-            android:layout_marginEnd="99dp"
-            android:layout_marginBottom="686dp"
-            android:ems="10"
-            android:inputType="date"
-            android:textColor="#42B0FF"
+            android:layout_marginStart="176dp"
+            android:layout_marginTop="80dp"
+            android:layout_marginEnd="176dp"
+            android:layout_marginBottom="704dp"
+            android:text="TextView"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="1.0" />
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/imageView3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="174dp"
+            android:layout_marginTop="482dp"
+            android:layout_marginEnd="186dp"
+            android:layout_marginBottom="218dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="284dp"
+            android:layout_marginTop="632dp"
+            android:layout_marginEnd="39dp"
+            android:layout_marginBottom="200dp"
+            android:text="Continue"
+            android:background="@drawable/custom_progress"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </LinearLayout>
