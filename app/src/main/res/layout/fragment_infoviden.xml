@@ -12,7 +12,7 @@
             android:orientation="vertical"
             android:paddingLeft="25dp"
             android:paddingRight="25dp"
-            android:paddingBottom="250dp">
+            android:paddingBottom="100dp">
 
             <TextView
                 android:id="@+id/textView7"
