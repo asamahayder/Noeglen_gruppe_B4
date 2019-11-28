@@ -11,10 +11,10 @@ import androidx.fragment.app.Fragment;
 
 import com.example.noeglen.R;
 
-public class InfoArtikelF extends Fragment {
+public class InfoKnowledgeF extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_infoartikel, container, false);
+        return inflater.inflate(R.layout.fragment_infoknowledge, container, false);
     }
 }
