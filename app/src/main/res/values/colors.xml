@@ -4,4 +4,8 @@
     <color name="colorPrimaryDark">#00574B</color>
     <color name="colorAccent">#D81B60</color>
     <color name="backGround">#8dcdff</color>
+    
+    //VIDEO COLORS
+    <color name="vidNotWatched">#009AFF</color>
+    <color name="vidIsWatched">#24FF00</color>
 </resources>
