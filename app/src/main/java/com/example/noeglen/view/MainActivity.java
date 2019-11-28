@@ -14,6 +14,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.example.noeglen.R;
+import com.example.noeglen.logic.CurrentDate;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,8 +24,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private Animation in;
     private List<Button> navBarBtnList;
     private List<TextView> navBarTxtList;
-    private String fragmentTag;
+    private String fragmentTag, currDateString;
     private FragmentManager fm;
+    private CurrentDate currDate;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,6 +72,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         DashMainF fragment = new DashMainF();
         setFragment(fragment,getString(R.string.fragment_dashmain),false);
         fm = this.getSupportFragmentManager();
+
+        currDate = CurrentDate.getInstance();
+        currDateString = currDate.createCurrentDate();
     }
 
     @Override

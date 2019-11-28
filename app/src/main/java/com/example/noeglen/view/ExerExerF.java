@@ -5,6 +5,10 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.widget.Button;
+import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -12,9 +16,13 @@ import androidx.fragment.app.Fragment;
 
 import com.example.noeglen.R;
 
-public class ExerExerF extends Fragment {
+public class ExerExerF extends Fragment implements View.OnClickListener {
 
+    private ImageView iAnim;
+    private Animation connectingAnimation;
+    private Button bFav, bAnim;
     private IMainActivity iMain;
+
 
     @Nullable
     @Override
@@ -23,8 +31,33 @@ public class ExerExerF extends Fragment {
     }
 
     @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        initializeView();
+    }
+    public void initializeView(){
+        iAnim = getView().findViewById(R.id.iExerAnim);
+        bAnim = getView().findViewById(R.id.bstartAnim);
+        bFav = getView().findViewById(R.id.bAddToFav);
+        bAnim.setOnClickListener(this);
+        bFav.setOnClickListener(this);
+        connectingAnimation = AnimationUtils.loadAnimation(getContext(), R.anim.scale);
+
+    }
+
+    @Override
     public void onAttach(Context context) {
         super.onAttach(context);
         iMain = (IMainActivity) getActivity();
+    }
+
+    @Override
+    public void onClick(View v) {
+        if(v == bFav) {
+            //TODO: Adding functionality to add the exercise to favourites but beaware of animations and stuff
+        } else if( v == bAnim){
+            iAnim.startAnimation(connectingAnimation);
+        }
+
     }
 }

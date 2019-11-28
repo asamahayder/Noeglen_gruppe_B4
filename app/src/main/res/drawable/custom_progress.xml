@@ -3,10 +3,19 @@
     <item>
         <shape>
             <gradient
-                android:endColor="#ffcc99"
-                android:startColor="#66ff99"
-                android:useLevel="true" />
+                android:endColor="#FB9008"
+                android:startColor="#A8FDA1"
+                android:useLevel="false" />
+            <size android:height="35dp"
+                  android:width="60dp"/>
+            <corners
+                android:bottomRightRadius="30dp"
+                android:bottomLeftRadius="30dp"
+                android:topLeftRadius="30dp"
+                android:topRightRadius="30dp"/>
+
         </shape>
+
     </item>
 
 </layer-list>
