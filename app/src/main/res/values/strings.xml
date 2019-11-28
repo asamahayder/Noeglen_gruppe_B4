@@ -3,13 +3,18 @@
 
     <!-- fragment tags -->
     <string name="fragment_content">Fragment ContentFrame</string>
-        <string name="fragment_dash">Fragment Dash</string>
+        <string name="fragment_dashmain">Fragment Dash</string>
             <string name="fragment_vid">Fragment Vid</string>
-        <string name="fragment_diary">Fragment Diary</string>
-        <string name="fragment_info">Fragment Info</string>
-        <string name="fragment_exer">Fragment Exer</string>
-        <string name="fragment_fav">Fragment Fav</string>
+        <string name="fragment_diarymain">Fragment Diary</string>
+            <string name="fragment_artikler">Fragment Artikler</string>
+            <string name="fragment_artikel">Fragment Artikel</string>
+            <string name="fragment_nyttigViden">Fragment NyttigViden</string>
+        <string name="fragment_infomain">Fragment Info</string>
+        <string name="fragment_exermain">Fragment Exer</string>
+        <string name="fragment_favmain">Fragment Fav</string>
 
 
     <string name="Viden">Viden</string>
+    <string name="nyttig_viden">Nyttig Viden</string>
+
 </resources>
