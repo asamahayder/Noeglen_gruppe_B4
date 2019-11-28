@@ -35,27 +35,26 @@
             android:layout_marginBottom="330dp"
             android:max="200"
             android:progress="10"
+
             android:progressDrawable="@drawable/custom_progress"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <EditText
-            android:id="@+id/editText"
+        <TextView
+            android:id="@+id/textView4"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="99dp"
-            android:layout_marginEnd="99dp"
-            android:layout_marginBottom="686dp"
-            android:ems="10"
-            android:inputType="date"
-            android:textColor="#42B0FF"
+            android:layout_marginStart="160dp"
+            android:layout_marginTop="80dp"
+            android:layout_marginEnd="192dp"
+            android:layout_marginBottom="704dp"
+            android:text="TextView"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="1.0" />
+            app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </LinearLayout>
