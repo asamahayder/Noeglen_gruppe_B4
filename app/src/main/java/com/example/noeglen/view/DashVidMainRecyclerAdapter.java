@@ -1,6 +1,11 @@
 package com.example.noeglen.view;
 
 import android.content.Context;
+import android.graphics.Color;
+import android.graphics.PorterDuff;
+import android.graphics.PorterDuffColorFilter;
+import android.graphics.drawable.Drawable;
+import android.graphics.drawable.ShapeDrawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,14 +20,14 @@ import com.bumptech.glide.Glide;
 import com.example.noeglen.R;
 import com.example.noeglen.data.VideoDTO;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public class DashVidMainRecyclerAdapter extends RecyclerView.Adapter<DashVidMainRecyclerAdapter.ViewHolder>{
 
-   private ArrayList<VideoDTO> videoList;
+   private List<VideoDTO> videoList;
    private Context mContext;
 
-   public DashVidMainRecyclerAdapter(ArrayList<VideoDTO> videoList, Context mContext) {
+   public DashVidMainRecyclerAdapter(List<VideoDTO> videoList, Context mContext) {
       this.videoList = videoList;
       this.mContext = mContext;
    }
@@ -37,13 +42,18 @@ public class DashVidMainRecyclerAdapter extends RecyclerView.Adapter<DashVidMain
 
    @Override
    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-
+      String imgURL = "https://img.youtube.com/vi/" + videoList.get(position).getVideoID() + "/3.jpg";
       Glide.with(mContext)
               .asBitmap()
-              .load(videoList.get(position).ge)
+              .load(imgURL)
               .into(holder.iVideo);
 
       holder.tVideoTitle.setText(videoList.get(position).getTitle());
+      holder.tProgressTitle.setText("TEST");
+
+      Drawable bak = holder.iLineTop.getDrawable();
+      bak.setColorFilter(new PorterDuffColorFilter(Color.parseColor("black"), PorterDuff.Mode.MULTIPLY));
+
    }
 
    @Override

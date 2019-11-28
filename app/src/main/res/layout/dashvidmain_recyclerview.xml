@@ -44,7 +44,6 @@
                 android:id="@+id/dashVidMain_customLayoutList_iTopLine"
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
-                android:layout_alignTopBottom="true"
                 android:src="@drawable/line"
                 android:visibility="visible" />
 

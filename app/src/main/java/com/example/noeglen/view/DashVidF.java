@@ -29,7 +29,7 @@ public class DashVidF extends Fragment implements View.OnClickListener {
     private TextView videoDescription;
     private Button returnButton;
     private Button markSeenButton;
-    private YouTubePlayerView youTubePlayerView;
+    //private YouTubePlayerView youTubePlayerView;
 
     private IMainActivity iMain;
 
@@ -37,6 +37,7 @@ public class DashVidF extends Fragment implements View.OnClickListener {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
+        /*
         YouTubePlayerSupportFragment youTubePlayerFragment = YouTubePlayerSupportFragment.newInstance();
 
         youTubePlayerFragment.initialize("AIzaSyB1ZHv40LuyAjJ7ygFNU7ImVVEUTTsf0uw", new YouTubePlayer.OnInitializedListener() {
@@ -57,7 +58,7 @@ public class DashVidF extends Fragment implements View.OnClickListener {
         });
         FragmentTransaction transaction = getChildFragmentManager().beginTransaction();
         transaction.replace(R.id.content_frame,youTubePlayerFragment).commit();
-
+         */
         return inflater.inflate(R.layout.fragment_dashvid, container, false);
     }
 
@@ -68,7 +69,7 @@ public class DashVidF extends Fragment implements View.OnClickListener {
         videoDescription = getView().findViewById(R.id.videoDescription);
         returnButton = getView().findViewById(R.id.returnButton);
         markSeenButton = getView().findViewById(R.id.markSeenButton);
-        youTubePlayerView = getView().findViewById(R.id.youtubePlayerView);
+        //youTubePlayerView = getView().findViewById(R.id.youtubePlayerView);
 
         //TODO this is just for testing. get video from intent
         VideoDTO videoDTO = new VideoDTO("Velkommen til nøglen", "kyci1wyxpOc", false);

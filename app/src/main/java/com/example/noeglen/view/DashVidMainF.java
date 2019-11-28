@@ -1,10 +1,12 @@
 package com.example.noeglen.view;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -13,12 +15,21 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.noeglen.R;
+import com.example.noeglen.data.VideoDTO;
+import com.example.noeglen.logic.VideoListLogic;
+import com.example.noeglen.logic.YoutubePlayer;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.FirebaseApp;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
 
-public class DashVidMainF extends Fragment {
+import java.util.ArrayList;
+import java.util.List;
 
-    private IMainActivity iMain;
-    private RecyclerView rView;
-    private DashVidMainRecyclerAdapter rAdapter;
+public class DashVidMainF extends Fragment implements View.OnClickListener {
+
+    private ImageView iVIdeoLink;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -33,15 +44,21 @@ public class DashVidMainF extends Fragment {
     }
 
     private void initializeView() {
-        rView = getView().findViewById(R.id.dashvidmain_recyclerview);
-        rAdapter = new DashVidMainRecyclerAdapter(vidoes,this);
-        rView.setAdapter(rAdapter);
-        rView.setLayoutManager(new LinearLayoutManager(getContext()));
+
+        iVIdeoLink = getView().findViewById(R.id.iVideoLink);
+        iVIdeoLink.setOnClickListener(DashVidMainF.this,DashVidF.class);
+
     }
 
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        iMain = (IMainActivity) getActivity();
+    }
+
+    @Override
+    public void onClick(View view) {
+        if (view == iVIdeoLink){
+            startActivity(new Intent());
+        }
     }
 }
