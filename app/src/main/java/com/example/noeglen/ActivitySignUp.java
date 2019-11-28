@@ -2,36 +2,26 @@ package com.example.noeglen;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.asynclayoutinflater.view.AsyncLayoutInflater;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.widget.Toast;
 
-import com.example.noeglen.R;
-import com.firebase.ui.auth.AuthUI;
-import com.firebase.ui.auth.IdpResponse;
 import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.AuthResult;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.firestore.CollectionReference;
+import com.google.android.youtube.player.YouTubeBaseActivity;
+import com.google.android.youtube.player.YouTubeInitializationResult;
+import com.google.android.youtube.player.YouTubePlayer;
+import com.google.android.youtube.player.YouTubePlayerView;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.SetOptions;
 
-import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 //Denne klasse indeholder to måder at lave en login funktionalitet vha. google. Dene ene med onActivityResult kan både skabe brugere og login
 // på samme tid, hvilket er smart men også kan virke forvirrende. Den anden kan bare skabe brugere og måske logger den også automatisk ind bagefter.
 
-public class ActivitySignUp extends AppCompatActivity {
+public class ActivitySignUp extends YouTubeBaseActivity implements YouTubePlayer.OnInitializedListener {
 
     //metode 2
     //private FirebaseAuth mAuth;
@@ -42,11 +32,20 @@ public class ActivitySignUp extends AppCompatActivity {
     //for trying to get videolist
     private List<String> videoIDs;
 
+    private YouTubePlayerView youTubePlayerView;
+    private String videoID;
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_sign_up);
 
-        tryGetListFromFireStore();
+       // tryGetListFromFireStore();
+        initYoutubeVideo();
+
+
 
 
         //hører til metode 2
@@ -144,7 +143,6 @@ public class ActivitySignUp extends AppCompatActivity {
 
 
     public void tryGetListFromFireStore(){
-        List<String> videoIDs;
 
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         DocumentReference documentReference = db.collection("videos").document("videolist");
@@ -172,6 +170,24 @@ public class ActivitySignUp extends AppCompatActivity {
         });
     }
 
+    public void initYoutubeVideo(){
+        YouTubePlayerView youTubePlayerView = (YouTubePlayerView) findViewById(R.id.player);
+        if (youTubePlayerView == null){
+            System.out.println("hej med dig");
+        }
+        youTubePlayerView.initialize("AIzaSyB1ZHv40LuyAjJ7ygFNU7ImVVEUTTsf0uw", new YouTubePlayer.OnInitializedListener() {
+            @Override
+            public void onInitializationSuccess(YouTubePlayer.Provider provider, YouTubePlayer youTubePlayer, boolean b) {
+                youTubePlayer.cueVideo("Do7Nai2oSZU");
+            }
+
+            @Override
+            public void onInitializationFailure(YouTubePlayer.Provider provider, YouTubeInitializationResult youTubeInitializationResult) {
+
+            }
+        });
+    }
+
 
     public List<String> getVideoIDs() {
         return videoIDs;
@@ -179,5 +195,19 @@ public class ActivitySignUp extends AppCompatActivity {
 
     public void setVideoIDs(List<String> videoIDs) {
         this.videoIDs = videoIDs;
+    }
+
+    @Override
+    public void onInitializationSuccess(YouTubePlayer.Provider provider, YouTubePlayer youTubePlayer, boolean b) {
+        if (!b) {
+            System.out.println("kommer vi her?");
+            youTubePlayer.cueVideo("Do7Nai2oSZU");
+        }
+
+    }
+
+    @Override
+    public void onInitializationFailure(YouTubePlayer.Provider provider, YouTubeInitializationResult youTubeInitializationResult) {
+        System.out.println("oh no!");
     }
 }
