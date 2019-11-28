@@ -10,9 +10,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:paddingLeft="20dp"
-            android:paddingRight="20dp"
-            android:paddingBottom="300dp">
+            android:paddingLeft="25dp"
+            android:paddingRight="25dp"
+            android:paddingBottom="250dp">
 
             <TextView
                 android:id="@+id/textView7"
@@ -30,8 +30,9 @@
                 android:layout_marginTop="20dp"
                 android:background="@drawable/information_round"
                 android:drawableEnd="@drawable/arrow_right"
-                android:drawableStart="@drawable/dot"
-                android:text="Hvad er stress?"
+                android:text="• Hvad er stress?"
+                android:textAlignment="textStart"
+                android:paddingStart="10dp"
                 android:textColor="#ffffff" />
 
             <Button
@@ -41,7 +42,9 @@
                 android:layout_marginTop="20dp"
                 android:background="@drawable/information_round"
                 android:drawableEnd="@drawable/arrow_right"
-                android:text="Hvad skyldes stress?"
+                android:text="• Hvad skyldes stress?"
+                android:textAlignment="textStart"
+                android:paddingStart="10dp"
                 android:textColor="#ffffff" />
 
             <Button
@@ -51,7 +54,9 @@
                 android:layout_marginTop="20dp"
                 android:background="@drawable/information_round"
                 android:drawableEnd="@drawable/arrow_right"
-                android:text="Hvordan viser stress sig?"
+                android:text="• Hvordan viser stress sig?"
+                android:textAlignment="textStart"
+                android:paddingStart="10dp"
                 android:textColor="#ffffff" />
 
             <Button
@@ -61,7 +66,9 @@
                 android:layout_marginTop="20dp"
                 android:background="@drawable/information_round"
                 android:drawableEnd="@drawable/arrow_right"
-                android:text="Gode råd til stressramte pårørende"
+                android:text="• Gode råd til pårørende"
+                android:textAlignment="textStart"
+                android:paddingStart="10dp"
                 android:textColor="#ffffff" />
 
             <Button
@@ -71,7 +78,9 @@
                 android:layout_marginTop="20dp"
                 android:background="@drawable/information_round"
                 android:drawableEnd="@drawable/arrow_right"
-                android:text="Behandling af stress"
+                android:text="• Behandling af stress"
+                android:textAlignment="textStart"
+                android:paddingStart="10dp"
                 android:textColor="#ffffff" />
 
             <Button
@@ -81,7 +90,9 @@
                 android:layout_marginTop="20dp"
                 android:background="@drawable/information_round"
                 android:drawableEnd="@drawable/arrow_right"
-                android:text="Stress og arbejde"
+                android:text="• Stress og arbejde"
+                android:textAlignment="textStart"
+                android:paddingStart="10dp"
                 android:textColor="#ffffff" />
 
             <Button
@@ -91,7 +102,9 @@
                 android:layout_marginTop="20dp"
                 android:background="@drawable/information_round"
                 android:drawableEnd="@drawable/arrow_right"
-                android:text="Få mere at vide om stress"
+                android:text="• Få mere at vide om stress"
+                android:textAlignment="textStart"
+                android:paddingStart="10dp"
                 android:textColor="#ffffff" />
 
         </LinearLayout>
