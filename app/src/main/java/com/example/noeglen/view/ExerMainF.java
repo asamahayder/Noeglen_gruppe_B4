@@ -50,7 +50,7 @@ public class ExerMainF extends Fragment implements View.OnClickListener {
 
         switch (v.getId()){
             case R.id.iDashVid:
-                fragmentTag = getString(R.string.fragment_exer);
+                fragmentTag = getString(R.string.fragment_exermain);
                 break;
         }
         iMain.inflateFragment(fragmentTag);
