@@ -13,7 +13,7 @@
         <string name="fragment_exermain">Fragment Exer</string>
         <string name="fragment_favmain">Fragment Fav</string>
 
-    <string name="Viden">Nyttig Viden</string>
+    <string name="Viden">Viden</string>
     <string name="nyttig_viden">Nyttig Viden</string>
 
 </resources>
