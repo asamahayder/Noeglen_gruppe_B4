@@ -11,6 +11,13 @@
         android:layout_height="wrap_content"
         android:text="back" />
 
+    <com.google.android.youtube.player.YouTubePlayerView
+        android:id="@+id/youtubePlayerView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+    </com.google.android.youtube.player.YouTubePlayerView>
+
     <TextView
         android:id="@+id/videoTitle"
         android:layout_width="match_parent"
@@ -34,11 +41,5 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="mark as seen" />
-
-    <fragment
-        android:name="com.google.android.youtube.player.YouTubePlayerFragment"
-        android:id="@+id/youtube_fragment"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
 
 </LinearLayout>
