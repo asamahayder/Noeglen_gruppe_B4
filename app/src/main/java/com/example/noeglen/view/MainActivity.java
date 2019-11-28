@@ -15,6 +15,11 @@ import androidx.fragment.app.FragmentTransaction;
 
 import com.example.noeglen.R;
 import com.example.noeglen.logic.CurrentDate;
+import com.google.android.youtube.player.YouTubeBaseActivity;
+import com.google.android.youtube.player.YouTubeInitializationResult;
+import com.google.android.youtube.player.YouTubePlayer;
+import com.google.android.youtube.player.YouTubePlayerFragment;
+import com.google.android.youtube.player.YouTubePlayerSupportFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -69,8 +74,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
         }
 
-        DashMainF fragment = new DashMainF();
-        setFragment(fragment,getString(R.string.fragment_dashmain),false);
+        //DashMainF fragment = new DashMainF();
+        DashVidF fragment = new DashVidF();
+        //setFragment(fragment,getString(R.string.fragment_dashmain),false);
+        setFragment(fragment,getString(R.string.fragment_dashvid),false);
         fm = this.getSupportFragmentManager();
 
         currDate = CurrentDate.getInstance();
@@ -164,6 +171,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
         if (tag.equals(getString(R.string.fragment_exerexer))){
             Fragment selectedFragment = new ExerExerF();
+            setFragment(selectedFragment,tag,true);
+        }
+        if (tag.equals("Fragment Diary1")){
+            Fragment selectedFragment = new Diary1F();
             setFragment(selectedFragment,tag,true);
         }
 

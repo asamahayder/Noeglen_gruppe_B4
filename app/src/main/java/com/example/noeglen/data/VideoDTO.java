@@ -2,16 +2,16 @@ package com.example.noeglen.data;
 
 public class VideoDTO implements IFavoritesDTO {
 
-    private int dbID;
+    private String videoID;
     private boolean watched;
     private String title;
-    private String progression;
 
-    public VideoDTO(int dbID, boolean watched, String title, String progression) {
-        this.dbID = dbID;
+    public VideoDTO(){}
+
+    public VideoDTO(String title, String videoID, boolean watched) {
+        this.videoID = videoID;
         this.watched = watched;
         this.title = title;
-        this.progression = progression;
     }
 
     //FIXME
@@ -30,12 +30,12 @@ public class VideoDTO implements IFavoritesDTO {
 
     /** GETTERS AND SETTERS */
 
-    public int getDbID() {
-        return dbID;
+    public String getVideoID() {
+        return videoID;
     }
 
-    public void setDbID(int dbID) {
-        this.dbID = dbID;
+    public void setVideoID(String videoID) {
+        this.videoID = videoID;
     }
 
     public boolean isWatched() {
@@ -52,13 +52,5 @@ public class VideoDTO implements IFavoritesDTO {
 
     public void setTitle(String title) {
         this.title = title;
-    }
-
-    public String getProgression() {
-        return progression;
-    }
-
-    public void setProgression(String progression) {
-        this.progression = progression;
     }
 }

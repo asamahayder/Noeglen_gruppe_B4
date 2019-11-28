@@ -1,37 +1,33 @@
 package com.example.noeglen;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.widget.Toast;
 
-import com.example.noeglen.R;
-import com.firebase.ui.auth.AuthUI;
-import com.firebase.ui.auth.IdpResponse;
+import com.example.noeglen.data.VideoDTO;
+import com.example.noeglen.logic.YoutubePlayer;
 import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.AuthResult;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.firestore.CollectionReference;
+import com.google.android.youtube.player.YouTubeBaseActivity;
+import com.google.android.youtube.player.YouTubeInitializationResult;
+import com.google.android.youtube.player.YouTubePlayer;
+import com.google.android.youtube.player.YouTubePlayerView;
+import com.google.android.youtube.player.YouTubeThumbnailView;
+import com.google.firebase.FirebaseApp;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.SetOptions;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 
-import java.util.Arrays;
-import java.util.HashMap;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 //Denne klasse indeholder to måder at lave en login funktionalitet vha. google. Dene ene med onActivityResult kan både skabe brugere og login
 // på samme tid, hvilket er smart men også kan virke forvirrende. Den anden kan bare skabe brugere og måske logger den også automatisk ind bagefter.
 
-public class ActivitySignUp extends AppCompatActivity {
+public class ActivitySignUp extends YouTubeBaseActivity {
 
     //metode 2
     //private FirebaseAuth mAuth;
@@ -41,12 +37,32 @@ public class ActivitySignUp extends AppCompatActivity {
 
     //for trying to get videolist
     private List<String> videoIDs;
+    private List<String> weekList;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_sign_up);
 
-        tryGetListFromFireStore();
+        YouTubePlayerView youTubePlayerView = findViewById(R.id.player);
+        YoutubePlayer youtubePlayer = new YoutubePlayer();
+        YouTubeThumbnailView youTubeThumbnailView = findViewById(R.id.thumbnailView);
+        youtubePlayer.initYoutubeVideo("Do7Nai2oSZU", youTubePlayerView);
+        youtubePlayer.initVideoThumbNail("Do7Nai2oSZU", youTubeThumbnailView);
+
+        //tryGetListFromFireStore();
+
+        //downloadWeekList();
+
+        //addCustomObject();
+        //getVideo();
+
+        //getAllVideosFromWeek("Uge 1: Intro og grundlæggende viden");
+
+
+
 
 
         //hører til metode 2
@@ -65,6 +81,8 @@ public class ActivitySignUp extends AppCompatActivity {
                         .setIsSmartLockEnabled(false)
                         .build(),
                 1);*/
+
+
     }
 
     //hører til metode 1. Dette er hvad jeg går efter
@@ -90,8 +108,7 @@ public class ActivitySignUp extends AppCompatActivity {
                 System.out.println("OH no");
             }
         }
-
-        if (loggedin){
+        if (true){
             FirebaseFirestore db = FirebaseFirestore.getInstance();
             Map<String, String> map = new HashMap<>();
             map.put("lastName", "Hayder");
@@ -107,7 +124,8 @@ public class ActivitySignUp extends AppCompatActivity {
                 }
             });
         }
-    }*/
+     */
+
 
     //hører til metode to
     /*@Override
@@ -144,8 +162,7 @@ public class ActivitySignUp extends AppCompatActivity {
 
 
     public void tryGetListFromFireStore(){
-        List<String> videoIDs;
-
+        FirebaseApp.initializeApp(this);
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         DocumentReference documentReference = db.collection("videos").document("videolist");
         documentReference.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
@@ -172,6 +189,79 @@ public class ActivitySignUp extends AppCompatActivity {
         });
     }
 
+    public void getVideo(String week, String videoName){
+        FirebaseApp.initializeApp(this);
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        DocumentReference documentReference = db.collection(week).document(videoName);
+        documentReference.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+            @Override
+            public void onSuccess(DocumentSnapshot documentSnapshot) {
+                VideoDTO video = documentSnapshot.toObject(VideoDTO.class);
+                System.out.println(video.getTitle());
+                System.out.println(video.getVideoID());
+            }
+        });
+    }
+
+    public void addCustomObject(){
+        VideoDTO video = new VideoDTO("1 - Velkommen Til Noeglen", "kyci1wyxpOc",false);
+        FirebaseApp.initializeApp(this);
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        db.collection("Uge 1: Intro og grundlæggende viden").document(video.getTitle()).set(video);
+    }
+
+    public List<VideoDTO> getAllVideosFromWeek(final String week){
+        final List<VideoDTO> videoList = new ArrayList<>();
+        FirebaseApp.initializeApp(this);
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        db.collection(week).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if (task.isSuccessful()){
+                    for (QueryDocumentSnapshot snapshot: task.getResult()) {
+                        VideoDTO videoDTO = snapshot.toObject(VideoDTO.class);
+                        videoList.add(videoDTO);
+                     }
+                }else{
+                    System.out.println("Could not fetch videos from: " + week);
+                }
+            }
+        });
+        return videoList;
+    }
+
+    public void downloadWeekList(){
+        FirebaseApp.initializeApp(this);
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        db.collection("Weeks").document("ListOfAllWeeks").get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                DocumentSnapshot snapshot = task.getResult();
+                List<String> weekList = (List<String>) snapshot.get("list");
+                setWeekList(weekList);
+                //TODO lav en for-loop som opdatere UI samt kører getAllVideosFromWeek
+            }
+        });
+    }
+
+    public void initYoutubeVideo(){
+        YouTubePlayerView youTubePlayerView = (YouTubePlayerView) findViewById(R.id.player);
+        if (youTubePlayerView == null){
+            System.out.println("hej med dig");
+        }
+        youTubePlayerView.initialize("AIzaSyB1ZHv40LuyAjJ7ygFNU7ImVVEUTTsf0uw", new YouTubePlayer.OnInitializedListener() {
+            @Override
+            public void onInitializationSuccess(YouTubePlayer.Provider provider, YouTubePlayer youTubePlayer, boolean b) {
+                youTubePlayer.cueVideo("Do7Nai2oSZU");
+            }
+
+            @Override
+            public void onInitializationFailure(YouTubePlayer.Provider provider, YouTubeInitializationResult youTubeInitializationResult) {
+
+            }
+        });
+    }
+
 
     public List<String> getVideoIDs() {
         return videoIDs;
@@ -179,5 +269,13 @@ public class ActivitySignUp extends AppCompatActivity {
 
     public void setVideoIDs(List<String> videoIDs) {
         this.videoIDs = videoIDs;
+    }
+
+    public void setWeekList(List<String> weekList){
+        this.weekList = weekList;
+    }
+
+    public List<String> getWeekList() {
+        return weekList;
     }
 }
