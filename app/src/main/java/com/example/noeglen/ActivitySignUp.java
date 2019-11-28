@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 
 import android.os.Bundle;
 
+import com.example.noeglen.data.VideoDAO;
 import com.example.noeglen.data.VideoDTO;
 import com.example.noeglen.logic.YoutubePlayer;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -50,7 +51,7 @@ public class ActivitySignUp extends YouTubeBaseActivity {
         YoutubePlayer youtubePlayer = new YoutubePlayer();
         YouTubeThumbnailView youTubeThumbnailView = findViewById(R.id.thumbnailView);
         youtubePlayer.initYoutubeVideo("Do7Nai2oSZU", youTubePlayerView);
-        youtubePlayer.initVideoThumbNail("Do7Nai2oSZU", youTubeThumbnailView);
+        //youtubePlayer.initVideoThumbNail("Do7Nai2oSZU", youTubeThumbnailView);
 
         //tryGetListFromFireStore();
 
@@ -238,6 +239,9 @@ public class ActivitySignUp extends YouTubeBaseActivity {
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                 DocumentSnapshot snapshot = task.getResult();
                 List<String> weekList = (List<String>) snapshot.get("list");
+                for (int i = 0; i < weekList.size(); i++) {
+                    System.out.println(weekList.get(i));
+                }
                 setWeekList(weekList);
                 //TODO lav en for-loop som opdatere UI samt kører getAllVideosFromWeek
             }

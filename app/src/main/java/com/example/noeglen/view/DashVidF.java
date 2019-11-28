@@ -11,18 +11,11 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
 
 import com.example.noeglen.R;
 import com.example.noeglen.data.VideoDTO;
 import com.example.noeglen.logic.YoutubePlayer;
-import com.google.android.youtube.player.YouTubeBaseActivity;
-import com.google.android.youtube.player.YouTubeInitializationResult;
-import com.google.android.youtube.player.YouTubePlayer;
-import com.google.android.youtube.player.YouTubePlayerSupportFragment;
 import com.google.android.youtube.player.YouTubePlayerView;
-
-import org.w3c.dom.Text;
 
 public class DashVidF extends Fragment implements View.OnClickListener {
     private TextView videoTitle;
@@ -36,28 +29,6 @@ public class DashVidF extends Fragment implements View.OnClickListener {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-
-        YouTubePlayerSupportFragment youTubePlayerFragment = YouTubePlayerSupportFragment.newInstance();
-
-        youTubePlayerFragment.initialize("AIzaSyB1ZHv40LuyAjJ7ygFNU7ImVVEUTTsf0uw", new YouTubePlayer.OnInitializedListener() {
-
-            @Override
-            public void onInitializationSuccess(YouTubePlayer.Provider provider, YouTubePlayer player, boolean wasRestored) {
-                if (!wasRestored) {
-                    player.cueVideo("kyci1wyxpOc");
-                }
-
-            }
-
-            @Override
-            public void onInitializationFailure(YouTubePlayer.Provider arg0, YouTubeInitializationResult arg1) {
-                // TODO Auto-generated method stub
-
-            }
-        });
-        FragmentTransaction transaction = getChildFragmentManager().beginTransaction();
-        transaction.replace(R.id.content_frame,youTubePlayerFragment).commit();
-
         return inflater.inflate(R.layout.fragment_dashvid, container, false);
     }
 
@@ -71,11 +42,11 @@ public class DashVidF extends Fragment implements View.OnClickListener {
         youTubePlayerView = getView().findViewById(R.id.youtubePlayerView);
 
         //TODO this is just for testing. get video from intent
-        VideoDTO videoDTO = new VideoDTO("Velkommen til nøglen", "kyci1wyxpOc", false);
+        VideoDTO videoDTO = new VideoDTO("Velkommen til nøglen", "AP7BdohPhMY", false);
 
         //TODO get video from intent
-        //YoutubePlayer youtubePlayer = new YoutubePlayer();
-        //youtubePlayer.initYoutubeVideo(videoDTO.getTitle(), youTubePlayerView);
+        YoutubePlayer youtubePlayer = new YoutubePlayer();
+        youtubePlayer.initYoutubeVideo(videoDTO.getTitle(), youTubePlayerView);
 
         videoTitle.setText(videoDTO.getTitle());
 
