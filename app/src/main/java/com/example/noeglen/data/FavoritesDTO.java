@@ -4,12 +4,10 @@ import java.util.List;
 
 public class FavoritesDTO {
 
+    private int dbID;
     private List<ArticleDTO> listOfArticleDTOS;
     private List<VideoDTO> listOfVideoDTOS;
     private List<ExerciseDTO> listOfExerciseDTOS;
-
-    public FavoritesDTO() {
-    }
 
     public FavoritesDTO(List<ArticleDTO> listOfArticleDTOS, List<VideoDTO> listOfVideoDTOS, List<ExerciseDTO> listOfExerciseDTOS) {
         this.listOfArticleDTOS = listOfArticleDTOS;
