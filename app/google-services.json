@@ -1,34 +1,42 @@
 {
   "project_info": {
-    "project_number": "163450930068",
-    "firebase_url": "https://noeglen-dde4e.firebaseio.com",
-    "project_id": "noeglen-dde4e",
-    "storage_bucket": "noeglen-dde4e.appspot.com"
+    "project_number": "148806104553",
+    "firebase_url": "https://noeglen-18170.firebaseio.com",
+    "project_id": "noeglen-18170",
+    "storage_bucket": "noeglen-18170.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:163450930068:android:6f6ae61914c31fcba50581",
+        "mobilesdk_app_id": "1:148806104553:android:47683126e2c259abbc4778",
         "android_client_info": {
           "package_name": "com.example.noeglen"
         }
       },
       "oauth_client": [
         {
-          "client_id": "163450930068-8d22arlbnks4ef3hsbp0gd3rf4ttuks8.apps.googleusercontent.com",
+          "client_id": "148806104553-q0tls295mhgom6c200sqhoi1h6ig8m1r.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.noeglen",
+            "certificate_hash": "a32c82eebbf86a385cba669b0734bc14be97c8a4"
+          }
+        },
+        {
+          "client_id": "148806104553-pg3scgnkonl779idqqb6u1k67ea1h8is.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyDP25bUB4D6YaGuR2F2s3x1ZIYxg1PHhHc"
+          "current_key": "AIzaSyAHtpR7Ce0SF-9kNeXO8lAKQpzdoga9Wus"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "163450930068-8d22arlbnks4ef3hsbp0gd3rf4ttuks8.apps.googleusercontent.com",
+              "client_id": "148806104553-pg3scgnkonl779idqqb6u1k67ea1h8is.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

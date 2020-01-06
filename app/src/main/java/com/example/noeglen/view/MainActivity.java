@@ -15,11 +15,6 @@ import androidx.fragment.app.FragmentTransaction;
 
 import com.example.noeglen.R;
 import com.example.noeglen.logic.CurrentDate;
-import com.google.android.youtube.player.YouTubeBaseActivity;
-import com.google.android.youtube.player.YouTubeInitializationResult;
-import com.google.android.youtube.player.YouTubePlayer;
-import com.google.android.youtube.player.YouTubePlayerFragment;
-import com.google.android.youtube.player.YouTubePlayerSupportFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -177,6 +172,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             Fragment selectedFragment = new Diary1F();
             setFragment(selectedFragment,tag,true);
         }
+        if (tag.equals(getString(R.string.fragment_dashvid))){
+            Fragment selectedFragment = new DashVidF();
+            setFragment(selectedFragment,tag,true);
+        }
+
 
     }
 

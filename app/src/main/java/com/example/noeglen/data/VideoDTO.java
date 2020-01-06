@@ -8,8 +8,8 @@ public class VideoDTO implements IFavoritesDTO {
 
     public VideoDTO(){}
 
-    public VideoDTO(String title, String videoID, boolean watched) {
-        this.videoID = videoID;
+    public VideoDTO(String title, String videoURI, boolean watched) {
+        this.videoID = videoURI;
         this.watched = watched;
         this.title = title;
     }

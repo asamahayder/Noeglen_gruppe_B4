@@ -11,14 +11,10 @@
         android:layout_height="wrap_content"
         android:text="back" />
 
-    <TextView
-        android:id="@+id/videoTitle"
+    <VideoView
+        android:id="@+id/videoView"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textSize="30sp"
-        android:textColor="@color/babyBlue"
-        android:fontFamily="@font/karla_regular"
-        android:text="loading video please wait" />
+        android:layout_height="wrap_content" />
 
     <TextView
         android:id="@+id/videoDescription"
@@ -34,11 +30,5 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="mark as seen" />
-
-    <fragment
-        android:name="com.google.android.youtube.player.YouTubePlayerFragment"
-        android:id="@+id/youtube_fragment"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
 
 </LinearLayout>

@@ -1,28 +1,26 @@
 package com.example.noeglen.view;
 
 import android.content.Context;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.VideoView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.example.noeglen.R;
-import com.example.noeglen.data.VideoDTO;
-import com.example.noeglen.logic.YoutubePlayer;
-import com.google.android.youtube.player.YouTubePlayerView;
 
 public class DashVidF extends Fragment implements View.OnClickListener {
-    private TextView videoTitle;
     private TextView videoDescription;
     private Button returnButton;
     private Button markSeenButton;
-    private YouTubePlayerView youTubePlayerView;
+    private VideoView videoView;
 
     private IMainActivity iMain;
 
@@ -35,29 +33,12 @@ public class DashVidF extends Fragment implements View.OnClickListener {
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        /*super.onViewCreated(view, savedInstanceState);
-        videoTitle = getView().findViewById(R.id.videoTitle);
-        videoDescription = getView().findViewById(R.id.videoDescription);
-        returnButton = getView().findViewById(R.id.returnButton);
-        markSeenButton = getView().findViewById(R.id.markSeenButton);
-        youTubePlayerView = getView().findViewById(R.id.youtubePlayerView);
-
-        //TODO this is just for testing. get video from intent
-        VideoDTO videoDTO = new VideoDTO("Velkommen til nøglen", "AP7BdohPhMY", false);
-
-        //TODO get video from intent
-        YoutubePlayer youtubePlayer = new YoutubePlayer();
-        youtubePlayer.initYoutubeVideo(videoDTO.getTitle(), youTubePlayerView);
-
-        videoTitle.setText(videoDTO.getTitle());
-
-        //TODO this is just for testing. get description value from video
-        videoDescription.setText("Denne video giver dig en introduktion til hvad denne app handler om.");
-
-        returnButton.setOnClickListener(this);*/
-
-
-
+        super.onViewCreated(view, savedInstanceState);
+        videoView = getView().findViewById(R.id.videoView);
+        Uri videoURI = Uri.parse("https://firebasestorage.googleapis.com/v0/b/noeglen-18170.appspot.com/o/velkommen%20til%20noeglen.mp4?alt=media&token=ae56401a-2a6c-440b-93c2-8200f02a7cfe");
+        videoView.setVideoURI(videoURI);
+        videoView.requestFocus();
+        videoView.start();
     }
 
     @Override
