@@ -2,11 +2,9 @@ package com.example.noeglen.view;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.os.CountDownTimer;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.SeekBar;
 import android.widget.TextView;
@@ -18,15 +16,16 @@ import androidx.fragment.app.Fragment;
 import com.example.noeglen.R;
 import com.example.noeglen.logic.CurrentDate;
 
-public class DiaryMainF extends Fragment implements View.OnClickListener {
+//public class DiaryMainF extends Fragment implements View.OnClickListener {
+  public class DiaryMainF extends Fragment{
 
    private TextView textView1,textView2;
    private CurrentDate currentDate;
    private SeekBar seekBar;
    private ImageView imageView;
-   private Button con;
+   //private Button con;
    private IMainActivity iMain;
-   private CountDownTimer CT;
+
 
     @Nullable
     @Override
@@ -36,8 +35,8 @@ public class DiaryMainF extends Fragment implements View.OnClickListener {
 
     @Override
     public void onViewCreated(@NonNull final View view, @Nullable Bundle savedInstanceState) {
-        con = getView().findViewById(R.id.button);
-        con.setOnClickListener(this);
+        //con = getView().findViewById(R.id.button);
+        //con.setOnClickListener(this);
         textView1 = getView().findViewById(R.id.textView4);
         textView1.setText(currentDate.getDateString());
 
@@ -72,6 +71,12 @@ public class DiaryMainF extends Fragment implements View.OnClickListener {
 
             @Override
             public void onStopTrackingTouch(SeekBar seekBar) {
+                String mm = "";
+                if (seekBar.getProgress() > 0 && seekBar.getProgress() <= 20){
+                    mm = "Fragment Diary1";
+                    iMain.inflateFragment(mm);
+                }
+
 
             }
         });
@@ -86,7 +91,7 @@ public class DiaryMainF extends Fragment implements View.OnClickListener {
         iMain = (IMainActivity) getActivity();
     }
 
-    @Override
+   /* @Override
     public void onClick(View view) {
         String tag ="";
 
@@ -101,5 +106,5 @@ public class DiaryMainF extends Fragment implements View.OnClickListener {
 
         }
 
-    }
+    }*/
 }
