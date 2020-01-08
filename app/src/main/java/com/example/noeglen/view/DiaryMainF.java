@@ -2,6 +2,7 @@ package com.example.noeglen.view;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,6 +26,7 @@ public class DiaryMainF extends Fragment implements View.OnClickListener {
    private ImageView imageView;
    private Button con;
    private IMainActivity iMain;
+   private CountDownTimer CT;
 
     @Nullable
     @Override
@@ -42,6 +44,7 @@ public class DiaryMainF extends Fragment implements View.OnClickListener {
         seekBar = getView().findViewById(R.id.simpleSeekBar);
 
         imageView = getView().findViewById(R.id.imageView3);
+        imageView.setBackground(getView().getResources().getDrawable(R.drawable.emoji3));
         seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
@@ -57,6 +60,8 @@ public class DiaryMainF extends Fragment implements View.OnClickListener {
                 }else if (seekBar.getProgress() > 80 && seekBar.getProgress() <= 100){
                     imageView.setBackground(getView().getResources().getDrawable(R.drawable.emoji5));
                 }
+
+
             }
 
 
