@@ -24,7 +24,7 @@ public class ArticleDAO implements IArticleDAO {
     private FirebaseFirestore db;
     private DocumentReference dRef;
 
-    private static final String TAG = "FIREBASE - ARTICLES: ";
+    private static final String TAG = "INFO_MAIN_ARTICLES";
 
     @Override
     public ArticleDTO getArticle(String collection, String articleTitle) {
@@ -37,6 +37,7 @@ public class ArticleDAO implements IArticleDAO {
             @Override
             public void onSuccess(DocumentSnapshot documentSnapshot) {
                 article = documentSnapshot.toObject(ArticleDTO.class);
+                Log.d(TAG, "onSuccess: SUCCESSFULLY RETRIEVED FROM FIREBASE");
             }
         });
 
@@ -55,6 +56,7 @@ public class ArticleDAO implements IArticleDAO {
                     for (QueryDocumentSnapshot snapshot : task.getResult()) {
                         article = snapshot.toObject(ArticleDTO.class);
                         listOfArticles.add(article);
+                        Log.d(TAG, "onComplete: COMPLETED RETRIEVING FROM FIREBASE");
                     }
                 }
                 else {

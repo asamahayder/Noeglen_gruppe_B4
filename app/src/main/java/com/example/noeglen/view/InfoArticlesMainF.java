@@ -15,15 +15,19 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.noeglen.R;
 import com.example.noeglen.data.ArticleDAO;
+import com.example.noeglen.data.ArticleDTO;
 import com.example.noeglen.data.IArticleDAO;
 
-public class InfoArticlesMainF extends Fragment implements View.OnClickListener {
+import java.util.List;
+
+public class InfoArticlesMainF extends Fragment implements InfoArticlesMainAdapter.OnArticleListener {
 
     private RecyclerView rView;
     private InfoArticlesMainAdapter adapter;
 
     private IMainActivity iMain;
     private IArticleDAO iArticle;
+    private List<ArticleDTO> articles;
 
     @Nullable
     @Override
@@ -39,9 +43,12 @@ public class InfoArticlesMainF extends Fragment implements View.OnClickListener 
 
     private void initializeView() {
         iArticle = new ArticleDAO();
+        articles = iArticle.getListOfArticles("Articles");
 
         rView = getView().findViewById(R.id.infoarticlesmain_recyclerview);
-        adapter = new InfoArticlesMainAdapter(getContext(), iArticle.getListOfArticles("Articles"));
+        adapter = new InfoArticlesMainAdapter(getContext(), articles, this);
+        rView.setLayoutManager(new LinearLayoutManager(getContext()));
+        rView.setAdapter(adapter);
     }
 
 
@@ -51,8 +58,8 @@ public class InfoArticlesMainF extends Fragment implements View.OnClickListener 
         iMain = (IMainActivity) getActivity();
     }
 
-
     @Override
-    public void onClick(View view) {
+    public void onArticleClick(int position) {
+        iMain.inflateFragment(getString(R.string.fragment_infoarticle));
     }
 }
