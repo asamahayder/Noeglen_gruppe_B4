@@ -45,6 +45,12 @@ public class InfoArticlesMainF extends Fragment implements InfoArticlesMainAdapt
         iArticle = new ArticleDAO();
         articles = iArticle.getListOfArticles("Articles");
 
+        // FIXME Dette er for testing
+        for (int i = 0; i < 12; i++) {
+            ArticleDTO article = new ArticleDTO("test","test","test","https://firebasestorage.googleapis.com/v0/b/noeglen-18170.appspot.com/o/Articles%2F1.png?alt=media&token=d24de751-e8ca-4c54-94f0-07420430b5af");
+            articles.add(article);
+        }
+
         rView = getView().findViewById(R.id.infoarticlesmain_recyclerview);
         adapter = new InfoArticlesMainAdapter(getContext(), articles, this);
         rView.setLayoutManager(new LinearLayoutManager(getContext()));
