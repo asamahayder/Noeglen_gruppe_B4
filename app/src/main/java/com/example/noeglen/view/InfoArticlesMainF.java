@@ -14,11 +14,16 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.noeglen.R;
+import com.example.noeglen.data.ArticleDAO;
+import com.example.noeglen.data.IArticleDAO;
 
 public class InfoArticlesMainF extends Fragment implements View.OnClickListener {
 
+    private RecyclerView rView;
+    private InfoArticlesMainAdapter adapter;
+
     private IMainActivity iMain;
-    private ImageView iArticles;
+    private IArticleDAO iArticle;
 
     @Nullable
     @Override
@@ -33,8 +38,10 @@ public class InfoArticlesMainF extends Fragment implements View.OnClickListener 
     }
 
     private void initializeView() {
+        iArticle = new ArticleDAO();
 
-
+        rView = getView().findViewById(R.id.infoarticlesmain_recyclerview);
+        adapter = new InfoArticlesMainAdapter(getContext(), iArticle.getListOfArticles("Articles"));
     }
 
 
@@ -47,10 +54,5 @@ public class InfoArticlesMainF extends Fragment implements View.OnClickListener 
 
     @Override
     public void onClick(View view) {
-        String tag = "";
-        if (view == iArticles){
-            tag = getString(R.string.fragment_infoarticle);
-            iMain.inflateFragment(tag);
-        }
     }
 }
