@@ -2,6 +2,7 @@ package com.example.noeglen.data;
 
 import androidx.annotation.NonNull;
 
+import com.example.noeglen.view.DashVidMainRecyclerAdapter;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
@@ -18,6 +19,7 @@ public class VideoDAO implements IVideoDAO{
 
     List<String> weekList;
     VideoDTO video;
+    ArrayList<VideoDTO> videoList = null;
 
     public VideoDTO getVideo(String week, String videoName){
         FirebaseFirestore db = FirebaseFirestore.getInstance();
@@ -34,17 +36,25 @@ public class VideoDAO implements IVideoDAO{
         return video;
     }
 
-    public List<String> getWeekList(){
+    public void getWeekList(){
+        final ArrayList<VideoDTO> videoList = new ArrayList<>();
+        this.videoList = new ArrayList<>();
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         db.collection("Weeks").document("ListOfAllWeeks").get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                 DocumentSnapshot snapshot = task.getResult();
                 List<String> weekList = (List<String>) snapshot.get("list");
+                System.out.println("####################");
+                for (String week : weekList) {
+                    System.out.println(week);
+                    videoList.addAll(getAllVideosFromWeek(week));
+                }
+                System.out.println(videoList);
+                setVideoList(videoList);
                 setWeekList(weekList);
             }
         });
-        return weekList;
     }
 
     public List<VideoDTO> getAllVideosFromWeek(final String week){
@@ -65,12 +75,26 @@ public class VideoDAO implements IVideoDAO{
         });
         return videoList;
     }
+    
+    /*public ArrayList<VideoDTO> getAllVideos(){
+        ArrayList<VideoDTO> videoList;
+        videoList = getWeekList();
+        return videoList;
+    }*/
 
     public void setWeekList(List<String> weekList) {
         this.weekList = weekList;
     }
 
+    public void setVideoList(ArrayList<VideoDTO> videoList){
+        this.videoList = videoList;
+    }
+
     public void setVideo(VideoDTO video) {
         this.video = video;
+    }
+
+    public ArrayList<VideoDTO> getVideoList() {
+        return videoList;
     }
 }

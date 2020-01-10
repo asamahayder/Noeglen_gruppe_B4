@@ -10,13 +10,20 @@ import android.widget.ImageView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.noeglen.R;
+import com.example.noeglen.data.VideoDTO;
+import com.example.noeglen.logic.VideoListLogic;
+
+import java.util.ArrayList;
 
 public class DashVidMainF extends Fragment implements View.OnClickListener {
 
-    private ImageView iVIdeoLink;
-    IMainActivity mainActivity;
+    private IMainActivity mainActivity;
+    private RecyclerView recyclerView;
+    private ArrayList<VideoDTO> videoList;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -36,10 +43,8 @@ public class DashVidMainF extends Fragment implements View.OnClickListener {
     }
 
     private void initializeView() {
-
-        //iVIdeoLink = (ImageView) getView().findViewById(R.id.iVideoLink);
-        iVIdeoLink.setOnClickListener(this);
-
+        recyclerView = getView().findViewById(R.id.videoRecyclerView);
+        new AsyncTaskGetVideos(this).execute();
     }
 
     @Override
@@ -50,8 +55,19 @@ public class DashVidMainF extends Fragment implements View.OnClickListener {
 
     @Override
     public void onClick(View view) {
-        if (view == iVIdeoLink){
-            mainActivity.inflateFragment(getString(R.string.fragment_dashvid));
-        }
+    }
+
+
+    public void setVideoList(ArrayList<VideoDTO> videoList){
+        this.videoList = videoList;
+    }
+
+    public void displayVideos(DashVidMainRecyclerAdapter adapter){
+        recyclerView.setAdapter(adapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this.getContext()));
+    }
+
+    public void showErrorMessage(){
+        //TODO show error message in case Async fails
     }
 }

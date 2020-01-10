@@ -69,10 +69,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
         }
 
-        //DashMainF fragment = new DashMainF();
-        DashVidF fragment = new DashVidF();
-        //setFragment(fragment,getString(R.string.fragment_dashmain),false);
-        setFragment(fragment,getString(R.string.fragment_dashvid),false);
+        DashMainF fragment = new DashMainF();
+        setFragment(fragment,getString(R.string.fragment_dashmain),false);
+
         fm = this.getSupportFragmentManager();
 
         currDate = CurrentDate.getInstance();
