@@ -2,6 +2,7 @@ package com.example.noeglen.view;
 
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.os.AsyncTask;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -55,10 +56,8 @@ public class DashVidMainRecyclerAdapter extends RecyclerView.Adapter<DashVidMain
 
       TextView name = holder.name;
       imageView = holder.image;
-
       name.setText(videoItem.getTitle());
-      //AsyncTaskGetImage asyncTaskGetImage = new AsyncTaskGetImage(this).execute("");
-
+      new AsyncTaskGetImage(this).execute(videoItem.getImageUrl());
    }
 
    @Override

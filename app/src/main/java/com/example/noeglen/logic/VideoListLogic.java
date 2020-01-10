@@ -3,11 +3,12 @@ package com.example.noeglen.logic;
 import com.example.noeglen.data.VideoDAO;
 import com.example.noeglen.data.VideoDTO;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class VideoListLogic {
 
-    public List<String> getWeekList(){
+    /*public List<String> getWeekList(){
         List<String> weekList;
         VideoDAO videoDAO = new VideoDAO();
         weekList = videoDAO.getWeekList();
@@ -26,7 +27,14 @@ public class VideoListLogic {
         VideoDAO videoDAO = new VideoDAO();
         video = videoDAO.getVideo(week, videoName);
         return  video;
-    }
+    }*/
+
+    /*public ArrayList<VideoDTO> getAllVideos(){
+        VideoDAO videoDAO = new VideoDAO();
+        ArrayList<VideoDTO> videoList = videoDAO.getAllVideos();
+        System.out.println("#############" + videoList);
+        return videoList;
+    }*/
 
 
 }
