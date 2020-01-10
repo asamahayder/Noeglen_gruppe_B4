@@ -176,6 +176,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             Fragment selectedFragment = new DashVidF();
             setFragment(selectedFragment,tag,true);
         }
+        if (tag.equals(getString(R.string.fragment_calendar))){
+            Fragment selectedFragment = new DiaryFCalendar();
+            setFragment(selectedFragment, tag, true);
+        }
 
 
     }

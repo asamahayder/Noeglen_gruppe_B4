@@ -25,12 +25,17 @@
         android:orientation="vertical">
 
 
-        <ImageView
-            android:layout_width="wrap_content"
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/emoji1"
+            android:text="TextView" />
+
+        <ImageView
+            android:layout_width="137dp"
+            android:layout_height="160dp"
             android:layout_marginLeft="135dp"
-            />
+            android:background="@drawable/smile" />
 
 
         <TextView
@@ -80,6 +85,7 @@
             android:inputType="textPersonName" />
 
         <Button
+            android:id="@+id/gem"
             style="@android:style/Widget.Material.Light.Button.Inset"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

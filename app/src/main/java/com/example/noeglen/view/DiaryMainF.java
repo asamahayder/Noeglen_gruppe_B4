@@ -19,7 +19,7 @@ import com.example.noeglen.logic.CurrentDate;
 //public class DiaryMainF extends Fragment implements View.OnClickListener {
   public class DiaryMainF extends Fragment{
 
-   private TextView textView1,textView2;
+   private TextView date,textView2;
    private CurrentDate currentDate;
    private SeekBar seekBar;
    private ImageView imageView;
@@ -37,8 +37,8 @@ import com.example.noeglen.logic.CurrentDate;
     public void onViewCreated(@NonNull final View view, @Nullable Bundle savedInstanceState) {
         //con = getView().findViewById(R.id.button);
         //con.setOnClickListener(this);
-        textView1 = getView().findViewById(R.id.textView4);
-        textView1.setText(currentDate.getDateString());
+        date = getView().findViewById(R.id.textView4);
+        date.setText(currentDate.getDateString());
 
         seekBar = getView().findViewById(R.id.simpleSeekBar);
 
