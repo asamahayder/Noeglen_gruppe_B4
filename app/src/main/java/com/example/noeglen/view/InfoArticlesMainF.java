@@ -10,6 +10,8 @@ import android.widget.ImageView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.noeglen.R;
 
@@ -27,9 +29,14 @@ public class InfoArticlesMainF extends Fragment implements View.OnClickListener 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        iArticles = getView().findViewById(R.id.imageView6);
-        iArticles.setOnClickListener(this);
+        initializeView();
     }
+
+    private void initializeView() {
+
+
+    }
+
 
     @Override
     public void onAttach(Context context) {

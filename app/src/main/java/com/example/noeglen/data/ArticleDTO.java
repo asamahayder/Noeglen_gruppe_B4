@@ -2,18 +2,18 @@ package com.example.noeglen.data;
 
 public class ArticleDTO implements IFavoritesDTO {
 
-    private int dbID;
+    private String dbID;
     private String title;
     private String textBody;
     private String imageName;
 
-    public ArticleDTO(int dbID, String title, String textBody, String imageName) {
+    public ArticleDTO(String dbID, String title, String textBody, String imageName) {
         this.dbID = dbID;
         this.title = title;
         this.textBody = textBody;
         this.imageName = imageName;
     }
-
+    
     //FIXME
 
     @Override
@@ -30,11 +30,11 @@ public class ArticleDTO implements IFavoritesDTO {
 
     /** GETTERS AND SETTERS */
 
-    public int getDbID() {
+    public String getDbID() {
         return dbID;
     }
 
-    public void setDbID(int dbID) {
+    public void setDbID(String dbID) {
         this.dbID = dbID;
     }
 
