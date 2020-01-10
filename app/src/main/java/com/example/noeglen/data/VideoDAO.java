@@ -28,7 +28,7 @@ public class VideoDAO implements IVideoDAO{
                 VideoDTO video = documentSnapshot.toObject(VideoDTO.class);
                 setVideo(video);
                 System.out.println(video.getTitle());
-                System.out.println(video.getVideoID());
+                System.out.println(video.getVideoUrl());
             }
         });
         return video;

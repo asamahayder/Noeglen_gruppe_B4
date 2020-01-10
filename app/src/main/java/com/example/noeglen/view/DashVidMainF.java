@@ -37,7 +37,7 @@ public class DashVidMainF extends Fragment implements View.OnClickListener {
 
     private void initializeView() {
 
-        iVIdeoLink = (ImageView) getView().findViewById(R.id.iVideoLink);
+        //iVIdeoLink = (ImageView) getView().findViewById(R.id.iVideoLink);
         iVIdeoLink.setOnClickListener(this);
 
     }

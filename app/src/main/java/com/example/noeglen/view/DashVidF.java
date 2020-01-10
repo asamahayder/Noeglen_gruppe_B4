@@ -1,12 +1,16 @@
 package com.example.noeglen.view;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.media.Image;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.VideoView;
 
@@ -15,6 +19,13 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.example.noeglen.R;
+
+import java.io.BufferedInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.net.URLConnection;
 
 public class DashVidF extends Fragment implements View.OnClickListener {
     private TextView videoDescription;
@@ -52,5 +63,9 @@ public class DashVidF extends Fragment implements View.OnClickListener {
         if (view == returnButton){
             iMain.inflateFragment(getString(R.string.fragment_dashvidmain));
         }
+    }
+
+    public void showErrorMessage(){
+        //TODO show error message
     }
 }
