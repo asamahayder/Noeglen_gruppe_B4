@@ -6,6 +6,15 @@
     <color name="backGround">#8dcdff</color>
     <color name="babyBlue">#0797FF</color>
 
+    //MATERIAL COLORS
+    <color name="primaryNormal">#40c4ff</color>
+    <color name="primaryLight">#82f7ff</color>
+    <color name="primaryDark">#0094cc</color>
+    <color name="secondaryNormal">#1de9b6</color>
+    <color name="secondaryLight">#6effe8</color>
+    <color name="secondaryDark">#00b686</color>
+
+
     //VIDEO COLORS
     <color name="vidNotWatched">#009AFF</color>
     <color name="vidIsWatched">#24FF00</color>
