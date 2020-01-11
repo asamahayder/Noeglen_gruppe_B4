@@ -1,6 +1,7 @@
 package com.example.noeglen.view;
 
 import android.os.Bundle;
+import android.text.method.LinkMovementMethod;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -32,13 +33,27 @@ public class InfoArticleF extends Fragment {
         if (bundle != null){
             int num = bundle.getInt("textChanger");
             if (num == 1){
-                System.out.println(num);
                 headline.setText("Hvad er stress?");
-                body.setText(R.string.hvadErStress);
+                body.setText(R.string.whatsStress);
             }else if (num == 2){
-                System.out.println(num);
+                headline.setText("Hvad skyldes stress?");
+                body.setText(R.string.causesStress);
             }else if (num == 3){
-                System.out.println(num);
+                headline.setText("Hvordan viser stress sig?");
+                body.setText(R.string.signStress);
+            }else if (num == 4){
+                headline.setText("Gode råd til pårørende");
+                body.setText(R.string.adviceStress);
+            }else if (num == 5){
+                headline.setText("Behandling af stress");
+                body.setText(R.string.treatmentStress);
+            }else if (num == 6){
+                headline.setText("Stress og arbejde");
+                body.setText(R.string.workStress);
+            }else if (num == 7){
+                headline.setText("Få mere at vide om stress");
+                body.setText(R.string.infoStress);
+                body.setMovementMethod(LinkMovementMethod.getInstance());
             }
         }
     }

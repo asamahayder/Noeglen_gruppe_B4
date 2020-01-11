@@ -22,11 +22,84 @@
     <string name="nyttig_viden">Nyttig Viden</string>
     <string name="Øvelser">Øvelser</string>
 
-    <string name="hvadErStress">Stress er ikke en sygdom, men en belastningstilstand. Kortvarig stress kan gøre os i stand til at yde en ekstra indsats, fx ved en eksamen eller en jobsamtale.
-Langvarig stress belaster derimod krop og psyke og giver både fysiske og psykiske symptomer. Man føler at man ikke magter opgaverne og er ved at miste kontrollen. Kravene overstiger de ressourcer, man synes, man har.
-Stress kan desuden føre til alvorlig sygdom, fx blodpropper, depression og en forværring af kroniske lidelser.
-Har du mistanke om stress, skal du sætte dig ind i, hvad stress er, og hvad du selv kan gøre. Involvér din arbejdsplads så tidligt som muligt. Hjælper det ikke, skal du kontakte din læge, så i sammen kan finde en løsning.
-Der er gode muligheder for at behandle og forebygge stress – og jo før du tager fat om problemet, desto bedre.
-</string>
+    <string name="whatsStress">
+        Stress er ikke en sygdom, men en belastningstilstand. Kortvarig stress kan gøre os i stand til at yde en ekstra indsats, fx ved en eksamen eller en jobsamtale.
+        Langvarig stress belaster derimod krop og psyke og giver både fysiske og psykiske symptomer. Man føler at man ikke magter opgaverne og er ved at miste kontrollen. Kravene overstiger de ressourcer, man synes, man har.
+        Stress kan desuden føre til alvorlig sygdom, fx blodpropper, depression og en forværring af kroniske lidelser.
+        Har du mistanke om stress, skal du sætte dig ind i, hvad stress er, og hvad du selv kan gøre. Involvér din arbejdsplads så tidligt som muligt. Hjælper det ikke, skal du kontakte din læge, så i sammen kan finde en løsning.
+        Der er gode muligheder for at behandle og forebygge stress – og jo før du tager fat om problemet, desto bedre.
+    </string>
+    <string name="causesStress">
+        Stress kan have både ydre og indre årsager, fx:\n
+        • Problemer på arbejdspladsen, manglende indflydelse og mening med arbejdet, manglende støtte og opbakning i arbejdet, for store krav i arbejdet, mobning og chikane.\n
+        • Et såkaldt grænseløst arbejde, som breder sig ind i fritiden.\n
+        • Et dårligt fysisk arbejdsmiljø, fx støj, kulde, dårligt indeklima samt akkord- og skifteholdsarbejde.\n
+        • Voldsomme hændelser, tab og store forandringer i livet.\n
+        • Vedvarende konflikter eller manglende ressourcer (tid, økonomi) i familielivet.\n
+        • Særlige karaktertræk hos dig selv, så som perfektionisme, konkurrencementalitet, pessimisme og arbejdsnarkomani.\n
+        • Store ambitioner og forventninger til dig selv (”den indre pisk”).
+    </string>
+
+    <string name="signStress">\n
+        • Du mister evnen til at føle glæde.\n
+        • Du er træt, mangler livskraft og engagement.\n
+        • Du får søvnproblemer og nedsat sexlyst.\n
+        • Du har svært ved at koncentrere dig og er glemsom.\n
+        • Du bliver let irritabel, angst eller i dårligt humør.\n
+        • Måske har du smerter, hovedpine, spændinger.\n
+        • Måske sveder du meget, f.eks. Om natten.\n
+        • Du har mindre appetit og kvalme eller overspiser.\n
+        • Du er ubeslutsom, lægger opgaver til side og udskyder mere end vanligt.
+    </string>
+
+    <string name="adviceStress">
+        Når du er sygemeldt med stress, kan det være svært at overskue noget som helst og her er det vigtigt, at trække på dine omgivelser. Nedenfor finder du et par gode råd, som du kan dele med dine pårørende.
+        Hjælp den stressramte med at få fastlagt og ændret de stressfremkaldende faktorer i arbejde og privatliv.
+        Hjælp med at fastholde de planlagte ændringer (vi er alle tilbøjelige til at falde tilbage i de gamle rytmer).
+        Hjælp med at efterleve de livsstilsprincipper, der er nævnt ovenfor.
+        Hjælp med det praktiske og med at huske vigtige beskeder og informationer.
+        Vær tålmodig og bak op om de små fremskridt.
+    </string>
+
+    <string name="workStress">
+        Tal i tide med din leder om at ændre de forhold, der belaster dig, fx arbejdsopgaver, arbejdets tilrettelæggelse, konflikter eller uklare forventninger.
+        Du kan også tale med din tillids- og sikkerhedsrepræsentant.
+        Stress på arbejdspladsen er et fælles problem.
+        Det kan være nødvendigt med nedsat arbejdstid og hjælp til at afgrænse dine opgaver i en periode.
+        Det er vigtigt, at du har kontakt til din arbejdsplads, hvis du er sygemeldt, men langvarig sygemelding er ikke en god løsning for de fleste.
+        Den såkaldte <a href="https://www.come-back.nu/mulighedserklaering-loenmodtager/">mulighedserklæring</a> er vigtig i kontakten mellem dig, din arbejdsgiver og lægen.
+
+    </string>
+
+    <string name="treatmentStress">\n
+        Er du ramt af stress i mild grad, kan du godt bearbejde stress selv, f.eks. ved hjælp den vejledning, du kan hente i denne app. App’en hjælper dig til at afgøre, om der er tale om mild stress eller om det er mere alvorlig og behandlingskrævende, og derfor bør involvere en læge eller arbejdspsykolog. Måske har dit arbejde en sundhedsforsikring, som rummer professionel hjælp.\n
+        <b>Hvad kan du selv gøre?\n</b>
+        Stress kan ofte afhjælpes med viden og kendskab til tilstanden og gennem
+        livstilsændringer, fx en regelmæssig søvn, motion, færre belastninger og mindre alkohol. Søg viden om stress i denne app, i bøger, på nettet, kurser mv. Hvis der er tale om arbejdsrelateret stress, er det afgørende, at arbejdspladsen inddrages og belastningerne i arbejdet begrænses.
+        Kend dine fysiske og psykiske symptomer på stress, så du fremover kan slå bremserne i – i tide.\n
+        • Tal med dine nærmeste om problemerne.\n
+        • Tal med din leder eller tillids- og sikkerhedsrepræsentanten.\n
+        • Lav en realistisk plan for din dag. Hold små pauser i løbet af dagen.\n
+        • Husk frokostpausen.\n
+        • Sig nej, sig fra, sig pyt!.\n
+        • Hold arbejdsliv og fritid adskilt.\n
+        • Brug tid på det, der giver dig glæde og energi i livet.\n
+        • Motionér mindst en halv time hver dag – havearbejde og en tur med hunden tæller også.\n
+        • Begræns dit forbrug af alkohol, tobak, kaffe, sukker og andre stimulanser.\n
+        • Få tilstrækkelig og regelmæssig søvn.\n
+        • Spis sundt, varieret og regelmæssigt.\n
+        • Find ro, meditér, hør musik, vær god ved dig selv.\n
+        <b>Samtaleterapi\n</b>
+        Samtaleterapi kan være nødvendigt ved stress. Det kan give dig en bedre forståelse af samspillet mellem dine karaktertræk og din arbejdssituation og du får redskaber til at håndtere og forebygge stress
+        fremover. Stress skal ikke behandles med medicin, kun evt. hvis der
+        samtidig er angst, depression eller søvnløshed i flere uger.
+    </string>
+
+    <string name="infoStress">
+        På <a href="https://www.psykiatrifonden.dk/">psykiatrifondens</a> hjemmeside kan du få mere information om stress, depression og angst. Du kan også bestille bøger og tilmelde dig foredrag og kurser om emnet.
+        Du kan få anonym professionel rådgivning i psykiatrifondens telefonrådgivning på tlf. 3925 2525\n
+        <a href="https://www.sundhed.dk/">Sundhed.dk</a> er det offentlige sundhedsvæsens portal. Her kan du finde information og vejledninger til patienter og læger.
+        Du kan kontakte supporten på telefon i 35 29 83 10 dagtimerne.
+    </string>
 
 </resources>
