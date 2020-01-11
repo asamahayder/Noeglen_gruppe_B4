@@ -14,16 +14,10 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.example.noeglen.R;
 import com.example.noeglen.data.ArticleDTO;
 
-import java.io.BufferedInputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.lang.ref.WeakReference;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.net.URLConnection;
 import java.util.List;
 
 public class InfoArticlesMainAdapter extends RecyclerView.Adapter<InfoArticlesMainAdapter.ViewHolder> {
@@ -45,7 +39,7 @@ public class InfoArticlesMainAdapter extends RecyclerView.Adapter<InfoArticlesMa
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.recyclerview_infomainarticles,parent);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.recyclerview_infomainarticles,parent,false);
         return new ViewHolder(view,onArticleListener);
     }
 
@@ -54,9 +48,13 @@ public class InfoArticlesMainAdapter extends RecyclerView.Adapter<InfoArticlesMa
         try {
             holder.tTitle.setText(articles.get(position).getTitle());
             holder.tSubtext.setText(articles.get(position).getHeader());
-            image = holder.image;
 
-            new AsyncTaskGetImage(this).execute(articles.get(position).getImage());
+            Log.d(TAG, "onBindViewHolder: context = " + context.toString());
+
+            Glide
+                    .with(context)
+                    .load(articles.get(position).getImage())
+                    .into(holder.image);
 
         } catch (NullPointerException e){
             Log.d(TAG, "onBindViewHolder: NULLPOINTER EXCEPTION");
@@ -71,11 +69,6 @@ public class InfoArticlesMainAdapter extends RecyclerView.Adapter<InfoArticlesMa
         else {
             return articles.size();
         }
-    }
-
-    public void setImage(Bitmap bitmap){
-        image.setImageBitmap(bitmap);
-        Log.d(TAG, "setImage: SETTING IMAGE ON RECYCLERVIEW");
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
@@ -102,56 +95,5 @@ public class InfoArticlesMainAdapter extends RecyclerView.Adapter<InfoArticlesMa
 
     public interface OnArticleListener{
         void onArticleClick(int position);
-    }
-
-    private class AsyncTaskGetImage extends AsyncTask<String, String, Exception>{
-
-        private final WeakReference<InfoArticlesMainAdapter> activityRef;
-        private Bitmap image;
-
-        public AsyncTaskGetImage(InfoArticlesMainAdapter activityRef) {
-            this.activityRef = new WeakReference<>(activityRef);
-        }
-
-        @Override
-        protected Exception doInBackground(String... strings) {
-            try {
-                image = getImageFromWeb(strings[9]);
-            } catch (Exception e){
-                return e;
-            }
-            return null;
-        }
-
-        @Override
-        protected void onPostExecute(Exception e) {
-            if (activityRef.get() != null) {
-                if (e != null) {
-                    Log.d(TAG, "onPostExecute: ERROR");
-                } else {
-                    activityRef.get().setImage(image);
-                }
-            }
-        }
-
-        public Bitmap getImageFromWeb(String url){
-            Bitmap image = null;
-            try {
-                URL imageURL = new URL(url);
-                URLConnection connection = imageURL.openConnection();
-                connection.connect();
-                InputStream inputStream =  connection.getInputStream();
-                BufferedInputStream bufferedInputStream = new BufferedInputStream(inputStream);
-                image = BitmapFactory.decodeStream(bufferedInputStream);
-                bufferedInputStream.close();
-                inputStream.close();
-
-            } catch (MalformedURLException e) {
-                e.printStackTrace();
-            } catch (IOException e){
-                e.printStackTrace();
-            }
-            return image;
-        }
     }
 }
