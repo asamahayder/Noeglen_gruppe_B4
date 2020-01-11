@@ -14,7 +14,7 @@ import com.example.noeglen.R;
 
 
 public class InfoArticleF extends Fragment {
-    TextView contentText;
+    TextView headline, body;
 
 
     @Nullable
@@ -27,11 +27,14 @@ public class InfoArticleF extends Fragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         Bundle bundle = getArguments();
+        headline = view.findViewById(R.id.headline);
+        body = view.findViewById(R.id.body);
         if (bundle != null){
             int num = bundle.getInt("textChanger");
             if (num == 1){
                 System.out.println(num);
-
+                headline.setText("Hvad er stress?");
+                body.setText(R.string.hvadErStress);
             }else if (num == 2){
                 System.out.println(num);
             }else if (num == 3){
