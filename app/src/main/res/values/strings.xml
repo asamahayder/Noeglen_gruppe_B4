@@ -40,7 +40,7 @@
         • Store ambitioner og forventninger til dig selv (”den indre pisk”).
     </string>
 
-    <string name="signStress">\n
+    <string name="signStress">
         • Du mister evnen til at føle glæde.\n
         • Du er træt, mangler livskraft og engagement.\n
         • Du får søvnproblemer og nedsat sexlyst.\n
@@ -61,19 +61,10 @@
         Vær tålmodig og bak op om de små fremskridt.
     </string>
 
-    <string name="workStress">
-        Tal i tide med din leder om at ændre de forhold, der belaster dig, fx arbejdsopgaver, arbejdets tilrettelæggelse, konflikter eller uklare forventninger.
-        Du kan også tale med din tillids- og sikkerhedsrepræsentant.
-        Stress på arbejdspladsen er et fælles problem.
-        Det kan være nødvendigt med nedsat arbejdstid og hjælp til at afgrænse dine opgaver i en periode.
-        Det er vigtigt, at du har kontakt til din arbejdsplads, hvis du er sygemeldt, men langvarig sygemelding er ikke en god løsning for de fleste.
-        Den såkaldte <a href="https://www.come-back.nu/mulighedserklaering-loenmodtager/">mulighedserklæring</a> er vigtig i kontakten mellem dig, din arbejdsgiver og lægen.
-
-    </string>
-
-    <string name="treatmentStress">\n
+    <string name="treatmentStress">
         Er du ramt af stress i mild grad, kan du godt bearbejde stress selv, f.eks. ved hjælp den vejledning, du kan hente i denne app. App’en hjælper dig til at afgøre, om der er tale om mild stress eller om det er mere alvorlig og behandlingskrævende, og derfor bør involvere en læge eller arbejdspsykolog. Måske har dit arbejde en sundhedsforsikring, som rummer professionel hjælp.\n
-        <b>Hvad kan du selv gøre?\n</b>
+        \n
+        <font size="20"><b>Hvad kan du selv gøre?\n</b></font>
         Stress kan ofte afhjælpes med viden og kendskab til tilstanden og gennem
         livstilsændringer, fx en regelmæssig søvn, motion, færre belastninger og mindre alkohol. Søg viden om stress i denne app, i bøger, på nettet, kurser mv. Hvis der er tale om arbejdsrelateret stress, er det afgørende, at arbejdspladsen inddrages og belastningerne i arbejdet begrænses.
         Kend dine fysiske og psykiske symptomer på stress, så du fremover kan slå bremserne i – i tide.\n
@@ -89,10 +80,21 @@
         • Få tilstrækkelig og regelmæssig søvn.\n
         • Spis sundt, varieret og regelmæssigt.\n
         • Find ro, meditér, hør musik, vær god ved dig selv.\n
-        <b>Samtaleterapi\n</b>
+        \n
+        <font size="20"><b>Samtaleterapi\n</b></font>
         Samtaleterapi kan være nødvendigt ved stress. Det kan give dig en bedre forståelse af samspillet mellem dine karaktertræk og din arbejdssituation og du får redskaber til at håndtere og forebygge stress
         fremover. Stress skal ikke behandles med medicin, kun evt. hvis der
         samtidig er angst, depression eller søvnløshed i flere uger.
+    </string>
+
+    <string name="workStress">
+        Tal i tide med din leder om at ændre de forhold, der belaster dig, fx arbejdsopgaver, arbejdets tilrettelæggelse, konflikter eller uklare forventninger.
+        Du kan også tale med din tillids- og sikkerhedsrepræsentant.
+        Stress på arbejdspladsen er et fælles problem.
+        Det kan være nødvendigt med nedsat arbejdstid og hjælp til at afgrænse dine opgaver i en periode.
+        Det er vigtigt, at du har kontakt til din arbejdsplads, hvis du er sygemeldt, men langvarig sygemelding er ikke en god løsning for de fleste.
+        Den såkaldte <a href="https://www.come-back.nu/mulighedserklaering-loenmodtager/">mulighedserklæring</a> er vigtig i kontakten mellem dig, din arbejdsgiver og lægen.
+
     </string>
 
     <string name="infoStress">

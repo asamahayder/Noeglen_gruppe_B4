@@ -15,7 +15,7 @@ import com.example.noeglen.R;
 
 
 public class InfoArticleF extends Fragment {
-    TextView headline, body;
+    private TextView headline, body;
 
 
     @Nullable
@@ -30,6 +30,7 @@ public class InfoArticleF extends Fragment {
         Bundle bundle = getArguments();
         headline = view.findViewById(R.id.headline);
         body = view.findViewById(R.id.body);
+        body.setMovementMethod(LinkMovementMethod.getInstance());
         if (bundle != null){
             int num = bundle.getInt("textChanger");
             if (num == 1){
@@ -53,7 +54,6 @@ public class InfoArticleF extends Fragment {
             }else if (num == 7){
                 headline.setText("Få mere at vide om stress");
                 body.setText(R.string.infoStress);
-                body.setMovementMethod(LinkMovementMethod.getInstance());
             }
         }
     }
