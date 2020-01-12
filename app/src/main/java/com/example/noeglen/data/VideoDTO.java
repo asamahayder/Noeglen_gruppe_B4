@@ -1,6 +1,6 @@
 package com.example.noeglen.data;
 
-public class VideoDTO implements IFavoritesDTO {
+public class VideoDTO {
 
     private String videoUrl;
     private String imageUrl;
@@ -12,20 +12,6 @@ public class VideoDTO implements IFavoritesDTO {
         this.videoUrl = videoUrl;
         this.title = title;
         this.imageUrl = imageUrl;
-    }
-
-    //FIXME
-
-    @Override
-    public boolean addFav(int dbID) {
-        return false;
-    }
-
-    //FIXME
-
-    @Override
-    public boolean remFav(int dbID) {
-        return false;
     }
 
     /** GETTERS AND SETTERS */

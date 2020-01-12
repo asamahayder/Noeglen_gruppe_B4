@@ -16,10 +16,12 @@ import androidx.fragment.app.Fragment;
 
 import com.example.noeglen.R;
 
+import java.util.Objects;
+
 public class ExerExerF extends Fragment implements View.OnClickListener {
 
     private ImageView iAnim;
-    private Animation connectingAnimation;
+    private Animation breatheAnimation;
     private Button bFav, bAnim;
     private IMainActivity iMain;
 
@@ -35,14 +37,14 @@ public class ExerExerF extends Fragment implements View.OnClickListener {
         super.onViewCreated(view, savedInstanceState);
         initializeView();
     }
-    public void initializeView(){
-        iAnim = getView().findViewById(R.id.iExerAnim);
+
+    private void initializeView(){
+        iAnim = Objects.requireNonNull(getView()).findViewById(R.id.iExerAnim);
         bAnim = getView().findViewById(R.id.bstartAnim);
         bFav = getView().findViewById(R.id.bAddToFav);
         bAnim.setOnClickListener(this);
         bFav.setOnClickListener(this);
-        connectingAnimation = AnimationUtils.loadAnimation(getContext(), R.anim.scale);
-
+        breatheAnimation = AnimationUtils.loadAnimation(getContext(), R.anim.scale);
     }
 
     @Override
@@ -55,8 +57,9 @@ public class ExerExerF extends Fragment implements View.OnClickListener {
     public void onClick(View v) {
         if(v == bFav) {
             //TODO: Adding functionality to add the exercise to favourites but beaware of animations and stuff
+            iAnim.startAnimation(breatheAnimation);
         } else if( v == bAnim){
-            iAnim.startAnimation(connectingAnimation);
+            iAnim.startAnimation(breatheAnimation);
         }
 
     }
