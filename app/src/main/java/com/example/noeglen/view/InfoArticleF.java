@@ -13,10 +13,8 @@ import androidx.fragment.app.Fragment;
 
 import com.example.noeglen.R;
 
-
 public class InfoArticleF extends Fragment {
     private TextView headline, body;
-
 
     @Nullable
     @Override
