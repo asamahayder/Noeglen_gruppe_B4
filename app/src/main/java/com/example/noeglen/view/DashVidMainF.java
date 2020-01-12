@@ -74,7 +74,7 @@ public class DashVidMainF extends Fragment implements View.OnClickListener {
                 DashVidMainRecyclerAdapter adapter = new DashVidMainRecyclerAdapter(videoList, getContext(), new MyCallBack() {
                     @Override
                     public void onCallBack(Object object) {
-
+                        Bundle bundle = new Bundle();
                     }
                 });
                 displayVideos(adapter);

@@ -134,6 +134,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         setFragment(selectedFragment,fragmentTag,false,null);
     }
 
+    @Override
     public void setFragment(Fragment f, String tag, boolean addToBackStack, Bundle bundle){
 
         if (bundle != null){
