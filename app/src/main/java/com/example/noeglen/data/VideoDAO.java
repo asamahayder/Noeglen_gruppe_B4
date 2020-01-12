@@ -20,6 +20,7 @@ public class VideoDAO implements IVideoDAO{
     List<String> weekList;
     VideoDTO video;
     ArrayList<VideoDTO> videoList = null;
+    boolean videoListDone = false;
 
     public VideoDTO getVideo(String week, String videoName){
         FirebaseFirestore db = FirebaseFirestore.getInstance();
@@ -36,7 +37,7 @@ public class VideoDAO implements IVideoDAO{
         return video;
     }
 
-    public void getWeekList(){
+    public void getWeekList(final MyCallBack myCallBack){
         final ArrayList<VideoDTO> videoList = new ArrayList<>();
         this.videoList = new ArrayList<>();
         FirebaseFirestore db = FirebaseFirestore.getInstance();
@@ -48,10 +49,9 @@ public class VideoDAO implements IVideoDAO{
                 System.out.println("####################");
                 for (String week : weekList) {
                     System.out.println(week);
-                    videoList.addAll(getAllVideosFromWeek(week));
+                    getAllVideosFromWeek(week);
                 }
-                System.out.println(videoList);
-                setVideoList(videoList);
+                myCallBack.onCallBack(videoList);
                 setWeekList(weekList);
             }
         });
@@ -67,6 +67,8 @@ public class VideoDAO implements IVideoDAO{
                     for (QueryDocumentSnapshot snapshot: task.getResult()) {
                         VideoDTO videoDTO = snapshot.toObject(VideoDTO.class);
                         videoList.add(videoDTO);
+                        addToVideo(videoDTO);
+                        //LAD CALLBACK SENDE VIDEOER TIL SELVE DEN KLASSE DE SKAL BRUGES I
                     }
                 }else{
                     System.out.println("Could not fetch videos from: " + week);
@@ -76,11 +78,25 @@ public class VideoDAO implements IVideoDAO{
         return videoList;
     }
     
-    /*public ArrayList<VideoDTO> getAllVideos(){
-        ArrayList<VideoDTO> videoList;
-        videoList = getWeekList();
-        return videoList;
-    }*/
+    public void getAllVideos(final MyCallBack callBack){
+        final ArrayList<VideoDTO> videoList = new ArrayList<>();
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        db.collection("Videos").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if (task.isSuccessful()){
+                    for (QueryDocumentSnapshot snapshot :
+                            task.getResult()) {
+                        VideoDTO videoDTO = snapshot.toObject(VideoDTO.class);
+                        videoList.add(videoDTO);
+                        System.out.println("#################3" + videoDTO);
+                    }
+                    //System.out.println("#########" + videoList);
+                    callBack.onCallBack(videoList);
+                }
+            }
+        });
+    }
 
     public void setWeekList(List<String> weekList) {
         this.weekList = weekList;
@@ -90,11 +106,27 @@ public class VideoDAO implements IVideoDAO{
         this.videoList = videoList;
     }
 
+    public void addToVideo(VideoDTO videoDTO){
+        System.out.println("###############" + videoDTO.getTitle());
+        videoList.add(videoDTO);
+    }
+
     public void setVideo(VideoDTO video) {
         this.video = video;
     }
 
+    public void printList(){
+        /*for (VideoDTO video:
+             videoList) {
+            System.out.println(video.getTitle());
+        }*/
+    }
+
     public ArrayList<VideoDTO> getVideoList() {
         return videoList;
+    }
+
+    public void setVideoListDone(boolean videoListDone) {
+        this.videoListDone = videoListDone;
     }
 }
