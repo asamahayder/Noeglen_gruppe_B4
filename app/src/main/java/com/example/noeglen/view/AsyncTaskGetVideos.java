@@ -2,6 +2,7 @@ package com.example.noeglen.view;
 
 import android.os.AsyncTask;
 
+import com.example.noeglen.data.MyCallBack;
 import com.example.noeglen.data.VideoDAO;
 import com.example.noeglen.data.VideoDTO;
 import com.example.noeglen.logic.VideoListLogic;
@@ -12,7 +13,7 @@ import java.util.ArrayList;
 public class AsyncTaskGetVideos extends AsyncTask<String, String, Exception> {
 
     private final WeakReference<DashVidMainF> activityRef; //Weak reference bruges så der ikke kommer memory leakage. En forklaring findes her: https://medium.com/google-developer-experts/finally-understanding-how-references-work-in-android-and-java-26a0d9c92f83
-    private ArrayList<VideoDTO> videoList;
+    private ArrayList<VideoDTO> vList;
     private DashVidMainRecyclerAdapter adapter;
 
     public AsyncTaskGetVideos(DashVidMainF activity) {
@@ -23,13 +24,12 @@ public class AsyncTaskGetVideos extends AsyncTask<String, String, Exception> {
     protected Exception doInBackground(String... strings) {
         try {
             VideoDAO videoDAO = new VideoDAO();
-            videoDAO.getWeekList();
-            /*while (videoDAO.getVideoList().isEmpty()){
-                //do nothing - wait
-                System.out.println("waiting");
-            }
-            videoList = videoDAO.getVideoList();
-            adapter = new DashVidMainRecyclerAdapter(videoList);*/
+            videoDAO.getAllVideos(new MyCallBack() {
+                @Override
+                public void onCallBack(ArrayList<VideoDTO> videoList) {
+                    vList = videoList;
+                }
+            });
 
         } catch (Exception e) {
             return e;
@@ -43,7 +43,9 @@ public class AsyncTaskGetVideos extends AsyncTask<String, String, Exception> {
             if (e != null) {
                 activityRef.get().showErrorMessage();
             } else {
-                activityRef.get().setVideoList(videoList);
+                //System.out.println("###############" + vList);
+                adapter = new DashVidMainRecyclerAdapter(vList);
+                activityRef.get().setVideoList(vList);
                 activityRef.get().displayVideos(adapter);
             }
         }

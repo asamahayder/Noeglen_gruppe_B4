@@ -14,6 +14,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.noeglen.R;
+import com.example.noeglen.data.MyCallBack;
+import com.example.noeglen.data.VideoDAO;
 import com.example.noeglen.data.VideoDTO;
 import com.example.noeglen.logic.VideoListLogic;
 
@@ -44,7 +46,7 @@ public class DashVidMainF extends Fragment implements View.OnClickListener {
 
     private void initializeView() {
         recyclerView = getView().findViewById(R.id.videoRecyclerView);
-        new AsyncTaskGetVideos(this).execute();
+        getAllVideosFromDataBase();
     }
 
     @Override
@@ -60,6 +62,18 @@ public class DashVidMainF extends Fragment implements View.OnClickListener {
 
     public void setVideoList(ArrayList<VideoDTO> videoList){
         this.videoList = videoList;
+    }
+
+    public void getAllVideosFromDataBase(){
+        VideoDAO videoDAO = new VideoDAO();
+        videoDAO.getAllVideos(new MyCallBack() {
+            @Override
+            public void onCallBack(ArrayList<VideoDTO> videoList) {
+                setVideoList(videoList);
+                DashVidMainRecyclerAdapter adapter = new DashVidMainRecyclerAdapter(videoList);
+                displayVideos(adapter);
+            }
+        });
     }
 
     public void displayVideos(DashVidMainRecyclerAdapter adapter){
