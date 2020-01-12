@@ -51,7 +51,7 @@ public class InfoArticlesMainF extends Fragment implements InfoArticlesMainAdapt
             articles.add(article);
         }
 
-        rView = getView().findViewById(R.id.infoarticlesmain_recyclerview);
+        //rView = getView().findViewById(R.id.infoarticlesmain_recyclerview);
         adapter = new InfoArticlesMainAdapter(getContext(), articles, this);
         rView.setLayoutManager(new LinearLayoutManager(getContext()));
         rView.setAdapter(adapter);

@@ -12,7 +12,9 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.example.noeglen.R;
+import com.example.noeglen.data.MyCallBack;
 import com.example.noeglen.data.VideoDTO;
 
 import java.util.List;
@@ -33,9 +35,13 @@ public class DashVidMainRecyclerAdapter extends RecyclerView.Adapter<DashVidMain
 
    private List<VideoDTO> videoList;
    private ImageView imageView;
+   private Context context;
+   private MyCallBack myCallBack;
 
-   public DashVidMainRecyclerAdapter(List<VideoDTO> videoList){
+   public DashVidMainRecyclerAdapter(List<VideoDTO> videoList, Context context, MyCallBack myCallBack){
       this.videoList = videoList;
+      this.context = context;
+      this.myCallBack = myCallBack;
    }
 
    @NonNull
@@ -52,12 +58,22 @@ public class DashVidMainRecyclerAdapter extends RecyclerView.Adapter<DashVidMain
 
    @Override
    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-      VideoDTO videoItem = videoList.get(position);
+      final VideoDTO videoItem = videoList.get(position);
 
       TextView name = holder.name;
       imageView = holder.image;
+      imageView.setOnClickListener(new View.OnClickListener() {
+         @Override
+         public void onClick(View view) {
+            myCallBack.onCallBack(videoItem);
+         }
+      });
       name.setText(videoItem.getTitle());
-      new AsyncTaskGetImage(this).execute(videoItem.getImageUrl());
+      //new AsyncTaskGetImage(this).execute(videoItem.getImageUrl());
+      Glide
+              .with(context)
+              .load(videoItem.getImageUrl())
+              .into(imageView);
    }
 
    @Override

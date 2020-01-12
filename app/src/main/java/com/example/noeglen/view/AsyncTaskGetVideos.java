@@ -24,12 +24,12 @@ public class AsyncTaskGetVideos extends AsyncTask<String, String, Exception> {
     protected Exception doInBackground(String... strings) {
         try {
             VideoDAO videoDAO = new VideoDAO();
-            videoDAO.getAllVideos(new MyCallBack() {
+            /*videoDAO.getAllVideos(new MyCallBack() {
                 @Override
                 public void onCallBack(ArrayList<VideoDTO> videoList) {
                     vList = videoList;
                 }
-            });
+            });*/
 
         } catch (Exception e) {
             return e;
@@ -44,7 +44,7 @@ public class AsyncTaskGetVideos extends AsyncTask<String, String, Exception> {
                 activityRef.get().showErrorMessage();
             } else {
                 //System.out.println("###############" + vList);
-                adapter = new DashVidMainRecyclerAdapter(vList);
+                //adapter = new DashVidMainRecyclerAdapter(vList);
                 activityRef.get().setVideoList(vList);
                 activityRef.get().displayVideos(adapter);
             }

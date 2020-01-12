@@ -5,13 +5,15 @@ public class VideoDTO {
     private String videoUrl;
     private String imageUrl;
     private String title;
+    private String week;
 
     public VideoDTO(){}
 
-    public VideoDTO(String title, String videoUrl, String imageUrl, boolean watched) {
+    public VideoDTO(String title, String videoUrl, String imageUrl, String week) {
         this.videoUrl = videoUrl;
         this.title = title;
         this.imageUrl = imageUrl;
+        this.week = week;
     }
 
     /** GETTERS AND SETTERS */
@@ -38,5 +40,13 @@ public class VideoDTO {
 
     public void setTitle(String title) {
         this.title = title;
+    }
+
+    public String getWeek() {
+        return week;
+    }
+
+    public void setWeek(String week) {
+        this.week = week;
     }
 }

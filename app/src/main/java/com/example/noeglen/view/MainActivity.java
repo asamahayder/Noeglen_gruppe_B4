@@ -70,7 +70,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
 
         DashMainF fragment = new DashMainF();
-        setFragment(fragment,getString(R.string.fragment_dashmain),false);
+        setFragment(fragment,getString(R.string.fragment_dashmain),false, null);
 
         fm = this.getSupportFragmentManager();
 
@@ -131,10 +131,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             fm.popBackStack();
         }
 
-        setFragment(selectedFragment,fragmentTag,false);
+        setFragment(selectedFragment,fragmentTag,false,null);
     }
 
-    private void setFragment(Fragment f, String tag, boolean addToBackStack){
+    public void setFragment(Fragment f, String tag, boolean addToBackStack, Bundle bundle){
+
+        if (bundle != null){
+            f.setArguments(bundle);
+        }
+
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
 
         transaction.replace(R.id.content_frame,f,tag);
@@ -149,31 +154,31 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void inflateFragment(String tag) {
         if (tag.equals(getString(R.string.fragment_dashvidmain))){
             Fragment selectedFragment = new DashVidMainF();
-            setFragment(selectedFragment,tag,true);
+            setFragment(selectedFragment,tag,true, null);
         }
         if (tag.equals(getString(R.string.fragment_infoarticlesmain))){
             Fragment selectedFragment = new InfoArticlesMainF();
-            setFragment(selectedFragment,tag,true);
+            setFragment(selectedFragment,tag,true, null);
         }
         if (tag.equals(getString(R.string.fragment_infoknowledge))){
             Fragment selectedFragment = new InfoKnowledgeF();
-            setFragment(selectedFragment,tag,true);
+            setFragment(selectedFragment,tag,true, null);
         }
         if (tag.equals(getString(R.string.fragment_infoarticle))){
             Fragment selectedFragment = new InfoArticleF();
-            setFragment(selectedFragment,tag,true);
+            setFragment(selectedFragment,tag,true, null);
         }
         if (tag.equals(getString(R.string.fragment_exerexer))){
             Fragment selectedFragment = new ExerExerF();
-            setFragment(selectedFragment,tag,true);
+            setFragment(selectedFragment,tag,true, null);
         }
         if (tag.equals("Fragment Diary1")){
             Fragment selectedFragment = new Diary1F();
-            setFragment(selectedFragment,tag,true);
+            setFragment(selectedFragment,tag,true, null);
         }
         if (tag.equals(getString(R.string.fragment_dashvid))){
             Fragment selectedFragment = new DashVidF();
-            setFragment(selectedFragment,tag,true);
+            setFragment(selectedFragment,tag,true, null);
         }
 
 
