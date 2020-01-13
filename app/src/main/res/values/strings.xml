@@ -25,15 +25,11 @@
     <!-- navigation drawer -->
     <string name="navigation_drawer_open">navigation drawer open</string>
     <string name="navigation_drawer_close">navigation drawer close</string>
+    <string name="phoneNumber">+4511223344</string>
+    <string name="emailAddress">support@nøglen.dk</string>
 
 
-
-
-
-
-
-
-
+    <!-- knowledge article -->
     <string name="whatsStress">
         Stress er ikke en sygdom, men en belastningstilstand. Kortvarig stress kan gøre os i stand til at yde en ekstra indsats, fx ved en eksamen eller en jobsamtale.
         Langvarig stress belaster derimod krop og psyke og giver både fysiske og psykiske symptomer. Man føler at man ikke magter opgaverne og er ved at miste kontrollen. Kravene overstiger de ressourcer, man synes, man har.
