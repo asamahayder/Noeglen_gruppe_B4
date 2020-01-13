@@ -25,8 +25,8 @@ import java.util.List;
 public class InfoArticlesMainF extends Fragment implements InfoArticlesMainAdapter.OnArticleListener {
 
     private IMainActivity iMain;
-    private IArticleDAO iArticle;
-    private List<ArticleDTO> articles;
+    private static IArticleDAO iArticle;
+    private static List<ArticleDTO> articles;
 
     private static final String TAG = "INFO_MAIN_ARTICLES";
 
