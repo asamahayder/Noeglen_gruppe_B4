@@ -60,9 +60,7 @@ public class InfoArticlesMainF extends Fragment implements InfoArticlesMainAdapt
         Bundle bundle = new Bundle();
         Gson gson = new Gson();
         InfoArticleF article = new InfoArticleF();
-        //String json = gson.toJson(articles.get(position));
-        String json = gson.toJson(new ArticleDTO("ehader","titles","assdsasdasdasdasdadasdasdasda" +
-                "sssssssssssssssssssssssssssadasdasdasdasdasdasdasdasdasdasdasd /n asdasdasdasdasdasdasdasdasdasdasdasdasasdasd |\n asdasdasdasdasdasdasd \n asdasasd \n asdasdasd","asd"));
+        String json = gson.toJson(articles.get(position));
         bundle.putString("currentArticle",json);
         iMain.setFragment(article,getString(R.string.fragment_infoarticle),true,bundle);
     }
