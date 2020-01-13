@@ -1,7 +1,9 @@
 package com.example.noeglen.view;
 
 import android.content.Context;
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,12 +24,11 @@ import java.util.List;
 
 public class InfoArticlesMainF extends Fragment implements InfoArticlesMainAdapter.OnArticleListener {
 
-    private RecyclerView rView;
-    private InfoArticlesMainAdapter adapter;
-
     private IMainActivity iMain;
     private IArticleDAO iArticle;
     private List<ArticleDTO> articles;
+
+    private static final String TAG = "INFO_MAIN_ARTICLES";
 
     @Nullable
     @Override
@@ -43,12 +44,7 @@ public class InfoArticlesMainF extends Fragment implements InfoArticlesMainAdapt
 
     private void initializeView() {
         iArticle = new ArticleDAO();
-        articles = iArticle.getListOfArticles("Articles");
-
-        rView = getView().findViewById(R.id.infoarticlesmain_recyclerview);
-        adapter = new InfoArticlesMainAdapter(getContext(), articles, this);
-        rView.setLayoutManager(new LinearLayoutManager(getContext()));
-        rView.setAdapter(adapter);
+        new LoadArticles().execute();
     }
 
 
@@ -61,5 +57,29 @@ public class InfoArticlesMainF extends Fragment implements InfoArticlesMainAdapt
     @Override
     public void onArticleClick(int position) {
         iMain.inflateFragment(getString(R.string.fragment_infoarticle));
+    }
+
+    public class LoadArticles extends AsyncTask<Void, Void, Void>{
+
+        @Override
+        protected Void doInBackground(Void... voids) {
+            articles = iArticle.getListOfArticles("Articles");
+            while (articles == null || articles.size() < 1){
+                Log.d(TAG, "doInBackground: article size = " + articles.size());
+            }
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            setRecyclerview();
+        }
+    }
+
+    private void setRecyclerview() {
+        RecyclerView rView = getView().findViewById(R.id.infoarticlesmain_recyclerview);
+        InfoArticlesMainAdapter adapter = new InfoArticlesMainAdapter(getContext(), articles, this);
+        rView.setLayoutManager(new LinearLayoutManager(getContext()));
+        rView.setAdapter(adapter);
     }
 }
