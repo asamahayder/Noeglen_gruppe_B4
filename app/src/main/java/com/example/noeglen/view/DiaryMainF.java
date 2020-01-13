@@ -25,6 +25,7 @@ import com.example.noeglen.logic.CurrentDate;
    private ImageView imageView;
    private IMainActivity iMain;
    private int smiley;
+   private String [] questions;
 
 
     @Nullable
@@ -43,6 +44,9 @@ import com.example.noeglen.logic.CurrentDate;
 
         imageView = getView().findViewById(R.id.imageView3);
         imageView.setBackground(getView().getResources().getDrawable(R.drawable.emoji3));
+
+        questions = new String[4];
+
         seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
@@ -50,6 +54,11 @@ import com.example.noeglen.logic.CurrentDate;
                 if (seekBar.getProgress() > 0 && seekBar.getProgress() <= 20) {
                     imageView.setBackground(getView().getResources().getDrawable(R.drawable.emoji1));
                     smiley = 0;
+                    questions[0] = "Hvad gik godt i dag? ";
+                    questions[1] = "Hvad gik mindre godt ?";
+                    questions[2] = "Hvordan vil du indgår de dårlige ting fremover?";
+
+
                 }else if (seekBar.getProgress() > 20 && seekBar.getProgress() <= 40){
                     imageView.setBackground(getView().getResources().getDrawable(R.drawable.emoji2));
                     smiley = 1;
@@ -64,6 +73,8 @@ import com.example.noeglen.logic.CurrentDate;
                     smiley = 4;
                 }
 
+                questions[3] = "Andet du vil tilføje?";
+
 
             }
 
@@ -77,8 +88,12 @@ import com.example.noeglen.logic.CurrentDate;
             public void onStopTrackingTouch(SeekBar seekBar) {
                 String mm = "";
                 if (seekBar.getProgress() > 0 && seekBar.getProgress() <= 20){
-                    mm = "Fragment Diary1";
-                    iMain.inflateFragment(mm);
+                    mm = getString(R.string.fragment_diary1);
+                    Bundle bundle = new Bundle();
+                    bundle.putInt("smiley", smiley);
+                    bundle.putStringArray("questions",questions);
+                    Diary1F diary1F = new Diary1F();
+                    iMain.setFragment(diary1F,mm,true,bundle);
                 }
 
 

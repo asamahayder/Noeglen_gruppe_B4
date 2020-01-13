@@ -42,7 +42,6 @@
             android:id="@+id/textView8"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Hvad gik godt i dag ?"
             android:textColor="#42B0FF"
             android:textSize="24sp" />
 

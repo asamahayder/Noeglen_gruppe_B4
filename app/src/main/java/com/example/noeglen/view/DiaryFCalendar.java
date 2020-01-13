@@ -47,7 +47,7 @@ public class DiaryFCalendar extends Fragment implements View.OnClickListener {
 
              //   String nyDate = calendar.setDate(date);
 
-                System.out.println(calendar.getDate());
+                //System.out.println(calendar.getDate());
 
 
 
