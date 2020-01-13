@@ -61,7 +61,7 @@ public class DashVidF extends Fragment implements View.OnClickListener {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         videoView = getView().findViewById(R.id.videoView);
-        returnButton = getView().findViewById(R.id.returnButton);
+        returnButton = getView().findViewById(R.id.returnToDashVidMainButton);
         videoDescription = getView().findViewById(R.id.videoDescription);
         videoTitle = getView().findViewById(R.id.videoTitle);
         markSeenButton = getView().findViewById(R.id.markSeenButton);
@@ -75,6 +75,7 @@ public class DashVidF extends Fragment implements View.OnClickListener {
         wasPlaying = false;
         isTouchingBar = false;
         buttonPlayAndPause.setOnClickListener(this);
+        returnButton.setOnClickListener(this);
 
         videoSeekBar.setMin(0);
         videoSeekBar.setMax(100);
