@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/chat"
+            android:icon="@drawable/navigation_drawer_chat"
+            android:title="Chat" />
+    </group>
+
+    <item android:title="Bruger indstillinger">
+        <menu>
+            <item
+                android:id="@+id/changePass"
+                android:icon="@drawable/navigation_drawer_person"
+                android:title="Skift kodeord" />
+            <item
+                android:id="@+id/changeEmail"
+                android:icon="@drawable/navigation_drawer_person"
+                android:title="Skift email" />
+        </menu>
+    </item>
+    <item android:title="App indstillinger">
+        <menu>
+            <item
+                android:id="@+id/bigSmallText"
+                android:icon="@drawable/navigation_drawer_fields"
+                android:title="Stor Tekst" />
+            <item
+                android:id="@+id/darkMode"
+                android:icon="@drawable/navigation_drawer_darkmode"
+                android:title="Dark Mode" />
+        </menu>
+    </item>
+    <item android:title="Kontakt">
+        <menu>
+            <item
+                android:id="@+id/phoneContact"
+                android:icon="@drawable/navigation_drawer_local_phone"
+                android:title="+45 11 22 33 44" />
+            <item
+                android:id="@+id/emailContact"
+                android:icon="@drawable/navigation_drawer_email"
+                android:title="support@nøglen.dk" />
+        </menu>
+    </item>
+    <item android:title="Om appen">
+        <menu>
+            <item
+                android:id="@+id/information"
+                android:icon="@drawable/navigation_drawer_info"
+                android:title="ver.1.4.2" />
+            <item
+                android:id="@+id/developers"
+                android:icon="@drawable/navigation_drawer_code"
+                android:title="Gruppe 24" />
+        </menu>
+    </item>
+</menu>

@@ -29,6 +29,9 @@ public class InfoKnowledgeF extends Fragment{
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        iMain = (IMainActivity) getActivity();
+
+
         btn1 = getView().findViewById(R.id.whatsStress);
         btn1.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -36,9 +39,7 @@ public class InfoKnowledgeF extends Fragment{
                 InfoArticleF article = new InfoArticleF();
                 Bundle bundle = new Bundle();
                 bundle.putInt("textChanger", 1);
-                article.setArguments(bundle);
-                FragmentManager manager = getFragmentManager();
-                manager.beginTransaction().replace(R.id.content_frame,article).commit();
+                iMain.setFragment(article,getString(R.string.fragment_infoarticle),true,bundle);
 
             }
         });
@@ -50,9 +51,7 @@ public class InfoKnowledgeF extends Fragment{
                 InfoArticleF article = new InfoArticleF();
                 Bundle bundle = new Bundle();
                 bundle.putInt("textChanger", 2);
-                article.setArguments(bundle);
-                FragmentManager manager = getFragmentManager();
-                manager.beginTransaction().replace(R.id.content_frame,article).commit();
+                iMain.setFragment(article,getString(R.string.fragment_infoarticle),true,bundle);
 
             }
         });
@@ -64,9 +63,7 @@ public class InfoKnowledgeF extends Fragment{
                 InfoArticleF article = new InfoArticleF();
                 Bundle bundle = new Bundle();
                 bundle.putInt("textChanger", 3);
-                article.setArguments(bundle);
-                FragmentManager manager = getFragmentManager();
-                manager.beginTransaction().replace(R.id.content_frame,article).commit();
+                iMain.setFragment(article,getString(R.string.fragment_infoarticle),true,bundle);
 
             }
         });
@@ -78,9 +75,7 @@ public class InfoKnowledgeF extends Fragment{
                 InfoArticleF article = new InfoArticleF();
                 Bundle bundle = new Bundle();
                 bundle.putInt("textChanger", 4);
-                article.setArguments(bundle);
-                FragmentManager manager = getFragmentManager();
-                manager.beginTransaction().replace(R.id.content_frame,article).commit();
+                iMain.setFragment(article,getString(R.string.fragment_infoarticle),true,bundle);
 
             }
         });
@@ -92,10 +87,7 @@ public class InfoKnowledgeF extends Fragment{
                 InfoArticleF article = new InfoArticleF();
                 Bundle bundle = new Bundle();
                 bundle.putInt("textChanger", 5);
-                article.setArguments(bundle);
-                FragmentManager manager = getFragmentManager();
-                manager.beginTransaction().replace(R.id.content_frame,article).commit();
-
+                iMain.setFragment(article,getString(R.string.fragment_infoarticle),true,bundle);
             }
         });
 
@@ -106,9 +98,7 @@ public class InfoKnowledgeF extends Fragment{
                 InfoArticleF article = new InfoArticleF();
                 Bundle bundle = new Bundle();
                 bundle.putInt("textChanger", 6);
-                article.setArguments(bundle);
-                FragmentManager manager = getFragmentManager();
-                manager.beginTransaction().replace(R.id.content_frame,article).commit();
+                iMain.setFragment(article,getString(R.string.fragment_infoarticle),true,bundle);
 
             }
         });
@@ -120,9 +110,7 @@ public class InfoKnowledgeF extends Fragment{
                 InfoArticleF article = new InfoArticleF();
                 Bundle bundle = new Bundle();
                 bundle.putInt("textChanger", 7);
-                article.setArguments(bundle);
-                FragmentManager manager = getFragmentManager();
-                manager.beginTransaction().replace(R.id.content_frame,article).commit();
+                iMain.setFragment(article,getString(R.string.fragment_infoarticle),true,bundle);
 
             }
         });

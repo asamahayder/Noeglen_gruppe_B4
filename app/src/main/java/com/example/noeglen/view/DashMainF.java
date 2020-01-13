@@ -15,7 +15,12 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.ActionBarDrawerToggle;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
+
 
 import com.example.noeglen.R;
 
@@ -26,6 +31,7 @@ import java.lang.ref.WeakReference;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
+import java.util.Objects;
 
 public class DashMainF extends Fragment implements View.OnClickListener {
 
@@ -33,6 +39,9 @@ public class DashMainF extends Fragment implements View.OnClickListener {
     private ImageView iVidDash;
     private TextView tVidDash1, tVidDash2;
     private String fragmentTag;
+    private Toolbar toolbar;
+    private DrawerLayout drawerLayout;
+    private ActionBarDrawerToggle toggle;
 
     private static final String TAG = "DASHMAIN";
 
@@ -40,16 +49,27 @@ public class DashMainF extends Fragment implements View.OnClickListener {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragment_dashmain, container, false);
+
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         initializeView();
+
+        toolbar = getView().findViewById(R.id.toolBar);
+        ((AppCompatActivity)getActivity()).setSupportActionBar(toolbar);
+        ((AppCompatActivity)getActivity()).getSupportActionBar().setDisplayShowTitleEnabled(false);
+
+        drawerLayout = getView().findViewById(R.id.drawer_layout);
+
+        toggle = new ActionBarDrawerToggle(getActivity(), drawerLayout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        drawerLayout.addDrawerListener(toggle);
+        toggle.syncState();
     }
 
     private void initializeView() {
-        iVidDash = getView().findViewById(R.id.iDashVid);
+        iVidDash = Objects.requireNonNull(getView()).findViewById(R.id.iDashVid);
         iVidDash.setOnClickListener(this);
 
 
@@ -57,8 +77,6 @@ public class DashMainF extends Fragment implements View.OnClickListener {
         tVidDash1 = getView().findViewById(R.id.tDashVid1);
         tVidDash1 = getView().findViewById(R.id.tDashVid2);
     }
-
-
 
     @Override
     public void onClick(View v) {
