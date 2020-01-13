@@ -19,6 +19,7 @@ import com.example.noeglen.data.MyCallBack;
 import com.example.noeglen.data.VideoDAO;
 import com.example.noeglen.data.VideoDTO;
 import com.example.noeglen.logic.VideoListLogic;
+import com.google.gson.Gson;
 
 import java.util.ArrayList;
 
@@ -74,7 +75,11 @@ public class DashVidMainF extends Fragment implements View.OnClickListener {
                 DashVidMainRecyclerAdapter adapter = new DashVidMainRecyclerAdapter(videoList, getContext(), new MyCallBack() {
                     @Override
                     public void onCallBack(Object object) {
+                        Gson gson = new Gson();
                         Bundle bundle = new Bundle();
+                        String videoAsString = gson.toJson(object);
+                        bundle.putString("videoObject",videoAsString);
+                        mainActivity.setFragment(new DashVidF(), getString(R.string.fragment_dashvid),true, bundle);
                     }
                 });
                 displayVideos(adapter);
