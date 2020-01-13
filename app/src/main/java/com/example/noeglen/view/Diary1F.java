@@ -13,6 +13,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.example.noeglen.R;
+import com.example.noeglen.data.DiaryDTO;
 import com.example.noeglen.logic.CurrentDate;
 
 public class Diary1F extends Fragment  implements View.OnClickListener{
@@ -21,6 +22,8 @@ public class Diary1F extends Fragment  implements View.OnClickListener{
     private IMainActivity iMain;
     private TextView text;
     private CurrentDate currentDate;
+    DiaryDTO diaryDTO;
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -45,6 +48,9 @@ public class Diary1F extends Fragment  implements View.OnClickListener{
 
     @Override
     public void onClick(View view) {
+        diaryDTO = new DiaryDTO()
+
+
         String tag ="";
 
         if (view == a){

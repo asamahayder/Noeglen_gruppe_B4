@@ -23,8 +23,8 @@ import com.example.noeglen.logic.CurrentDate;
    private CurrentDate currentDate;
    private SeekBar seekBar;
    private ImageView imageView;
-   //private Button con;
    private IMainActivity iMain;
+   private int smiley;
 
 
     @Nullable
@@ -35,8 +35,7 @@ import com.example.noeglen.logic.CurrentDate;
 
     @Override
     public void onViewCreated(@NonNull final View view, @Nullable Bundle savedInstanceState) {
-        //con = getView().findViewById(R.id.button);
-        //con.setOnClickListener(this);
+
         date = getView().findViewById(R.id.textView4);
         date.setText(currentDate.getDateString());
 
@@ -50,14 +49,19 @@ import com.example.noeglen.logic.CurrentDate;
 
                 if (seekBar.getProgress() > 0 && seekBar.getProgress() <= 20) {
                     imageView.setBackground(getView().getResources().getDrawable(R.drawable.emoji1));
+                    smiley = 0;
                 }else if (seekBar.getProgress() > 20 && seekBar.getProgress() <= 40){
                     imageView.setBackground(getView().getResources().getDrawable(R.drawable.emoji2));
+                    smiley = 1;
                 }else if (seekBar.getProgress() > 40 && seekBar.getProgress() <= 60){
                     imageView.setBackground(getView().getResources().getDrawable(R.drawable.emoji3));
+                    smiley = 2;
                 }else if (seekBar.getProgress() > 60 && seekBar.getProgress() <= 80){
                     imageView.setBackground(getView().getResources().getDrawable(R.drawable.emoji4));
+                    smiley = 3;
                 }else if (seekBar.getProgress() > 80 && seekBar.getProgress() <= 100){
                     imageView.setBackground(getView().getResources().getDrawable(R.drawable.emoji5));
+                    smiley = 4;
                 }
 
 
