@@ -1,34 +1,126 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_centerHorizontal="true"
     android:background="#ffffff">
 
-    <Button
-        android:id="@+id/returnButton"
-        android:layout_width="match_parent"
+    <ImageView
+        android:id="@+id/returnToDashVidMainButton"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="back" />
+        android:layout_weight="1"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/arrow_right"
+        android:rotation="-180"/>
 
     <VideoView
         android:id="@+id/videoView"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="230dp"
+        android:elevation="8dp"
+        app:layout_constraintTop_toBottomOf="@id/returnToDashVidMainButton"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"/>
+
+    <LinearLayout
+        android:id="@+id/controlLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:background="@drawable/control_layout_background"
+        android:elevation="8dp"
+        app:layout_constraintTop_toBottomOf="@id/videoView">
+
+        <ImageView
+            android:id="@+id/buttonPlayAndPause"
+            android:layout_width="0dp"
+            android:layout_height="30dp"
+            android:layout_weight="1"
+            app:srcCompat="@drawable/pause" />
+
+        <TextView
+            android:id="@+id/timeCurrent"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="0:00"
+            android:textColor="@android:color/black"/>
+
+        <SeekBar
+            android:id="@+id/videoSeekBar"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:progressBackgroundTint="@color/secondaryNormal"
+            android:progressTint="@color/secondaryNormal"
+            android:thumbTint="@color/secondaryNormal" />
+
+        <TextView
+            android:id="@+id/timeTotal"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="0:00"
+            android:textColor="@android:color/black"/>
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/videoTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:fontFamily="@font/karla_regular"
+        android:gravity="center"
+        android:text="Title"
+        android:textColor="@color/primaryDark"
+        android:textSize="30sp"
+        app:layout_constraintTop_toBottomOf="@id/controlLayout" />
 
     <TextView
         android:id="@+id/videoDescription"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="25sp"
-        android:textColor="@color/babyBlue"
+        android:layout_marginTop="20dp"
         android:fontFamily="@font/karla_regular"
-        android:text="this will hold the video description. We need to add a description field to firestore" />
+        android:text="this will hold the video description. We need to add a description field to firestore"
+        android:textColor="@color/babyBlue"
+        android:textSize="15sp"
+        android:gravity="center"
+        app:layout_constraintTop_toBottomOf="@id/videoTitle" />
 
     <Button
         android:id="@+id/markSeenButton"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="mark as seen" />
+        android:layout_marginBottom="100dp"
+        android:background="@drawable/mark_as_seen_button_background"
+        android:elevation="5dp"
+        android:fontFamily="@font/karla_regular"
+        android:padding="20dp"
+        android:text="@string/markAsSeenButton"
+        android:textAllCaps="false"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/videoDescription" />
 
-</LinearLayout>
+    <ProgressBar
+        android:id="@+id/videoBufferSign"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:elevation="8dp"
+        android:indeterminateDrawable="@drawable/buffer_ring_color"
+        app:layout_constraintBottom_toTopOf="@+id/controlLayout"
+        app:layout_constraintEnd_toEndOf="@+id/videoView"
+        app:layout_constraintStart_toStartOf="@+id/videoView"
+        app:layout_constraintTop_toTopOf="@+id/videoView" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,49 +1,37 @@
 package com.example.noeglen.data;
 
-public class VideoDTO implements IFavoritesDTO {
+public class VideoDTO {
 
-    private String videoID;
-    private boolean watched;
+    private String videoUrl;
+    private String imageUrl;
     private String title;
+    private String week;
 
     public VideoDTO(){}
 
-    public VideoDTO(String title, String videoURI, boolean watched) {
-        this.videoID = videoURI;
-        this.watched = watched;
+    public VideoDTO(String title, String videoUrl, String imageUrl, String week) {
+        this.videoUrl = videoUrl;
         this.title = title;
-    }
-
-    //FIXME
-
-    @Override
-    public boolean addFav(int dbID) {
-        return false;
-    }
-
-    //FIXME
-
-    @Override
-    public boolean remFav(int dbID) {
-        return false;
+        this.imageUrl = imageUrl;
+        this.week = week;
     }
 
     /** GETTERS AND SETTERS */
 
-    public String getVideoID() {
-        return videoID;
+    public String getVideoUrl() {
+        return videoUrl;
     }
 
-    public void setVideoID(String videoID) {
-        this.videoID = videoID;
+    public void setVideoUrl(String videoUrl) {
+        this.videoUrl = videoUrl;
     }
 
-    public boolean isWatched() {
-        return watched;
+    public String getImageUrl() {
+        return imageUrl;
     }
 
-    public void setWatched(boolean watched) {
-        this.watched = watched;
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
     }
 
     public String getTitle() {
@@ -52,5 +40,13 @@ public class VideoDTO implements IFavoritesDTO {
 
     public void setTitle(String title) {
         this.title = title;
+    }
+
+    public String getWeek() {
+        return week;
+    }
+
+    public void setWeek(String week) {
+        this.week = week;
     }
 }

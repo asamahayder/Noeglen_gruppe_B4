@@ -1,41 +1,30 @@
 package com.example.noeglen.data;
 
-public class ArticleDTO implements IFavoritesDTO {
+public class ArticleDTO{
 
-    private int dbID;
+    private String header;
     private String title;
-    private String textBody;
-    private String imageName;
+    private String body;
+    private String image;
 
-    public ArticleDTO(int dbID, String title, String textBody, String imageName) {
-        this.dbID = dbID;
+    public ArticleDTO() {
+    }
+
+    public ArticleDTO(String header, String title, String body, String image) {
+        this.header = header;
         this.title = title;
-        this.textBody = textBody;
-        this.imageName = imageName;
-    }
-
-    //FIXME
-
-    @Override
-    public boolean addFav(int dbID) {
-        return false;
-    }
-
-    //FIXME
-
-    @Override
-    public boolean remFav(int dbID) {
-        return false;
+        this.body = body;
+        this.image = image;
     }
 
     /** GETTERS AND SETTERS */
 
-    public int getDbID() {
-        return dbID;
+    public String getHeader() {
+        return header;
     }
 
-    public void setDbID(int dbID) {
-        this.dbID = dbID;
+    public void setHeader(String header) {
+        this.header = header;
     }
 
     public String getTitle() {
@@ -46,19 +35,19 @@ public class ArticleDTO implements IFavoritesDTO {
         this.title = title;
     }
 
-    public String getTextBody() {
-        return textBody;
+    public String getBody() {
+        return body;
     }
 
-    public void setTextBody(String textBody) {
-        this.textBody = textBody;
+    public void setBody(String body) {
+        this.body = body;
     }
 
-    public String getImageName() {
-        return imageName;
+    public String getImage() {
+        return image;
     }
 
-    public void setImageName(String imageName) {
-        this.imageName = imageName;
+    public void setImage(String image) {
+        this.image = image;
     }
 }

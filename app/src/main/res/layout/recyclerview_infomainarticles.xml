@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/border">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/infoarticlesmain_recyclerview_image"
+            android:layout_width="match_parent"
+            android:layout_height="220dp"
+            android:layout_marginTop="25dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:background="@color/colorAccent"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="220dp"
+            android:layout_marginTop="25dp"
+            android:layout_marginRight="9dp"
+            android:layout_marginLeft="9dp"
+            android:layout_marginBottom="5dp"
+            android:background="@drawable/gradient"/>
+
+        <TextView
+            android:id="@+id/infoarticlesmain_recyclerview_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="16dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="139dp"
+            android:text="Article Title Placeholder"
+            android:textSize="35sp"
+            android:textColor="#ffffff"
+            />
+
+        <TextView
+            android:id="@+id/infoarticlesmain_recyclerview_subtext"
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:layout_marginTop="190dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:text="fillertextfillertextfillertextfilfillertextfillertextfillertextfillertextfillerte ..."
+            android:textSize="21sp"
+            android:textColor="#ffff"
+            android:elevation="20dp"/>
+
+    </FrameLayout>
+
+
+</LinearLayout>

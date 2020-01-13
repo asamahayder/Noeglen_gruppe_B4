@@ -1,6 +1,6 @@
 package com.example.noeglen.data;
 
-public class ExerciseDTO implements IFavoritesDTO {
+public class ExerciseDTO {
 
     private int dbID;
     private String title;
@@ -14,20 +14,6 @@ public class ExerciseDTO implements IFavoritesDTO {
         this.animated = animated;
         this.animationIn = animationIn;
         this.animationOut = animationOut;
-    }
-
-    //FIXME
-
-    @Override
-    public boolean addFav(int dbID) {
-        return false;
-    }
-
-    //FIXME
-
-    @Override
-    public boolean remFav(int dbID) {
-        return false;
     }
 
     /** GETTERS AND SETTERS */

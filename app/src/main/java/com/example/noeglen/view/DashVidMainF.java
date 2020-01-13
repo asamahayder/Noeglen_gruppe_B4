@@ -10,13 +10,24 @@ import android.widget.ImageView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.noeglen.R;
+import com.example.noeglen.data.MyCallBack;
+import com.example.noeglen.data.VideoDAO;
+import com.example.noeglen.data.VideoDTO;
+import com.example.noeglen.logic.VideoListLogic;
+import com.google.gson.Gson;
+
+import java.util.ArrayList;
 
 public class DashVidMainF extends Fragment implements View.OnClickListener {
 
-    private ImageView iVIdeoLink;
-    IMainActivity mainActivity;
+    private IMainActivity mainActivity;
+    private RecyclerView recyclerView;
+    private ArrayList<VideoDTO> videoList;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -36,10 +47,8 @@ public class DashVidMainF extends Fragment implements View.OnClickListener {
     }
 
     private void initializeView() {
-
-        iVIdeoLink = (ImageView) getView().findViewById(R.id.iVideoLink);
-        iVIdeoLink.setOnClickListener(this);
-
+        recyclerView = getView().findViewById(R.id.videoRecyclerView);
+        getAllVideosFromDataBase();
     }
 
     @Override
@@ -50,8 +59,40 @@ public class DashVidMainF extends Fragment implements View.OnClickListener {
 
     @Override
     public void onClick(View view) {
-        if (view == iVIdeoLink){
-            mainActivity.inflateFragment(getString(R.string.fragment_dashvid));
-        }
+    }
+
+
+    public void setVideoList(ArrayList<VideoDTO> videoList){
+        this.videoList = videoList;
+    }
+
+    public void getAllVideosFromDataBase(){
+        VideoDAO videoDAO = new VideoDAO();
+        videoDAO.getAllVideos(new MyCallBack() {
+            @Override
+            public void onCallBack(Object object) {
+                setVideoList((ArrayList<VideoDTO>) object);
+                DashVidMainRecyclerAdapter adapter = new DashVidMainRecyclerAdapter(videoList, getContext(), new MyCallBack() {
+                    @Override
+                    public void onCallBack(Object object) {
+                        Gson gson = new Gson();
+                        Bundle bundle = new Bundle();
+                        String videoAsString = gson.toJson(object);
+                        bundle.putString("videoObject",videoAsString);
+                        mainActivity.setFragment(new DashVidF(), getString(R.string.fragment_dashvid),true, bundle);
+                    }
+                });
+                displayVideos(adapter);
+            }
+        });
+    }
+
+    public void displayVideos(DashVidMainRecyclerAdapter adapter){
+        recyclerView.setAdapter(adapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this.getContext()));
+    }
+
+    public void showErrorMessage(){
+        //TODO show error message in case Async fails
     }
 }
