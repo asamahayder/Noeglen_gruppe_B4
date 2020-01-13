@@ -1,5 +1,6 @@
 package com.example.noeglen.view;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.media.MediaPlayer;
 import android.net.Uri;
@@ -76,8 +77,7 @@ public class DashVidF extends Fragment implements View.OnClickListener {
         isTouchingBar = false;
         buttonPlayAndPause.setOnClickListener(this);
         returnButton.setOnClickListener(this);
-
-        videoSeekBar.setMin(0);
+        
         videoSeekBar.setMax(100);
         videoSeekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
@@ -197,11 +197,11 @@ public class DashVidF extends Fragment implements View.OnClickListener {
 
             do{
                 if (isPlaying || isTouchingBar){
-                    currentTime = videoView.getCurrentPosition()/1000;
+                    currentTime = getVideoPosition()/1000;
                     publishProgress(currentTime);
                 }
 
-            }while (videoSeekBar.getProgress() <= 100);
+            }while (getVideoSeekBarProgress() <= 100);
 
             return null;
         }
@@ -222,5 +222,13 @@ public class DashVidF extends Fragment implements View.OnClickListener {
             }
 
         }
+    }
+
+    public int getVideoPosition(){
+        return videoView.getCurrentPosition();
+    }
+
+    public int getVideoSeekBarProgress(){
+        return videoSeekBar.getProgress();
     }
 }

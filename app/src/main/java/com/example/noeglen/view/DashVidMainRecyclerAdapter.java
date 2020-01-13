@@ -69,7 +69,6 @@ public class DashVidMainRecyclerAdapter extends RecyclerView.Adapter<DashVidMain
          }
       });
       name.setText(videoItem.getTitle());
-      //new AsyncTaskGetImage(this).execute(videoItem.getImageUrl());
       Glide
               .with(context)
               .load(videoItem.getImageUrl())
