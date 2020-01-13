@@ -37,9 +37,9 @@ public class DashVidF extends Fragment implements View.OnClickListener {
     private ImageView buttonPlayAndPause;
     private TextView timeCurrentView;
     private TextView timeTotalView;
-    private ProgressBar videoProgressBar;
     private ProgressBar videoBufferSign;
     private boolean isPlaying;
+    private boolean wasPlaying;
     private SeekBar videoSeekBar;
     private boolean isTouchingBar;
 
@@ -61,16 +61,21 @@ public class DashVidF extends Fragment implements View.OnClickListener {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         videoView = getView().findViewById(R.id.videoView);
-        returnButton = getView().findViewById(R.id.returnButton);
+        returnButton = getView().findViewById(R.id.returnToDashVidMainButton);
         videoDescription = getView().findViewById(R.id.videoDescription);
         videoTitle = getView().findViewById(R.id.videoTitle);
         markSeenButton = getView().findViewById(R.id.markSeenButton);
         buttonPlayAndPause = getView().findViewById(R.id.buttonPlayAndPause);
         timeCurrentView = getView().findViewById(R.id.timeCurrent);
         timeTotalView = getView().findViewById(R.id.timeTotal);
-        videoProgressBar = getView().findViewById(R.id.videoProgressBar);
         videoBufferSign = getView().findViewById(R.id.videoBufferSign);
         videoSeekBar = getView().findViewById(R.id.videoSeekBar);
+
+        isPlaying = false;
+        wasPlaying = false;
+        isTouchingBar = false;
+        buttonPlayAndPause.setOnClickListener(this);
+        returnButton.setOnClickListener(this);
 
         videoSeekBar.setMin(0);
         videoSeekBar.setMax(100);
@@ -82,37 +87,33 @@ public class DashVidF extends Fragment implements View.OnClickListener {
                     int newTime = newProgress*totalTime/100;
                     videoView.seekTo(newTime*1000);
                 }
-
             }
-
             @Override
             public void onStartTrackingTouch(SeekBar seekBar) {
                 isTouchingBar = true;
+                wasPlaying = isPlaying;
                 isPlaying = false;
                 videoView.pause();
             }
-
             @Override
             public void onStopTrackingTouch(SeekBar seekBar) {
                 isTouchingBar = false;
-                isPlaying = true;
-                videoView.start();
+                if (wasPlaying){
+                    isPlaying = true;
+                    videoView.start();
+                }else {
+                    isPlaying = false;
+                    videoView.pause();
+                }
             }
         });
-
-
-        isPlaying = false;
-        isTouchingBar = false;
-        videoProgressBar.setMax(100);
-        buttonPlayAndPause.setOnClickListener(this);
 
         handleGetVideo();
 
         videoTitle.setText(video.getTitle());
         //videoDescription.setText(video.getDescription);
 
-        //Uri videoURI = Uri.parse(video.getVideoUrl());
-        Uri videoURI = Uri.parse("https://player.vimeo.com/video/384360470");
+        Uri videoURI = Uri.parse(video.getVideoUrl());
         videoView.setVideoURI(videoURI);
         videoView.requestFocus();
         videoView.start();
@@ -195,12 +196,12 @@ public class DashVidF extends Fragment implements View.OnClickListener {
         protected Void doInBackground(Void... voids) {
 
             do{
-                if (isPlaying){
+                if (isPlaying || isTouchingBar){
                     currentTime = videoView.getCurrentPosition()/1000;
                     publishProgress(currentTime);
                 }
 
-            }while (videoProgressBar.getProgress() <= 100);
+            }while (videoSeekBar.getProgress() <= 100);
 
             return null;
         }
@@ -210,11 +211,10 @@ public class DashVidF extends Fragment implements View.OnClickListener {
             super.onProgressUpdate(values);
 
             try {
-                int currentPercent = values[0] * 100/ totalTime;
-
-                videoProgressBar.setProgress(currentPercent);
-                videoSeekBar.setProgress(currentPercent);
-
+                if (!isTouchingBar){
+                    int currentPercent = values[0] * 100/ totalTime;
+                    videoSeekBar.setProgress(currentPercent);
+                }
                 String currentTimeString = String.format("%02d:%02d", values[0]/60, values[0]%60);
                 timeCurrentView.setText(currentTimeString);
             }catch (Exception e){

@@ -21,6 +21,7 @@
     <string name="Viden">Viden</string>
     <string name="nyttig_viden">Nyttig Viden</string>
     <string name="Øvelser">Øvelser</string>
+    <string name="markAsSeenButton">Marker som set</string>
 
     <!-- navigation drawer -->
     <string name="navigation_drawer_open">navigation drawer open</string>

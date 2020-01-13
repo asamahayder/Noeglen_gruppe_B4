@@ -23,12 +23,21 @@
             android:contentDescription="Back button"
             app:srcCompat="@drawable/arrow_left"
             tools:ignore="HardcodedText" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="Artikler"
+            android:textColor="@color/babyBlue"
+            android:textSize="30sp"
+            android:textStyle="bold"
+            android:gravity="center_vertical"/>
     </LinearLayout>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/infoarticlesmain_recyclerview"
-        android:layout_width="409dp"
-        android:layout_height="689dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"

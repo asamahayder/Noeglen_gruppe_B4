@@ -53,10 +53,10 @@ public class ArticleDAO implements IArticleDAO {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                 if (task.isSuccessful()){
+                    int i = 0;
                     for (QueryDocumentSnapshot snapshot : task.getResult()) {
                         article = snapshot.toObject(ArticleDTO.class);
                         listOfArticles.add(article);
-                        Log.d(TAG, "onComplete: COMPLETED RETRIEVING FROM FIREBASE");
                     }
                 }
                 else {
