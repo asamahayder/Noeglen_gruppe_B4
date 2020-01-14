@@ -1,6 +1,7 @@
 package com.example.noeglen.view;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,8 +21,12 @@ import com.example.noeglen.data.VideoDAO;
 import com.example.noeglen.data.VideoDTO;
 import com.example.noeglen.logic.VideoListLogic;
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
+import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class DashVidMainF extends Fragment implements View.OnClickListener {
 
@@ -72,7 +77,7 @@ public class DashVidMainF extends Fragment implements View.OnClickListener {
             @Override
             public void onCallBack(Object object) {
                 setVideoList((ArrayList<VideoDTO>) object);
-                DashVidMainRecyclerAdapter adapter = new DashVidMainRecyclerAdapter(videoList, getContext(), new MyCallBack() {
+                DashVidMainRecyclerAdapter adapter = new DashVidMainRecyclerAdapter(videoList, getContext(), getSeenVideosList(), new MyCallBack() {
                     @Override
                     public void onCallBack(Object object) {
                         Gson gson = new Gson();
@@ -94,5 +99,20 @@ public class DashVidMainF extends Fragment implements View.OnClickListener {
 
     public void showErrorMessage(){
         //TODO show error message in case Async fails
+    }
+
+    public HashMap<String, Boolean> getSeenVideosList(){
+        HashMap<String, Boolean> seenVideosList;
+        Gson gson = new Gson();
+        //Getting list from shared preferences
+        String preferenceKey = getString(R.string.sharedPreferencesKey);
+        String listKey = getString(R.string.seenVideosListKey);
+
+        SharedPreferences preferences = getActivity().getSharedPreferences(preferenceKey, Context.MODE_PRIVATE);
+        String listInJSON = preferences.getString(listKey, null);
+        Type type = new TypeToken<HashMap<String, Boolean>>(){}.getType(); //getting hashmap type for gson
+        seenVideosList = gson.fromJson(listInJSON, type);
+
+        return seenVideosList;
     }
 }

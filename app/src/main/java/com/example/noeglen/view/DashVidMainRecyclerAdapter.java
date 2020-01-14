@@ -1,6 +1,7 @@
 package com.example.noeglen.view;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.os.AsyncTask;
 import android.view.LayoutInflater;
@@ -17,6 +18,7 @@ import com.example.noeglen.R;
 import com.example.noeglen.data.MyCallBack;
 import com.example.noeglen.data.VideoDTO;
 
+import java.util.HashMap;
 import java.util.List;
 
 //this was made using the recyclerView guide from codepath.com
@@ -28,12 +30,14 @@ public class DashVidMainRecyclerAdapter extends RecyclerView.Adapter<DashVidMain
       public ImageView image;
       public ImageView line1;
       public ImageView line2;
+      public ImageView checkMark;
 
       public ViewHolder(View itemView) {
          super(itemView);
          name = itemView.findViewById(R.id.videoItemName);
          image = itemView.findViewById(R.id.videoItemImage);
          weekLabel = itemView.findViewById(R.id.weekLabel);
+         checkMark = itemView.findViewById(R.id.seenImage);
          line1 = itemView.findViewById(R.id.line1);
          line2 = itemView.findViewById(R.id.line2);
       }
@@ -43,11 +47,13 @@ public class DashVidMainRecyclerAdapter extends RecyclerView.Adapter<DashVidMain
    private ImageView imageView;
    private Context context;
    private MyCallBack myCallBack;
+   private HashMap<String, Boolean> seenVideosList;
 
-   public DashVidMainRecyclerAdapter(List<VideoDTO> videoList, Context context, MyCallBack myCallBack){
+   public DashVidMainRecyclerAdapter(List<VideoDTO> videoList, Context context,HashMap<String, Boolean> seenVideosList ,MyCallBack myCallBack){
       this.videoList = videoList;
       this.context = context;
       this.myCallBack = myCallBack;
+      this.seenVideosList = seenVideosList;
    }
 
    @NonNull
@@ -67,10 +73,17 @@ public class DashVidMainRecyclerAdapter extends RecyclerView.Adapter<DashVidMain
       final VideoDTO videoItem = videoList.get(position);
       ImageView line1 = holder.line1;
       ImageView line2 = holder.line2;
+      TextView name = holder.name;
+      TextView weekLabel = holder.weekLabel;
+      imageView = holder.image;
+
+      String wholeWeekName = videoItem.getWeek();
+      String onlyWeekNumber = wholeWeekName.substring(0,5);
+      name.setText(videoItem.getTitle());
+      weekLabel.setText(onlyWeekNumber);
 
       //Removing first and last line
       if (videoItem == videoList.get(0)){
-         System.out.println("#######################BUM");
          line1.setVisibility(View.INVISIBLE);
       }else {
          line1.setVisibility(View.VISIBLE);
@@ -82,24 +95,32 @@ public class DashVidMainRecyclerAdapter extends RecyclerView.Adapter<DashVidMain
          line2.setVisibility(View.VISIBLE);
       }
 
-      String wholeWeekName = videoItem.getWeek();
-      String onlyWeekNumber = wholeWeekName.substring(0,5);
-      holder.weekLabel.setText(onlyWeekNumber);
+      //showing checkMark if seen
+      if (seenVideosList != null){ //checking that the list isn't null
+         Boolean seen = seenVideosList.get(videoItem.getTitle());
+         if (seen != null){ //checking that the value isn't null
+            if (seen){ //checking if value is true
+               holder.checkMark.setVisibility(View.VISIBLE);
+            }else{
+               holder.checkMark.setVisibility(View.INVISIBLE);
+            }
+         }else {
+            holder.checkMark.setVisibility(View.INVISIBLE);
+         }
+      }else {
+         holder.checkMark.setVisibility(View.INVISIBLE);
+      }
 
 
-      TextView name = holder.name;
-      imageView = holder.image;
+      //Handling image clicklistener and loading image using glide
+      Glide.with(context).load(videoItem.getImageUrl()).into(imageView);
       imageView.setOnClickListener(new View.OnClickListener() {
          @Override
          public void onClick(View view) {
             myCallBack.onCallBack(videoItem);
          }
       });
-      name.setText(videoItem.getTitle());
-      Glide
-              .with(context)
-              .load(videoItem.getImageUrl())
-              .into(imageView);
+
    }
 
    @Override
