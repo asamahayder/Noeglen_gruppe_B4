@@ -69,13 +69,18 @@ public class DashVidMainRecyclerAdapter extends RecyclerView.Adapter<DashVidMain
       ImageView line2 = holder.line2;
 
       //Removing first and last line
-      /*if (position == 0){
+      if (videoItem == videoList.get(0)){
+         System.out.println("#######################BUM");
          line1.setVisibility(View.INVISIBLE);
-      }*/
-      /*
+      }else {
+         line1.setVisibility(View.VISIBLE);
+      }
+
       if (videoItem == videoList.get(videoList.size()-1)){
-         holder.line2.setVisibility(View.INVISIBLE);
-      }*/
+         line2.setVisibility(View.INVISIBLE);
+      }else{
+         line2.setVisibility(View.VISIBLE);
+      }
 
       String wholeWeekName = videoItem.getWeek();
       String onlyWeekNumber = wholeWeekName.substring(0,5);
