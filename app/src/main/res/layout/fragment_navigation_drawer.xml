@@ -4,13 +4,12 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:padding="16dp"
-    android:theme="@style/ThemeOverlay.AppCompat.Dark">
+    >
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Nøglen"
-        android:paddingTop="15dp"
         android:textSize="28sp"
         android:textColor="@color/primaryDark"/>
 

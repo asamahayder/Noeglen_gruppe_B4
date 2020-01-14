@@ -90,6 +90,7 @@ public class DashMainF extends Fragment implements NavigationView.OnNavigationIt
     public void onAttach(Context context) {
         super.onAttach(context);
         iMain = (IMainActivity) getActivity();
+
     }
 
     @Override
@@ -100,6 +101,10 @@ public class DashMainF extends Fragment implements NavigationView.OnNavigationIt
                 break;
             case R.id.emailContact:
                 openMail();
+                break;
+            case R.id.chat:
+                Intent intent = new Intent(getActivity(), ChatActivity.class);
+                startActivity(intent);
                 break;
         }
         return true;
@@ -133,7 +138,7 @@ public class DashMainF extends Fragment implements NavigationView.OnNavigationIt
 
         System.out.println(emailAddress);
         Intent intent = new Intent(Intent.ACTION_SEND);
-        intent.putExtra(Intent.EXTRA_EMAIL,new String[]{emailAddress});
+        intent.putExtra(Intent.EXTRA_EMAIL, new String[]{emailAddress});
         intent.setType("message/rfc822");
         startActivity(Intent.createChooser(intent, "Vælg en email klient"));
     }

@@ -19,6 +19,7 @@ import com.example.noeglen.R;
 import com.example.noeglen.data.ArticleDAO;
 import com.example.noeglen.data.ArticleDTO;
 import com.example.noeglen.data.IArticleDAO;
+import com.google.gson.Gson;
 
 import java.util.List;
 
@@ -56,7 +57,12 @@ public class InfoArticlesMainF extends Fragment implements InfoArticlesMainAdapt
 
     @Override
     public void onArticleClick(int position) {
-        iMain.inflateFragment(getString(R.string.fragment_infoarticle));
+        Bundle bundle = new Bundle();
+        Gson gson = new Gson();
+        InfoArticleF article = new InfoArticleF();
+        String json = gson.toJson(articles.get(position));
+        bundle.putString("currentArticle",json);
+        iMain.setFragment(article,getString(R.string.fragment_infoarticle),true,bundle);
     }
 
     public class LoadArticles extends AsyncTask<Void, Void, Void>{
