@@ -32,14 +32,13 @@ import java.util.Objects;
 public class DashMainF extends Fragment implements NavigationView.OnNavigationItemSelectedListener, View.OnClickListener {
 
     private IMainActivity iMain;
-    private ImageView iVidDash;
+    private ImageView iVidDash, iDiaryDash, iExerciseDash;
     private TextView tVidDash1, tVidDash2;
     private String fragmentTag;
     private Toolbar toolbar;
     private DrawerLayout drawerLayout;
     private ActionBarDrawerToggle toggle;
     private static int Request = 4;
-    private static final String TAG = "DASHMAIN";
 
     @Nullable
     @Override
@@ -69,7 +68,12 @@ public class DashMainF extends Fragment implements NavigationView.OnNavigationIt
 
     private void initializeView() {
         iVidDash = Objects.requireNonNull(getView()).findViewById(R.id.iDashVid);
+        iDiaryDash = Objects.requireNonNull(getView()).findViewById(R.id.iDashDiary);
+        iExerciseDash = Objects.requireNonNull(getView()).findViewById(R.id.iDashExercise);
         iVidDash.setOnClickListener(this);
+        iDiaryDash.setOnClickListener(this);
+        iExerciseDash.setOnClickListener(this);
+
 
         tVidDash1 = getView().findViewById(R.id.tDashVid1);
         tVidDash2 = getView().findViewById(R.id.tDashVid2);
@@ -81,6 +85,12 @@ public class DashMainF extends Fragment implements NavigationView.OnNavigationIt
         switch (v.getId()) {
             case R.id.iDashVid:
                 fragmentTag = getString(R.string.fragment_dashvidmain);
+                break;
+            case R.id.iDashDiary:
+                fragmentTag = getString(R.string.fragment_diarymain);
+                break;
+            case R.id.iDashExercise:
+                fragmentTag = getString(R.string.fragment_exermain);
                 break;
         }
         iMain.inflateFragment(fragmentTag);
