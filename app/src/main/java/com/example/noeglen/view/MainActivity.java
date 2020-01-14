@@ -181,22 +181,24 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private void checkNavBar(String tag) {
         View v = currentView;
+        Fragment selectedFragment = null;
         if (tag.equals(getString(R.string.fragment_dashvidmain))){
-            Fragment selectedFragment = new DashVidMainF();
-            setFragment(selectedFragment,tag,true, null);
+            selectedFragment = new DashVidMainF();
         }
         if (tag.equals(getString(R.string.fragment_diarymain))){
-            Fragment selectedFragment = new DiaryMainF();
-            setFragment(selectedFragment,tag,true, null);
+            selectedFragment = new DiaryMainF();
             v = findViewById(R.id.bNav1);
         }
         if (tag.equals(getString(R.string.fragment_exermain))){
-            Fragment selectedFragment = new ExerMainF();
-            setFragment(selectedFragment,tag,true, null);
+            selectedFragment = new ExerMainF();
             v = findViewById(R.id.bNav4);
         }
         if (currentView != v){
             onClick(v);
+            setFragment(selectedFragment,tag,false,null);
+        }
+        else if (selectedFragment != null){
+            setFragment(selectedFragment,tag,true,null);
         }
     }
 
