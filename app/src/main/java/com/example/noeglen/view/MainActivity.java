@@ -138,6 +138,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
+    private void clearOneBackStack() {
+        for (int i = 0; i < fm.getBackStackEntryCount(); i++) {
+            if (i + 1 > fm.getBackStackEntryCount()){
+                fm.popBackStack();
+            }
+        }
+    }
+
     @Override
     public void setFragment(Fragment f, String tag, boolean addToBackStack, Bundle bundle){
 
@@ -163,12 +171,34 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public void inflateFragment(String tag, boolean addToBackStack) {
-        checkNavBar(tag);
 
         Fragment selectedFragment = null;
+        View v = currentView;
+
+        if (tag.equals(getString(R.string.fragment_dashvidmain))){
+            selectedFragment = new DashVidMainF();
+        }
+        if (tag.equals(getString(R.string.fragment_diarymain))){
+            selectedFragment = new DiaryMainF();
+            v = findViewById(R.id.bNav1);
+        }
+        if (tag.equals(getString(R.string.fragment_exermain))){
+            selectedFragment = new ExerMainF();
+            v = findViewById(R.id.bNav4);
+        }
+        if (currentView != v){
+            onClick(v);
+            setFragment(selectedFragment,tag,false,null);
+        }
+        else if (selectedFragment != null){
+            setFragment(selectedFragment,tag,true,null);
+        }
 
         if (tag.equals(getString(R.string.fragment_infoarticlesmain))){
             selectedFragment = new InfoArticlesMainF();
+            if (!addToBackStack){
+                clearOneBackStack();
+            }
         }
         if (tag.equals(getString(R.string.fragment_infoknowledge))){
             selectedFragment = new InfoKnowledgeF();
@@ -190,29 +220,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
         if (selectedFragment != null){
             setFragment(selectedFragment,tag,addToBackStack, null);
-        }
-    }
-
-    private void checkNavBar(String tag) {
-        View v = currentView;
-        Fragment selectedFragment = null;
-        if (tag.equals(getString(R.string.fragment_dashvidmain))){
-            selectedFragment = new DashVidMainF();
-        }
-        if (tag.equals(getString(R.string.fragment_diarymain))){
-            selectedFragment = new DiaryMainF();
-            v = findViewById(R.id.bNav1);
-        }
-        if (tag.equals(getString(R.string.fragment_exermain))){
-            selectedFragment = new ExerMainF();
-            v = findViewById(R.id.bNav4);
-        }
-        if (currentView != v){
-            onClick(v);
-            setFragment(selectedFragment,tag,false,null);
-        }
-        else if (selectedFragment != null){
-            setFragment(selectedFragment,tag,true,null);
         }
     }
 

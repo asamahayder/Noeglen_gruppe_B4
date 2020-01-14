@@ -13,13 +13,13 @@
     <LinearLayout
         android:id="@+id/infomain_toplayout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="50dp"
         android:background="@color/primaryNormal"
         android:layout_marginBottom="10dp"
-        android:weightSum="2">
+        android:weightSum="1">
 
         <ImageView
-            android:id="@+id/infoarticlesmain_backbutton"
+            android:id="@+id/infoarticle_backbutton"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:clickable="true"
@@ -27,19 +27,19 @@
             android:contextClickable="true"
             android:soundEffectsEnabled="true"
             app:srcCompat="@drawable/arrow_left"
-            tools:ignore="HardcodedText" />
+            tools:ignore="HardcodedText"
+            android:focusable="true" />
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="center_horizontal"
-            android:paddingTop="3dp"
-            android:paddingRight="30dp"
             android:text="Artikler"
+            android:paddingRight="45dp"
             android:textColor="#fff"
             android:textSize="30sp"
             android:textStyle="bold"
-            android:layout_weight="0" />
+            android:layout_weight="1" />
     </LinearLayout>
 
     <androidx.recyclerview.widget.RecyclerView

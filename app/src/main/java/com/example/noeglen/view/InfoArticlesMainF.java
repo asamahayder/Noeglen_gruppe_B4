@@ -48,16 +48,16 @@ public class InfoArticlesMainF extends Fragment implements InfoArticlesMainAdapt
     }
 
     private void initializeView() {
-        fetchingArticles = false;
-        iArticle = new ArticleDAO();
-        backImage = getView().findViewById(R.id.infoarticlesmain_backbutton);
+        backImage = getView().findViewById(R.id.infoarticle_backbutton);
         backImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 iMain.inflateFragment(getString(R.string.fragment_infomain),false);
             }
         });
-        new LoadArticles().execute();
+        if (adapter != null){
+            setRecyclerview();
+        }
     }
 
 
@@ -65,6 +65,9 @@ public class InfoArticlesMainF extends Fragment implements InfoArticlesMainAdapt
     public void onAttach(Context context) {
         super.onAttach(context);
         iMain = (IMainActivity) getActivity();
+        fetchingArticles = false;
+        iArticle = new ArticleDAO();
+        new LoadArticles().execute();
     }
 
     @Override

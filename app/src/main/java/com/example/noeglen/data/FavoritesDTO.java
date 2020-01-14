@@ -4,7 +4,6 @@ import java.util.List;
 
 public class FavoritesDTO {
 
-    private int dbID;
     private List<ArticleDTO> listOfArticleDTOS;
     private List<VideoDTO> listOfVideoDTOS;
     private List<ExerciseDTO> listOfExerciseDTOS;
@@ -40,4 +39,5 @@ public class FavoritesDTO {
     public void setListOfExerciseDTOS(List<ExerciseDTO> listOfExerciseDTOS) {
         this.listOfExerciseDTOS = listOfExerciseDTOS;
     }
+
 }
