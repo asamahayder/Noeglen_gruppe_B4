@@ -8,6 +8,7 @@
     <string name="fragment_dashvid">Fragment VideoList</string>
     <string name="fragment_diarymain">Fragment Diary</string>
     <string name="fragment_diary1">Fragment Diary1</string>
+    <string name="fragment_diary2">Fragment Diary2</string>
     <string name="fragment_infomain">Fragment Info</string>
     <string name="fragment_infoarticlesmain">Fragment Articles</string>
     <string name="fragment_infoarticle">Fragment Article</string>
@@ -15,6 +16,7 @@
     <string name="fragment_exermain">Fragment Exer</string>
     <string name="fragment_exerexer">Fragment Exercises</string>
     <string name="fragment_favmain">Fragment Fav</string>
+    <string name="fragment_calendar">Fragment Diary Calendar</string>
 
 
     <!-- text strings -->
@@ -26,15 +28,11 @@
     <!-- navigation drawer -->
     <string name="navigation_drawer_open">navigation drawer open</string>
     <string name="navigation_drawer_close">navigation drawer close</string>
+    <string name="phoneNumber">+4511223344</string>
+    <string name="emailAddress">support@nøglen.dk</string>
 
 
-
-
-
-
-
-
-
+    <!-- knowledge article -->
     <string name="whatsStress">
         Stress er ikke en sygdom, men en belastningstilstand. Kortvarig stress kan gøre os i stand til at yde en ekstra indsats, fx ved en eksamen eller en jobsamtale.
         Langvarig stress belaster derimod krop og psyke og giver både fysiske og psykiske symptomer. Man føler at man ikke magter opgaverne og er ved at miste kontrollen. Kravene overstiger de ressourcer, man synes, man har.
