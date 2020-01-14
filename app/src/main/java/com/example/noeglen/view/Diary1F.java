@@ -21,6 +21,7 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
 import java.lang.reflect.Type;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -66,7 +67,7 @@ public class Diary1F extends Fragment  implements View.OnClickListener{
         bundle = getArguments();
 
         currentDate = CurrentDate.getInstance();
-        date = currentDate.getDateString();
+        date = new SimpleDateFormat("dd/M/yyyy").format(currentDate.getDate());
         answers = new String[4];
 
         dateText = getView().findViewById(R.id.textView3);
