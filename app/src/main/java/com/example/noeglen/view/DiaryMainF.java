@@ -105,35 +105,35 @@ import com.example.noeglen.logic.CurrentDate;
             public void onStopTrackingTouch(SeekBar seekBar) {
                 String mm = "";
                 if (seekBar.getProgress() > 0 && seekBar.getProgress() <= 20){
-                    mm = getString(R.string.fragment_diary2);
+                    mm = getString(R.string.fragment_diary1);
                     Bundle bundle = new Bundle();
                     bundle.putInt("smiley", smiley);
                     bundle.putStringArray("questions",questions);
                     Diary1F diary1F = new Diary1F();
                     iMain.setFragment(diary1F,mm,true,bundle);
                 }else if ((seekBar.getProgress() > 20 && seekBar.getProgress() <= 40)){
-                    mm = getString(R.string.fragment_diary2);
+                    mm = getString(R.string.fragment_diary1);
                     Bundle bundle = new Bundle();
                     bundle.putInt("smiley", smiley);
                     bundle.putStringArray("questions",questions);
                     Diary1F diary1F = new Diary1F();
                     iMain.setFragment(diary1F,mm,true,bundle);
                 }else if (seekBar.getProgress() > 40 && seekBar.getProgress() <= 60){
-                    mm = getString(R.string.fragment_diary2);
+                    mm = getString(R.string.fragment_diary1);
                     Bundle bundle = new Bundle();
                     bundle.putInt("smiley", smiley);
                     bundle.putStringArray("questions",questions);
                     Diary1F diary1F = new Diary1F();
                     iMain.setFragment(diary1F,mm,true,bundle);
                 }else if (seekBar.getProgress() > 60 && seekBar.getProgress() <= 80){
-                    mm = getString(R.string.fragment_diary2);
+                    mm = getString(R.string.fragment_diary1);
                     Bundle bundle = new Bundle();
                     bundle.putInt("smiley", smiley);
                     bundle.putStringArray("questions",questions);
                     Diary1F diary1F = new Diary1F();
                     iMain.setFragment(diary1F,mm,true,bundle);
                 }else if (seekBar.getProgress() > 80 && seekBar.getProgress() <= 100){
-                    mm = getString(R.string.fragment_diary2);
+                    mm = getString(R.string.fragment_diary1);
                     Bundle bundle = new Bundle();
                     bundle.putInt("smiley", smiley);
                     bundle.putStringArray("questions",questions);
