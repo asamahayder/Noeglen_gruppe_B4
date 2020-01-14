@@ -27,6 +27,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private String fragmentTag, currDateString;
     private FragmentManager fm;
     private CurrentDate currDate;
+    private View currentView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,6 +82,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onClick(View v) {
         Fragment selectedFragment = null;
+        currentView = v;
 
         for (int i = 0; i < 5; i++) {
             Button b = navBarBtnList.get(i);
@@ -151,12 +153,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         transaction.commit();
     }
 
+
     @Override
     public void inflateFragment(String tag) {
-        if (tag.equals(getString(R.string.fragment_dashvidmain))){
-            Fragment selectedFragment = new DashVidMainF();
-            setFragment(selectedFragment,tag,true, null);
-        }
+        checkNavBar(tag);
         if (tag.equals(getString(R.string.fragment_infoarticlesmain))){
             Fragment selectedFragment = new InfoArticlesMainF();
             setFragment(selectedFragment,tag,true, null);
@@ -177,9 +177,31 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             Fragment selectedFragment = new DashVidF();
             setFragment(selectedFragment,tag,true, null);
         }
-
-
     }
+
+    private void checkNavBar(String tag) {
+        View v = currentView;
+        Fragment selectedFragment = null;
+        if (tag.equals(getString(R.string.fragment_dashvidmain))){
+            selectedFragment = new DashVidMainF();
+        }
+        if (tag.equals(getString(R.string.fragment_diarymain))){
+            selectedFragment = new DiaryMainF();
+            v = findViewById(R.id.bNav1);
+        }
+        if (tag.equals(getString(R.string.fragment_exermain))){
+            selectedFragment = new ExerMainF();
+            v = findViewById(R.id.bNav4);
+        }
+        if (currentView != v){
+            onClick(v);
+            setFragment(selectedFragment,tag,false,null);
+        }
+        else if (selectedFragment != null){
+            setFragment(selectedFragment,tag,true,null);
+        }
+    }
+
 
     @Override
     public void onBackPressed() {
