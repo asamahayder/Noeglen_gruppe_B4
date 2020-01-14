@@ -14,13 +14,14 @@ import androidx.fragment.app.Fragment;
 
 import com.example.noeglen.R;
 
+import java.text.DecimalFormat;
 
 
 public class DiaryFCalendar extends Fragment implements View.OnClickListener {
 
     private static final String tag ="DiaryFCalendar";
     private CalendarView calendar;
-    Long date;
+    private Long date;
 
 
 
@@ -42,17 +43,12 @@ public class DiaryFCalendar extends Fragment implements View.OnClickListener {
 
             @Override
             public void onSelectedDayChange(@NonNull CalendarView calendarView, int year, int month, int day) {
-               String date = day + "/" + (month + 1) + "/" +year ;
+                String years = Integer.toString(year);
+                years.substring(0,1);
+                year = Integer.parseInt(years);
+                String date = day + "/" + (month + 1) + "/" + year;
                 Log.d(tag, "onSelectedDayChange: day/month/year:"+ date);
-
-             //   String nyDate = calendar.setDate(date);
-
-                //System.out.println(calendar.getDate());
-
-
-
-
-
+                System.out.println(date);
 
             }
         });
