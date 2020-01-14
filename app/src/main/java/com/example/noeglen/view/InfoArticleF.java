@@ -30,7 +30,7 @@ import java.util.List;
 
 public class InfoArticleF extends Fragment implements View.OnClickListener {
 
-    private TextView textTITLE, textHEADER, textBODY;
+    private TextView textTITLE, textHEADER, textBODY, textTOPBAR;
     private ImageView backButton, favButton;
 
     private ArticleDTO article;
@@ -66,6 +66,7 @@ public class InfoArticleF extends Fragment implements View.OnClickListener {
         textTITLE = view.findViewById(R.id.infoarticle_title);
         textHEADER = view.findViewById(R.id.infoarticle_header);
         textBODY = view.findViewById(R.id.infoarticle_body);
+        textTOPBAR = view.findViewById(R.id.infoarticle_topbartext);
         backButton = getView().findViewById(R.id.infoarticle_backbutton);
         backButton.setOnClickListener(this);
         favButton = getView().findViewById(R.id.infoarticle_favbutton);
@@ -108,9 +109,15 @@ public class InfoArticleF extends Fragment implements View.OnClickListener {
         if (bundle != null){
             if (bundle.containsKey("textChanger")){
                 infoKnowledgeChecker(view);
+                favButton.setVisibility(View.INVISIBLE);
+                favButton.setClickable(false);
+                textTOPBAR.setText("Viden");
             }
             if (bundle.containsKey("currentArticle")){
                 articleMainChecker(view);
+                favButton.setVisibility(View.VISIBLE);
+                favButton.setClickable(true);
+                textTOPBAR.setText("Artikler");
             }
         }
     }

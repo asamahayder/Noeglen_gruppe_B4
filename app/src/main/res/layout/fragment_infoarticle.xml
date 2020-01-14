@@ -34,9 +34,11 @@
             android:focusable="true" />
 
         <TextView
+            android:id="@+id/infoarticle_topbartext"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_weight="1"
+            android:paddingTop="5dp"
             android:gravity="center_horizontal"
             android:text="Artikler"
             android:textColor="#fff"
