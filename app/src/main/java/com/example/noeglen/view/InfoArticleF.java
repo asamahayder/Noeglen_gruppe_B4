@@ -60,26 +60,33 @@ public class InfoArticleF extends Fragment {
         textBODY.setMovementMethod(LinkMovementMethod.getInstance());
         int num = bundle.getInt("textChanger");
         if (num == 1){
-            textTITLE.setText("Hvad er stress?");
-            textBODY.setText(R.string.whatsStress);
+            textTITLE.setText(R.string.whatIsStrsssTitle);
+            textHEADER.setVisibility(View.GONE);
+            textBODY.setText(R.string.whatIsStrsssBody);
         }else if (num == 2){
-            textTITLE.setText("Hvad skyldes stress?");
-            textBODY.setText(R.string.causesStress);
+            textTITLE.setText(R.string.whatCausesStrsssTitle);
+            textHEADER.setVisibility(View.GONE);
+            textBODY.setText(R.string.whatCausesStrsssBody);
         }else if (num == 3){
-            textTITLE.setText("Hvordan viser stress sig?");
-            textBODY.setText(R.string.signStress);
+            textTITLE.setText(R.string.howDoesStressShowTitle);
+            textHEADER.setVisibility(View.GONE);
+            textBODY.setText(R.string.howDoesStressShowBody);
         }else if (num == 4){
-            textTITLE.setText("Gode råd til pårørende");
-            textBODY.setText(R.string.adviceStress);
+            textTITLE.setText(R.string.goodAdviceForTheAffectedPersonsTitle);
+            textHEADER.setVisibility(View.GONE);
+            textBODY.setText(R.string.goodAdviceForTheAffectedPersonsBody);
         }else if (num == 5){
-            textTITLE.setText("Behandling af stress");
-            textBODY.setText(R.string.treatmentStress);
+            textTITLE.setText(R.string.treatmentForStressTitle);
+            textHEADER.setVisibility(View.GONE);
+            textBODY.setText(R.string.treatmentForStressBody);
         }else if (num == 6){
-            textTITLE.setText("Stress og arbejde");
-            textBODY.setText(R.string.workStress);
+            textTITLE.setText(R.string.stressAndWorkTitle);
+            textHEADER.setVisibility(View.GONE);
+            textBODY.setText(R.string.stressAndWorkBody);
         }else if (num == 7){
-            textTITLE.setText("Få mere at vide om stress");
-            textBODY.setText(R.string.infoStress);
+            textTITLE.setText(R.string.getMoreInfoAboutStressTitle);
+            textHEADER.setVisibility(View.GONE);
+            textBODY.setText(R.string.getMoreInfoAboutStressBody);
         }
     }
 
