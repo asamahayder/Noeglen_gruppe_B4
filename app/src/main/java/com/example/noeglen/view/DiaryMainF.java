@@ -52,17 +52,17 @@ import com.example.noeglen.logic.CurrentDate;
             public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
 
                 if (seekBar.getProgress() > 0 && seekBar.getProgress() <= 20) {
-                    imageView.setBackground(getView().getResources().getDrawable(R.drawable.emoji1));
+                    imageView.setBackground(getView().getResources().getDrawable(R.drawable.emoji5));
                     smiley = 0;
-                    questions[0] = "Hvad gik godt i dag? ";
+                    questions[0] = "Hvad gik dårligt i dag? ";
                     questions[1] = "Hvad gik mindre godt ?";
                     questions[2] = "Hvordan vil du indgår de dårlige ting fremover?";
                     questions[3] = "Andet du vil tilføje?";
 
                 }else if (seekBar.getProgress() > 20 && seekBar.getProgress() <= 40){
-                    imageView.setBackground(getView().getResources().getDrawable(R.drawable.emoji2));
+                    imageView.setBackground(getView().getResources().getDrawable(R.drawable.emoji4));
                     smiley = 1;
-                    questions[0] = "Hvad gik godt i dag? ";
+                    questions[0] = "Hvad gik dårligt i dag? ";
                     questions[1] = "Hvad gik mindre godt ?";
                     questions[2] = "Hvordan vil du indgår de dårlige ting fremover?";
                     questions[3] = "Andet du vil tilføje?";
@@ -70,21 +70,21 @@ import com.example.noeglen.logic.CurrentDate;
                 }else if (seekBar.getProgress() > 40 && seekBar.getProgress() <= 60){
                     imageView.setBackground(getView().getResources().getDrawable(R.drawable.emoji3));
                     smiley = 2;
-                    questions[0] = "Hvad gik dårligt i dag? ";
+                    questions[0] = "Hvorfor er du ligeglad? ";
                     questions[1] = "Hvad gik mindre godt ?";
                     questions[2] = "Hvordan vil du indgår de dårlige ting fremover?";
                     questions[3] = "Andet du vil tilføje?";
                 }else if (seekBar.getProgress() > 60 && seekBar.getProgress() <= 80){
-                    imageView.setBackground(getView().getResources().getDrawable(R.drawable.emoji4));
+                    imageView.setBackground(getView().getResources().getDrawable(R.drawable.emoji2));
                     smiley = 3;
-                    questions[0] = "Hvad gik dårligt i dag? ";
+                    questions[0] = "Hvad gik godt i dag? ";
                     questions[1] = "Hvad gik mindre godt ?";
                     questions[2] = "Hvordan vil du indgår de dårlige ting fremover?";
                     questions[3] = "Andet du vil tilføje?";
                 }else if (seekBar.getProgress() > 80 && seekBar.getProgress() <= 100){
-                    imageView.setBackground(getView().getResources().getDrawable(R.drawable.emoji5));
+                    imageView.setBackground(getView().getResources().getDrawable(R.drawable.emoji1));
                     smiley = 4;
-                    questions[0] = "Hvad gik dårligt i dag? ";
+                    questions[0] = "Hvad gik godt i dag? ";
                     questions[1] = "Hvad gik mindre godt ?";
                     questions[2] = "Hvordan vil du indgår de dårlige ting fremover?";
                     questions[3] = "Andet du vil tilføje?";

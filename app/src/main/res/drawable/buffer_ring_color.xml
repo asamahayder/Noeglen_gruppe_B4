@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<!--inspired by the following: https://stackoverflow.com/questions/5337613/how-to-change-color-in-circular-progress-bar-->
+<!--inspired by the following: https://stackoverflow.com/answers/5337613/how-to-change-color-in-circular-progress-bar-->
 
 <rotate xmlns:android="http://schemas.android.com/apk/res/android"
     android:pivotX="50%"

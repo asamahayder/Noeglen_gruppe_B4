@@ -24,12 +24,18 @@ public class DashVidMainRecyclerAdapter extends RecyclerView.Adapter<DashVidMain
 
    public class ViewHolder extends RecyclerView.ViewHolder {
       public TextView name;
+      public TextView weekLabel;
       public ImageView image;
+      public ImageView line1;
+      public ImageView line2;
 
       public ViewHolder(View itemView) {
          super(itemView);
          name = itemView.findViewById(R.id.videoItemName);
          image = itemView.findViewById(R.id.videoItemImage);
+         weekLabel = itemView.findViewById(R.id.weekLabel);
+         line1 = itemView.findViewById(R.id.line1);
+         line2 = itemView.findViewById(R.id.line2);
       }
    }
 
@@ -59,6 +65,27 @@ public class DashVidMainRecyclerAdapter extends RecyclerView.Adapter<DashVidMain
    @Override
    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
       final VideoDTO videoItem = videoList.get(position);
+      ImageView line1 = holder.line1;
+      ImageView line2 = holder.line2;
+
+      //Removing first and last line
+      if (videoItem == videoList.get(0)){
+         System.out.println("#######################BUM");
+         line1.setVisibility(View.INVISIBLE);
+      }else {
+         line1.setVisibility(View.VISIBLE);
+      }
+
+      if (videoItem == videoList.get(videoList.size()-1)){
+         line2.setVisibility(View.INVISIBLE);
+      }else{
+         line2.setVisibility(View.VISIBLE);
+      }
+
+      String wholeWeekName = videoItem.getWeek();
+      String onlyWeekNumber = wholeWeekName.substring(0,5);
+      holder.weekLabel.setText(onlyWeekNumber);
+
 
       TextView name = holder.name;
       imageView = holder.image;
@@ -69,7 +96,6 @@ public class DashVidMainRecyclerAdapter extends RecyclerView.Adapter<DashVidMain
          }
       });
       name.setText(videoItem.getTitle());
-      //new AsyncTaskGetImage(this).execute(videoItem.getImageUrl());
       Glide
               .with(context)
               .load(videoItem.getImageUrl())

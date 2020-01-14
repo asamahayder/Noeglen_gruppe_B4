@@ -43,7 +43,7 @@
                 android:background="@drawable/information_round"
                 android:drawableEnd="@drawable/arrow_right"
                 android:paddingStart="10dp"
-                android:text="• Hvad er stress?"
+                android:text="@string/whatIsStrsssButton"
                 android:textAlignment="textStart"
                 android:textColor="#ffffff" />
 
@@ -55,7 +55,7 @@
                 android:background="@drawable/information_round"
                 android:drawableEnd="@drawable/arrow_right"
                 android:paddingStart="10dp"
-                android:text="• Hvad skyldes stress?"
+                android:text="@string/whatCausesStrsssButton"
                 android:textAlignment="textStart"
                 android:textColor="#ffffff" />
 
@@ -67,19 +67,7 @@
                 android:background="@drawable/information_round"
                 android:drawableEnd="@drawable/arrow_right"
                 android:paddingStart="10dp"
-                android:text="• Hvordan viser stress sig?"
-                android:textAlignment="textStart"
-                android:textColor="#ffffff" />
-
-            <Button
-                android:id="@+id/adviceStress"
-                android:layout_width="match_parent"
-                android:layout_height="80dp"
-                android:layout_marginTop="20dp"
-                android:background="@drawable/information_round"
-                android:drawableEnd="@drawable/arrow_right"
-                android:paddingStart="10dp"
-                android:text="• Gode råd til pårørende"
+                android:text="@string/howDoesStressShowButton"
                 android:textAlignment="textStart"
                 android:textColor="#ffffff" />
 
@@ -91,7 +79,7 @@
                 android:background="@drawable/information_round"
                 android:drawableEnd="@drawable/arrow_right"
                 android:paddingStart="10dp"
-                android:text="• Behandling af stress"
+                android:text="@string/treatmentForStressButton"
                 android:textAlignment="textStart"
                 android:textColor="#ffffff" />
 
@@ -103,7 +91,19 @@
                 android:background="@drawable/information_round"
                 android:drawableEnd="@drawable/arrow_right"
                 android:paddingStart="10dp"
-                android:text="• Stress og arbejde"
+                android:text="@string/stressAndWorkButton"
+                android:textAlignment="textStart"
+                android:textColor="#ffffff" />
+
+            <Button
+                android:id="@+id/adviceStress"
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/information_round"
+                android:drawableEnd="@drawable/arrow_right"
+                android:paddingStart="10dp"
+                android:text="@string/goodAdviceForTheAffectedPersonsButton"
                 android:textAlignment="textStart"
                 android:textColor="#ffffff" />
 
@@ -115,7 +115,7 @@
                 android:background="@drawable/information_round"
                 android:drawableEnd="@drawable/arrow_right"
                 android:paddingStart="10dp"
-                android:text="• Få mere at vide om stress"
+                android:text="@string/getMoreInfoAboutStressButton"
                 android:textAlignment="textStart"
                 android:textColor="#ffffff" />
         </LinearLayout>
