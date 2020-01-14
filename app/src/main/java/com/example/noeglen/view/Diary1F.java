@@ -27,14 +27,14 @@ public class Diary1F extends Fragment  implements View.OnClickListener{
     DiaryDTO diaryDTO;
     private Bundle bundle;
     private String[] answers,questions;
-    private EditText answer1, answer2, answer3;
-    private TextView question1,question2,question3;
+    private EditText answer1, answer2, answer3,answer4;
+    private TextView question1,question2,question3, question4;
 
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_diary1, container, false);
+        return inflater.inflate(R.layout.fragment_diary2, container, false);
 
 
     }
@@ -45,6 +45,7 @@ public class Diary1F extends Fragment  implements View.OnClickListener{
         currentDate = CurrentDate.getInstance();
         text = getView().findViewById(R.id.textView3);
         text.setText(currentDate.getDateString());
+       // text.setOnClickListener(this);
 
         a = getView().findViewById(R.id.gem);
         a.setOnClickListener(this);
@@ -53,15 +54,19 @@ public class Diary1F extends Fragment  implements View.OnClickListener{
         questions = bundle.getStringArray("questions");
 
         answer1 = getView().findViewById(R.id.editText);
-        answer2 = getView().findViewById(R.id.editText1);
-        answer3 = getView().findViewById(R.id.editText2);
+        answer2 = getView().findViewById(R.id.editText3);
+        answer3 = getView().findViewById(R.id.editText4);
+        answer4 = getView().findViewById(R.id.editText1);
 
         question1 = getView().findViewById(R.id.textView8);
         question2 = getView().findViewById(R.id.textView9);
         question3 = getView().findViewById(R.id.textView10);
+        question4 = getView().findViewById(R.id.textView11);
+
         question1.setText(questions[0]);
         question2.setText(questions[1]);
         question3.setText(questions[2]);
+        question4.setText(questions[3]);
 
 
 
@@ -74,15 +79,16 @@ public class Diary1F extends Fragment  implements View.OnClickListener{
         answers[0] = answer1.getText().toString();
         answers[1] = answer2.getText().toString();
         answers[2] = answer3.getText().toString();
+        answers[3] = answer4.getText().toString();
 
 
 
         diaryDTO  = new DiaryDTO(bundle.getInt("smiley"), answers,currentDate);
-        System.out.println(diaryDTO.getQuestions()[0]);
+        /*System.out.println(diaryDTO.getQuestions()[0]);
         System.out.println(diaryDTO.getQuestions()[1]);
         System.out.println(diaryDTO.getQuestions()[2]);
         System.out.println(diaryDTO.getDate());
-        System.out.println(diaryDTO.getSmiley());
+        System.out.println(diaryDTO.getSmiley());*/
 
 
         String tag ="";

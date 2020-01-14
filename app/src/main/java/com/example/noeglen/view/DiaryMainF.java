@@ -57,23 +57,40 @@ import com.example.noeglen.logic.CurrentDate;
                     questions[0] = "Hvad gik godt i dag? ";
                     questions[1] = "Hvad gik mindre godt ?";
                     questions[2] = "Hvordan vil du indgår de dårlige ting fremover?";
-
+                    questions[3] = "Andet du vil tilføje?";
 
                 }else if (seekBar.getProgress() > 20 && seekBar.getProgress() <= 40){
                     imageView.setBackground(getView().getResources().getDrawable(R.drawable.emoji2));
                     smiley = 1;
+                    questions[0] = "Hvad gik godt i dag? ";
+                    questions[1] = "Hvad gik mindre godt ?";
+                    questions[2] = "Hvordan vil du indgår de dårlige ting fremover?";
+                    questions[3] = "Andet du vil tilføje?";
+
                 }else if (seekBar.getProgress() > 40 && seekBar.getProgress() <= 60){
                     imageView.setBackground(getView().getResources().getDrawable(R.drawable.emoji3));
                     smiley = 2;
+                    questions[0] = "Hvad gik dårligt i dag? ";
+                    questions[1] = "Hvad gik mindre godt ?";
+                    questions[2] = "Hvordan vil du indgår de dårlige ting fremover?";
+                    questions[3] = "Andet du vil tilføje?";
                 }else if (seekBar.getProgress() > 60 && seekBar.getProgress() <= 80){
                     imageView.setBackground(getView().getResources().getDrawable(R.drawable.emoji4));
                     smiley = 3;
+                    questions[0] = "Hvad gik dårligt i dag? ";
+                    questions[1] = "Hvad gik mindre godt ?";
+                    questions[2] = "Hvordan vil du indgår de dårlige ting fremover?";
+                    questions[3] = "Andet du vil tilføje?";
                 }else if (seekBar.getProgress() > 80 && seekBar.getProgress() <= 100){
                     imageView.setBackground(getView().getResources().getDrawable(R.drawable.emoji5));
                     smiley = 4;
+                    questions[0] = "Hvad gik dårligt i dag? ";
+                    questions[1] = "Hvad gik mindre godt ?";
+                    questions[2] = "Hvordan vil du indgår de dårlige ting fremover?";
+                    questions[3] = "Andet du vil tilføje?";
                 }
 
-                questions[3] = "Andet du vil tilføje?";
+
 
 
             }
@@ -88,7 +105,35 @@ import com.example.noeglen.logic.CurrentDate;
             public void onStopTrackingTouch(SeekBar seekBar) {
                 String mm = "";
                 if (seekBar.getProgress() > 0 && seekBar.getProgress() <= 20){
-                    mm = getString(R.string.fragment_diary1);
+                    mm = getString(R.string.fragment_diary2);
+                    Bundle bundle = new Bundle();
+                    bundle.putInt("smiley", smiley);
+                    bundle.putStringArray("questions",questions);
+                    Diary1F diary1F = new Diary1F();
+                    iMain.setFragment(diary1F,mm,true,bundle);
+                }else if ((seekBar.getProgress() > 20 && seekBar.getProgress() <= 40)){
+                    mm = getString(R.string.fragment_diary2);
+                    Bundle bundle = new Bundle();
+                    bundle.putInt("smiley", smiley);
+                    bundle.putStringArray("questions",questions);
+                    Diary1F diary1F = new Diary1F();
+                    iMain.setFragment(diary1F,mm,true,bundle);
+                }else if (seekBar.getProgress() > 40 && seekBar.getProgress() <= 60){
+                    mm = getString(R.string.fragment_diary2);
+                    Bundle bundle = new Bundle();
+                    bundle.putInt("smiley", smiley);
+                    bundle.putStringArray("questions",questions);
+                    Diary1F diary1F = new Diary1F();
+                    iMain.setFragment(diary1F,mm,true,bundle);
+                }else if (seekBar.getProgress() > 60 && seekBar.getProgress() <= 80){
+                    mm = getString(R.string.fragment_diary2);
+                    Bundle bundle = new Bundle();
+                    bundle.putInt("smiley", smiley);
+                    bundle.putStringArray("questions",questions);
+                    Diary1F diary1F = new Diary1F();
+                    iMain.setFragment(diary1F,mm,true,bundle);
+                }else if (seekBar.getProgress() > 80 && seekBar.getProgress() <= 100){
+                    mm = getString(R.string.fragment_diary2);
                     Bundle bundle = new Bundle();
                     bundle.putInt("smiley", smiley);
                     bundle.putStringArray("questions",questions);

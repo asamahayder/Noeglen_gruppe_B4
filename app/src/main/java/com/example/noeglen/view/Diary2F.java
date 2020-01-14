@@ -1,4 +1,4 @@
-package com.example.noeglen;
+package com.example.noeglen.view;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -8,6 +8,8 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+
+import com.example.noeglen.R;
 
 public class Diary2F extends Fragment {
     @Nullable
