@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -44,6 +45,8 @@ public class Diary1F extends Fragment  implements View.OnClickListener{
     private String date;
 
     private List<DiaryDTO> listOfEntries;
+    private ImageView imageView;
+    private String image;
 
 
     @Nullable
@@ -73,6 +76,19 @@ public class Diary1F extends Fragment  implements View.OnClickListener{
 
         saveButton = getView().findViewById(R.id.gem);
         saveButton.setOnClickListener(this);
+
+        image = "emoji" + bundle.getInt("smiley");
+        int rec = getResources().getIdentifier(image,"drawable", this.getContext().getPackageName());
+        imageView = getView().findViewById(R.id.imageView6);
+
+
+
+        System.out.println(bundle.getInt("smiley"));
+        System.out.println(rec);
+        System.out.println(image);
+
+       // imageView.setBackground(getContext().getDrawable(rec));
+        imageView.setImageDrawable(getContext().getDrawable(rec));
 
         questions = bundle.getStringArray("questions");
 
