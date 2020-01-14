@@ -1,15 +1,14 @@
 package com.example.noeglen.data;
 
-import com.example.noeglen.logic.CurrentDate;
-
 public class DiaryDTO {
-    private int smiley;
-    private String [] questions;
-    CurrentDate date;
 
-    public DiaryDTO(int smilie, String[] questions, CurrentDate date) {
-        this.smiley = smilie;
-        this.questions = questions;
+    private int smiley;
+    private String [] answers;
+    private String date;
+
+    public DiaryDTO(int smiley, String[] answers, String date) {
+        this.smiley = smiley;
+        this.answers = answers;
         this.date = date;
     }
 
@@ -21,19 +20,19 @@ public class DiaryDTO {
         this.smiley = smiley;
     }
 
-    public String[] getQuestions() {
-        return questions;
+    public String[] getAnswers() {
+        return answers;
     }
 
-    public void setQuestions(String[] questions) {
-        this.questions = questions;
+    public void setAnswers(String[] answers) {
+        this.answers = answers;
     }
 
-    public CurrentDate getDate() {
+    public String getDate() {
         return date;
     }
 
-    public void setDate(CurrentDate date) {
+    public void setDate(String date) {
         this.date = date;
     }
 }
