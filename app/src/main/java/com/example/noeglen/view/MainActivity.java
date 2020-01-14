@@ -177,6 +177,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             Fragment selectedFragment = new DashVidF();
             setFragment(selectedFragment,tag,true, null);
         }
+        if (tag.equals(getString(R.string.fragment_diarymain))){
+            Fragment selectedFragment = new DiaryMainF();
+            setFragment(selectedFragment,tag,true, null);
+        }
+        if (tag.equals(getString(R.string.fragment_exermain))){
+            Fragment selectedFragment = new ExerMainF();
+            setFragment(selectedFragment,tag,true, null);
+        }
 
 
     }
