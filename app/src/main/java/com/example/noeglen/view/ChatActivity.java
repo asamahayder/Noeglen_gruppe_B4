@@ -25,7 +25,7 @@ public class ChatActivity extends AppCompatActivity implements RoomListener {
     private String channelID = "X8A1IE8B4upTRo8o";
     private String roomName = "observable-room";
     private Scaledrone scaledrone;
-    private MessageAdapter messageAdapter;
+    //private MessageAdapter messageAdapter;
 
 
     @Override
