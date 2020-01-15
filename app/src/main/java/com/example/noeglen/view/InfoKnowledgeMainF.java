@@ -29,7 +29,6 @@ public class InfoKnowledgeMainF extends Fragment implements InfoKnowledgeMainAda
     private IMainActivity iMain;
     private static IKnowledgeDAO iArticle;
     private static List<KnowledgeDTO> listOfKnowledgeArticles;
-    private static boolean fetchingArticles;
     private RecyclerView rView;
     private InfoKnowledgeMainAdapter adapter;
 
@@ -39,7 +38,6 @@ public class InfoKnowledgeMainF extends Fragment implements InfoKnowledgeMainAda
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         iMain = (IMainActivity) getActivity();
-        fetchingArticles = false;
         iArticle = new KnowledgeDAO();
         new LoadArticles().execute();
         return inflater.inflate(R.layout.fragment_infoknowledgemain, container, false);
@@ -69,10 +67,9 @@ public class InfoKnowledgeMainF extends Fragment implements InfoKnowledgeMainAda
 
         @Override
         protected Void doInBackground(Void... voids) {
-            if (!fetchingArticles){
-                listOfKnowledgeArticles = iArticle.getListOfArticles("Articles");
-                fetchingArticles = true;
-            }
+
+            listOfKnowledgeArticles = iArticle.getListOfArticles("Articles");
+
             while (listOfKnowledgeArticles == null || listOfKnowledgeArticles.size() < 1){
                 Log.d(TAG, "doInBackground: article size = " + listOfKnowledgeArticles.size());
             }
