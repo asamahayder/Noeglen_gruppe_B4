@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -33,6 +34,8 @@ public class DashVidMainF extends Fragment implements View.OnClickListener {
     private IMainActivity mainActivity;
     private RecyclerView recyclerView;
     private ArrayList<VideoDTO> videoList;
+    private ImageView returnButton;
+    private ProgressBar videoListBufferSign;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -53,17 +56,24 @@ public class DashVidMainF extends Fragment implements View.OnClickListener {
 
     private void initializeView() {
         recyclerView = getView().findViewById(R.id.videoRecyclerView);
+        returnButton = getView().findViewById(R.id.returnToDashButton);
+        videoListBufferSign = getView().findViewById(R.id.videoListBufferSign);
         getAllVideosFromDataBase();
+        returnButton.setOnClickListener(this);
     }
 
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        mainActivity = (MainActivity)getActivity();
+        mainActivity = (IMainActivity) getActivity();
     }
 
     @Override
     public void onClick(View view) {
+        if (view == returnButton){
+            System.out.println("##################333333 hey");
+            mainActivity.inflateFragment(getString(R.string.fragment_dashmain), false);
+        }
     }
 
 
@@ -95,6 +105,7 @@ public class DashVidMainF extends Fragment implements View.OnClickListener {
     public void displayVideos(DashVidMainRecyclerAdapter adapter){
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this.getContext()));
+        videoListBufferSign.setVisibility(View.INVISIBLE);
     }
 
     public void showErrorMessage(){
