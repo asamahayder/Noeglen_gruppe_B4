@@ -20,18 +20,6 @@
         app:layout_constraintTop_toTopOf="@+id/EmailTV"
         app:layout_constraintVertical_bias="0.576" />
 
-    <TextView
-        android:id="@+id/EmailTV"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="E-mail"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.104"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.464" />
-
     <EditText
         android:id="@+id/PassInsert"
         android:layout_width="wrap_content"
@@ -47,17 +35,40 @@
         app:layout_constraintVertical_bias="0.615" />
 
     <TextView
+        android:id="@+id/EmailTV"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="E-mail"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.161"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.464" />
+
+    <TextView
         android:id="@+id/LostPassBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="28dp"
         android:clickable="true"
+        android:focusable="auto"
         android:text="Glemt kode"
         app:layout_constraintEnd_toEndOf="@+id/PassInsert"
         app:layout_constraintTop_toBottomOf="@+id/PassInsert" />
 
     <TextView
-        android:id="@+id/RegisterBtn"
+        android:id="@+id/LoginBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="28dp"
+        android:clickable="true"
+        android:text="Log på"
+        app:layout_constraintStart_toStartOf="@+id/PassInsert"
+        app:layout_constraintTop_toBottomOf="@+id/PassInsert" />
+
+    <TextView
+        android:id="@+id/RegBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="28dp"
@@ -71,9 +82,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="72dp"
-        android:text="Password"
+        android:text="Kodeord"
         app:layout_constraintEnd_toEndOf="@+id/EmailTV"
-        app:layout_constraintHorizontal_bias="0.958"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="@+id/EmailTV"
         app:layout_constraintTop_toBottomOf="@+id/EmailTV" />
 
@@ -89,4 +100,18 @@
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/PassInsert" />
+
+    <TextView
+        android:id="@+id/RegisterTV"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="76dp"
+        android:clickable="true"
+        android:text="Registrer"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/PassInsert" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
