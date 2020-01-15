@@ -24,7 +24,7 @@ import com.example.noeglen.logic.CurrentDate;
    private SeekBar seekBar;
    private ImageView imageView;
    private IMainActivity iMain;
-   private int smiley;
+   private int  smiley;
    private String [] questions;
 
 
@@ -53,7 +53,7 @@ import com.example.noeglen.logic.CurrentDate;
 
                 if (seekBar.getProgress() > 0 && seekBar.getProgress() <= 20) {
                     imageView.setBackground(getView().getResources().getDrawable(R.drawable.emoji5));
-                    smiley = 0;
+                    smiley = 5;
                     questions[0] = "Hvad gik dårligt i dag? ";
                     questions[1] = "Hvad gik mindre godt ?";
                     questions[2] = "Hvordan vil du indgår de dårlige ting fremover?";
@@ -61,7 +61,7 @@ import com.example.noeglen.logic.CurrentDate;
 
                 }else if (seekBar.getProgress() > 20 && seekBar.getProgress() <= 40){
                     imageView.setBackground(getView().getResources().getDrawable(R.drawable.emoji4));
-                    smiley = 1;
+                    smiley = 4;
                     questions[0] = "Hvad gik dårligt i dag? ";
                     questions[1] = "Hvad gik mindre godt ?";
                     questions[2] = "Hvordan vil du indgår de dårlige ting fremover?";
@@ -69,28 +69,26 @@ import com.example.noeglen.logic.CurrentDate;
 
                 }else if (seekBar.getProgress() > 40 && seekBar.getProgress() <= 60){
                     imageView.setBackground(getView().getResources().getDrawable(R.drawable.emoji3));
-                    smiley = 2;
+                    smiley = 3;
                     questions[0] = "Hvorfor er du ligeglad? ";
                     questions[1] = "Hvad gik mindre godt ?";
                     questions[2] = "Hvordan vil du indgår de dårlige ting fremover?";
                     questions[3] = "Andet du vil tilføje?";
                 }else if (seekBar.getProgress() > 60 && seekBar.getProgress() <= 80){
                     imageView.setBackground(getView().getResources().getDrawable(R.drawable.emoji2));
-                    smiley = 3;
+                    smiley = 2;
                     questions[0] = "Hvad gik godt i dag? ";
                     questions[1] = "Hvad gik mindre godt ?";
                     questions[2] = "Hvordan vil du indgår de dårlige ting fremover?";
                     questions[3] = "Andet du vil tilføje?";
                 }else if (seekBar.getProgress() > 80 && seekBar.getProgress() <= 100){
                     imageView.setBackground(getView().getResources().getDrawable(R.drawable.emoji1));
-                    smiley = 4;
+                    smiley = 1;
                     questions[0] = "Hvad gik godt i dag? ";
                     questions[1] = "Hvad gik mindre godt ?";
                     questions[2] = "Hvordan vil du indgår de dårlige ting fremover?";
                     questions[3] = "Andet du vil tilføje?";
                 }
-
-
 
 
             }
@@ -104,7 +102,7 @@ import com.example.noeglen.logic.CurrentDate;
             @Override
             public void onStopTrackingTouch(SeekBar seekBar) {
                 String mm = "";
-                if (seekBar.getProgress() > 0 && seekBar.getProgress() <= 20){
+                if (seekBar.getProgress() > -20 && seekBar.getProgress() <= 20){
                     mm = getString(R.string.fragment_diary1);
                     Bundle bundle = new Bundle();
                     bundle.putInt("smiley", smiley);
@@ -132,7 +130,7 @@ import com.example.noeglen.logic.CurrentDate;
                     bundle.putStringArray("questions",questions);
                     Diary1F diary1F = new Diary1F();
                     iMain.setFragment(diary1F,mm,true,bundle);
-                }else if (seekBar.getProgress() > 80 && seekBar.getProgress() <= 100){
+                }else if (seekBar.getProgress() > 80 && seekBar.getProgress() <= 120){
                     mm = getString(R.string.fragment_diary1);
                     Bundle bundle = new Bundle();
                     bundle.putInt("smiley", smiley);

@@ -24,6 +24,7 @@
     <string name="nyttig_viden">Nyttig Viden</string>
     <string name="Øvelser">Øvelser</string>
     <string name="markAsSeenButton">Marker som set</string>
+    <string name="markAsUnseenButton">Marker som Uset</string>
 
     <!-- navigation drawer -->
     <string name="navigation_drawer_open">navigation drawer open</string>
@@ -48,6 +49,10 @@
     <string name="stressAndWorkTitle">Stress og arbejde</string>
     <string name="goodAdviceForTheAffectedPersonsTitle">Gode råd til stressramtes pårørend</string>
     <string name="getMoreInfoAboutStressTitle">Få mere at vide om stress</string>
+
+    <!-- sharedPreferencesKeys-->
+    <string name="sharedPreferencesKey">sharedPreferencesKey</string>
+    <string name="seenVideosListKey">seenVideosListKey</string>
 
     <!-- knowledge article textbody -->
     <string name="whatIsStrsssBody">

@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -21,6 +22,7 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
 import java.lang.reflect.Type;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -44,6 +46,8 @@ public class Diary1F extends Fragment  implements View.OnClickListener{
     private String date;
 
     private List<DiaryDTO> listOfEntries;
+    private ImageView imageView;
+    private String image;
 
 
     @Nullable
@@ -66,13 +70,26 @@ public class Diary1F extends Fragment  implements View.OnClickListener{
         bundle = getArguments();
 
         currentDate = CurrentDate.getInstance();
-        date = currentDate.getDateString();
+        date = new SimpleDateFormat("dd/M/yyyy").format(currentDate.getDate());
         answers = new String[4];
 
         dateText = getView().findViewById(R.id.textView3);
 
         saveButton = getView().findViewById(R.id.gem);
         saveButton.setOnClickListener(this);
+
+        image = "emoji" + bundle.getInt("smiley");
+        int rec = getResources().getIdentifier(image,"drawable", this.getContext().getPackageName());
+        imageView = getView().findViewById(R.id.imageView6);
+
+
+
+        System.out.println(bundle.getInt("smiley"));
+        System.out.println(rec);
+        System.out.println(image);
+
+       // imageView.setBackground(getContext().getDrawable(rec));
+        imageView.setImageDrawable(getContext().getDrawable(rec));
 
         questions = bundle.getStringArray("questions");
 
