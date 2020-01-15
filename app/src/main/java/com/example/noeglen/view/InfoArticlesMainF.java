@@ -21,6 +21,7 @@ import com.example.noeglen.data.ArticleDTO;
 import com.example.noeglen.data.IArticleDAO;
 import com.google.gson.Gson;
 
+import java.util.Collections;
 import java.util.List;
 
 public class InfoArticlesMainF extends Fragment implements InfoArticlesMainAdapter.OnArticleListener {
@@ -28,6 +29,9 @@ public class InfoArticlesMainF extends Fragment implements InfoArticlesMainAdapt
     private IMainActivity iMain;
     private static IArticleDAO iArticle;
     private static List<ArticleDTO> articles;
+    private static boolean fetchingArticles;
+    private InfoArticlesMainAdapter adapter;
+    private ImageView backImage;
 
     private static final String TAG = "INFO_MAIN_ARTICLES";
 
@@ -44,8 +48,16 @@ public class InfoArticlesMainF extends Fragment implements InfoArticlesMainAdapt
     }
 
     private void initializeView() {
-        iArticle = new ArticleDAO();
-        new LoadArticles().execute();
+        backImage = getView().findViewById(R.id.infoarticle_backbutton);
+        backImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                iMain.inflateFragment(getString(R.string.fragment_infomain),false);
+            }
+        });
+        if (adapter != null){
+            setRecyclerview();
+        }
     }
 
 
@@ -53,6 +65,9 @@ public class InfoArticlesMainF extends Fragment implements InfoArticlesMainAdapt
     public void onAttach(Context context) {
         super.onAttach(context);
         iMain = (IMainActivity) getActivity();
+        fetchingArticles = false;
+        iArticle = new ArticleDAO();
+        new LoadArticles().execute();
     }
 
     @Override
@@ -69,7 +84,10 @@ public class InfoArticlesMainF extends Fragment implements InfoArticlesMainAdapt
 
         @Override
         protected Void doInBackground(Void... voids) {
-            articles = iArticle.getListOfArticles("Articles");
+            if (!fetchingArticles){
+                articles = iArticle.getListOfArticles("Articles");
+                fetchingArticles = true;
+            }
             while (articles == null || articles.size() < 1){
                 Log.d(TAG, "doInBackground: article size = " + articles.size());
             }
@@ -78,13 +96,14 @@ public class InfoArticlesMainF extends Fragment implements InfoArticlesMainAdapt
 
         @Override
         protected void onPostExecute(Void aVoid) {
+            Collections.shuffle(articles);
             setRecyclerview();
         }
     }
 
     private void setRecyclerview() {
         RecyclerView rView = getView().findViewById(R.id.infoarticlesmain_recyclerview);
-        InfoArticlesMainAdapter adapter = new InfoArticlesMainAdapter(getContext(), articles, this);
+        adapter = new InfoArticlesMainAdapter(getContext(), articles, this);
         rView.setLayoutManager(new LinearLayoutManager(getContext()));
         rView.setAdapter(adapter);
     }

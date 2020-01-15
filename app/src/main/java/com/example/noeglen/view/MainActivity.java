@@ -128,12 +128,22 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 }
             }
         }
+        clearBackStack();
+        setFragment(selectedFragment,fragmentTag,false,null);
+    }
 
+    private void clearBackStack() {
         for (int i = 0; i < fm.getBackStackEntryCount(); i++) {
             fm.popBackStack();
         }
+    }
 
-        setFragment(selectedFragment,fragmentTag,false,null);
+    private void clearOneBackStack() {
+        for (int i = 0; i < fm.getBackStackEntryCount(); i++) {
+            if (i + 1 > fm.getBackStackEntryCount()){
+                fm.popBackStack();
+            }
+        }
     }
 
     @Override
@@ -156,32 +166,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public void inflateFragment(String tag) {
-        checkNavBar(tag);
-        if (tag.equals(getString(R.string.fragment_infoarticlesmain))){
-            Fragment selectedFragment = new InfoArticlesMainF();
-            setFragment(selectedFragment,tag,true, null);
-        }
-        if (tag.equals(getString(R.string.fragment_infoknowledge))){
-            Fragment selectedFragment = new InfoKnowledgeF();
-            setFragment(selectedFragment,tag,true, null);
-        }
-        if (tag.equals(getString(R.string.fragment_infoarticle))){
-            Fragment selectedFragment = new InfoArticleF();
-            setFragment(selectedFragment,tag,true, null);
-        }
-        if (tag.equals(getString(R.string.fragment_exerexer))){
-            Fragment selectedFragment = new ExerExerF();
-            setFragment(selectedFragment,tag,true, null);
-        }
-        if (tag.equals(getString(R.string.fragment_dashvid))){
-            Fragment selectedFragment = new DashVidF();
-            setFragment(selectedFragment,tag,true, null);
-        }
+        inflateFragment(tag, true);
     }
 
-    private void checkNavBar(String tag) {
-        View v = currentView;
+    @Override
+    public void inflateFragment(String tag, boolean addToBackStack) {
+
         Fragment selectedFragment = null;
+        View v = currentView;
+
         if (tag.equals(getString(R.string.fragment_dashvidmain))){
             selectedFragment = new DashVidMainF();
         }
@@ -199,6 +192,34 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
         else if (selectedFragment != null){
             setFragment(selectedFragment,tag,true,null);
+        }
+
+        if (tag.equals(getString(R.string.fragment_infoarticlesmain))){
+            selectedFragment = new InfoArticlesMainF();
+            if (!addToBackStack){
+                clearOneBackStack();
+            }
+        }
+        if (tag.equals(getString(R.string.fragment_infoknowledge))){
+            selectedFragment = new InfoKnowledgeF();
+        }
+        if (tag.equals(getString(R.string.fragment_infoarticle))){
+            selectedFragment = new InfoArticleF();
+        }
+        if (tag.equals(getString(R.string.fragment_exerexer))){
+            selectedFragment = new ExerExerF();
+        }
+        if (tag.equals(getString(R.string.fragment_dashvid))){
+            selectedFragment = new DashVidF();
+        }
+        if (tag.equals(getString(R.string.fragment_infomain))){
+            selectedFragment = new InfoMainF();
+            if (!addToBackStack){
+                clearBackStack();
+            }
+        }
+        if (selectedFragment != null){
+            setFragment(selectedFragment,tag,addToBackStack, null);
         }
     }
 
