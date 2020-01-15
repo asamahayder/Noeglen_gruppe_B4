@@ -43,7 +43,6 @@ import com.example.noeglen.logic.CurrentDate;
         seekBar = getView().findViewById(R.id.simpleSeekBar);
 
         imageView = getView().findViewById(R.id.imageView3);
-        imageView.setBackground(getView().getResources().getDrawable(R.drawable.emoji3));
 
         questions = new String[4];
 
