@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.SeekBar;
 import android.widget.TextView;
@@ -16,16 +17,17 @@ import androidx.fragment.app.Fragment;
 import com.example.noeglen.R;
 import com.example.noeglen.logic.CurrentDate;
 
-//public class DiaryMainF extends Fragment implements View.OnClickListener {
-  public class DiaryMainF extends Fragment{
 
-   private TextView date,textView2;
+  public class DiaryMainF extends Fragment implements View.OnClickListener{
+
+   private TextView date;
    private CurrentDate currentDate;
    private SeekBar seekBar;
    private ImageView imageView;
    private IMainActivity iMain;
    private int  smiley;
    private String [] questions;
+   private Button calendar;
 
 
     @Nullable
@@ -39,6 +41,7 @@ import com.example.noeglen.logic.CurrentDate;
 
         date = getView().findViewById(R.id.textView4);
         date.setText(currentDate.getDateString());
+        date.setOnClickListener(this);
 
         seekBar = getView().findViewById(R.id.simpleSeekBar);
 
@@ -152,20 +155,18 @@ import com.example.noeglen.logic.CurrentDate;
         iMain = (IMainActivity) getActivity();
     }
 
-   /* @Override
+    @Override
     public void onClick(View view) {
         String tag ="";
 
-        if (view == con){
-            if (seekBar.getProgress() > 0 && seekBar.getProgress() <= 20){
-                tag = getString(R.string.fragment_diary1);
-                iMain.inflateFragment(tag);
-            }else if (seekBar.getProgress() > 20 && seekBar.getProgress() <= 40){
-                tag= getString(R.string.fragment_diarymain);
-                iMain.inflateFragment(tag);
+
+        if (view == date){
+            DiaryFCalendar diaryFCalendar = new DiaryFCalendar();
+            iMain.inflateFragment(getString(R.string.fragment_calendar));
+
             }
 
         }
 
-    }*/
-}
+    }
+

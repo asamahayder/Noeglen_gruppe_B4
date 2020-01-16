@@ -212,6 +212,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         if (tag.equals(getString(R.string.fragment_dashvid))){
             selectedFragment = new DashVidF();
         }
+        if(tag.equals(getString(R.string.fragment_calendar))){
+            selectedFragment = new DiaryFCalendar();
+        }
         if (tag.equals(getString(R.string.fragment_infomain))){
             selectedFragment = new InfoMainF();
             if (!addToBackStack){
@@ -221,6 +224,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         if (selectedFragment != null){
             setFragment(selectedFragment,tag,addToBackStack, null);
         }
+
     }
 
 

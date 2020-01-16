@@ -3,12 +3,13 @@ package com.example.noeglen.data;
 public class DiaryDTO {
 
     private int smiley;
-    private String [] answers;
+    private String [] answers, questions;
     private String date;
 
-    public DiaryDTO(int smiley, String[] answers, String date) {
+    public DiaryDTO(int smiley, String[] answers, String[] questions, String date) {
         this.smiley = smiley;
         this.answers = answers;
+        this.questions = questions;
         this.date = date;
     }
 
@@ -26,6 +27,14 @@ public class DiaryDTO {
 
     public void setAnswers(String[] answers) {
         this.answers = answers;
+    }
+
+    public String[] getQuestions() {
+        return questions;
+    }
+
+    public void setQuestions(String[] questions) {
+        this.questions = questions;
     }
 
     public String getDate() {
