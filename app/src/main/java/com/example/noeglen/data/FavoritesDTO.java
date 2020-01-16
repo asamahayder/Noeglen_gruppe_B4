@@ -4,24 +4,24 @@ import java.util.List;
 
 public class FavoritesDTO {
 
-    private List<ArticleDTO> listOfArticleDTOS;
+    private List<KnowledgeDTO> listOfKnowledgeDTOS;
     private List<VideoDTO> listOfVideoDTOS;
     private List<ExerciseDTO> listOfExerciseDTOS;
 
-    public FavoritesDTO(List<ArticleDTO> listOfArticleDTOS, List<VideoDTO> listOfVideoDTOS, List<ExerciseDTO> listOfExerciseDTOS) {
-        this.listOfArticleDTOS = listOfArticleDTOS;
+    public FavoritesDTO(List<KnowledgeDTO> listOfKnowledgeDTOS, List<VideoDTO> listOfVideoDTOS, List<ExerciseDTO> listOfExerciseDTOS) {
+        this.listOfKnowledgeDTOS = listOfKnowledgeDTOS;
         this.listOfVideoDTOS = listOfVideoDTOS;
         this.listOfExerciseDTOS = listOfExerciseDTOS;
     }
 
     /** GETTERS AND SETTERS */
 
-    public List<ArticleDTO> getListOfArticleDTOS() {
-        return listOfArticleDTOS;
+    public List<KnowledgeDTO> getListOfKnowledgeDTOS() {
+        return listOfKnowledgeDTOS;
     }
 
-    public void setListOfArticleDTOS(List<ArticleDTO> listOfArticleDTOS) {
-        this.listOfArticleDTOS = listOfArticleDTOS;
+    public void setListOfKnowledgeDTOS(List<KnowledgeDTO> listOfKnowledgeDTOS) {
+        this.listOfKnowledgeDTOS = listOfKnowledgeDTOS;
     }
 
     public List<VideoDTO> getListOfVideoDTOS() {

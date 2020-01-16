@@ -16,10 +16,10 @@ import com.google.firebase.firestore.QuerySnapshot;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ArticleDAO implements IArticleDAO {
+public class KnowledgeDAO implements IKnowledgeDAO {
 
-    private ArticleDTO article;
-    private List<ArticleDTO> listOfArticles;
+    private KnowledgeDTO knowledgeArticle;
+    private List<KnowledgeDTO> listOfKnowledgeArticles;
 
     private FirebaseFirestore db;
     private DocumentReference dRef;
@@ -27,8 +27,8 @@ public class ArticleDAO implements IArticleDAO {
     private static final String TAG = "INFO_MAIN_ARTICLES";
 
     @Override
-    public ArticleDTO getArticle(String collection, String articleTitle) {
-        article = new ArticleDTO();
+    public KnowledgeDTO getArticle(String collection, String articleTitle) {
+        knowledgeArticle = new KnowledgeDTO();
 
         db = FirebaseFirestore.getInstance();
         dRef = db.collection(collection).document(articleTitle);
@@ -36,17 +36,17 @@ public class ArticleDAO implements IArticleDAO {
         dRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
             @Override
             public void onSuccess(DocumentSnapshot documentSnapshot) {
-                article = documentSnapshot.toObject(ArticleDTO.class);
+                knowledgeArticle = documentSnapshot.toObject(KnowledgeDTO.class);
                 Log.d(TAG, "onSuccess: SUCCESSFULLY RETRIEVED FROM FIREBASE");
             }
         });
 
-        return article;
+        return knowledgeArticle;
     }
 
     @Override
-    public List<ArticleDTO> getListOfArticles(final String collection) {
-        listOfArticles = new ArrayList<>();
+    public List<KnowledgeDTO> getListOfArticles(final String collection) {
+        listOfKnowledgeArticles = new ArrayList<>();
 
         db = FirebaseFirestore.getInstance();
         db.collection(collection).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
@@ -55,8 +55,8 @@ public class ArticleDAO implements IArticleDAO {
                 if (task.isSuccessful()){
                     int i = 0;
                     for (QueryDocumentSnapshot snapshot : task.getResult()) {
-                        article = snapshot.toObject(ArticleDTO.class);
-                        listOfArticles.add(article);
+                        knowledgeArticle = snapshot.toObject(KnowledgeDTO.class);
+                        listOfKnowledgeArticles.add(knowledgeArticle);
                     }
                 }
                 else {
@@ -64,6 +64,6 @@ public class ArticleDAO implements IArticleDAO {
                 }
             }
         });
-        return listOfArticles;
+        return listOfKnowledgeArticles;
     }
 }
