@@ -1,33 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
 
-        <item
-            android:id="@+id/chat"
-            android:icon="@drawable/navigation_drawer_chat"
-            android:title="Chat" />
+    <item
+        android:id="@+id/chat"
+        android:icon="@drawable/navigation_drawer_chat"
+        android:title="Chat" />
 
     <item android:title="Bruger indstillinger">
         <menu>
             <item
-                android:id="@+id/changePass"
+                android:id="@+id/changePassAndMail"
                 android:icon="@drawable/navigation_drawer_person"
-                android:title="Skift kodeord" />
-            <item
-                android:id="@+id/changeEmail"
-                android:icon="@drawable/navigation_drawer_person"
-                android:title="Skift email" />
-        </menu>
-    </item>
-    <item android:title="App indstillinger">
-        <menu>
-            <item
-                android:id="@+id/bigSmallText"
-                android:icon="@drawable/navigation_drawer_fields"
-                android:title="Stor Tekst" />
-            <item
-                android:id="@+id/darkMode"
-                android:icon="@drawable/navigation_drawer_darkmode"
-                android:title="Dark Mode" />
+                android:title="Skift kodeord og email" />
         </menu>
     </item>
     <item android:title="Kontakt">
@@ -40,6 +24,14 @@
                 android:id="@+id/emailContact"
                 android:icon="@drawable/navigation_drawer_email"
                 android:title="@string/emailAddress" />
+        </menu>
+    </item>
+    <item android:title="Log ud">
+        <menu>
+            <item
+                android:id="@+id/logOut"
+                android:icon="@drawable/navigation_drawer_log_out"
+                android:title="Log ud" />
         </menu>
     </item>
 
