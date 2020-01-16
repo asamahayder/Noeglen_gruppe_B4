@@ -6,37 +6,35 @@
     android:layout_height="match_parent"
     android:background="#ffffff"
     android:orientation="vertical"
-    android:fitsSystemWindows="true"
-    android:layout_marginTop="30dp"
-    android:layout_marginBottom="30dp">
+    android:fitsSystemWindows="true">
 
     <LinearLayout
-        android:id="@+id/infomain_toplayout"
+        android:id="@+id/infknowledgemain_toplayout"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="wrap_content"
         android:background="@color/primaryNormal"
-        android:layout_marginBottom="10dp"
         android:weightSum="1">
 
         <ImageView
-            android:id="@+id/infoarticle_backbutton"
+            android:id="@+id/infoknowledgemain_backbutton"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:clickable="true"
+            android:clickable="false"
+            android:visibility="invisible"
             android:contentDescription="Back button"
-            android:contextClickable="true"
-            android:soundEffectsEnabled="true"
+            android:contextClickable="false"
+            android:soundEffectsEnabled="false"
             app:srcCompat="@drawable/arrow_left"
             tools:ignore="HardcodedText"
             android:focusable="true" />
 
         <TextView
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="match_parent"
             android:gravity="center_horizontal"
-            android:text="Artikler"
+            android:text="@string/Viden"
             android:paddingRight="45dp"
-            android:paddingTop="5dp"
+            android:paddingTop="2dp"
             android:textColor="#fff"
             android:textSize="30sp"
             android:textStyle="bold"
@@ -44,15 +42,9 @@
     </LinearLayout>
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/infoarticlesmain_recyclerview"
+        android:id="@+id/infoknowledgemain_recyclerview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:scrollbars="vertical"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/infomain_toplayout" />
-
+        android:scrollbars="vertical"/>
 
 </LinearLayout>

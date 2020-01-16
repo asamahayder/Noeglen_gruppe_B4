@@ -224,7 +224,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         if (selectedFragment != null){
             setFragment(selectedFragment,tag,addToBackStack, null);
         }
-
     }
 
 
