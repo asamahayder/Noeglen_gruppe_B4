@@ -18,6 +18,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.cardview.widget.CardView;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
@@ -32,7 +33,7 @@ import java.util.Objects;
 public class DashMainF extends Fragment implements NavigationView.OnNavigationItemSelectedListener, View.OnClickListener {
 
     private IMainActivity iMain;
-    private ImageView iVidDash, iDiaryDash, iExerciseDash;
+    private CardView iVidDash, iDiaryDash, iExerciseDash;
     private TextView tVidDash1, tVidDash2;
     private String fragmentTag;
     private Toolbar toolbar;
