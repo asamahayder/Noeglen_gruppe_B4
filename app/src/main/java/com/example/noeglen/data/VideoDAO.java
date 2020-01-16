@@ -89,7 +89,7 @@ public class VideoDAO implements IVideoDAO{
                             task.getResult()) {
                         VideoDTO videoDTO = snapshot.toObject(VideoDTO.class);
                         videoList.add(videoDTO);
-                        System.out.println("#################3" + videoDTO);
+                        System.out.println("#################favmain3" + videoDTO);
                     }
                     //System.out.println("#########" + videoList);
                     callBack.onCallBack(videoList);

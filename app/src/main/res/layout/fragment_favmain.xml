@@ -1,8 +1,137 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#ffffff">
 
+    <LinearLayout
+        android:id="@+id/infknowledgemain_toplayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/primaryNormal"
+        android:weightSum="1">
+
+        <ImageView
+            android:id="@+id/infoknowledgemain_backbutton"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:clickable="false"
+            android:visibility="invisible"
+            android:contentDescription="Back button"
+            android:contextClickable="false"
+            android:soundEffectsEnabled="false"
+            app:srcCompat="@drawable/arrow_left"
+            tools:ignore="HardcodedText"
+            android:focusable="true" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:gravity="center_horizontal"
+            android:text="@string/Favoritter"
+            android:paddingEnd="45dp"
+            android:paddingTop="2dp"
+            android:textColor="#fff"
+            android:textSize="30sp"
+            android:textStyle="bold"
+            android:layout_weight="1" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:weightSum="100"
+        android:orientation="vertical">
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="33.3333">
+
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/favmain1"
+                android:src="@drawable/gradient3"
+                android:orientation="vertical">
+
+            </ImageView>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="@string/videor"
+                android:textSize="50sp"
+                android:gravity="center"
+                android:textStyle="bold"
+                android:textColor="#fff">
+
+            </TextView>
+
+        </FrameLayout>
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="33.3333">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@drawable/gradient3"
+                android:background="@drawable/favmain2"
+                android:orientation="vertical">
+
+            </ImageView>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="@string/Viden"
+                android:textSize="50sp"
+                android:shadowColor="#7F000000"
+                android:shadowRadius="5"
+                android:shadowDx="5"
+                android:shadowDy="5"
+                android:gravity="center"
+                android:textStyle="bold"
+                android:textColor="#fff">
+
+            </TextView>
+
+        </FrameLayout>
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="33.4">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@drawable/gradient3"
+                android:background="@drawable/favmain3"
+                android:orientation="vertical">
+
+            </ImageView>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="@string/Øvelser"
+                android:textSize="50sp"
+                android:gravity="center"
+                android:textStyle="bold"
+                android:textColor="#fff">
+
+            </TextView>
+
+        </FrameLayout>
+
+    </LinearLayout>
 
 </LinearLayout>

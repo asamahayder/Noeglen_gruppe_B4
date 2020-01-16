@@ -19,7 +19,8 @@
 
     <!-- text strings -->
     <string name="Viden">Viden</string>
-    <string name="nyttig_viden">Nyttig Viden</string>
+    <string name="videor">Videor</string>
+    <string name="Favoritter">Favoritter</string>
     <string name="Øvelser">Øvelser</string>
     <string name="markAsSeenButton">Marker som set</string>
     <string name="markAsUnseenButton">Marker som Uset</string>
