@@ -5,7 +5,7 @@
     android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#ffffff" >
+    android:background="#ffffff">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -20,135 +20,139 @@
             android:theme="@style/ThemeOverlay.AppCompat.Light"
             app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
 
-        <FrameLayout
-            android:id="@+id/fragment_container"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
-
     </LinearLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-            <androidx.cardview.widget.CardView
-                android:id="@+id/iDashVid"
-                android:layout_width="0dp"
-                android:layout_height="250dp"
-                android:layout_marginStart="25dp"
-                android:layout_marginTop="50dp"
-                android:layout_marginEnd="25dp"
+        <androidx.cardview.widget.CardView
+            android:id="@+id/iDashVid"
+            android:layout_width="0dp"
+            android:layout_height="230dp"
+            android:layout_marginStart="25dp"
+            android:layout_marginTop="50dp"
+            android:layout_marginEnd="25dp"
+            app:cardCornerRadius="20dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:contentDescription="Video"
+                android:scaleType="centerCrop"
+                android:src="@drawable/thumbnail"
+                android:tint="@color/transparentPrimary"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
+                app:layout_constraintTop_toTopOf="parent"
+                tools:ignore="HardcodedText" />
 
-
-                    <ImageView
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:scaleType="centerCrop"
-                        android:contentDescription="Video"
-                        android:src="@drawable/idash3"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        tools:ignore="HardcodedText" />
-
-                    <TextView
-                        android:id="@+id/tDashVid1"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_horizontal"
-                        android:layout_marginTop="10dp"
-                        android:text="Se video"
-                        android:textColor="#ffffff"
-                        android:textSize="40sp"
-                        tools:ignore="HardcodedText" />
-
-                    <TextView
-                        android:id="@+id/tDashVid2"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
-                        android:text="Velkommen til nøglen"
-                        android:textColor="#ffffff"
-                        android:textSize="40sp"
-                        tools:ignore="HardcodedText" />
-            </androidx.cardview.widget.CardView>
-
-            <androidx.cardview.widget.CardView
-                android:id="@+id/iDashDiary"
-                android:layout_width="0dp"
-                android:layout_height="150dp"
-                android:layout_marginStart="25dp"
+            <TextView
+                android:id="@+id/tDashVid1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
                 android:layout_marginTop="20dp"
-                android:layout_marginEnd="5dp"
-                app:layout_constraintEnd_toEndOf="@id/iDashExercise"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/iDashExercise"
-                app:layout_constraintTop_toBottomOf="@+id/iDashVid">
+                android:shadowColor="@android:color/black"
+                android:shadowDx="5"
+                android:shadowDy="5"
+                android:shadowRadius="6"
+                android:text="Se video"
+                android:textColor="#ffffff"
+                android:textSize="40sp"
+                tools:ignore="HardcodedText" />
 
-                    <ImageView
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:alpha="0.9"
-                        android:scaleType="centerCrop"
-                        android:src="@drawable/diary_image" />
+            <TextView
+                android:id="@+id/tDashVid2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                android:layout_marginBottom="70dp"
+                android:shadowColor="@android:color/black"
+                android:shadowDx="5"
+                android:shadowDy="5"
+                android:shadowRadius="6"
+                android:text="Velkommen til nøglen"
+                android:textColor="#ffffff"
+                android:textSize="30sp"
+                tools:ignore="HardcodedText" />
+        </androidx.cardview.widget.CardView>
 
+        <androidx.cardview.widget.CardView
+            android:id="@+id/iDashDiary"
+            android:layout_width="0dp"
+            android:layout_height="150dp"
+            android:layout_marginStart="25dp"
+            android:layout_marginTop="40dp"
+            android:layout_marginEnd="5dp"
+            app:cardCornerRadius="20dp"
+            app:layout_constraintEnd_toEndOf="@id/iDashExercise"
+            app:layout_constraintEnd_toStartOf="@+id/iDashExercise"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/iDashVid">
 
-                    <TextView
-                        android:id="@+id/tDashDiary"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:paddingStart="10dp"
-                        android:paddingEnd="10dp"
-                        android:layout_gravity="center_vertical"
-                        android:shadowColor="@android:color/black"
-                        android:shadowDx="5"
-                        android:shadowDy="5"
-                        android:shadowRadius="6"
-                        android:text="Skriv dagbog for i dag"
-                        android:textColor="#ffffff"
-                        android:textSize="20sp"
-                         />
-            </androidx.cardview.widget.CardView>
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="centerCrop"
+                android:src="@drawable/diary_image"
+                android:tint="@color/transparentPrimary" />
 
-            <androidx.cardview.widget.CardView
-                android:id="@+id/iDashExercise"
-                android:layout_width="0dp"
-                android:layout_height="150dp"
-                android:layout_marginTop="20dp"
-                android:layout_marginEnd="25dp"
-                android:layout_marginStart="5dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/iDashDiary"
-                app:layout_constraintTop_toBottomOf="@+id/iDashVid">
+            <TextView
+                android:id="@+id/tDashDiary"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:paddingStart="10dp"
+                android:paddingEnd="10dp"
+                android:shadowColor="@android:color/black"
+                android:shadowDx="5"
+                android:shadowDy="5"
+                android:shadowRadius="6"
+                android:text="Skriv dagbog for i dag"
+                android:textColor="#ffffff"
+                android:textSize="30sp" />
+        </androidx.cardview.widget.CardView>
 
-                    <ImageView
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:alpha="0.9"
-                        android:scaleType="centerCrop"
-                        android:src="@drawable/idash2" />
+        <androidx.cardview.widget.CardView
+            android:id="@+id/iDashExercise"
+            android:layout_width="0dp"
+            android:layout_height="150dp"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="40dp"
+            android:layout_marginEnd="25dp"
+            app:cardCornerRadius="20dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/iDashDiary"
+            app:layout_constraintTop_toBottomOf="@+id/iDashVid">
 
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="centerCrop"
+                android:src="@drawable/exercise_image"
+                android:tint="@color/transparentPrimary" />
 
-                    <TextView
-                        android:id="@+id/tDashExercise"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="1dp"
-                        android:layout_gravity="center_vertical"
-                        android:paddingStart="10dp"
-                        android:paddingEnd="10dp"
-                        android:shadowColor="@android:color/black"
-                        android:shadowDx="5"
-                        android:shadowDy="5"
-                        android:shadowRadius="6"
-                        android:text="Lav en øvelse for i dag"
-                        android:textColor="#ffffff"
-                        android:textSize="20sp" />
-            </androidx.cardview.widget.CardView>
+            <TextView
+                android:id="@+id/tDashExercise"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:paddingStart="10dp"
+                android:paddingEnd="10dp"
+                android:shadowColor="@android:color/black"
+                android:shadowDx="5"
+                android:shadowDy="5"
+                android:shadowRadius="6"
+                android:text="Lav en øvelse for i dag"
+                android:textColor="#ffffff"
+                android:textSize="30sp" />
+        </androidx.cardview.widget.CardView>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <com.google.android.material.navigation.NavigationView

@@ -4,14 +4,18 @@ import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.content.res.Configuration;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -63,8 +67,32 @@ public class DashMainF extends Fragment implements NavigationView.OnNavigationIt
         drawerLayout.addDrawerListener(toggle);
         toggle.syncState();
 
-        NavigationView NV = getView().findViewById(R.id.navigationView);
-        NV.setNavigationItemSelectedListener(this);
+
+        DisplayMetrics metrics = new DisplayMetrics();
+        getActivity().getWindowManager().getDefaultDisplay().getMetrics(metrics);
+        int density = metrics.densityDpi;
+
+        if (density <= 440){
+            iDiaryDash.getLayoutParams().height = 750;
+            iExerciseDash.getLayoutParams().height = 750;
+            tVidDash2.setTextSize(TypedValue.COMPLEX_UNIT_SP,35);
+
+        } else if (density > 440){
+            tVidDash2.setTextSize(TypedValue.COMPLEX_UNIT_SP,30);
+        }
+
+        /*if (density == DisplayMetrics.DENSITY_HIGH) {
+            Toast.makeText(getActivity(), "DENSITY_HIGH... Density is " + String.valueOf(density), Toast.LENGTH_LONG).show();
+        }
+        else if (density == DisplayMetrics.DENSITY_MEDIUM) {
+            Toast.makeText(getActivity(), "DENSITY_MEDIUM... Density is " + String.valueOf(density), Toast.LENGTH_LONG).show();
+        }
+        else if (density == DisplayMetrics.DENSITY_LOW) {
+            Toast.makeText(getActivity(), "DENSITY_LOW... Density is " + String.valueOf(density), Toast.LENGTH_LONG).show();
+        }
+        else {
+            Toast.makeText(getActivity(), "Density is neither HIGH, MEDIUM OR LOW.  Density is " + String.valueOf(density), Toast.LENGTH_LONG).show();
+        }*/
     }
 
     private void initializeView() {

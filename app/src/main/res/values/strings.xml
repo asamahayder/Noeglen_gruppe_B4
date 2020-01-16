@@ -27,8 +27,8 @@
     <!-- navigation drawer -->
     <string name="navigation_drawer_open">navigation drawer open</string>
     <string name="navigation_drawer_close">navigation drawer close</string>
-    <string name="phoneNumber">+4511223344</string>
-    <string name="emailAddress">support@nøglen.dk</string>
+    <string name="phoneNumber">28 10 80 53</string>
+    <string name="emailAddress">kontakt@come-back.dk</string>
 
     <!-- sharedPreferencesKeys-->
     <string name="sharedPreferencesKey">sharedPreferencesKey</string>
