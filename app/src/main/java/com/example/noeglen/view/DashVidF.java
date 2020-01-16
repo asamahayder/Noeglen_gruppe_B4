@@ -55,7 +55,6 @@ public class DashVidF extends Fragment implements View.OnClickListener {
     private IMainActivity iMain;
 
     private HashMap<String, Boolean> seenVideosList;
-    private boolean markedAsSeen;
 
 
     @Nullable

@@ -218,6 +218,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 clearBackStack();
             }
         }
+        if (tag.equals(getString(R.string.fragment_dashmain))){
+            selectedFragment = new DashMainF();
+            if (!addToBackStack){
+                clearBackStack();
+            }
+        }
         if (selectedFragment != null){
             setFragment(selectedFragment,tag,addToBackStack, null);
         }
