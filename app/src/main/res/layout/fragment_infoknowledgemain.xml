@@ -6,15 +6,13 @@
     android:layout_height="match_parent"
     android:background="#ffffff"
     android:orientation="vertical"
-    android:fitsSystemWindows="true"
-    android:layout_marginBottom="90dp">
+    android:fitsSystemWindows="true">
 
     <LinearLayout
         android:id="@+id/infknowledgemain_toplayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/primaryNormal"
-        android:layout_marginBottom="10dp"
         android:weightSum="1">
 
         <ImageView
