@@ -118,8 +118,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         fragmentTag = getString(R.string.fragment_dashmain);
                         break;
                     case 3:
-                        selectedFragment = new FavMainF();
-                        fragmentTag = getString(R.string.fragment_favmain);
+                        selectedFragment = new DashVidMainF();
+                        fragmentTag = getString(R.string.fragment_dashvidmain);
                         break;
                     case 4:
                         selectedFragment = new ExerMainF();
