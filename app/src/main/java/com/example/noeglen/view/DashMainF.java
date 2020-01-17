@@ -115,7 +115,7 @@ public class DashMainF extends Fragment implements NavigationView.OnNavigationIt
                 Intent intent = new Intent(getActivity(), ChatActivity.class);
                 startActivity(intent);
                 break;
-            case R.id.darkMode:
+            case R.id.logOut:
                 FirebaseAuth.getInstance().signOut();
                 Intent login = new Intent(getActivity(), LoginActivity.class);
                 startActivity(login);
