@@ -10,6 +10,14 @@
         <item name="android:windowDrawsSystemBarBackgrounds">true</item>
         <item name="android:statusBarColor">@color/colorPrimaryDark</item>
         <item name="android:windowTranslucentStatus">false</item>
+
+        <item name="drawerArrowStyle">@style/DrawerArrowStyle</item>
+
+    </style>
+
+    <style name="DrawerArrowStyle" parent="@style/Widget.AppCompat.DrawerArrowToggle">
+        <item name="spinBars">true</item>
+        <item name="color">@color/primaryDark</item>
     </style>
 
 </resources>

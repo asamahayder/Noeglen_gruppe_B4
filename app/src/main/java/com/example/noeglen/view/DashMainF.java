@@ -66,33 +66,6 @@ public class DashMainF extends Fragment implements NavigationView.OnNavigationIt
         toggle = new ActionBarDrawerToggle(getActivity(), drawerLayout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawerLayout.addDrawerListener(toggle);
         toggle.syncState();
-
-/*
-        DisplayMetrics metrics = new DisplayMetrics();
-        getActivity().getWindowManager().getDefaultDisplay().getMetrics(metrics);
-        int density = metrics.densityDpi;
-
-        if (density <= 440){
-            iDiaryDash.getLayoutParams().height = 750;
-            iExerciseDash.getLayoutParams().height = 750;
-            tVidDash2.setTextSize(TypedValue.COMPLEX_UNIT_SP,35);
-
-        } else if (density > 440){
-            tVidDash2.setTextSize(TypedValue.COMPLEX_UNIT_SP,30);
-        }
-
-        if (density == DisplayMetrics.DENSITY_HIGH) {
-            Toast.makeText(getActivity(), "DENSITY_HIGH... Density is " + String.valueOf(density), Toast.LENGTH_LONG).show();
-        }
-        else if (density == DisplayMetrics.DENSITY_MEDIUM) {
-            Toast.makeText(getActivity(), "DENSITY_MEDIUM... Density is " + String.valueOf(density), Toast.LENGTH_LONG).show();
-        }
-        else if (density == DisplayMetrics.DENSITY_LOW) {
-            Toast.makeText(getActivity(), "DENSITY_LOW... Density is " + String.valueOf(density), Toast.LENGTH_LONG).show();
-        }
-        else {
-            Toast.makeText(getActivity(), "Density is neither HIGH, MEDIUM OR LOW.  Density is " + String.valueOf(density), Toast.LENGTH_LONG).show();
-        }*/
     }
 
     private void initializeView() {
