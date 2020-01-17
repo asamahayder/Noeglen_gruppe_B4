@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="#ffffff" >
 
-    <androidx.drawerlayout.widget.DrawerLayout
+        <androidx.drawerlayout.widget.DrawerLayout
         android:id="@+id/drawer_layout"
         android:layout_width="0dp"
         android:layout_height="0dp"
@@ -84,7 +84,6 @@
                 android:textColor="#000000"
                 android:textSize="20sp" />
         </androidx.constraintlayout.widget.ConstraintLayout>
-
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/constraintLayout"
@@ -294,18 +293,22 @@
 
         <LinearLayout
             android:id="@+id/favorites_linear_layout"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/favorites_titel">
+            app:layout_constraintTop_toBottomOf="@id/favorites_titel"
+            android:orientation="vertical">
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/favorites_recyclerview"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical" />
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/favorites_titel"/>
         </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
