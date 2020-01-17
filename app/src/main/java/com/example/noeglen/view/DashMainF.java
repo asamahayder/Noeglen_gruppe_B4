@@ -26,6 +26,7 @@ import androidx.fragment.app.Fragment;
 
 import com.example.noeglen.R;
 import com.google.android.material.navigation.NavigationView;
+import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.Objects;
 
@@ -116,6 +117,13 @@ public class DashMainF extends Fragment implements NavigationView.OnNavigationIt
                 Intent intent = new Intent(getActivity(), ChatActivity.class);
                 startActivity(intent);
                 break;
+            case R.id.darkMode:
+                FirebaseAuth.getInstance().signOut();
+                Intent login = new Intent(getActivity(), LoginActivity.class);
+                startActivity(login);
+                getActivity().finish();
+                break;
+
         }
         return true;
     }
