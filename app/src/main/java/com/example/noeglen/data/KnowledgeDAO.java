@@ -29,7 +29,6 @@ public class KnowledgeDAO implements IKnowledgeDAO {
     @Override
     public KnowledgeDTO getArticle(String collection, String articleTitle) {
         knowledgeArticle = new KnowledgeDTO();
-
         db = FirebaseFirestore.getInstance();
         dRef = db.collection(collection).document(articleTitle);
 
@@ -47,7 +46,6 @@ public class KnowledgeDAO implements IKnowledgeDAO {
     @Override
     public List<KnowledgeDTO> getListOfArticles(final String collection) {
         listOfKnowledgeArticles = new ArrayList<>();
-
         db = FirebaseFirestore.getInstance();
         db.collection(collection).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override

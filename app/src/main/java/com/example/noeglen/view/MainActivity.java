@@ -106,8 +106,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                 switch (i){
                     case 0:
-                        selectedFragment = new InfoKnowledgeMainF();
-                        fragmentTag = getString(R.string.fragment_infoknowledgemain);
+                        selectedFragment = new InfoMainF();
+                        fragmentTag = getString(R.string.fragment_infomain);
                         break;
                     case 1:
                         selectedFragment = new DiaryMainF();
@@ -194,8 +194,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             setFragment(selectedFragment,tag,true,null);
         }
 
-        if (tag.equals(getString(R.string.fragment_infoknowledgemain))){
-            selectedFragment = new InfoKnowledgeMainF();
+        if (tag.equals(getString(R.string.fragment_infoarticlesmain))){
+            selectedFragment = new InfoArticlesMainF();
             if (!addToBackStack){
                 clearOneBackStack();
             }
@@ -203,8 +203,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         if (tag.equals(getString(R.string.fragment_infoknowledge))){
             selectedFragment = new InfoKnowledgeF();
         }
-        if (tag.equals(getString(R.string.fragment_infoknowledge))){
-            selectedFragment = new InfoKnowledgeF();
+        if (tag.equals(getString(R.string.fragment_infoarticle))){
+            selectedFragment = new InfoArticleF();
         }
         if (tag.equals(getString(R.string.fragment_exerexer))){
             selectedFragment = new ExerExerF();
@@ -212,8 +212,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         if (tag.equals(getString(R.string.fragment_dashvid))){
             selectedFragment = new DashVidF();
         }
-        if (tag.equals(getString(R.string.fragment_dashmain))){
-            selectedFragment = new DashMainF();
+        if(tag.equals(getString(R.string.fragment_calendar))){
+            selectedFragment = new DiaryFCalendar();
+        }
+        if (tag.equals(getString(R.string.fragment_infomain))){
+            selectedFragment = new InfoMainF();
             if (!addToBackStack){
                 clearBackStack();
             }

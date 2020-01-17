@@ -14,7 +14,6 @@ import androidx.fragment.app.Fragment;
 
 import com.example.noeglen.R;
 
-import java.text.DecimalFormat;
 
 
 public class DiaryFCalendar extends Fragment implements View.OnClickListener {
@@ -59,4 +58,5 @@ public class DiaryFCalendar extends Fragment implements View.OnClickListener {
     public void onClick(View view) {
 
     }
+
 }
