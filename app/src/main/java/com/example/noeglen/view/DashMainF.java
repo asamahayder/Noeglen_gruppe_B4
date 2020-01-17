@@ -38,7 +38,6 @@ public class DashMainF extends Fragment implements NavigationView.OnNavigationIt
 
     private IMainActivity iMain;
     private CardView iVidDash, iDiaryDash, iExerciseDash;
-    private TextView tVidDash1, tVidDash2;
     private String fragmentTag;
     private Toolbar toolbar;
     private DrawerLayout drawerLayout;
@@ -49,7 +48,6 @@ public class DashMainF extends Fragment implements NavigationView.OnNavigationIt
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragment_dashmain, container, false);
-
     }
 
     @Override
@@ -62,12 +60,14 @@ public class DashMainF extends Fragment implements NavigationView.OnNavigationIt
         ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayShowTitleEnabled(false);
 
         drawerLayout = getView().findViewById(R.id.drawer_layout);
+        drawerLayout.setScrimColor(getResources().getColor(android.R.color.transparent));
+
 
         toggle = new ActionBarDrawerToggle(getActivity(), drawerLayout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawerLayout.addDrawerListener(toggle);
         toggle.syncState();
 
-
+/*
         DisplayMetrics metrics = new DisplayMetrics();
         getActivity().getWindowManager().getDefaultDisplay().getMetrics(metrics);
         int density = metrics.densityDpi;
@@ -81,7 +81,7 @@ public class DashMainF extends Fragment implements NavigationView.OnNavigationIt
             tVidDash2.setTextSize(TypedValue.COMPLEX_UNIT_SP,30);
         }
 
-        /*if (density == DisplayMetrics.DENSITY_HIGH) {
+        if (density == DisplayMetrics.DENSITY_HIGH) {
             Toast.makeText(getActivity(), "DENSITY_HIGH... Density is " + String.valueOf(density), Toast.LENGTH_LONG).show();
         }
         else if (density == DisplayMetrics.DENSITY_MEDIUM) {
@@ -102,10 +102,6 @@ public class DashMainF extends Fragment implements NavigationView.OnNavigationIt
         iVidDash.setOnClickListener(this);
         iDiaryDash.setOnClickListener(this);
         iExerciseDash.setOnClickListener(this);
-
-
-        tVidDash1 = getView().findViewById(R.id.tDashVid1);
-        tVidDash2 = getView().findViewById(R.id.tDashVid2);
     }
 
     @Override
