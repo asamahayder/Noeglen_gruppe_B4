@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -19,6 +20,7 @@ import com.example.noeglen.R;
 import com.example.noeglen.data.MyCallBack;
 import com.example.noeglen.data.VideoDAO;
 import com.example.noeglen.data.VideoDTO;
+import com.example.noeglen.data.WeekDTO;
 import com.example.noeglen.logic.VideoListLogic;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -33,6 +35,10 @@ public class DashVidMainF extends Fragment implements View.OnClickListener {
     private IMainActivity mainActivity;
     private RecyclerView recyclerView;
     private ArrayList<VideoDTO> videoList;
+    private ArrayList<Integer> weekPositionList;
+    private ArrayList<Object> itemList;
+    private ImageView returnButton;
+    private ProgressBar videoListBufferSign;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -53,17 +59,24 @@ public class DashVidMainF extends Fragment implements View.OnClickListener {
 
     private void initializeView() {
         recyclerView = getView().findViewById(R.id.videoRecyclerView);
+        returnButton = getView().findViewById(R.id.returnToDashButton);
+        videoListBufferSign = getView().findViewById(R.id.videoListBufferSign);
         getAllVideosFromDataBase();
+        returnButton.setOnClickListener(this);
     }
 
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        mainActivity = (MainActivity)getActivity();
+        mainActivity = (IMainActivity) getActivity();
     }
 
     @Override
     public void onClick(View view) {
+        if (view == returnButton){
+            System.out.println("##################333333 hey");
+            mainActivity.inflateFragment(getString(R.string.fragment_dashmain), false);
+        }
     }
 
 
@@ -77,7 +90,9 @@ public class DashVidMainF extends Fragment implements View.OnClickListener {
             @Override
             public void onCallBack(Object object) {
                 setVideoList((ArrayList<VideoDTO>) object);
-                DashVidMainRecyclerAdapter adapter = new DashVidMainRecyclerAdapter(videoList, getContext(), getSeenVideosList(), new MyCallBack() {
+                createListForAdapter();
+                createWeekPositionList();
+                DashVidMainRecyclerAdapter adapter = new DashVidMainRecyclerAdapter(itemList, getContext(), getSeenVideosList(), weekPositionList, new MyCallBack() {
                     @Override
                     public void onCallBack(Object object) {
                         Gson gson = new Gson();
@@ -92,9 +107,12 @@ public class DashVidMainF extends Fragment implements View.OnClickListener {
         });
     }
 
+
+
     public void displayVideos(DashVidMainRecyclerAdapter adapter){
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this.getContext()));
+        videoListBufferSign.setVisibility(View.INVISIBLE);
     }
 
     public void showErrorMessage(){
@@ -114,5 +132,35 @@ public class DashVidMainF extends Fragment implements View.OnClickListener {
         seenVideosList = gson.fromJson(listInJSON, type);
 
         return seenVideosList;
+    }
+
+    //This method combines a video object and a weekobject in the same list and positions them in a way that makes sense for the adapter:
+    public void createListForAdapter(){
+        ArrayList<Object> list = new ArrayList<>();
+        boolean firstVideoInWeek = true;
+        for (int i = 0; i < videoList.size(); i++) {
+            if (!firstVideoInWeek){
+                if (i != 0){
+                    if (!videoList.get(i-1).getWeek().equals(videoList.get(i).getWeek()))firstVideoInWeek = true;
+                }
+            }
+            if (firstVideoInWeek){
+                list.add(new WeekDTO(videoList.get(i).getWeek()));
+                firstVideoInWeek = false;
+            }
+            list.add(videoList.get(i));
+        }
+        itemList = list;
+    }
+
+    //This is used by the adapter to determine when to create a week label and when to create a video in the recycler view.
+    public void createWeekPositionList(){
+        ArrayList<Integer> weekTitlePositionList = new ArrayList<>();
+        for (int i = 0; i < itemList.size(); i++) {
+            if (itemList.get(i) instanceof WeekDTO){
+                weekTitlePositionList.add(i);
+            }
+        }
+        weekPositionList = weekTitlePositionList;
     }
 }

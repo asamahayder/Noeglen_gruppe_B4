@@ -1,31 +1,21 @@
 package com.example.noeglen.data;
 
-public class ArticleDTO{
+public class KnowledgeDTO {
 
-    private String header;
     private String title;
     private String body;
     private String image;
 
-    public ArticleDTO() {
+    public KnowledgeDTO() {
     }
 
-    public ArticleDTO(String header, String title, String body, String image) {
-        this.header = header;
+    public KnowledgeDTO(String title, String body, String image) {
         this.title = title;
         this.body = body;
         this.image = image;
     }
 
     /** GETTERS AND SETTERS */
-
-    public String getHeader() {
-        return header;
-    }
-
-    public void setHeader(String header) {
-        this.header = header;
-    }
 
     public String getTitle() {
         return title;
