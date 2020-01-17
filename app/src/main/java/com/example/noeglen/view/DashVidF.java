@@ -2,28 +2,16 @@ package com.example.noeglen.view;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.graphics.PorterDuff;
-import android.media.MediaPlayer;
-import android.net.Uri;
-import android.os.AsyncTask;
 import android.os.Bundle;
-import android.provider.MediaStore;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.MediaController;
-import android.widget.ProgressBar;
-import android.widget.SeekBar;
 import android.widget.TextView;
-import android.widget.VideoView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.core.content.ContextCompat;
-import androidx.core.content.res.ResourcesCompat;
 import androidx.fragment.app.Fragment;
 
 import com.example.noeglen.R;
@@ -33,7 +21,8 @@ import com.google.gson.reflect.TypeToken;
 
 import java.lang.reflect.Type;
 import java.util.HashMap;
-import java.util.Map;
+
+import bg.devlabs.fullscreenvideoview.FullscreenVideoView;
 
 public class DashVidF extends Fragment implements View.OnClickListener {
     private TextView videoDescription;
@@ -41,18 +30,17 @@ public class DashVidF extends Fragment implements View.OnClickListener {
     private ImageView returnButton;
     private Button markSeenButton;
     private Button markUnseenButton;
-    private VideoView videoView;
+    private FullscreenVideoView videoView;
     private VideoDTO video;
-    private MediaController mediaController;
-    private ProgressBar videoBufferSign;
     private IMainActivity iMain;
     private HashMap<String, Boolean> seenVideosList;
+    private Bundle bundle;
+
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragment_dashvid, container, false);
-
     }
 
     @Override
@@ -64,10 +52,10 @@ public class DashVidF extends Fragment implements View.OnClickListener {
         videoTitle = getView().findViewById(R.id.videoTitle);
         markSeenButton = getView().findViewById(R.id.markSeenButton);
         markUnseenButton = getView().findViewById(R.id.markUnseenButton);
-        videoBufferSign = getView().findViewById(R.id.videoBufferSign);
         returnButton.setOnClickListener(this);
         markSeenButton.setOnClickListener(this);
         markUnseenButton.setOnClickListener(this);
+        bundle = this.getArguments();
 
         handleGetVideo();
         handleGetSeenList();
@@ -82,26 +70,9 @@ public class DashVidF extends Fragment implements View.OnClickListener {
         videoTitle.setText(video.getTitle());
         //videoDescription.setText(video.getDescription);
 
-        Uri videoURI = Uri.parse(video.getVideoUrl());
-        videoView.setVideoURI(videoURI);
+        videoView.videoUrl(video.getVideoUrl());
+        videoView.enableAutoStart();
         videoView.requestFocus();
-        videoBufferSign.setVisibility(View.VISIBLE);
-        videoView.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
-            @Override
-            public void onPrepared(MediaPlayer mediaPlayer) {
-                mediaPlayer.setOnVideoSizeChangedListener(new MediaPlayer.OnVideoSizeChangedListener() {
-                    @Override
-                    public void onVideoSizeChanged(MediaPlayer mp, int width, int height) {
-                        mediaController = new MediaController(getActivity());
-                        videoView.setMediaController(mediaController);
-                        mediaController.setAnchorView(videoView);
-                    }
-                });
-
-                videoBufferSign.setVisibility(View.INVISIBLE);
-                videoView.start();
-            }
-        });
     }
 
     @Override
@@ -125,7 +96,7 @@ public class DashVidF extends Fragment implements View.OnClickListener {
 
     public void handleGetVideo(){
         Gson gson = new Gson();
-        Bundle bundle = this.getArguments();
+        bundle = this.getArguments();
         if (bundle!=null){
             String videoAsString = bundle.getString("videoObject","no vid here");
             video = gson.fromJson(videoAsString,VideoDTO.class);
