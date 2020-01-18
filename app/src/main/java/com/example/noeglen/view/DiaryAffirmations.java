@@ -41,9 +41,7 @@ public class DiaryAffirmations extends Fragment {
             @Override
             public void run() {
                 if(getActivity()!=null){
-
-                    DiaryFCalendar diaryFCalendar = new DiaryFCalendar();
-                    iMain.inflateFragment("");
+                    iMain.inflateFragment(getString(R.string.fragment_dashmain),false);
 
                 }
             }

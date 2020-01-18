@@ -53,6 +53,7 @@ import com.example.noeglen.logic.CurrentDate;
             @Override
             public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
 
+
                 if (seekBar.getProgress() > 0 && seekBar.getProgress() <= 20) {
                     imageView.setBackground(getView().getResources().getDrawable(R.drawable.emoji5));
                     smiley = 5;
