@@ -25,6 +25,7 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.cardview.widget.CardView;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
+import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 
@@ -99,23 +100,29 @@ public class DashMainF extends Fragment implements NavigationView.OnNavigationIt
     public void onAttach(Context context) {
         super.onAttach(context);
         iMain = (IMainActivity) getActivity();
-
     }
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
-        switch (menuItem.getItemId()) {
+
+        int id = menuItem.getItemId();
+
+        switch (id) {
             case R.id.phoneContact:
+                System.out.println("1");
                 phonePermission();
                 break;
             case R.id.emailContact:
+                System.out.println("1");
                 openMail();
                 break;
             case R.id.chat:
+                System.out.println("1");
                 Intent intent = new Intent(getActivity(), ChatActivity.class);
                 startActivity(intent);
                 break;
             case R.id.logOut:
+                System.out.println("1");
                 FirebaseAuth.getInstance().signOut();
                 Intent login = new Intent(getActivity(), LoginActivity.class);
                 startActivity(login);
@@ -149,9 +156,7 @@ public class DashMainF extends Fragment implements NavigationView.OnNavigationIt
     }
 
     private void openMail() {
-
         String emailAddress = getResources().getString(R.string.emailAddress);
-
         System.out.println(emailAddress);
         Intent intent = new Intent(Intent.ACTION_SEND);
         intent.putExtra(Intent.EXTRA_EMAIL, new String[]{emailAddress});
