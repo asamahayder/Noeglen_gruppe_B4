@@ -119,8 +119,12 @@ public class Diary1F extends Fragment  implements View.OnClickListener{
     public void onClick(View view) {
         saveDiaryDTO();
         if (view == saveButton){
-                String tag = getString(R.string.fragment_diary2);
-                Diary2F diary2F = new Diary2F();
+                //String tag = getString(R.string.fragment_diary2);
+               // Diary2F diary2F = new Diary2F();
+
+                String tag = getString(R.string.fragment_affirmationer);
+                DiaryAffirmations diaryAffirmations = new DiaryAffirmations();
+
                 //DiaryFCalendar diaryFCalendar = new DiaryFCalendar();
 
                 Bundle bundle1 = new Bundle();
@@ -130,7 +134,9 @@ public class Diary1F extends Fragment  implements View.OnClickListener{
                 bundle1.putString("diaryDTO",json);
                 bundle1.putStringArray("questions", questions);
 
-                iMain.setFragment(diary2F,tag,true, bundle1);
+              //  iMain.setFragment(diary2F,tag,true, bundle1);
+                iMain.setFragment(diaryAffirmations,tag,true,bundle1);
+
 
             }
     }

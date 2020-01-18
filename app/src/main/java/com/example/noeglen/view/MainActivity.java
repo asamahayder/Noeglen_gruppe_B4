@@ -23,7 +23,6 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
-
 import com.example.noeglen.R;
 import com.example.noeglen.logic.CurrentDate;
 import com.google.android.material.navigation.NavigationView;
@@ -136,32 +135,37 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 t.animate().translationY(-40).setDuration(200).setInterpolator(new DecelerateInterpolator());
                 t.startAnimation(in);
 
-                switch (i){
-                    case 0:
-                        selectedFragment = new InfoKnowledgeMainF();
-                        fragmentTag = getString(R.string.fragment_infoknowledgemain);
-                        break;
-                    case 1:
-                        selectedFragment = new DiaryMainF();
-                        fragmentTag = getString(R.string.fragment_diarymain);
-                        break;
-                    case 2:
-                        selectedFragment = new DashMainF();
-                        fragmentTag = getString(R.string.fragment_dashmain);
-                        break;
-                    case 3:
-                        selectedFragment = new DashVidMainF();
-                        fragmentTag = getString(R.string.fragment_dashvidmain);
-                        break;
-                    case 4:
-                        selectedFragment = new ExerMainF();
-                        fragmentTag = getString(R.string.fragment_exermain);
-                        break;
-                }
+                selectedFragment = checkNavBarFragment(selectedFragment, i);
             }
         }
         clearBackStack();
         setFragment(selectedFragment,fragmentTag,false,null);
+    }
+
+    private Fragment checkNavBarFragment(Fragment selectedFragment, int i) {
+        switch (i){
+            case 0:
+                selectedFragment = new InfoKnowledgeMainF();
+                fragmentTag = getString(R.string.fragment_infoknowledgemain);
+                break;
+            case 1:
+                selectedFragment = new DiaryMainF();
+                fragmentTag = getString(R.string.fragment_diarymain);
+                break;
+            case 2:
+                selectedFragment = new DashMainF();
+                fragmentTag = getString(R.string.fragment_dashmain);
+                break;
+            case 3:
+                selectedFragment = new DashVidMainF();
+                fragmentTag = getString(R.string.fragment_dashvidmain);
+                break;
+            case 4:
+                selectedFragment = new ExerMainF();
+                fragmentTag = getString(R.string.fragment_exermain);
+                break;
+        }
+        return selectedFragment;
     }
 
     private void clearBackStack() {
@@ -206,47 +210,57 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         Fragment selectedFragment = null;
         View v = currentView;
 
-        if (tag.equals(getString(R.string.fragment_dashvidmain))){
-            selectedFragment = new DashVidMainF();
+
+        // NAVBAR
+        if (tag.equals(getString(R.string.fragment_infoknowledgemain))){
+            selectedFragment = new InfoKnowledgeMainF();
+            v = findViewById(R.id.bNav0);
         }
         if (tag.equals(getString(R.string.fragment_diarymain))){
             selectedFragment = new DiaryMainF();
             v = findViewById(R.id.bNav1);
         }
+        if (tag.equals(getString(R.string.fragment_dashmain))){
+            selectedFragment = new DashVidMainF();
+            v = findViewById(R.id.bNav2);
+        }
+        if (tag.equals(getString(R.string.fragment_dashvidmain))){
+            selectedFragment = new DashVidMainF();
+            v = findViewById(R.id.bNav3);
+        }
         if (tag.equals(getString(R.string.fragment_exermain))){
             selectedFragment = new ExerMainF();
             v = findViewById(R.id.bNav4);
         }
+
+        // OTHER FRAGMENTS
+        if (tag.equals(getString(R.string.fragment_infoknowledge))){
+            selectedFragment = new InfoKnowledgeF();
+        }
+        if(tag.equals(getString(R.string.fragment_calendar))){
+            selectedFragment = new DiaryFCalendar();
+        }
+        if (tag.equals("Fragment Affirmations")){
+            selectedFragment = new DiaryAffirmations();
+        }
+        if (tag.equals(getString(R.string.fragment_dashvid))){
+            selectedFragment = new DashVidF();
+            v = findViewById(R.id.bNav3);
+        }
+        if (tag.equals(getString(R.string.fragment_exerexer))){
+            selectedFragment = new ExerExerF();
+        }
+
+        // CLEAR BACKSTACK / CHANGE NAVBAR ANIMATION
+        if (!addToBackStack){
+            clearBackStack();
+        }
+
         if (currentView != v){
             onClick(v);
             setFragment(selectedFragment,tag,false,null);
         }
         else if (selectedFragment != null){
-            setFragment(selectedFragment,tag,true,null);
-        }
-        if (tag.equals(getString(R.string.fragment_infoknowledge))){
-            selectedFragment = new InfoKnowledgeF();
-        }
-        if (tag.equals(getString(R.string.fragment_infoknowledge))){
-            selectedFragment = new InfoKnowledgeF();
-        }
-        if (tag.equals(getString(R.string.fragment_exerexer))){
-            selectedFragment = new ExerExerF();
-        }
-        if (tag.equals(getString(R.string.fragment_dashvid))){
-            selectedFragment = new DashVidF();
-            onClick(currentView);
-        }
-        if(tag.equals(getString(R.string.fragment_calendar))){
-            selectedFragment = new DiaryFCalendar();
-        }
-        if (tag.equals(getString(R.string.fragment_infoknowledgemain))){
-            selectedFragment = new InfoKnowledgeMainF();
-            if (!addToBackStack){
-                clearBackStack();
-            }
-        }
-        if (selectedFragment != null){
             setFragment(selectedFragment,tag,addToBackStack, null);
         }
     }

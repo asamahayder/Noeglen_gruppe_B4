@@ -27,7 +27,7 @@ import com.example.noeglen.logic.CurrentDate;
    private IMainActivity iMain;
    private int  smiley;
    private String [] questions;
-   private Button calendar;
+
 
 
     @Nullable
