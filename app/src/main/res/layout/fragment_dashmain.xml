@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     android:background="#ffffff">
 
+
     <androidx.drawerlayout.widget.DrawerLayout
         android:id="@+id/drawer_layout"
         android:layout_width="0dp"
@@ -17,21 +18,13 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:layout_height="match_parent">
 
             <androidx.appcompat.widget.Toolbar
                 android:id="@+id/toolBar"
                 android:layout_width="match_parent"
-                android:layout_height="?attr/actionBarSize"
-                android:elevation="4dp"
-                android:theme="@style/ThemeOverlay.AppCompat.Light"
-                app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
+                android:layout_height="?attr/actionBarSize" />
 
-            <FrameLayout
-                android:id="@+id/fragment_container"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" />
         </LinearLayout>
 
         <com.google.android.material.navigation.NavigationView
@@ -39,9 +32,11 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_gravity="start"
+            android:fitsSystemWindows="true"
             app:headerLayout="@layout/fragment_navigation_drawer"
             app:itemIconTint="@color/primaryDark"
             app:menu="@menu/navigation_drawer" />
+
     </androidx.drawerlayout.widget.DrawerLayout>
 
     <androidx.constraintlayout.widget.Guideline
@@ -290,24 +285,24 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <LinearLayout
-            android:id="@+id/favorites_linear_layout"
+    <LinearLayout
+        android:id="@+id/favorites_linear_layout"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/favorites_titel">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/favorites_recyclerview"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_height="wrap_content"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/favorites_titel"
-            android:orientation="vertical">
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/favorites_recyclerview"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/favorites_titel"/>
-        </LinearLayout>
+            app:layout_constraintTop_toBottomOf="@id/favorites_titel" />
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

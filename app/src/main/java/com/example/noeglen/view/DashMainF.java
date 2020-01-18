@@ -27,6 +27,7 @@ import androidx.cardview.widget.CardView;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.core.view.GravityCompat;
+import androidx.core.view.ViewCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -82,7 +83,6 @@ public class DashMainF extends Fragment implements NavigationView.OnNavigationIt
 
 
         toggle = new ActionBarDrawerToggle(getActivity(), drawerLayout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-        drawerLayout.addDrawerListener(toggle);
         toggle.syncState();
     }
 
@@ -137,6 +137,8 @@ public class DashMainF extends Fragment implements NavigationView.OnNavigationIt
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+
+        drawerLayout.setElevation(4);
 
         int id = menuItem.getItemId();
 
