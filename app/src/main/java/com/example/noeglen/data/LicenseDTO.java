@@ -1,16 +1,16 @@
 package com.example.noeglen.data;
 
-public class UserDTO {
+public class LicenseDTO {
 
     private String license;
     private String UserID;
     private boolean used;
 
-    UserDTO(){
+    LicenseDTO(){
 
     }
 
-    public UserDTO(String license, String UserID, boolean used) {
+    public LicenseDTO(String license, String UserID, boolean used) {
         this.license = license;
         this.UserID = UserID;
         this.used = used;

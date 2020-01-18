@@ -12,7 +12,6 @@ import android.widget.ProgressBar;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -21,14 +20,12 @@ import com.example.noeglen.data.MyCallBack;
 import com.example.noeglen.data.VideoDAO;
 import com.example.noeglen.data.VideoDTO;
 import com.example.noeglen.data.WeekDTO;
-import com.example.noeglen.logic.VideoListLogic;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Map;
 
 public class DashVidMainF extends Fragment implements View.OnClickListener {
 
