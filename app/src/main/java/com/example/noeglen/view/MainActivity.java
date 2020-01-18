@@ -22,7 +22,6 @@ import com.google.android.material.navigation.NavigationView;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener, IMainActivity {
 
@@ -198,17 +197,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         else if (selectedFragment != null){
             setFragment(selectedFragment,tag,true,null);
         }
-
-        if (tag.equals(getString(R.string.fragment_infoknowledgemain))){
-            selectedFragment = new InfoKnowledgeMainF();
-            if (!addToBackStack){
-                clearOneBackStack();
-            }
+        if (tag.equals(getString(R.string.fragment_infoknowledge))){
+            selectedFragment = new InfoKnowledgeF();
         }
         if (tag.equals(getString(R.string.fragment_infoknowledge))){
             selectedFragment = new InfoKnowledgeF();
         }
-
         if (tag.equals(getString(R.string.fragment_exerexer))){
             selectedFragment = new ExerExerF();
         }
@@ -217,6 +211,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
         if(tag.equals(getString(R.string.fragment_calendar))){
             selectedFragment = new DiaryFCalendar();
+        }
+        if (tag.equals(getString(R.string.fragment_infoknowledgemain))){
+            selectedFragment = new InfoKnowledgeMainF();
+            if (!addToBackStack){
+                clearBackStack();
+            }
         }
         if (selectedFragment != null){
             setFragment(selectedFragment,tag,addToBackStack, null);
