@@ -15,6 +15,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -48,15 +49,11 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Objects;
 
-public class DashMainF extends Fragment implements NavigationView.OnNavigationItemSelectedListener, View.OnClickListener, DashMainRecyclerAdapter.OnFavoriteListener {
+public class DashMainF extends Fragment implements View.OnClickListener, DashMainRecyclerAdapter.OnFavoriteListener {
 
     private IMainActivity iMain;
     private CardView iVidDash, iDiaryDash, iExerciseDash;
     private String fragmentTag;
-    private Toolbar toolbar;
-    private DrawerLayout drawerLayout;
-    private ActionBarDrawerToggle toggle;
-    private static int Request = 4;
     private RecyclerView rView;
     private DashMainRecyclerAdapter adapter;
     private FavoritesDTO favorites;
@@ -73,17 +70,8 @@ public class DashMainF extends Fragment implements NavigationView.OnNavigationIt
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         initializeView();
+        iMain.visibilityShow();
 
-        toolbar = getView().findViewById(R.id.toolBar);
-        ((AppCompatActivity) getActivity()).setSupportActionBar(toolbar);
-        ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayShowTitleEnabled(false);
-
-        drawerLayout = getView().findViewById(R.id.drawer_layout);
-        drawerLayout.setScrimColor(getResources().getColor(android.R.color.transparent));
-
-
-        toggle = new ActionBarDrawerToggle(getActivity(), drawerLayout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-        toggle.syncState();
     }
 
     private void initializeView() {
@@ -136,67 +124,9 @@ public class DashMainF extends Fragment implements NavigationView.OnNavigationIt
     }
 
     @Override
-    public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
-
-        drawerLayout.setElevation(4);
-
-        int id = menuItem.getItemId();
-
-        switch (id) {
-            case R.id.phoneContact:
-                System.out.println("1");
-                phonePermission();
-                break;
-            case R.id.emailContact:
-                System.out.println("1");
-                openMail();
-                break;
-            case R.id.chat:
-                System.out.println("1");
-                Intent intent = new Intent(getActivity(), ChatActivity.class);
-                startActivity(intent);
-                break;
-            case R.id.logOut:
-                System.out.println("1");
-                FirebaseAuth.getInstance().signOut();
-                Intent login = new Intent(getActivity(), LoginActivity.class);
-                startActivity(login);
-                getActivity().finish();
-                break;
-
-        }
-        return true;
-    }
-
-    private void phonePermission() {
-
-        if (ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.CALL_PHONE}, Request);
-        } else {
-            String phoneNumber = getResources().getString(R.string.phoneNumber);
-            String uri = "tel:" + phoneNumber;
-            Intent intent = new Intent(Intent.ACTION_DIAL);
-            intent.setData(Uri.parse(uri));
-            startActivity(intent);
-        }
-    }
-
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        if (requestCode == Request) {
-            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                phonePermission();
-            }
-        }
-    }
-
-    private void openMail() {
-        String emailAddress = getResources().getString(R.string.emailAddress);
-        System.out.println(emailAddress);
-        Intent intent = new Intent(Intent.ACTION_SEND);
-        intent.putExtra(Intent.EXTRA_EMAIL, new String[]{emailAddress});
-        intent.setType("message/rfc822");
-        startActivity(Intent.createChooser(intent, "Vælg en email klient"));
+    public void onDetach() {
+        super.onDetach();
+        iMain.visibilityGone();
     }
 
     @Override
@@ -223,4 +153,5 @@ public class DashMainF extends Fragment implements NavigationView.OnNavigationIt
             iMain.setFragment(articleF,getString(R.string.fragment_infoknowledge),true,bundle);
         }
     }
+
 }

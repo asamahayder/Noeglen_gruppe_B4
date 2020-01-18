@@ -2,26 +2,22 @@ package com.example.noeglen.data;
 
 import android.util.Log;
 
-import androidx.annotation.NonNull;
-
-import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+public class LicenseDAO implements ILicenseDAO {
 
-public class UserDAO implements IUserDAO{
-
-    private UserDTO license;
+    private LicenseDTO license;
     private FirebaseFirestore db;
     private DocumentReference dRef;
 
     private static final String TAG = "INFO_MAIN_ARTICLES";
 
-    public UserDTO getLicense(String collection, String authLicense) {
+    public LicenseDTO getLicense(String collection, String authLicense) {
 
-        license = new UserDTO();
+        license = new LicenseDTO();
 
         db = FirebaseFirestore.getInstance();
         dRef = db.collection(collection).document(authLicense);
@@ -29,13 +25,12 @@ public class UserDAO implements IUserDAO{
         dRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
             @Override
             public void onSuccess(DocumentSnapshot documentSnapshot) {
-                license = documentSnapshot.toObject(UserDTO.class);
+                license = documentSnapshot.toObject(LicenseDTO.class);
                 Log.d(TAG, "onSuccess: SUCCESSFULLY RETRIEVED FROM FIREBASE");
                 System.out.println(license.getUserID());
                 System.out.println(license.getLicense());
             }
         });
-
 
         System.out.println(license.getLicense());
         System.out.println(license.getUserID());
@@ -44,7 +39,7 @@ public class UserDAO implements IUserDAO{
 
     public void getLicense2(String authLicense, final MyCallBack myCallBack) {
 
-        license = new UserDTO();
+        license = new LicenseDTO();
 
         db = FirebaseFirestore.getInstance();
         dRef = db.collection("License").document(authLicense);
@@ -52,18 +47,12 @@ public class UserDAO implements IUserDAO{
         dRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
             @Override
             public void onSuccess(DocumentSnapshot documentSnapshot) {
-                license = documentSnapshot.toObject(UserDTO.class);
+                license = documentSnapshot.toObject(LicenseDTO.class);
                 Log.d(TAG, "onSuccess: SUCCESSFULLY RETRIEVED FROM FIREBASE");
                 myCallBack.onCallBack(license);
             }
         });
 
-        dRef.get().addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-                myCallBack.onCallBack(null);
-            }
-        });
 
     }
 }
