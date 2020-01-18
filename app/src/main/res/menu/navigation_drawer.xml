@@ -1,38 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
+        <item
+            android:id="@+id/chat"
+            android:icon="@drawable/navigation_drawer_chat"
+            android:title="Chat" />
 
-    <item
-        android:id="@+id/chat"
-        android:icon="@drawable/navigation_drawer_chat"
-        android:title="Chat" />
-
-    <item android:title="Bruger indstillinger">
-        <menu>
-            <item
-                android:id="@+id/changePassAndMail"
-                android:icon="@drawable/navigation_drawer_person"
-                android:title="Skift kodeord og email" />
-        </menu>
-    </item>
-    <item android:title="Kontakt">
-        <menu>
-            <item
-                android:id="@+id/phoneContact"
-                android:icon="@drawable/navigation_drawer_local_phone"
-                android:title="@string/phoneNumber" />
-            <item
-                android:id="@+id/emailContact"
-                android:icon="@drawable/navigation_drawer_email"
-                android:title="@string/emailAddress" />
-        </menu>
-    </item>
-    <item android:title="Log ud">
-        <menu>
-            <item
-                android:id="@+id/logOut"
-                android:icon="@drawable/navigation_drawer_log_out"
-                android:title="Log ud" />
-        </menu>
-    </item>
-
+        <item android:title="Bruger indstillinger">
+            <menu>
+                <item
+                    android:id="@+id/changePassAndMail"
+                    android:icon="@drawable/navigation_drawer_person"
+                    android:title="Skift kodeord og email" />
+            </menu>
+        </item>
+        <item android:title="Kontakt">
+            <menu>
+                <item
+                    android:id="@+id/phoneContact"
+                    android:icon="@drawable/navigation_drawer_local_phone"
+                    android:title="@string/phoneNumber" />
+                <item
+                    android:id="@+id/emailContact"
+                    android:icon="@drawable/navigation_drawer_email"
+                    android:title="@string/emailAddress" />
+            </menu>
+        </item>
+        <item android:title="Log ud">
+            <menu>
+                <item
+                    android:id="@+id/logOut"
+                    android:icon="@drawable/navigation_drawer_log_out"
+                    android:title="Log ud" />
+            </menu>
+        </item>
 </menu>

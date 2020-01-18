@@ -1,6 +1,11 @@
 package com.example.noeglen.view;
 
+import android.Manifest;
+import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
@@ -8,18 +13,26 @@ import android.view.animation.DecelerateInterpolator;
 import android.widget.Button;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.example.noeglen.R;
 import com.example.noeglen.logic.CurrentDate;
+import com.google.android.material.navigation.NavigationView;
+import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener, IMainActivity {
+public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, View.OnClickListener, IMainActivity {
 
     private Animation in;
     private List<Button> navBarBtnList;
@@ -28,12 +41,31 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private FragmentManager fm;
     private CurrentDate currDate;
     private View currentView;
+    private Toolbar toolbar;
+    private DrawerLayout drawerLayout;
+    private ActionBarDrawerToggle toggle;
+    private static int Request = 4;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mainactivity);
         initializeView();
+
+        toolbar = findViewById(R.id.toolBar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
+
+        drawerLayout = findViewById(R.id.drawer_layout);
+        drawerLayout.setScrimColor(getResources().getColor(android.R.color.transparent));
+
+        NavigationView navigationView = findViewById(R.id.navigationView);
+        navigationView.setNavigationItemSelectedListener(this);
+
+        toggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        drawerLayout.addDrawerListener(toggle);
+        toggle.syncState();
     }
 
     private void initializeView() {
@@ -106,8 +138,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                 switch (i){
                     case 0:
-                        selectedFragment = new InfoMainF();
-                        fragmentTag = getString(R.string.fragment_infomain);
+                        selectedFragment = new InfoKnowledgeMainF();
+                        fragmentTag = getString(R.string.fragment_infoknowledgemain);
                         break;
                     case 1:
                         selectedFragment = new DiaryMainF();
@@ -118,8 +150,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         fragmentTag = getString(R.string.fragment_dashmain);
                         break;
                     case 3:
-                        selectedFragment = new FavMainF();
-                        fragmentTag = getString(R.string.fragment_favmain);
+                        selectedFragment = new DashVidMainF();
+                        fragmentTag = getString(R.string.fragment_dashvidmain);
                         break;
                     case 4:
                         selectedFragment = new ExerMainF();
@@ -163,7 +195,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         transaction.commit();
     }
 
-
     @Override
     public void inflateFragment(String tag) {
         inflateFragment(tag, true);
@@ -193,30 +224,24 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         else if (selectedFragment != null){
             setFragment(selectedFragment,tag,true,null);
         }
-
-        if (tag.equals(getString(R.string.fragment_infoarticlesmain))){
-            selectedFragment = new InfoArticlesMainF();
-            if (!addToBackStack){
-                clearOneBackStack();
-            }
-        }
         if (tag.equals(getString(R.string.fragment_infoknowledge))){
             selectedFragment = new InfoKnowledgeF();
         }
-        if (tag.equals(getString(R.string.fragment_infoarticle))){
-            selectedFragment = new InfoArticleF();
+        if (tag.equals(getString(R.string.fragment_infoknowledge))){
+            selectedFragment = new InfoKnowledgeF();
         }
         if (tag.equals(getString(R.string.fragment_exerexer))){
             selectedFragment = new ExerExerF();
         }
         if (tag.equals(getString(R.string.fragment_dashvid))){
             selectedFragment = new DashVidF();
+            onClick(currentView);
         }
         if(tag.equals(getString(R.string.fragment_calendar))){
             selectedFragment = new DiaryFCalendar();
         }
-        if (tag.equals(getString(R.string.fragment_infomain))){
-            selectedFragment = new InfoMainF();
+        if (tag.equals(getString(R.string.fragment_infoknowledgemain))){
+            selectedFragment = new InfoKnowledgeMainF();
             if (!addToBackStack){
                 clearBackStack();
             }
@@ -231,5 +256,73 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void onBackPressed() {
         super.onBackPressed();
         fm = this.getSupportFragmentManager();
+    }
+
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+
+        int id = menuItem.getItemId();
+
+        switch (id) {
+            case R.id.phoneContact:
+                System.out.println("1");
+                phonePermission();
+                break;
+            case R.id.emailContact:
+                System.out.println("1");
+                openMail();
+                break;
+            case R.id.chat:
+                System.out.println("1");
+                Intent intent = new Intent(this, ChatActivity.class);
+                startActivity(intent);
+                break;
+            case R.id.logOut:
+                System.out.println("1");
+                FirebaseAuth.getInstance().signOut();
+                Intent login = new Intent(this, LoginActivity.class);
+                startActivity(login);
+                this.finish();
+                break;
+        }
+        return true;
+    }
+
+    private void phonePermission() {
+
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CALL_PHONE}, Request);
+        } else {
+            String phoneNumber = getResources().getString(R.string.phoneNumber);
+            String uri = "tel:" + phoneNumber;
+            Intent intent = new Intent(Intent.ACTION_DIAL);
+            intent.setData(Uri.parse(uri));
+            startActivity(intent);
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        if (requestCode == Request) {
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                phonePermission();
+            }
+        }
+    }
+
+    private void openMail() {
+        String emailAddress = getResources().getString(R.string.emailAddress);
+        System.out.println(emailAddress);
+        Intent intent = new Intent(Intent.ACTION_SEND);
+        intent.putExtra(Intent.EXTRA_EMAIL, new String[]{emailAddress});
+        intent.setType("message/rfc822");
+        startActivity(Intent.createChooser(intent, "Vælg en email klient"));
+    }
+    public void visibilityGone() {
+        toolbar.setVisibility(View.GONE);
+    }
+
+    public void visibilityShow() {
+        toolbar.setVisibility(View.VISIBLE);
     }
 }
