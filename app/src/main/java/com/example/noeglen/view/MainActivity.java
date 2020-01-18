@@ -12,7 +12,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
-
 import com.example.noeglen.R;
 import com.example.noeglen.logic.CurrentDate;
 
@@ -204,6 +203,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
         if (tag.equals(getString(R.string.fragment_dashvid))){
             selectedFragment = new DashVidF();
+        }
+        if (tag.equals("Fragment Affirmations")){
+            selectedFragment = new DiaryAffirmations();
         }
         if(tag.equals(getString(R.string.fragment_calendar))){
             selectedFragment = new DiaryFCalendar();
