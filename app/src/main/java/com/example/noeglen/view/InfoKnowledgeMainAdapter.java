@@ -92,4 +92,5 @@ public class InfoKnowledgeMainAdapter extends RecyclerView.Adapter<InfoKnowledge
     public interface OnArticleListener{
         void onArticleClick(int position);
     }
+
 }

@@ -193,13 +193,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         else if (selectedFragment != null){
             setFragment(selectedFragment,tag,true,null);
         }
-
-        if (tag.equals(getString(R.string.fragment_infoknowledgemain))){
-            selectedFragment = new InfoKnowledgeMainF();
-            if (!addToBackStack){
-                clearOneBackStack();
-            }
-        }
         if (tag.equals(getString(R.string.fragment_infoknowledge))){
             selectedFragment = new InfoKnowledgeF();
         }
@@ -212,8 +205,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         if (tag.equals(getString(R.string.fragment_dashvid))){
             selectedFragment = new DashVidF();
         }
-        if (tag.equals(getString(R.string.fragment_dashmain))){
-            selectedFragment = new DashMainF();
+        if(tag.equals(getString(R.string.fragment_calendar))){
+            selectedFragment = new DiaryFCalendar();
+        }
+        if (tag.equals(getString(R.string.fragment_infoknowledgemain))){
+            selectedFragment = new InfoKnowledgeMainF();
             if (!addToBackStack){
                 clearBackStack();
             }

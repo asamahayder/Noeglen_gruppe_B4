@@ -84,9 +84,9 @@ public class Diary1F extends Fragment  implements View.OnClickListener{
 
 
 
-        System.out.println(bundle.getInt("smiley"));
-        System.out.println(rec);
-        System.out.println(image);
+        //System.out.println(bundle.getInt("smiley"));
+        //System.out.println(rec);
+        //System.out.println(image);
 
        // imageView.setBackground(getContext().getDrawable(rec));
         imageView.setImageDrawable(getContext().getDrawable(rec));
@@ -129,8 +129,8 @@ public class Diary1F extends Fragment  implements View.OnClickListener{
                 String json = gson.toJson(diaryDTO);
                 bundle1.putString("diaryDTO",json);
                 bundle1.putStringArray("questions", questions);
+
                 iMain.setFragment(diary2F,tag,true, bundle1);
-               // iMain.setFragment(diaryFCalendar,tag,true,bundle1);
 
             }
     }
@@ -142,11 +142,16 @@ public class Diary1F extends Fragment  implements View.OnClickListener{
         answers[1] = answer2.getText().toString();
         answers[2] = answer3.getText().toString();
         answers[3] = answer4.getText().toString();
-        diaryDTO  = new DiaryDTO(bundle.getInt("smiley"), answers,date);
+        diaryDTO  = new DiaryDTO(bundle.getInt("smiley"), answers,questions,date);
         System.out.println(date);
         listOfEntries.add(diaryDTO);
+
         System.out.println("list of diary entries : " + listOfEntries.size());
         saveSharedPref(sPrefEditKey);
+
+
+        System.out.println(questions.length);
+        System.out.println(answers.length);
     }
 
     private void getSharedPref(String sPrefEditKey) {
