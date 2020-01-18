@@ -138,19 +138,21 @@ public class DashMainF extends Fragment implements View.OnClickListener, DashMai
             json = gson.toJson(favorites.getListOfVideoDTOS().get(position));
             bundle.putString("videoObject",json);
             iMain.setFragment(videoF,getString(R.string.fragment_infoknowledge),true,bundle);
+            iMain.visibilityGone();
         }
         if (CURRENT_TYPE == 2){
             ExerExerF exerciseF = new ExerExerF();
             json = gson.toJson(favorites.getListOfExerciseDTOS().get(position));
             bundle.putString("currentExercise",json);
             iMain.setFragment(exerciseF,getString(R.string.fragment_infoknowledge),true,bundle);
-
+            iMain.visibilityGone();
         }
         if (CURRENT_TYPE == 3){
             InfoKnowledgeF articleF = new InfoKnowledgeF();
             json = gson.toJson(favorites.getListOfKnowledgeDTOS().get(position));
             bundle.putString("currentKnowledgeArticle",json);
             iMain.setFragment(articleF,getString(R.string.fragment_infoknowledge),true,bundle);
+            iMain.visibilityGone();
         }
     }
 
