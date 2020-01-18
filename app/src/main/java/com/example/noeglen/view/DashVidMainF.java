@@ -58,6 +58,7 @@ public class DashVidMainF extends Fragment implements View.OnClickListener {
         recyclerView = getView().findViewById(R.id.videoRecyclerView);
         returnButton = getView().findViewById(R.id.returnToDashButton);
         videoListBufferSign = getView().findViewById(R.id.videoListBufferSign);
+
         getAllVideosFromDataBase();
         returnButton.setOnClickListener(this);
     }
@@ -89,17 +90,19 @@ public class DashVidMainF extends Fragment implements View.OnClickListener {
                 setVideoList((ArrayList<VideoDTO>) object);
                 createListForAdapter();
                 createWeekPositionList();
-                DashVidMainRecyclerAdapter adapter = new DashVidMainRecyclerAdapter(itemList, getContext(), getSeenVideosList(), weekPositionList, new MyCallBack() {
-                    @Override
-                    public void onCallBack(Object object) {
-                        Gson gson = new Gson();
-                        Bundle bundle = new Bundle();
-                        String videoAsString = gson.toJson(object);
-                        bundle.putString("videoObject",videoAsString);
-                        mainActivity.setFragment(new DashVidF(), getString(R.string.fragment_dashvid),true, bundle);
-                    }
-                });
-                displayVideos(adapter);
+                if (getContext() != null){
+                    DashVidMainRecyclerAdapter adapter = new DashVidMainRecyclerAdapter(itemList, getContext(), getSeenVideosList(), weekPositionList, new MyCallBack() {
+                        @Override
+                        public void onCallBack(Object object) {
+                            Gson gson = new Gson();
+                            Bundle bundle = new Bundle();
+                            String videoAsString = gson.toJson(object);
+                            bundle.putString("videoObject",videoAsString);
+                            mainActivity.setFragment(new DashVidF(), getString(R.string.fragment_dashvid),true, bundle);
+                        }
+                    });
+                    displayVideos(adapter);
+                }
             }
         });
     }
