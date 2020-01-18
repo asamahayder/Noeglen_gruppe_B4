@@ -23,7 +23,6 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
-
 import com.example.noeglen.R;
 import com.example.noeglen.logic.CurrentDate;
 import com.google.android.material.navigation.NavigationView;
@@ -240,6 +239,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
         if(tag.equals(getString(R.string.fragment_calendar))){
             selectedFragment = new DiaryFCalendar();
+        }
+        if (tag.equals("Fragment Affirmations")){
+            selectedFragment = new DiaryAffirmations();
         }
         if (tag.equals(getString(R.string.fragment_dashvid))){
             selectedFragment = new DashVidF();

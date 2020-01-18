@@ -123,7 +123,7 @@ public class DashVidMainF extends Fragment implements View.OnClickListener {
         HashMap<String, Boolean> seenVideosList;
         Gson gson = new Gson();
         //Getting list from shared preferences
-        String preferenceKey = getString(R.string.sharedPreferencesKey);
+         String preferenceKey = getString(R.string.sharedPreferencesKey);
         String listKey = getString(R.string.seenVideosListKey);
 
         SharedPreferences preferences = getActivity().getSharedPreferences(preferenceKey, Context.MODE_PRIVATE);
