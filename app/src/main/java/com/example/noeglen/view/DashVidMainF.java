@@ -69,6 +69,7 @@ public class DashVidMainF extends Fragment implements View.OnClickListener {
     public void onAttach(Context context) {
         super.onAttach(context);
         mainActivity = (IMainActivity) getActivity();
+        mainActivity.visibilityGone();
     }
 
     @Override
