@@ -24,6 +24,9 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
 
     EditText insertEmail;
@@ -44,6 +47,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     ILicenseDAO iLicenseDAO;
     LicenseDTO licenseDTO;
     boolean checker;
+    Map<String, String> userinfo = new HashMap<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -131,7 +135,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     }
 
 
-    private void licenseCheck(final String license, final String email, final String password) {
+    private void licenseCheck(final String license, final String email, final String password ) {
 
         if (!validateForm()) {
             return;
@@ -140,23 +144,24 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         registerSelect.setVisibility(View.GONE);
 
         final LicenseDAO licenseDAO = new LicenseDAO();
-        licenseDAO.getLicense2(license, new MyCallBack() {
+        licenseDAO.getLicense(license, new MyCallBack() {
             @Override
             public void onCallBack(Object object) {
                 LicenseDTO licens = (LicenseDTO) object;
 
                 if (licens == null) {
-
+                    progressBar.setVisibility(View.GONE);
+                    registerSelect.setVisibility(View.VISIBLE);
                     Toast.makeText(LoginActivity.this, "Ubrulig licens", Toast.LENGTH_SHORT).show();
 
                 } else {
 
-                    if (licens.getUserID().equals("")) {
-
-                        createAccount(email, password);
+                    if (licens.getUserID() == null) {
+                        createAccount(email, password, license);
 
                     } else {
-
+                        progressBar.setVisibility(View.GONE);
+                        registerSelect.setVisibility(View.VISIBLE);
                         Toast.makeText(LoginActivity.this, "Licens allerede i brug", Toast.LENGTH_SHORT).show();
                     }
                 }
@@ -184,6 +189,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                             Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                             startActivity(intent);
                             finish();
+
                         } else {
                             // If sign in fails, display a message to the user.
                             Toast.makeText(LoginActivity.this, "Authentication failed.", Toast.LENGTH_SHORT).show();
@@ -195,13 +201,20 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 });
     }
 
-    private void createAccount(String email, String password) {
+    private void createAccount(String email, String password, final String license) {
 
         mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (task.isSuccessful()) {
                     System.out.println("success");
+
+                    System.out.println(mAuth.getUid());
+                    userinfo.put("UserID", mAuth.getUid());
+                    userinfo.put("license", license);
+                    final LicenseDAO licenseDAO = new LicenseDAO();
+                    licenseDAO.insertLicense(license, userinfo);
+
                     // Sign in success, update UI with the signed-in user's information
                     Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                     startActivity(intent);
