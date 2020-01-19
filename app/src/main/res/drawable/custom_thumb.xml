@@ -3,12 +3,10 @@
     <item>
 
         <shape android:shape="oval">
-            <solid android:color="#367AFF"/>
+            <solid android:color="@color/primaryDark"/>
             <size
                 android:width="55dp"
-                android:height="55dp"
-
-                />
+                android:height="55dp" />
         </shape>
     </item>
 </layer-list>
