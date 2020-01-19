@@ -3,10 +3,17 @@
     android:height="500dp"
     android:viewportWidth="500"
     android:viewportHeight="500">
+
   <path
       android:pathData="M10,250a240,240 0,1 0,480 0a240,240 0,1 0,-480 0z"
       android:strokeWidth="0"
       android:fillColor="#fff"/>
+
+  <path
+      android:pathData="M10,250a240,240 0,1 0,480 0a240,240 0,1 0,-480 0z"
+      android:strokeColor="#009AFF"
+      android:strokeWidth="20"/>
+
   <path
       android:fillColor="#FF000000"
       android:strokeWidth="1"
