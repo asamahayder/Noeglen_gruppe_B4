@@ -9,6 +9,7 @@
     <string name="fragment_diarymain">Fragment Diary</string>
     <string name="fragment_diary1">Fragment Diary1</string>
     <string name="fragment_diary2">Fragment Diary2</string>
+    <string name="fragment_affirmationer">Fragment Affirmationer</string>
     <string name="fragment_infoknowledgemain">Fragment KnowledgeArticlesMain</string>
     <string name="fragment_infoknowledge">Fragment KnowledgeArticle</string>
     <string name="fragment_exermain">Fragment Exer</string>

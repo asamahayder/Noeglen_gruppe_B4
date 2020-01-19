@@ -9,6 +9,7 @@ import android.widget.Button;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 
 import com.example.noeglen.R;
@@ -17,7 +18,7 @@ public class ExerMainF extends Fragment implements View.OnClickListener {
 
     private IMainActivity iMain;
     private String fragmentTag;
-    private Button bExercise;
+    private CardView exer_1, exer_2, exer_3, exer_4;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -39,8 +40,12 @@ public class ExerMainF extends Fragment implements View.OnClickListener {
 
     public void initializeView(){
 
-        bExercise = getView().findViewById(R.id.bExer1);
-        bExercise.setOnClickListener(this);
+        exer_1 = getView().findViewById(R.id.exer_1);
+        exer_2 = getView().findViewById(R.id.exer_2);
+        exer_3 = getView().findViewById(R.id.exer_3);
+        exer_4 = getView().findViewById(R.id.exer_4);
+
+        exer_1.setOnClickListener(this);
     }
 
     @Override
@@ -53,7 +58,7 @@ public class ExerMainF extends Fragment implements View.OnClickListener {
     public void onClick(View v) {
 
         switch (v.getId()){
-            case R.id.bExer1:
+            case R.id.exer_1:
                 fragmentTag = getString(R.string.fragment_exerexer);
                 break;
         }

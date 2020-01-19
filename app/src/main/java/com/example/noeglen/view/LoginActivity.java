@@ -13,16 +13,19 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.noeglen.R;
-import com.example.noeglen.data.IUserDAO;
+import com.example.noeglen.data.ILicenseDAO;
 import com.example.noeglen.data.MyCallBack;
-import com.example.noeglen.data.UserDAO;
-import com.example.noeglen.data.UserDTO;
+import com.example.noeglen.data.LicenseDAO;
+import com.example.noeglen.data.LicenseDTO;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -34,12 +37,17 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     TextView registerSelect;
     TextView loginBtn;
     TextView TVlicense;
+    TextView TVCheck;
+    TextView TVAuth;
     ProgressBar progressBar;
+
 
     private FirebaseAuth mAuth;
     private FirebaseUser mUser;
-    IUserDAO iUserDAO;
-    UserDTO userDTO;
+    ILicenseDAO iLicenseDAO;
+    LicenseDTO licenseDTO;
+    boolean checker;
+    Map<String, String> userinfo = new HashMap<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,9 +65,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             startActivity(welcome);
         }
 
-
         progressBar = findViewById(R.id.progressBar);
         progressBar.setVisibility(View.GONE);
+
 
         insertEmail = findViewById(R.id.EmailInsert);
         insertPass = findViewById(R.id.PassInsert);
@@ -69,7 +77,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         TVlicense = findViewById(R.id.LicenseTV);
         TVlicense.setVisibility(View.GONE);
 
+
         registerSelect = findViewById(R.id.RegisterTV);
+        registerSelect.setVisibility(View.GONE);
         loginBtn = findViewById(R.id.LoginTV);
 
         loginMenuBtn = findViewById(R.id.LoginBtn);
@@ -84,8 +94,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         registerSelect.setVisibility(View.GONE);
         loginMenuBtn.setVisibility(View.GONE);
 
-        iUserDAO = new UserDAO();
-
+        iLicenseDAO = new LicenseDAO();
     }
 
     @Override
@@ -118,17 +127,46 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
             signIn(insertEmail.getText().toString(), insertPass.getText().toString());
 
-        } else if (v.equals(registerSelect) && loginBtn.getVisibility() == View.GONE) {
+        } else if (v.equals(registerSelect) && loginBtn.getVisibility() == View.GONE){
 
-
-            licenseCheck(insertLicense.getText().toString());
-            if(userDTO.isUsed()){
-                createAccount(insertEmail.getText().toString(), insertPass.getText().toString());
-            }
+            licenseCheck(insertLicense.getText().toString(), insertEmail.getText().toString(), insertPass.getText().toString());
 
         }
+    }
 
 
+    private void licenseCheck(final String license, final String email, final String password ) {
+
+        if (!validateForm()) {
+            return;
+        }
+        progressBar.setVisibility(View.VISIBLE);
+        registerSelect.setVisibility(View.GONE);
+
+        final LicenseDAO licenseDAO = new LicenseDAO();
+        licenseDAO.getLicense(license, new MyCallBack() {
+            @Override
+            public void onCallBack(Object object) {
+                LicenseDTO licens = (LicenseDTO) object;
+
+                if (licens == null) {
+                    progressBar.setVisibility(View.GONE);
+                    registerSelect.setVisibility(View.VISIBLE);
+                    Toast.makeText(LoginActivity.this, "Ubrulig licens", Toast.LENGTH_SHORT).show();
+
+                } else {
+
+                    if (licens.getUserID() == null) {
+                        createAccount(email, password, license);
+
+                    } else {
+                        progressBar.setVisibility(View.GONE);
+                        registerSelect.setVisibility(View.VISIBLE);
+                        Toast.makeText(LoginActivity.this, "Licens allerede i brug", Toast.LENGTH_SHORT).show();
+                    }
+                }
+            }
+        });
     }
 
     //--- Disse metoder er taget fra Googles firebase preset authentication med lidt ændringer
@@ -142,7 +180,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         progressBar.setVisibility(View.VISIBLE);
         loginBtn.setVisibility(View.GONE);
 
-
         mAuth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
@@ -152,6 +189,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                             Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                             startActivity(intent);
                             finish();
+
                         } else {
                             // If sign in fails, display a message to the user.
                             Toast.makeText(LoginActivity.this, "Authentication failed.", Toast.LENGTH_SHORT).show();
@@ -159,49 +197,24 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                             progressBar.setVisibility(View.GONE);
                             loginBtn.setVisibility(View.VISIBLE);
                         }
-
                     }
                 });
     }
 
-    private void licenseCheck(final String license) {
-
-        if (!validateForm()) {
-            return;
-        }
-
-        UserDAO userDAO = new UserDAO();
-        userDAO.getLicense2(license, new MyCallBack() {
-            @Override
-            public void onCallBack(Object object) {
-                UserDTO licens = (UserDTO) object;
-
-                if (licens == null) {
-
-                    Toast.makeText(LoginActivity.this, "Ubrulig licens", Toast.LENGTH_SHORT).show();
-
-                } else {
-
-                    if (licens.getUserID().equals("")) {
-                        userDTO.setUsed(true);
-                    } else {
-                        Toast.makeText(LoginActivity.this, "Licens allerede i brug", Toast.LENGTH_SHORT).show();
-
-                    }
-                }
-            }
-        });
-    }
-
-    private void createAccount(String email, String password) {
-        progressBar.setVisibility(View.VISIBLE);
-        registerSelect.setVisibility(View.GONE);
+    private void createAccount(String email, String password, final String license) {
 
         mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (task.isSuccessful()) {
                     System.out.println("success");
+
+                    System.out.println(mAuth.getUid());
+                    userinfo.put("UserID", mAuth.getUid());
+                    userinfo.put("license", license);
+                    final LicenseDAO licenseDAO = new LicenseDAO();
+                    licenseDAO.insertLicense(license, userinfo);
+
                     // Sign in success, update UI with the signed-in user's information
                     Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                     startActivity(intent);
@@ -248,14 +261,5 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
         return valid;
     }
-
-    private boolean setChecker(boolean check) {
-
-
-
-        return check;
-    }
-
-
 }
 //------------------------------------------------------------------------------------------------------------

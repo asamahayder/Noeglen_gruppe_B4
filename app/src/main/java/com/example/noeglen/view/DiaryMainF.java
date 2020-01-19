@@ -27,7 +27,7 @@ import com.example.noeglen.logic.CurrentDate;
    private IMainActivity iMain;
    private int  smiley;
    private String [] questions;
-   private Button calendar;
+
 
 
     @Nullable
@@ -52,6 +52,7 @@ import com.example.noeglen.logic.CurrentDate;
         seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
+
 
                 if (seekBar.getProgress() > 0 && seekBar.getProgress() <= 20) {
                     imageView.setBackground(getView().getResources().getDrawable(R.drawable.emoji5));
