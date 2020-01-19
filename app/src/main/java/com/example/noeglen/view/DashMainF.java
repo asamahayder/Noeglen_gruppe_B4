@@ -114,6 +114,7 @@ public class DashMainF extends Fragment implements View.OnClickListener, DashMai
                     bundle.putString("videoObject",videoInJSON);
                     bundle.putString("isPartOfDailyGoals","true");
                     iMain.setFragment(new DashVidF(), getString(R.string.fragment_dashvid),true, bundle);
+                    iMain.visibilityGone();
                 }else {
                     iMain.inflateFragment(getString(R.string.fragment_dashvidmain));
                 }
