@@ -34,6 +34,7 @@
     <!-- sharedPreferencesKeys-->
     <string name="sharedPreferencesKey">sharedPreferencesKey</string>
     <string name="seenVideosListKey">seenVideosListKey</string>
+    <string name="videoListKey">videoListKey</string>
     <string name="savedDateKey">getSavedDate</string>
     <string name="isTodaysVideoSeen">getIsTodaysVideoSeen</string>
     <string name="isTodaysDiaryWritten">getIsTodaysDiaryWritten</string>

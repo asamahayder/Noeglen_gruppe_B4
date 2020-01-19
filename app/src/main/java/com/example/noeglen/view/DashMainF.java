@@ -51,8 +51,6 @@ public class DashMainF extends Fragment implements View.OnClickListener, DashMai
     private ImageView markTodaysExerciseAsDoneImage;
     private boolean isNewDay;
     private ArrayList<VideoDTO> videoList;
-    private ProgressBar progressBar;
-    private ConstraintLayout contentLayout;
 
     @Nullable
     @Override
@@ -75,8 +73,6 @@ public class DashMainF extends Fragment implements View.OnClickListener, DashMai
         markTodaysVideoAsSeenImage = getView().findViewById(R.id.markTodaysVideoAsSeenImage);
         markTodaysDiaryAsWrittenImage = getView().findViewById(R.id.markTodaysDiaryAsWrittenImage);
         markTodaysExerciseAsDoneImage = getView().findViewById(R.id.markTodaysExerciseAsDoneImage);
-        progressBar = getView().findViewById(R.id.dashBoardProgressBar);
-        contentLayout = getView().findViewById(R.id.contentConstraintLayout);
         iVidDash.setOnClickListener(this);
         iDiaryDash.setOnClickListener(this);
         iExerciseDash.setOnClickListener(this);
@@ -89,6 +85,7 @@ public class DashMainF extends Fragment implements View.OnClickListener, DashMai
         rView.setLayoutManager(new LinearLayoutManager(getContext()));
         rView.setAdapter(adapter);
 
+        getVideoList();
         checkIfNewDay();
         handleNewDay();
         handleShowCheckMarks();
@@ -109,16 +106,25 @@ public class DashMainF extends Fragment implements View.OnClickListener, DashMai
 
         switch (v.getId()) {
             case R.id.iDashVid:
-                fragmentTag = getString(R.string.fragment_dashvidmain);
+                if (markTodaysVideoAsSeenImage.getVisibility() != View.VISIBLE){
+                    VideoDTO videoDTO = handleGetNextVideo();
+                    Gson gson = new Gson();
+                    String videoInJSON = gson.toJson(videoDTO);
+                    Bundle bundle = new Bundle();
+                    bundle.putString("videoObject",videoInJSON);
+                    bundle.putString("isPartOfDailyGoals","true");
+                    iMain.setFragment(new DashVidF(), getString(R.string.fragment_dashvid),true, bundle);
+                }else {
+                    iMain.inflateFragment(getString(R.string.fragment_dashvidmain));
+                }
                 break;
             case R.id.iDashDiary:
-                fragmentTag = getString(R.string.fragment_diarymain);
+                iMain.inflateFragment(getString(R.string.fragment_diarymain));
                 break;
             case R.id.iDashExercise:
-                fragmentTag = getString(R.string.fragment_exermain);
+                iMain.inflateFragment(getString(R.string.fragment_exermain));
                 break;
         }
-        iMain.inflateFragment(fragmentTag);
     }
 
     @Override
@@ -224,26 +230,12 @@ public class DashMainF extends Fragment implements View.OnClickListener, DashMai
     public VideoDTO handleGetNextVideo(){
         HashMap<String, Boolean> seenVideosList = getSeenVideosList();
         for (int i = 0; i < videoList.size(); i++) {
-               if (!seenVideosList.get(videoList.get(i).getTitle())){
+            Boolean seen = seenVideosList.get(videoList.get(i).getTitle());
+               if (seen == null || !seen){
                    return videoList.get(i);
                }
         }
         return null;
-    }
-
-    public void setVideoList(ArrayList<VideoDTO> videoList){
-        this.videoList = videoList;
-    }
-
-    public void getAllVideosFromDataBase(){
-        VideoDAO videoDAO = new VideoDAO();
-        videoDAO.getAllVideos(new MyCallBack() {
-            @Override
-            public void onCallBack(Object object) {
-                setVideoList((ArrayList<VideoDTO>) object);
-                handleShowContent();
-            }
-        });
     }
 
     public HashMap<String, Boolean> getSeenVideosList(){
@@ -261,9 +253,20 @@ public class DashMainF extends Fragment implements View.OnClickListener, DashMai
         return seenVideosList;
     }
 
-    public void handleShowContent(){
-        progressBar.setVisibility(View.GONE);
-        contentLayout.setVisibility(View.VISIBLE);
+    public void getVideoList(){
+        Gson gson = new Gson();
+        String preferenceKey = getString(R.string.sharedPreferencesKey);
+        String videoListKey = getString(R.string.videoListKey);
+
+        SharedPreferences preferences = getActivity().getSharedPreferences(preferenceKey, Context.MODE_PRIVATE);
+        String listInJSON = preferences.getString(videoListKey, null);
+        if (listInJSON == null){
+            System.out.println("##################### The video list was not retrieved from shared preferences");
+            return;
+        }
+        Type type = new TypeToken<ArrayList<VideoDTO>>(){}.getType(); //getting arrayList type for gson
+        videoList = gson.fromJson(listInJSON, type);
     }
+
 
 }
