@@ -37,17 +37,13 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     TextView registerSelect;
     TextView loginBtn;
     TextView TVlicense;
-    TextView TVCheck;
-    TextView TVAuth;
     ProgressBar progressBar;
-
 
     private FirebaseAuth mAuth;
     private FirebaseUser mUser;
     ILicenseDAO iLicenseDAO;
-    LicenseDTO licenseDTO;
-    boolean checker;
-    Map<String, String> userinfo = new HashMap<>();
+    Map<String, String> licenseInfo = new HashMap<>();
+    Map<String, String> userInfo = new HashMap<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,7 +63,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
         progressBar = findViewById(R.id.progressBar);
         progressBar.setVisibility(View.GONE);
-
 
         insertEmail = findViewById(R.id.EmailInsert);
         insertPass = findViewById(R.id.PassInsert);
@@ -210,10 +205,10 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     System.out.println("success");
 
                     System.out.println(mAuth.getUid());
-                    userinfo.put("UserID", mAuth.getUid());
-                    userinfo.put("license", license);
+                    licenseInfo.put("UserID", mAuth.getUid());
+                    licenseInfo.put("license", license);
                     final LicenseDAO licenseDAO = new LicenseDAO();
-                    licenseDAO.insertLicense(license, userinfo);
+                    licenseDAO.insertLicense(license, licenseInfo);
 
                     // Sign in success, update UI with the signed-in user's information
                     Intent intent = new Intent(LoginActivity.this, MainActivity.class);
@@ -261,5 +256,5 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
         return valid;
     }
+    //------------------------------------------------------------------------------------------------------------
 }
-//------------------------------------------------------------------------------------------------------------

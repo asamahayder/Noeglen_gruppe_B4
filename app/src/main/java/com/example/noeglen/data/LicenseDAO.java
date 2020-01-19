@@ -20,7 +20,6 @@ public class LicenseDAO implements ILicenseDAO {
 
     private static final String TAG = "INFO_MAIN_ARTICLES";
 
-
     public void getLicense(String authLicense, final MyCallBack myCallBack) {
 
         license = new LicenseDTO();
