@@ -16,6 +16,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import com.bumptech.glide.Glide;
 import com.example.noeglen.R;
 import com.example.noeglen.data.KnowledgeDTO;
 import com.example.noeglen.data.ExerciseDTO;
@@ -30,7 +31,7 @@ import java.util.ArrayList;
 public class InfoKnowledgeF extends Fragment implements View.OnClickListener {
 
     private TextView textTITLE, textBODY;
-    private ImageView backButton, favButton;
+    private ImageView backButton, favButton, backgroundImage;
 
     private KnowledgeDTO currentKnowledgeArticle;
     private FavoritesDTO favorites;
@@ -62,10 +63,11 @@ public class InfoKnowledgeF extends Fragment implements View.OnClickListener {
 
         textTITLE = view.findViewById(R.id.infoarticle_title);
         textBODY = view.findViewById(R.id.infoarticle_body);
-        backButton = getView().findViewById(R.id.infoarticle_backbutton);
-        backButton.setOnClickListener(this);
+        //backButton = getView().findViewById(R.id.infoarticle_backbutton);
+        //backButton.setOnClickListener(this);
         favButton = getView().findViewById(R.id.infoarticle_favbutton);
         favButton.setOnClickListener(this);
+        backgroundImage = getView().findViewById(R.id.infoknowledge_backgroundimage);
 
         sPref = getContext().getSharedPreferences(getString(R.string.sharedPreferencesKey),Context.MODE_PRIVATE);
         sEdit = sPref.edit();
@@ -132,6 +134,11 @@ public class InfoKnowledgeF extends Fragment implements View.OnClickListener {
         currentKnowledgeArticle = gson.fromJson(bundle.getString("currentKnowledgeArticle"),type);
         textTITLE.setText(currentKnowledgeArticle.getTitle());
         textBODY.setText(Html.fromHtml(currentKnowledgeArticle.getBody(),Html.FROM_HTML_MODE_LEGACY));
+
+        Glide
+                .with(getContext())
+                .load(currentKnowledgeArticle.getImage())
+                .into(backgroundImage);
     }
 
     private boolean traverseThroughFavs() {

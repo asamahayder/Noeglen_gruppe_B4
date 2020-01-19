@@ -2,6 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/contentConstraintLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#ffffff">
@@ -11,14 +12,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.45" />
+        app:layout_constraintGuide_percent="0.40" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline_75_percent"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.75" />
+        app:layout_constraintGuide_percent="0.66" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/toDoList"
@@ -36,8 +37,8 @@
             android:text="Dagens gøremål"
             android:textColor="#000000"
             android:textSize="20sp" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
 
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout"
@@ -157,6 +158,40 @@
                 android:textColor="#ffffff"
                 android:textSize="25sp" />
         </androidx.cardview.widget.CardView>
+
+        <ImageView
+            android:id="@+id/markTodaysVideoAsSeenImage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:elevation="10dp"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toBottomOf="@id/iDashVid"
+            app:layout_constraintRight_toRightOf="@id/iDashVid"
+            app:srcCompat="@drawable/mark_as_seen_button"
+            tools:layout_editor_absoluteX="10dp" />
+
+        <ImageView
+            android:id="@+id/markTodaysDiaryAsWrittenImage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:elevation="10dp"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toBottomOf="@id/iDashDiary"
+            app:layout_constraintRight_toRightOf="@id/iDashDiary"
+            app:srcCompat="@drawable/mark_as_seen_button"
+            tools:layout_editor_absoluteX="10dp" />
+
+        <ImageView
+            android:id="@+id/markTodaysExerciseAsDoneImage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:elevation="10dp"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toBottomOf="@id/iDashExercise"
+            app:layout_constraintRight_toRightOf="@id/iDashExercise"
+            app:srcCompat="@drawable/mark_as_seen_button"
+            tools:layout_editor_absoluteX="10dp" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -245,15 +280,15 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <LinearLayout
-        android:id="@+id/favorites_linear_layout"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:orientation="vertical"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/favorites_titel">
+        <LinearLayout
+            android:id="@+id/favorites_linear_layout"
+            android:layout_width="match_parent"
+            android:layout_height="130dp"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/favorites_titel">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/favorites_recyclerview"

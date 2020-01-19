@@ -8,39 +8,6 @@
     android:orientation="vertical"
     android:fitsSystemWindows="true">
 
-    <LinearLayout
-        android:id="@+id/infknowledgemain_toplayout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/primaryNormal"
-        android:weightSum="1">
-
-        <ImageView
-            android:id="@+id/infoknowledgemain_backbutton"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:clickable="false"
-            android:visibility="invisible"
-            android:contentDescription="Back button"
-            android:contextClickable="false"
-            android:soundEffectsEnabled="false"
-            app:srcCompat="@drawable/arrow_left"
-            tools:ignore="HardcodedText"
-            android:focusable="true" />
-
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:gravity="center_horizontal"
-            android:text="@string/Viden"
-            android:paddingRight="45dp"
-            android:paddingTop="2dp"
-            android:textColor="#fff"
-            android:textSize="30sp"
-            android:textStyle="bold"
-            android:layout_weight="1" />
-    </LinearLayout>
-
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/infoknowledgemain_recyclerview"
         android:layout_width="match_parent"

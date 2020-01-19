@@ -6,7 +6,7 @@
 
     <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="70dp">
+        android:layout_height="78dp">
 
         <ImageView
             android:id="@+id/infoknowledgemain_recyclerview_image"
@@ -29,7 +29,7 @@
             android:layout_marginRight="16dp"
             android:text="Article Title Placeholder"
             android:textColor="#ffffff"
-            android:textSize="22sp"
+            android:textSize="20sp"
             tools:ignore="HardcodedText" />
 
     </FrameLayout>

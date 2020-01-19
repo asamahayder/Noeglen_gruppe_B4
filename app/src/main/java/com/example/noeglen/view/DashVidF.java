@@ -12,15 +12,21 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
 import com.example.noeglen.R;
+import com.example.noeglen.data.ExerciseDTO;
+import com.example.noeglen.data.FavoritesDTO;
+import com.example.noeglen.data.KnowledgeDTO;
 import com.example.noeglen.data.VideoDTO;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
 import java.lang.reflect.Type;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 
 import bg.devlabs.fullscreenvideoview.FullscreenVideoView;
 
@@ -35,6 +41,9 @@ public class DashVidF extends Fragment implements View.OnClickListener {
     private IMainActivity iMain;
     private HashMap<String, Boolean> seenVideosList;
     private Bundle bundle;
+    private String isPartOfDailyGoals;
+    private ImageView favoriteButton;
+    private boolean isFavorite;
 
 
     @Nullable
@@ -52,13 +61,20 @@ public class DashVidF extends Fragment implements View.OnClickListener {
         videoTitle = getView().findViewById(R.id.videoTitle);
         markSeenButton = getView().findViewById(R.id.markSeenButton);
         markUnseenButton = getView().findViewById(R.id.markUnseenButton);
+        favoriteButton = getView().findViewById(R.id.dashVidFavoriteButton);
         returnButton.setOnClickListener(this);
         markSeenButton.setOnClickListener(this);
         markUnseenButton.setOnClickListener(this);
+        favoriteButton.setOnClickListener(this);
         bundle = this.getArguments();
 
         handleGetVideo();
         handleGetSeenList();
+        checkIfFavorite();
+
+        if (isFavorite){
+            favoriteButton.setImageDrawable(ContextCompat.getDrawable(getActivity(),R.drawable.fav2));
+        }
 
         //show the correct mark button
         if (handleCheckIfSeen()){
@@ -86,11 +102,20 @@ public class DashVidF extends Fragment implements View.OnClickListener {
         if (view == returnButton){
             iMain.inflateFragment(getString(R.string.fragment_dashvidmain));
         }else if (view == markSeenButton){
+            isPartOfDailyGoals = bundle.getString("isPartOfDailyGoals");
+            if (isPartOfDailyGoals != null && isPartOfDailyGoals.equals("true")){
+                handlePartOfDailyGoals();
+                iMain.inflateFragment(getString(R.string.fragment_dashmain));
+            }else{
+                iMain.inflateFragment(getString(R.string.fragment_dashvidmain));
+            }
             handleMarkAsSeen(true);
-            iMain.inflateFragment(getString(R.string.fragment_dashvidmain));
+
         }else if (view == markUnseenButton){
             handleMarkAsSeen(false);
             iMain.inflateFragment(getString(R.string.fragment_dashvidmain));
+        }else if (view == favoriteButton){
+            handleFavorite();
         }
     }
 
@@ -153,12 +178,74 @@ public class DashVidF extends Fragment implements View.OnClickListener {
     }
 
     public Boolean handleCheckIfSeen(){
-        Boolean isSean = seenVideosList.get(video.getTitle());
+        Boolean isSeen = seenVideosList.get(video.getTitle());
 
-        if (isSean == null){
-            isSean = false;
+        if (isSeen == null){
+            isSeen = false;
         }
 
-        return isSean;
+        return isSeen;
+    }
+
+    public void handlePartOfDailyGoals(){
+        SharedPreferences preferences = getActivity().getSharedPreferences(getString(R.string.sharedPreferencesKey),Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.putString(getString(R.string.isTodaysVideoSeen),"true");
+        editor.apply();
+    }
+
+    public void handleFavorite(){
+        Gson gson = new Gson();
+        SharedPreferences preferences = getActivity().getSharedPreferences(getString(R.string.sharedPreferencesKey),Context.MODE_PRIVATE);
+        String objectInJSON = preferences.getString(getString(R.string.sPref_favorites),null);
+        FavoritesDTO favoritesDTO;
+
+        if (objectInJSON == null){
+            favoritesDTO = new FavoritesDTO(new ArrayList<KnowledgeDTO>(), new ArrayList<VideoDTO>(), new ArrayList<ExerciseDTO>());
+        }else{
+            favoritesDTO = gson.fromJson(objectInJSON, FavoritesDTO.class);
+        }
+
+        if (isFavorite){
+            for (int i = 0; i < favoritesDTO.getListOfVideoDTOS().size(); i++) {
+                if (favoritesDTO.getListOfVideoDTOS().get(i).getTitle().equals(video.getTitle())){
+                    favoritesDTO.getListOfVideoDTOS().remove(i);
+                    break;
+                }
+            }
+            favoriteButton.setImageDrawable(ContextCompat.getDrawable(getActivity(),R.drawable.fav1));
+            isFavorite = false;
+        }else{
+            favoritesDTO.getListOfVideoDTOS().add(video);
+            favoriteButton.setImageDrawable(ContextCompat.getDrawable(getActivity(),R.drawable.fav2));
+            isFavorite = true;
+        }
+
+        objectInJSON = gson.toJson(favoritesDTO);
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.putString(getString(R.string.sPref_favorites),objectInJSON);
+        editor.apply();
+    }
+
+    public void checkIfFavorite(){
+        Gson gson = new Gson();
+        SharedPreferences preferences = getActivity().getSharedPreferences(getString(R.string.sharedPreferencesKey),Context.MODE_PRIVATE);
+        String objectInJSON = preferences.getString(getString(R.string.sPref_favorites),null);
+        FavoritesDTO favoritesDTO;
+
+        if (objectInJSON == null){
+            isFavorite = false;
+            return;
+        }else{
+            favoritesDTO = gson.fromJson(objectInJSON, FavoritesDTO.class);
+            for (int i = 0; i < favoritesDTO.getListOfVideoDTOS().size(); i++) {
+                if (favoritesDTO.getListOfVideoDTOS().get(i).getTitle().equals(video.getTitle())){
+                    isFavorite = true;
+                    break;
+                }else {
+                    isFavorite = false;
+                }
+            }
+        }
     }
 }

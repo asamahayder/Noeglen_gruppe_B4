@@ -3,7 +3,9 @@ package com.example.noeglen.view;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
@@ -17,13 +19,17 @@ import com.example.noeglen.data.ILicenseDAO;
 import com.example.noeglen.data.MyCallBack;
 import com.example.noeglen.data.LicenseDAO;
 import com.example.noeglen.data.LicenseDTO;
+import com.example.noeglen.data.VideoDAO;
+import com.example.noeglen.data.VideoDTO;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.gson.Gson;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -37,17 +43,14 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     TextView registerSelect;
     TextView loginBtn;
     TextView TVlicense;
-    TextView TVCheck;
-    TextView TVAuth;
     ProgressBar progressBar;
-
+    private ArrayList<VideoDTO> videoList;
 
     private FirebaseAuth mAuth;
     private FirebaseUser mUser;
     ILicenseDAO iLicenseDAO;
-    LicenseDTO licenseDTO;
-    boolean checker;
-    Map<String, String> userinfo = new HashMap<>();
+    Map<String, String> licenseInfo = new HashMap<>();
+    Map<String, String> userInfo = new HashMap<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,7 +70,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
         progressBar = findViewById(R.id.progressBar);
         progressBar.setVisibility(View.GONE);
-
 
         insertEmail = findViewById(R.id.EmailInsert);
         insertPass = findViewById(R.id.PassInsert);
@@ -185,10 +187,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
-                            // Sign in success, update UI with the signed-in user's information
-                            Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                            startActivity(intent);
-                            finish();
+                            getAllVideosFromDataBase();
 
                         } else {
                             // If sign in fails, display a message to the user.
@@ -210,10 +209,10 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     System.out.println("success");
 
                     System.out.println(mAuth.getUid());
-                    userinfo.put("UserID", mAuth.getUid());
-                    userinfo.put("license", license);
+                    licenseInfo.put("UserID", mAuth.getUid());
+                    licenseInfo.put("license", license);
                     final LicenseDAO licenseDAO = new LicenseDAO();
-                    licenseDAO.insertLicense(license, userinfo);
+                    licenseDAO.insertLicense(license, licenseInfo);
 
                     // Sign in success, update UI with the signed-in user's information
                     Intent intent = new Intent(LoginActivity.this, MainActivity.class);
@@ -261,5 +260,41 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
         return valid;
     }
+
+    public void getAllVideosFromDataBase(){
+        VideoDAO videoDAO = new VideoDAO();
+        videoDAO.getAllVideos(new MyCallBack() {
+            @Override
+            public void onCallBack(Object object) {
+                setVideoList((ArrayList<VideoDTO>) object);
+                saveVideoList();
+                handleGoToDashBoard();
+            }
+        });
+    }
+
+    public void setVideoList(ArrayList<VideoDTO> videoList){
+        this.videoList = videoList;
+    }
+
+    public void handleGoToDashBoard(){
+        // Sign in success, update UI with the signed-in user's information
+        Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+        startActivity(intent);
+        finish();
+    }
+
+    public void saveVideoList(){
+        Gson gson = new Gson();
+        String listInJSON = gson.toJson(videoList);
+        String preferenceKey = getString(R.string.sharedPreferencesKey);
+        String videoListKey = getString(R.string.videoListKey);
+
+        SharedPreferences sharedPreferences = getSharedPreferences(preferenceKey, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString(videoListKey, listInJSON);
+        editor.apply();
+    }
+
+    //------------------------------------------------------------------------------------------------------------
 }
-//------------------------------------------------------------------------------------------------------------
