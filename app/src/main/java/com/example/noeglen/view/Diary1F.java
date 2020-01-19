@@ -149,15 +149,10 @@ public class Diary1F extends Fragment  implements View.OnClickListener{
         answers[2] = answer3.getText().toString();
         answers[3] = answer4.getText().toString();
         diaryDTO  = new DiaryDTO(bundle.getInt("smiley"), answers,questions,date);
-        System.out.println(date);
-        listOfEntries.add(diaryDTO);
 
-        System.out.println("list of diary entries : " + listOfEntries.size());
+        listOfEntries.add(diaryDTO);
         saveSharedPref(sPrefEditKey);
 
-
-        System.out.println(questions.length);
-        System.out.println(answers.length);
     }
 
     private void getSharedPref(String sPrefEditKey) {

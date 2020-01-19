@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -41,6 +42,7 @@ public class Diary2F extends Fragment implements View.OnClickListener {
     private String image;
     private IMainActivity iMain;
     private ImageView editKnap;
+    private Button gem;
 
 
     @Nullable
@@ -93,6 +95,8 @@ public class Diary2F extends Fragment implements View.OnClickListener {
         dateText = getView().findViewById(R.id.textView3);
         editKnap = getView().findViewById(R.id.editKnap);
         editKnap.setOnClickListener(this);
+        gem = getView().findViewById(R.id.gem);
+        gem.setOnClickListener(this);
 
         question1 = getView().findViewById(R.id.question1);
         question2 = getView().findViewById(R.id.question2);
@@ -144,6 +148,8 @@ public class Diary2F extends Fragment implements View.OnClickListener {
             answer2.setFocusableInTouchMode(true);
             answer3.setFocusableInTouchMode(true);
             answer4.setFocusableInTouchMode(true);
+        }else if (v == gem){
+            iMain.inflateFragment(getString(R.string.fragment_dashmain),true);
         }
     }
 }
