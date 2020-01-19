@@ -39,6 +39,8 @@ public class Diary2F extends Fragment implements View.OnClickListener {
     private Gson gson;
     private CurrentDate currentDate;
     private String image;
+    private IMainActivity iMain;
+    private ImageView editKnap;
 
 
     @Nullable
@@ -89,15 +91,22 @@ public class Diary2F extends Fragment implements View.OnClickListener {
 
 
         dateText = getView().findViewById(R.id.textView3);
+        editKnap = getView().findViewById(R.id.editKnap);
+        editKnap.setOnClickListener(this);
 
         question1 = getView().findViewById(R.id.question1);
         question2 = getView().findViewById(R.id.question2);
         question3 = getView().findViewById(R.id.question3);
         question4 = getView().findViewById(R.id.question4);
+
         answer1 = getView().findViewById(R.id.answer1);
+        answer1.setFocusable(false);
         answer2 = getView().findViewById(R.id.answer2);
+        answer2.setFocusable(false);
         answer3 = getView().findViewById(R.id.answer3);
+        answer3.setFocusable(false);
         answer4 = getView().findViewById(R.id.answer4);
+        answer4.setFocusable(false);
 
         dateText.setText(date);
 
@@ -113,10 +122,9 @@ public class Diary2F extends Fragment implements View.OnClickListener {
 
     }
 
-    @Override
-    public void onClick(View view) {
 
-    }
+
+
 
     private void getSharedPref(String sPrefEditKey) {
         String json = sPref.getString(sPrefEditKey, null);
@@ -127,5 +135,15 @@ public class Diary2F extends Fragment implements View.OnClickListener {
             listOfEntries = new ArrayList<>();
         }
 
+    }
+
+    @Override
+    public void onClick(View v) {
+        if (v == editKnap ) {
+            answer1.setFocusableInTouchMode(true);
+            answer2.setFocusableInTouchMode(true);
+            answer3.setFocusableInTouchMode(true);
+            answer4.setFocusableInTouchMode(true);
+        }
     }
 }
