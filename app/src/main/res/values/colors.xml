@@ -6,6 +6,7 @@
     <color name="backGround">#8dcdff</color>
     <color name="babyBlue">#0797FF</color>
     <color name="transparentPrimary">#5040c4ff</color>
+    <color name="transparentSecondary">#501de9b6</color>
     <color name="markAsUnSeen">#FF896E</color>
 
     //MATERIAL COLORS

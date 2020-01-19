@@ -35,6 +35,7 @@ public class DashVidF extends Fragment implements View.OnClickListener {
     private IMainActivity iMain;
     private HashMap<String, Boolean> seenVideosList;
     private Bundle bundle;
+    private String isPartOfDailyGoals;
 
 
     @Nullable
@@ -86,8 +87,15 @@ public class DashVidF extends Fragment implements View.OnClickListener {
         if (view == returnButton){
             iMain.inflateFragment(getString(R.string.fragment_dashvidmain));
         }else if (view == markSeenButton){
+            isPartOfDailyGoals = bundle.getString("isPartOfDailyGoals");
+            if (isPartOfDailyGoals != null && isPartOfDailyGoals.equals("true")){
+                handlePartOfDailyGoals();
+                iMain.inflateFragment(getString(R.string.fragment_dashmain));
+            }else{
+                iMain.inflateFragment(getString(R.string.fragment_dashvidmain));
+            }
             handleMarkAsSeen(true);
-            iMain.inflateFragment(getString(R.string.fragment_dashvidmain));
+
         }else if (view == markUnseenButton){
             handleMarkAsSeen(false);
             iMain.inflateFragment(getString(R.string.fragment_dashvidmain));
@@ -99,6 +107,7 @@ public class DashVidF extends Fragment implements View.OnClickListener {
         bundle = this.getArguments();
         if (bundle!=null){
             String videoAsString = bundle.getString("videoObject","no vid here");
+            //System.out.println("#######################" + videoAsString);
             video = gson.fromJson(videoAsString,VideoDTO.class);
         }else {
             System.out.println("something went wrong. Video was not sent from fragment");
@@ -153,12 +162,20 @@ public class DashVidF extends Fragment implements View.OnClickListener {
     }
 
     public Boolean handleCheckIfSeen(){
-        Boolean isSean = seenVideosList.get(video.getTitle());
+        //System.out.println("############################" + video);
+        Boolean isSeen = seenVideosList.get(video.getTitle());
 
-        if (isSean == null){
-            isSean = false;
+        if (isSeen == null){
+            isSeen = false;
         }
 
-        return isSean;
+        return isSeen;
+    }
+
+    public void handlePartOfDailyGoals(){
+        SharedPreferences preferences = getActivity().getSharedPreferences(getString(R.string.sharedPreferencesKey),Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.putString(getString(R.string.isTodaysVideoSeen),"true");
+        editor.apply();
     }
 }

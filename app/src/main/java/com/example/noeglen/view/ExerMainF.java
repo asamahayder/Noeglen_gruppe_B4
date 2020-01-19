@@ -46,6 +46,7 @@ public class ExerMainF extends Fragment implements View.OnClickListener {
         exer_4 = getView().findViewById(R.id.exer_4);
 
         exer_1.setOnClickListener(this);
+        exer_2.setOnClickListener(this);
     }
 
     @Override
@@ -60,6 +61,9 @@ public class ExerMainF extends Fragment implements View.OnClickListener {
         switch (v.getId()){
             case R.id.exer_1:
                 fragmentTag = getString(R.string.fragment_exerexer);
+                break;
+            case R.id.exer_2:
+                fragmentTag = getString(R.string.fragment_exer_2);
                 break;
         }
         iMain.inflateFragment(fragmentTag);

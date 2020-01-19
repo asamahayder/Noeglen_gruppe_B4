@@ -14,6 +14,7 @@
     <string name="fragment_infoknowledge">Fragment KnowledgeArticle</string>
     <string name="fragment_exermain">Fragment Exer</string>
     <string name="fragment_exerexer">Fragment Exercises</string>
+    <string name="fragment_exer_2">Fragment Exercise_2</string>
     <string name="fragment_calendar">Fragment Diary Calendar</string>
 
 
@@ -35,6 +36,11 @@
     <!-- sharedPreferencesKeys-->
     <string name="sharedPreferencesKey">sharedPreferencesKey</string>
     <string name="seenVideosListKey">seenVideosListKey</string>
+    <string name="videoListKey">videoListKey</string>
+    <string name="savedDateKey">getSavedDate</string>
+    <string name="isTodaysVideoSeen">getIsTodaysVideoSeen</string>
+    <string name="isTodaysDiaryWritten">getIsTodaysDiaryWritten</string>
+    <string name="isTodaysExerciseDone">getIsTodaysExerciseDone</string>
     <string name="sPref_favorites">favorites</string>
 
 </resources>

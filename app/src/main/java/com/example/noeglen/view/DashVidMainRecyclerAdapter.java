@@ -1,7 +1,9 @@
 package com.example.noeglen.view;
 
 import android.content.Context;
+import android.content.res.ColorStateList;
 import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,6 +11,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.core.content.ContextCompat;
+import androidx.core.widget.ImageViewCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
@@ -147,7 +151,7 @@ public class DashVidMainRecyclerAdapter extends RecyclerView.Adapter<RecyclerVie
             }
 
 
-      //showing checkMark if seen
+      //showing checkMark and chaning color filter if seen
       if (seenVideosList != null){ //checking that the list isn't null
          Boolean seen = seenVideosList.get(videoItem.getTitle());
          if (seen != null){ //checking that the value isn't null
