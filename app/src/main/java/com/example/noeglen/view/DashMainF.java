@@ -20,6 +20,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.noeglen.R;
 import com.example.noeglen.data.ExerciseDTO;
+import com.example.noeglen.data.FavoriteDTO;
 import com.example.noeglen.data.FavoritesDTO;
 import com.example.noeglen.data.KnowledgeDTO;
 import com.example.noeglen.data.MyCallBack;
@@ -33,6 +34,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Locale;
 import java.util.Objects;
 
@@ -43,7 +45,7 @@ public class DashMainF extends Fragment implements View.OnClickListener, DashMai
     private String fragmentTag;
     private RecyclerView rView;
     private DashMainRecyclerAdapter adapter;
-    private FavoritesDTO favorites;
+    private List<FavoriteDTO> favoriteList;
     private SharedPreferences sPref;
     private Gson gson;
     private ImageView markTodaysVideoAsSeenImage;
@@ -81,7 +83,7 @@ public class DashMainF extends Fragment implements View.OnClickListener, DashMai
         sPref = getContext().getSharedPreferences(getString(R.string.sharedPreferencesKey),Context.MODE_PRIVATE);
         getSharedPref();
         rView = getView().findViewById(R.id.favorites_recyclerview);
-        adapter = new DashMainRecyclerAdapter(favorites,getContext(),this);
+        adapter = new DashMainRecyclerAdapter(favoriteList,getContext(),this);
         rView.setLayoutManager(new LinearLayoutManager(getContext(),LinearLayoutManager.HORIZONTAL,false));
         rView.setAdapter(adapter);
 
@@ -94,10 +96,10 @@ public class DashMainF extends Fragment implements View.OnClickListener, DashMai
 
     private void getSharedPref() {
         String json = sPref.getString(getString(R.string.sPref_favorites),null);
-        Type type = new TypeToken<FavoritesDTO>(){}.getType();
-        favorites = gson.fromJson(json,type);
-        if (favorites == null) {
-            favorites = new FavoritesDTO(new ArrayList<KnowledgeDTO>(), new ArrayList<VideoDTO>(), new ArrayList<ExerciseDTO>());
+        Type type = new TypeToken<List<FavoriteDTO>>(){}.getType();
+        favoriteList = gson.fromJson(json,type);
+        if (favoriteList == null) {
+            favoriteList = new ArrayList<>();
         }
     }
 
@@ -146,21 +148,21 @@ public class DashMainF extends Fragment implements View.OnClickListener, DashMai
         String json = "";
         if (CURRENT_TYPE == 1){
             DashVidF videoF = new DashVidF();
-            json = gson.toJson(favorites.getListOfVideoDTOS().get(position));
+            json = gson.toJson(favoriteList.get(position));
             bundle.putString("videoObject",json);
-            iMain.setFragment(videoF,getString(R.string.fragment_infoknowledge),true,bundle);
+            iMain.setFragment(videoF,getString(R.string.fragment_dashvid),true,bundle);
             iMain.visibilityGone();
         }
         if (CURRENT_TYPE == 2){
             ExerExerF exerciseF = new ExerExerF();
-            json = gson.toJson(favorites.getListOfExerciseDTOS().get(position));
+            json = gson.toJson(favoriteList.get(position));
             bundle.putString("currentExercise",json);
-            iMain.setFragment(exerciseF,getString(R.string.fragment_infoknowledge),true,bundle);
+            iMain.setFragment(exerciseF,getString(R.string.fragment_exerexer),true,bundle);
             iMain.visibilityGone();
         }
         if (CURRENT_TYPE == 3){
             InfoKnowledgeF articleF = new InfoKnowledgeF();
-            json = gson.toJson(favorites.getListOfKnowledgeDTOS().get(position));
+            json = gson.toJson(favoriteList.get(position));
             bundle.putString("currentKnowledgeArticle",json);
             iMain.setFragment(articleF,getString(R.string.fragment_infoknowledge),true,bundle);
             iMain.visibilityGone();

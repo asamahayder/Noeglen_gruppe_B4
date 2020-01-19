@@ -17,6 +17,7 @@ import androidx.fragment.app.Fragment;
 
 import com.example.noeglen.R;
 import com.example.noeglen.data.ExerciseDTO;
+import com.example.noeglen.data.FavoriteDTO;
 import com.example.noeglen.data.FavoritesDTO;
 import com.example.noeglen.data.KnowledgeDTO;
 import com.example.noeglen.data.VideoDTO;
@@ -27,6 +28,7 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
 
 import bg.devlabs.fullscreenvideoview.FullscreenVideoView;
 
@@ -43,6 +45,7 @@ public class DashVidF extends Fragment implements View.OnClickListener {
     private Bundle bundle;
     private String isPartOfDailyGoals;
     private ImageView favoriteButton;
+    private FavoriteDTO currentFav;
     private boolean isFavorite;
 
 
@@ -86,7 +89,12 @@ public class DashVidF extends Fragment implements View.OnClickListener {
         videoTitle.setText(video.getTitle());
         //videoDescription.setText(video.getDescription);
 
-        videoView.videoUrl(video.getVideoUrl());
+        if (video.getImageUrl() == null){
+            videoView.videoUrl(currentFav.getVideoURL());
+        }
+        else {
+            videoView.videoUrl(video.getVideoUrl());
+        }
         videoView.enableAutoStart();
         videoView.requestFocus();
     }
@@ -198,30 +206,31 @@ public class DashVidF extends Fragment implements View.OnClickListener {
         Gson gson = new Gson();
         SharedPreferences preferences = getActivity().getSharedPreferences(getString(R.string.sharedPreferencesKey),Context.MODE_PRIVATE);
         String objectInJSON = preferences.getString(getString(R.string.sPref_favorites),null);
-        FavoritesDTO favoritesDTO;
+        Type type = new TypeToken<List<FavoriteDTO>>(){}.getType();
+        List<FavoriteDTO> favoriteList;
 
         if (objectInJSON == null){
-            favoritesDTO = new FavoritesDTO(new ArrayList<KnowledgeDTO>(), new ArrayList<VideoDTO>(), new ArrayList<ExerciseDTO>());
+            favoriteList = new ArrayList<>();
         }else{
-            favoritesDTO = gson.fromJson(objectInJSON, FavoritesDTO.class);
+            favoriteList = gson.fromJson(objectInJSON, type);
         }
 
         if (isFavorite){
-            for (int i = 0; i < favoritesDTO.getListOfVideoDTOS().size(); i++) {
-                if (favoritesDTO.getListOfVideoDTOS().get(i).getTitle().equals(video.getTitle())){
-                    favoritesDTO.getListOfVideoDTOS().remove(i);
+            for (int i = 0; i < favoriteList.size(); i++) {
+                if (favoriteList.get(i).getTitle().equals(video.getTitle()) && favoriteList.get(i).getCURRENT_TYPE() == 1){
+                    favoriteList.remove(i);
                     break;
                 }
             }
             favoriteButton.setImageDrawable(ContextCompat.getDrawable(getActivity(),R.drawable.fav1));
             isFavorite = false;
         }else{
-            favoritesDTO.getListOfVideoDTOS().add(video);
+            favoriteList.add(new FavoriteDTO(1,video.getImageUrl(),video.getTitle(),video.getWeek(),video.getWeek()));
             favoriteButton.setImageDrawable(ContextCompat.getDrawable(getActivity(),R.drawable.fav2));
             isFavorite = true;
         }
 
-        objectInJSON = gson.toJson(favoritesDTO);
+        objectInJSON = gson.toJson(favoriteList);
         SharedPreferences.Editor editor = preferences.edit();
         editor.putString(getString(R.string.sPref_favorites),objectInJSON);
         editor.apply();
@@ -231,16 +240,18 @@ public class DashVidF extends Fragment implements View.OnClickListener {
         Gson gson = new Gson();
         SharedPreferences preferences = getActivity().getSharedPreferences(getString(R.string.sharedPreferencesKey),Context.MODE_PRIVATE);
         String objectInJSON = preferences.getString(getString(R.string.sPref_favorites),null);
-        FavoritesDTO favoritesDTO;
+        Type type = new TypeToken<List<FavoriteDTO>>(){}.getType();
+        List<FavoriteDTO> listFav;
 
         if (objectInJSON == null){
             isFavorite = false;
             return;
         }else{
-            favoritesDTO = gson.fromJson(objectInJSON, FavoritesDTO.class);
-            for (int i = 0; i < favoritesDTO.getListOfVideoDTOS().size(); i++) {
-                if (favoritesDTO.getListOfVideoDTOS().get(i).getTitle().equals(video.getTitle())){
+            listFav = gson.fromJson(objectInJSON, type);
+            for (int i = 0; i < listFav.size(); i++) {
+                if (listFav.get(i).getTitle().equals(video.getTitle()) && listFav.get(i).getCURRENT_TYPE() == 1){
                     isFavorite = true;
+                    currentFav = listFav.get(i);
                     break;
                 }else {
                     isFavorite = false;
