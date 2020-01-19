@@ -70,10 +70,11 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="15dp"
-                        android:paddingStart="15dp"
-                        android:paddingEnd="15dp"
+                        android:paddingStart="25dp"
+                        android:paddingEnd="47dp"
+                        android:gravity="center_horizontal"
                         android:text=""
-                        android:textSize="30sp"
+                        android:textSize="25sp"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="@+id/infoarticle_cornerimage" />
@@ -99,26 +100,25 @@
 
                     </LinearLayout>
 
+                    <ImageView
+                        android:id="@+id/infoarticle_favbutton"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginTop="141dp"
+                        android:layout_marginEnd="10dp"
+                        android:layout_weight="0"
+                        android:background="@drawable/fav1"
+                        android:clickable="true"
+                        android:focusable="true"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
             </LinearLayout>
 
         </ScrollView>
-
-        <ImageView
-            android:id="@+id/infoarticle_favbutton"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_gravity="center_vertical"
-            android:layout_weight="0"
-            android:background="@drawable/fav1"
-            android:clickable="true"
-            android:focusable="true"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginEnd="5dp"
-            android:layout_marginTop="5dp"
-            tools:layout_editor_absoluteY="4dp" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
