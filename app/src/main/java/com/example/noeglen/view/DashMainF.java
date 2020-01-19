@@ -247,10 +247,16 @@ public class DashMainF extends Fragment implements View.OnClickListener, DashMai
 
         SharedPreferences preferences = getActivity().getSharedPreferences(preferenceKey, Context.MODE_PRIVATE);
         String listInJSON = preferences.getString(listKey, null);
-        Type type = new TypeToken<HashMap<String, Boolean>>(){}.getType(); //getting hashmap type for gson
-        seenVideosList = gson.fromJson(listInJSON, type);
+        if (listInJSON == null){
+            HashMap<String, Boolean> hashMap = new HashMap<>();
+            return hashMap;
+        }else{
+            Type type = new TypeToken<HashMap<String, Boolean>>(){}.getType(); //getting hashmap type for gson
+            seenVideosList = gson.fromJson(listInJSON, type);
 
-        return seenVideosList;
+            return seenVideosList;
+        }
+
     }
 
     public void getVideoList(){
