@@ -2,41 +2,63 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mainConstraintLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#ffffff">
+    android:background="@android:color/white">
 
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline_45_percent"
+    <ProgressBar
+        android:id="@+id/dashBoardProgressBar"
+        style="?android:attr/progressBarStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.45" />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline_75_percent"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.75" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/toDoList"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
-        android:layout_marginBottom="10dp"
-        app:layout_constraintBottom_toTopOf="@id/constraintLayout"
+        android:id="@+id/contentConstraintLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#ffffff"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="Dagens gøremål"
-            android:textColor="#000000"
-            android:textSize="20sp" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline_45_percent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.45" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline_75_percent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.75" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/toDoList"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginBottom="10dp"
+            app:layout_constraintBottom_toTopOf="@id/constraintLayout"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="Dagens gøremål"
+                android:textColor="#000000"
+                android:textSize="20sp" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/constraintLayout"
@@ -156,6 +178,40 @@
                     android:textColor="#ffffff"
                     android:textSize="25sp" />
             </androidx.cardview.widget.CardView>
+
+            <ImageView
+                android:id="@+id/markTodaysVideoAsSeenImage"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:elevation="10dp"
+                android:visibility="invisible"
+                app:layout_constraintBottom_toBottomOf="@id/iDashVid"
+                app:layout_constraintRight_toRightOf="@id/iDashVid"
+                app:srcCompat="@drawable/mark_as_seen_button"
+                tools:layout_editor_absoluteX="10dp" />
+
+            <ImageView
+                android:id="@+id/markTodaysDiaryAsWrittenImage"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:elevation="10dp"
+                android:visibility="invisible"
+                app:layout_constraintBottom_toBottomOf="@id/iDashDiary"
+                app:layout_constraintRight_toRightOf="@id/iDashDiary"
+                app:srcCompat="@drawable/mark_as_seen_button"
+                tools:layout_editor_absoluteX="10dp" />
+
+            <ImageView
+                android:id="@+id/markTodaysExerciseAsDoneImage"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:elevation="10dp"
+                android:visibility="invisible"
+                app:layout_constraintBottom_toBottomOf="@id/iDashExercise"
+                app:layout_constraintRight_toRightOf="@id/iDashExercise"
+                app:srcCompat="@drawable/mark_as_seen_button"
+                tools:layout_editor_absoluteX="10dp" />
+
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -264,4 +320,5 @@
                 app:layout_constraintTop_toBottomOf="@id/favorites_titel" />
         </LinearLayout>
 
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
