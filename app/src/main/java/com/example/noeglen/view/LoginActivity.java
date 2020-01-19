@@ -150,17 +150,18 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 LicenseDTO licens = (LicenseDTO) object;
 
                 if (licens == null) {
-
+                    progressBar.setVisibility(View.GONE);
+                    registerSelect.setVisibility(View.VISIBLE);
                     Toast.makeText(LoginActivity.this, "Ubrulig licens", Toast.LENGTH_SHORT).show();
 
                 } else {
 
                     if (licens.getUserID() == null) {
-
                         createAccount(email, password, license);
 
                     } else {
-
+                        progressBar.setVisibility(View.GONE);
+                        registerSelect.setVisibility(View.VISIBLE);
                         Toast.makeText(LoginActivity.this, "Licens allerede i brug", Toast.LENGTH_SHORT).show();
                     }
                 }

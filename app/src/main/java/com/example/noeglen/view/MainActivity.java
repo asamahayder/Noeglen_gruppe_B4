@@ -221,7 +221,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             v = findViewById(R.id.bNav1);
         }
         if (tag.equals(getString(R.string.fragment_dashmain))){
-            selectedFragment = new DashVidMainF();
+            selectedFragment = new DashMainF();
             v = findViewById(R.id.bNav2);
         }
         if (tag.equals(getString(R.string.fragment_dashvidmain))){
