@@ -16,10 +16,7 @@ import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
 import com.example.noeglen.R;
-import com.example.noeglen.data.ExerciseDTO;
 import com.example.noeglen.data.FavoriteDTO;
-import com.example.noeglen.data.FavoritesDTO;
-import com.example.noeglen.data.KnowledgeDTO;
 import com.example.noeglen.data.VideoDTO;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -27,7 +24,6 @@ import com.google.gson.reflect.TypeToken;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 
 import bg.devlabs.fullscreenvideoview.FullscreenVideoView;

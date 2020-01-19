@@ -20,9 +20,6 @@ import com.bumptech.glide.Glide;
 import com.example.noeglen.R;
 import com.example.noeglen.data.FavoriteDTO;
 import com.example.noeglen.data.KnowledgeDTO;
-import com.example.noeglen.data.ExerciseDTO;
-import com.example.noeglen.data.FavoritesDTO;
-import com.example.noeglen.data.VideoDTO;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 

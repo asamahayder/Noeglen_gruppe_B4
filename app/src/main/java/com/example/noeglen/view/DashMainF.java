@@ -7,24 +7,17 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.ProgressBar;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.cardview.widget.CardView;
-import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 
 import com.example.noeglen.R;
-import com.example.noeglen.data.ExerciseDTO;
 import com.example.noeglen.data.FavoriteDTO;
-import com.example.noeglen.data.FavoritesDTO;
-import com.example.noeglen.data.KnowledgeDTO;
-import com.example.noeglen.data.MyCallBack;
-import com.example.noeglen.data.VideoDAO;
 import com.example.noeglen.data.VideoDTO;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
