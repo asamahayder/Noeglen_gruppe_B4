@@ -87,7 +87,7 @@ public class DashMainF extends Fragment implements View.OnClickListener, DashMai
         getSharedPref();
         rView = getView().findViewById(R.id.favorites_recyclerview);
         adapter = new DashMainRecyclerAdapter(favorites,getContext(),this);
-        rView.setLayoutManager(new LinearLayoutManager(getContext()));
+        rView.setLayoutManager(new LinearLayoutManager(getContext(),LinearLayoutManager.HORIZONTAL,false));
         rView.setAdapter(adapter);
     }
 
