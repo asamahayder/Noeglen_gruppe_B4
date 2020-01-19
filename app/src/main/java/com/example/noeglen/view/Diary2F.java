@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -28,8 +29,8 @@ public class Diary2F extends Fragment implements View.OnClickListener {
 
     private String[] questions, answers;
     private String date;
-    private TextView dateText, question1, question2, question3, question4,
-                     answer1, answer2, answer3, answer4;
+    private TextView dateText, question1, question2, question3, question4;
+    private EditText answer1, answer2, answer3, answer4;
     private Bundle bundle;
     private ImageView imageView;
     private SharedPreferences sPref;
@@ -89,14 +90,14 @@ public class Diary2F extends Fragment implements View.OnClickListener {
 
         dateText = getView().findViewById(R.id.textView3);
 
-        question1 = getView().findViewById(R.id.textView8);
-        question2 = getView().findViewById(R.id.textView9);
-        question3 = getView().findViewById(R.id.textView10);
-        question4 = getView().findViewById(R.id.textView11);
-        answer1 = getView().findViewById(R.id.textView14);
-        answer2 = getView().findViewById(R.id.textView15);
-        answer3 = getView().findViewById(R.id.textView16);
-        answer4 = getView().findViewById(R.id.textView17);
+        question1 = getView().findViewById(R.id.question1);
+        question2 = getView().findViewById(R.id.question2);
+        question3 = getView().findViewById(R.id.question3);
+        question4 = getView().findViewById(R.id.question4);
+        answer1 = getView().findViewById(R.id.answer1);
+        answer2 = getView().findViewById(R.id.answer2);
+        answer3 = getView().findViewById(R.id.answer3);
+        answer4 = getView().findViewById(R.id.answer4);
 
         dateText.setText(date);
 
