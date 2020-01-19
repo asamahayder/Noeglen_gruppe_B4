@@ -89,9 +89,6 @@ public class Diary2F extends Fragment implements View.OnClickListener {
 
         dateText = getView().findViewById(R.id.textView3);
 
-
-
-
         question1 = getView().findViewById(R.id.textView8);
         question2 = getView().findViewById(R.id.textView9);
         question3 = getView().findViewById(R.id.textView10);

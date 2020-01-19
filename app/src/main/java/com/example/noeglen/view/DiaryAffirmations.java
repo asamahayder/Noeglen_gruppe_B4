@@ -15,11 +15,14 @@ import androidx.fragment.app.Fragment;
 
 import com.example.noeglen.R;
 
+import java.util.Random;
+
 
 public class DiaryAffirmations extends Fragment {
 
     private TextView affirmation;
     private IMainActivity iMain;
+
 
 
     @Nullable
@@ -32,8 +35,16 @@ public class DiaryAffirmations extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+
+        String[] arr = new String[]{"Det bliver en fantastisk dag", "Hvor er jeg heldig – jeg trækker vejret, lever og elsker", "Alt er muligt, jeg ved det og jeg kan mærke det",
+        "Jeg er elsket", "Der er så meget at være taknemmelig over", "Jeg mærker en styrke og en kraft vokse indeni mig", "Der er så meget at glæde sig over",
+        "Jeg kan mærke energien brede sig i min krop"};
+
+        Random random = new Random();
+        int randomAffir = random.nextInt(arr.length);
+
         affirmation = getView().findViewById(R.id.affirmation);
-        affirmation.setText("some message");
+        affirmation.setText(arr[randomAffir]);
 
         Handler mainLooperHandler = new Handler(Looper.getMainLooper());
 
