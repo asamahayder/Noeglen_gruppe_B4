@@ -250,6 +250,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         if (tag.equals(getString(R.string.fragment_exerexer))){
             selectedFragment = new ExerExerF();
         }
+        if (tag.equals(getString(R.string.fragment_exer_2))){
+            selectedFragment = new ExerExerTwoF();
+        }
 
         // CLEAR BACKSTACK / CHANGE NAVBAR ANIMATION
         if (!addToBackStack){
