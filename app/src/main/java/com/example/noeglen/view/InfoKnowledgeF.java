@@ -18,15 +18,14 @@ import androidx.fragment.app.FragmentTransaction;
 
 import com.bumptech.glide.Glide;
 import com.example.noeglen.R;
+import com.example.noeglen.data.FavoriteDTO;
 import com.example.noeglen.data.KnowledgeDTO;
-import com.example.noeglen.data.ExerciseDTO;
-import com.example.noeglen.data.FavoritesDTO;
-import com.example.noeglen.data.VideoDTO;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.List;
 
 public class InfoKnowledgeF extends Fragment implements View.OnClickListener {
 
@@ -34,7 +33,7 @@ public class InfoKnowledgeF extends Fragment implements View.OnClickListener {
     private ImageView backButton, favButton, backgroundImage;
 
     private KnowledgeDTO currentKnowledgeArticle;
-    private FavoritesDTO favorites;
+    private List<FavoriteDTO> favoriteList;
 
     private Bundle bundle;
     private Gson gson;
@@ -95,9 +94,9 @@ public class InfoKnowledgeF extends Fragment implements View.OnClickListener {
             if (traverseThroughFavs()){
                 favButton.setImageDrawable(getContext().getDrawable(resID1));
                 System.out.println("blue");
-                for (int i = 0; i < favorites.getListOfKnowledgeDTOS().size(); i++) {
-                    if (favorites.getListOfKnowledgeDTOS().get(i).getTitle().equals(currentKnowledgeArticle.getTitle())){
-                        favorites.getListOfKnowledgeDTOS().remove(i);
+                for (int i = 0; i < favoriteList.size(); i++) {
+                    if (favoriteList.get(i).getTitle().equals(currentKnowledgeArticle.getTitle()) && favoriteList.get(i).getCURRENT_TYPE() == 3){
+                        favoriteList.remove(i);
                         break;
                     }
                 }
@@ -105,9 +104,9 @@ public class InfoKnowledgeF extends Fragment implements View.OnClickListener {
             else {
                 favButton.setImageDrawable(getContext().getDrawable(resID2));
                 System.out.println("red");
-                favorites.getListOfKnowledgeDTOS().add(currentKnowledgeArticle);
+                favoriteList.add(new FavoriteDTO(3,currentKnowledgeArticle.getImage(),currentKnowledgeArticle.getTitle(),currentKnowledgeArticle.getBody()));
             }
-            System.out.println(favorites.getListOfKnowledgeDTOS().size());
+            System.out.println(favoriteList.size());
             saveSharedPref();
         }
         if (v == backButton){
@@ -129,24 +128,35 @@ public class InfoKnowledgeF extends Fragment implements View.OnClickListener {
     }
 
     private void infoKnowledgeChecker() {
+        String imageURL= "";
         Gson gson = new Gson();
         Type type = new TypeToken<KnowledgeDTO>(){}.getType();
         currentKnowledgeArticle = gson.fromJson(bundle.getString("currentKnowledgeArticle"),type);
-        textTITLE.setText(currentKnowledgeArticle.getTitle());
-        textBODY.setText(Html.fromHtml(currentKnowledgeArticle.getBody(),Html.FROM_HTML_MODE_LEGACY));
+        if (currentKnowledgeArticle.getBody() == null){
+            Type type1 = new TypeToken<FavoriteDTO>(){}.getType();
+            FavoriteDTO currentArticle = gson.fromJson(bundle.getString("currentKnowledgeArticle"),type1);
+            textTITLE.setText(currentArticle.getTitle());
+            textBODY.setText(Html.fromHtml(currentArticle.getBodyORweek(),Html.FROM_HTML_MODE_LEGACY));
+            imageURL = currentArticle.getIamgeURL();
+        }
+        else {
+            textTITLE.setText(currentKnowledgeArticle.getTitle());
+            textBODY.setText(Html.fromHtml(currentKnowledgeArticle.getBody(),Html.FROM_HTML_MODE_LEGACY));
+            imageURL = currentKnowledgeArticle.getImage();
+        }
 
         Glide
                 .with(getContext())
-                .load(currentKnowledgeArticle.getImage())
+                .load(imageURL)
                 .into(backgroundImage);
     }
 
     private boolean traverseThroughFavs() {
         boolean isFavorited = false;
-        for (int i = 0; i < favorites.getListOfKnowledgeDTOS().size(); i++) {
+        for (int i = 0; i < favoriteList.size(); i++) {
             favButton.setImageDrawable(getContext().getDrawable(resID1));
             isFavorited = false;
-            if (favorites.getListOfKnowledgeDTOS().get(i).getTitle().equals(currentKnowledgeArticle.getTitle())){
+            if (favoriteList.get(i).getTitle().equals(currentKnowledgeArticle.getTitle())){
                 favButton.setImageDrawable(getContext().getDrawable(resID2));
                 isFavorited = true;
                 break;
@@ -156,17 +166,17 @@ public class InfoKnowledgeF extends Fragment implements View.OnClickListener {
     }
 
     private void saveSharedPref() {
-        String json = gson.toJson(favorites);
+        String json = gson.toJson(favoriteList);
         sEdit.putString(getString(R.string.sPref_favorites),json);
         sEdit.commit();
     }
 
     private void getSharedPref() {
         String json = sPref.getString(getString(R.string.sPref_favorites),null);
-        Type type = new TypeToken<FavoritesDTO>(){}.getType();
-        favorites = gson.fromJson(json,type);
-        if (favorites == null) {
-            favorites = new FavoritesDTO(new ArrayList<KnowledgeDTO>(), new ArrayList<VideoDTO>(), new ArrayList<ExerciseDTO>());
+        Type type = new TypeToken<List<FavoriteDTO>>(){}.getType();
+        favoriteList = gson.fromJson(json,type);
+        if (favoriteList == null) {
+            favoriteList = new ArrayList<>();
         }
     }
 
