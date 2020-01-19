@@ -78,7 +78,6 @@ public class InfoKnowledgeMainF extends Fragment implements InfoKnowledgeMainAda
 
         @Override
         protected void onPostExecute(Void aVoid) {
-            Collections.shuffle(listOfKnowledgeArticles);
             setRecyclerview();
         }
     }

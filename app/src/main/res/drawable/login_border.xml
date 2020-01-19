@@ -3,8 +3,8 @@
     android:shape="rectangle" >
 
     <padding android:bottom="5dp"
-        android:right="7dp"
-        android:left="7dp"
+        android:right="10dp"
+        android:left="10dp"
         android:top="5dp">
 
     </padding>
@@ -14,7 +14,7 @@
         android:bottomRightRadius="67dp"
         android:topRightRadius="67dp" />
 
-    <stroke android:width="2dp" android:color="#78CDFD"/>
+    <stroke android:width="2dp" android:color="@color/primaryDark"/>
 
 </shape>
 
