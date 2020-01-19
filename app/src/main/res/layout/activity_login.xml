@@ -14,12 +14,14 @@
         android:ems="10"
         android:inputType="textEmailAddress"
         android:text="test@user.com"
+        android:textColor="#42B0FF"
         app:layout_constraintBottom_toBottomOf="@+id/EmailTV"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.01"
         app:layout_constraintStart_toEndOf="@+id/EmailTV"
         app:layout_constraintTop_toTopOf="@+id/EmailTV"
-        app:layout_constraintVertical_bias="0.576" />
+        app:layout_constraintVertical_bias="0.576"
+        app:backgroundTint="#42B0FF"/>
 
     <EditText
         android:id="@+id/PassInsert"
@@ -29,18 +31,21 @@
         android:ems="10"
         android:inputType="textPassword"
         android:text="123456"
+        android:textColor="#42B0FF"
         app:layout_constraintBottom_toBottomOf="@+id/PassTV"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@+id/PassTV"
         app:layout_constraintTop_toTopOf="@+id/PassTV"
-        app:layout_constraintVertical_bias="0.615" />
+        app:layout_constraintVertical_bias="0.615"
+        app:backgroundTint="#42B0FF"/>
 
     <TextView
         android:id="@+id/EmailTV"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="E-mail"
+        android:textColor="#42B0FF"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.161"
@@ -56,6 +61,7 @@
         android:clickable="true"
         android:focusable="auto"
         android:text="Glemt kode"
+        android:textColor="#42B0FF"
         app:layout_constraintEnd_toEndOf="@+id/PassInsert"
         app:layout_constraintTop_toBottomOf="@+id/PassInsert" />
 
@@ -66,6 +72,7 @@
         android:layout_marginTop="28dp"
         android:clickable="true"
         android:text="Log på"
+        android:textColor="#42B0FF"
         app:layout_constraintStart_toStartOf="@+id/PassInsert"
         app:layout_constraintTop_toBottomOf="@+id/PassInsert" />
 
@@ -76,6 +83,7 @@
         android:layout_marginTop="28dp"
         android:clickable="true"
         android:text="Registrer"
+        android:textColor="#42B0FF"
         app:layout_constraintStart_toStartOf="@+id/PassInsert"
         app:layout_constraintTop_toBottomOf="@+id/PassInsert" />
 
@@ -85,6 +93,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="72dp"
         android:text="Kodeord"
+        android:textColor="#42B0FF"
         app:layout_constraintEnd_toEndOf="@+id/EmailTV"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="@+id/EmailTV"
@@ -97,11 +106,13 @@
         android:layout_marginTop="76dp"
         android:clickable="true"
         android:text="Log på"
+        android:textColor="#42B0FF"
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/PassInsert" />
+        app:layout_constraintTop_toBottomOf="@+id/PassInsert"
+        android:background="@drawable/login_border"/>
 
     <TextView
         android:id="@+id/RegisterTV"
@@ -110,23 +121,25 @@
         android:layout_marginTop="76dp"
         android:clickable="true"
         android:text="Registrer"
+        android:textColor="#42B0FF"
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/PassInsert" />
+        app:layout_constraintTop_toBottomOf="@+id/PassInsert"
+        android:background="@drawable/login_border"/>
 
     <ProgressBar
         android:id="@+id/progressBar"
         style="?android:attr/progressBarStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:indeterminateTint="#42B0FF"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/PassInsert"
-        app:layout_constraintVertical_bias="0.327"
-        android:indeterminateTint="@android:color/darker_gray" />
+        app:layout_constraintVertical_bias="0.327" />
 
     <EditText
         android:id="@+id/LicenseInsert"
@@ -140,7 +153,9 @@
         app:layout_constraintHorizontal_bias="0.212"
         app:layout_constraintStart_toEndOf="@+id/LicenseTV"
         app:layout_constraintTop_toTopOf="@+id/LicenseTV"
-        app:layout_constraintVertical_bias="0.541" />
+        app:layout_constraintVertical_bias="0.541"
+        android:textColor="#42B0FF"
+        app:backgroundTint="#42B0FF"/>
 
     <TextView
         android:id="@+id/LicenseTV"
@@ -148,9 +163,22 @@
         android:layout_height="21dp"
         android:layout_marginBottom="72dp"
         android:text="Licens"
+        android:textColor="#42B0FF"
         app:layout_constraintBottom_toTopOf="@+id/EmailTV"
         app:layout_constraintEnd_toEndOf="@+id/EmailTV"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="@+id/EmailTV" />
+
+    <TextView
+        android:id="@+id/textView12"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="36dp"
+        android:text="TextView"
+        android:textColor="#489CFF"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toTopOf="@+id/LicenseInsert"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
