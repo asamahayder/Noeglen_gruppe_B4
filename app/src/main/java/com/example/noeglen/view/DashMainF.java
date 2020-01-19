@@ -74,6 +74,8 @@ public class DashMainF extends Fragment implements View.OnClickListener, DashMai
 
     }
 
+
+
     private void initializeView() {
         iVidDash = Objects.requireNonNull(getView()).findViewById(R.id.iDashVid);
         iDiaryDash = Objects.requireNonNull(getView()).findViewById(R.id.iDashDiary);
