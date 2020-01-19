@@ -257,7 +257,6 @@ public class DashMainF extends Fragment implements View.OnClickListener, DashMai
 
             return seenVideosList;
         }
-
     }
 
     public void getVideoList(){
