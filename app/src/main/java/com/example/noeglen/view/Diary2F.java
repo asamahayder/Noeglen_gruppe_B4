@@ -70,14 +70,14 @@ public class Diary2F extends Fragment implements View.OnClickListener {
         questions = new String[4];
         answers = new String[4];
         gson = new Gson();
-        String sPrefKey = "Noeglen.data";
+        String sPrefKey = getString(R.string.sharedPreferencesKey);
         sPref = getContext().getSharedPreferences(sPrefKey, Context.MODE_PRIVATE);
         sEdit = sPref.edit();
         bundle = getArguments();
         date = bundle.getString("date");
 
       //  questions = bundle.getStringArray("questions");
-        getSharedPref("Diary");
+        getListOfEntries("Diary");
 
         for (int i = 0; i < listOfEntries.size(); i++) {
             if (listOfEntries.get(i).getDate().equals(date)){
@@ -143,7 +143,7 @@ public class Diary2F extends Fragment implements View.OnClickListener {
 
 
 
-    private void getSharedPref(String sPrefEditKey) {
+    private void getListOfEntries(String sPrefEditKey) {
         String json = sPref.getString(sPrefEditKey, null);
         System.out.println(json + "##########");
         Type type = new TypeToken<List<DiaryDTO>>() {
@@ -156,7 +156,7 @@ public class Diary2F extends Fragment implements View.OnClickListener {
     }
     private void saveDiaryDTO() {
         String sPrefEditKey = "Diary";
-        getSharedPref(sPrefEditKey);
+        getListOfEntries(sPrefEditKey);
         diaryDTO  = new DiaryDTO(bundle.getInt("smiley"), answers,questions,date);
 
         listOfEntries.add(diaryDTO);
