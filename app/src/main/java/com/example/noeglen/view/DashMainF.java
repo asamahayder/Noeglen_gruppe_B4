@@ -178,10 +178,16 @@ public class DashMainF extends Fragment implements View.OnClickListener, DashMai
             iMain.visibilityGone();
         }
         if (CURRENT_TYPE == 2){
-            ExerExerF exerciseF = new ExerExerF();
             json = gson.toJson(favoriteList.get(position));
             bundle.putString("currentExercise",json);
-            iMain.setFragment(exerciseF,getString(R.string.fragment_exerexer),true,bundle);
+            if (favoriteList.get(position).getTitle().equals("Vejrtrækningsøvelse")){
+                ExerExerF exerciseF = new ExerExerF();
+                iMain.setFragment(exerciseF,getString(R.string.fragment_exerexer),true,bundle);
+            }
+            else {
+                ExerExerTwoF exerciseF = new ExerExerTwoF();
+                iMain.setFragment(exerciseF,getString(R.string.fragment_exerexer),true,bundle);
+            }
             iMain.visibilityGone();
         }
         if (CURRENT_TYPE == 3){
