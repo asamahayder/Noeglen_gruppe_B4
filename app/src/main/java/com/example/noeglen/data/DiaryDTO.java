@@ -1,6 +1,6 @@
 package com.example.noeglen.data;
 
-public class DiaryDTO {
+public class DiaryDTO implements Comparable<DiaryDTO> {
 
     private int smiley;
     private String [] answers, questions;
@@ -43,5 +43,10 @@ public class DiaryDTO {
 
     public void setDate(String date) {
         this.date = date;
+    }
+
+    @Override
+    public int compareTo(DiaryDTO o) {
+        return getDate().compareTo(o.getDate());
     }
 }
