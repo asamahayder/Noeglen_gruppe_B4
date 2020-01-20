@@ -27,6 +27,7 @@
     <string name="Dagbog">Dagbog</string>
     <string name="markAsSeenButton">Marker som set</string>
     <string name="markAsUnseenButton">Marker som Uset</string>
+    <string name="emptyFavoriteListText">Du har ikke valgt nogle favoritter</string>
 
     <!-- navigation drawer -->
     <string name="navigation_drawer_open">navigation drawer open</string>
