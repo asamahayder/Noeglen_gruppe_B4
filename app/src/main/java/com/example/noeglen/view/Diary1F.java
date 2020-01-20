@@ -125,10 +125,10 @@ public class Diary1F extends Fragment  implements View.OnClickListener{
                 Bundle bundle1 = new Bundle();
                 bundle1.putString("date",date);
 
-               /* Gson gson = new Gson();
+                Gson gson = new Gson();
                 String json = gson.toJson(diaryDTO);
                 bundle1.putString("diaryDTO",json);
-                bundle1.putStringArray("questions", questions);      */
+                bundle1.putStringArray("questions", questions);
 
 
                iMain.setFragment(diary2F,tag,true, bundle1);
@@ -165,7 +165,9 @@ public class Diary1F extends Fragment  implements View.OnClickListener{
     private void saveSharedPref(String sPrefEditKey) {
         String json = gson.toJson(listOfEntries);
         sEdit.putString(sPrefEditKey,json);
+
         sEdit.commit();
+        System.out.println("");
     }
 
     @Override

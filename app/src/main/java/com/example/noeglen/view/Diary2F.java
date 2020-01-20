@@ -84,7 +84,6 @@ public class Diary2F extends Fragment implements View.OnClickListener {
                 diaryDTO = listOfEntries.get(i);
             }
         }
-        System.out.println(diaryDTO + "#######################");
         questions = diaryDTO.getQuestions();
         answers = diaryDTO.getAnswers();
         image = "emoji" + diaryDTO.getSmiley();
