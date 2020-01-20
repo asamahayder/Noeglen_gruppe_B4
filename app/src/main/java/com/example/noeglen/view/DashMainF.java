@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -46,6 +47,7 @@ public class DashMainF extends Fragment implements View.OnClickListener, DashMai
     private ImageView markTodaysExerciseAsDoneImage;
     private boolean isNewDay;
     private ArrayList<VideoDTO> videoList;
+    private TextView emptyFavoriteListTextView;
 
     @Nullable
     @Override
@@ -68,17 +70,23 @@ public class DashMainF extends Fragment implements View.OnClickListener, DashMai
         markTodaysVideoAsSeenImage = getView().findViewById(R.id.markTodaysVideoAsSeenImage);
         markTodaysDiaryAsWrittenImage = getView().findViewById(R.id.markTodaysDiaryAsWrittenImage);
         markTodaysExerciseAsDoneImage = getView().findViewById(R.id.markTodaysExerciseAsDoneImage);
+        emptyFavoriteListTextView = getView().findViewById(R.id.emptyFavoriteListText);
         iVidDash.setOnClickListener(this);
         iDiaryDash.setOnClickListener(this);
         iExerciseDash.setOnClickListener(this);
 
         gson = new Gson();
         sPref = getContext().getSharedPreferences(getString(R.string.sharedPreferencesKey),Context.MODE_PRIVATE);
-        getSharedPref();
-        rView = getView().findViewById(R.id.favorites_recyclerview);
-        adapter = new DashMainRecyclerAdapter(favoriteList,getContext(),this);
-        rView.setLayoutManager(new LinearLayoutManager(getContext(),LinearLayoutManager.HORIZONTAL,false));
-        rView.setAdapter(adapter);
+        getFavoriteList();
+
+        if (!favoriteList.isEmpty()){
+            emptyFavoriteListTextView.setVisibility(View.GONE);
+            rView = getView().findViewById(R.id.favorites_recyclerview);
+            adapter = new DashMainRecyclerAdapter(favoriteList,getContext(),this);
+            rView.setLayoutManager(new LinearLayoutManager(getContext(),LinearLayoutManager.HORIZONTAL,false));
+            rView.setAdapter(adapter);
+        }
+
 
         getVideoList();
         checkIfNewDay();
@@ -87,7 +95,7 @@ public class DashMainF extends Fragment implements View.OnClickListener, DashMai
 
     }
 
-    private void getSharedPref() {
+    private void getFavoriteList() {
         String json = sPref.getString(getString(R.string.sPref_favorites),null);
         Type type = new TypeToken<List<FavoriteDTO>>(){}.getType();
         favoriteList = gson.fromJson(json,type);
