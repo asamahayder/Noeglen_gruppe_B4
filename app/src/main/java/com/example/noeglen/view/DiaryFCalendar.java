@@ -49,6 +49,9 @@ public class DiaryFCalendar extends Fragment implements View.OnClickListener {
                 Log.d(tag, "onSelectedDayChange: day/month/year:"+ date);
                 System.out.println(date);
 
+
+
+
             }
         });
 

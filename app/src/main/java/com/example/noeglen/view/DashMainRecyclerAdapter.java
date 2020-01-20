@@ -59,13 +59,16 @@ public class DashMainRecyclerAdapter extends RecyclerView.Adapter<DashMainRecycl
             //FIXME ADD ICONS FOR VIDEO AND EXERCISE
             switch (favorites.get(position).getCURRENT_TYPE()){
                 case 1:
-                    //holder.iconImage.setBackgroundResource();
+                    holder.iconImage.setBackgroundResource(R.drawable.ic_video_icon);
+                    holder.iconCircle.setBackgroundResource(R.drawable.circle_secondarylight);
                     break;
                 case 2:
-                    //holder.iconImage.setBackgroundResource();
+                    holder.iconImage.setBackgroundResource(R.drawable.ic_exercise);
+                    holder.iconCircle.setBackgroundResource(R.drawable.circle_secondarynormal);
                     break;
                 case 3:
-                    holder.iconImage.setBackgroundResource(R.drawable.article_trans_back);
+                    holder.iconImage.setBackgroundResource(R.drawable.ic_article);
+                    holder.iconCircle.setBackgroundResource(R.drawable.circle_white);
                     break;
             }
 
@@ -88,7 +91,7 @@ public class DashMainRecyclerAdapter extends RecyclerView.Adapter<DashMainRecycl
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         private OnFavoriteListener onFavoriteListener;
-        private ImageView favImage, iconImage;
+        private ImageView favImage, iconImage, iconCircle;
         private TextView favTitle;
 
 
@@ -98,6 +101,7 @@ public class DashMainRecyclerAdapter extends RecyclerView.Adapter<DashMainRecycl
             this.favImage = itemView.findViewById(R.id.dashmain_fav_image);
             this.favTitle = itemView.findViewById(R.id.dashmain_fav_titel);
             this.iconImage = itemView.findViewById(R.id.dashmain_fav_icontype);
+            this.iconCircle = itemView.findViewById(R.id.dashmain_fav_iconcircle);
 
             itemView.setOnClickListener(this);
         }

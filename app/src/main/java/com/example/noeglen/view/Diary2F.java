@@ -18,8 +18,8 @@ import androidx.fragment.app.Fragment;
 import com.example.noeglen.R;
 import com.example.noeglen.data.DiaryDTO;
 import com.example.noeglen.logic.CurrentDate;
+import com.google.common.reflect.TypeToken;
 import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 
 import java.lang.reflect.Type;
 import java.text.SimpleDateFormat;
@@ -43,6 +43,7 @@ public class Diary2F extends Fragment implements View.OnClickListener {
     private IMainActivity iMain;
     private ImageView editKnap;
     private Button gem;
+    private DiaryDTO diaryDTO;
 
 
     @Nullable
@@ -66,21 +67,34 @@ public class Diary2F extends Fragment implements View.OnClickListener {
         date = new SimpleDateFormat("dd/M/yyyy").format(currentDate.getDate());
         dateText = getView().findViewById(R.id.textView3);
 
-
-
-
         questions = new String[4];
         answers = new String[4];
         gson = new Gson();
-        String sPrefKey = "Noeglen.data";
+        String sPrefKey = getString(R.string.sharedPreferencesKey);
         sPref = getContext().getSharedPreferences(sPrefKey, Context.MODE_PRIVATE);
         sEdit = sPref.edit();
         bundle = getArguments();
-        questions = bundle.getStringArray("questions");
-        getSharedPref("Diary");
+        date = bundle.getString("date");
 
+      //  questions = bundle.getStringArray("questions");
+        getListOfEntries("Diary");
 
         for (int i = 0; i < listOfEntries.size(); i++) {
+            if (listOfEntries.get(i).getDate().equals(date)){
+                diaryDTO = listOfEntries.get(i);
+            }
+        }
+        System.out.println(diaryDTO + "#######################");
+        questions = diaryDTO.getQuestions();
+        answers = diaryDTO.getAnswers();
+        image = "emoji" + diaryDTO.getSmiley();
+        int rec = getResources().getIdentifier(image,"drawable", this.getContext().getPackageName());
+        imageView = getView().findViewById(R.id.imageView6);
+        imageView.setImageDrawable(getContext().getDrawable(rec));
+
+
+
+      /*  for (int i = 0; i < listOfEntries.size(); i++) {
             if (listOfEntries.get(i).getQuestions()[0].equals(questions[0])) {
                 answers = listOfEntries.get(i).getAnswers();
                 image = "emoji" + listOfEntries.get(i).getSmiley();
@@ -89,7 +103,7 @@ public class Diary2F extends Fragment implements View.OnClickListener {
                 imageView.setImageDrawable(getContext().getDrawable(rec));
 
             }
-        }
+        }  */
 
 
         dateText = getView().findViewById(R.id.textView3);
@@ -130,14 +144,24 @@ public class Diary2F extends Fragment implements View.OnClickListener {
 
 
 
-    private void getSharedPref(String sPrefEditKey) {
+    private void getListOfEntries(String sPrefEditKey) {
         String json = sPref.getString(sPrefEditKey, null);
+        System.out.println(json + "##########");
         Type type = new TypeToken<List<DiaryDTO>>() {
         }.getType();
         listOfEntries = gson.fromJson(json, type);
         if (listOfEntries == null) {
             listOfEntries = new ArrayList<>();
         }
+
+    }
+    private void saveDiaryDTO() {
+        String sPrefEditKey = "Diary";
+        getListOfEntries(sPrefEditKey);
+        diaryDTO  = new DiaryDTO(bundle.getInt("smiley"), answers,questions,date);
+
+        listOfEntries.add(diaryDTO);
+        saveSharedPref(sPrefEditKey);
 
     }
 
@@ -148,8 +172,29 @@ public class Diary2F extends Fragment implements View.OnClickListener {
             answer2.setFocusableInTouchMode(true);
             answer3.setFocusableInTouchMode(true);
             answer4.setFocusableInTouchMode(true);
+
+
+
+
         }else if (v == gem){
-            iMain.inflateFragment(getString(R.string.fragment_dashmain),true);
+
+            iMain.inflateFragment(getString(R.string.fragment_calendar),true);
+
+            /*String tag = getString(R.string.fragment_calendar);
+            DiaryFCalendar diaryFCalendar = new DiaryFCalendar();
+            Bundle bundle1 = new Bundle();
+            iMain.setFragment(diaryFCalendar,tag,true,bundle1);*/
         }
+    }
+    private void saveSharedPref(String sPrefEditKey) {
+        String json = gson.toJson(listOfEntries);
+        sEdit.putString(sPrefEditKey,json);
+        sEdit.commit();
+    }
+
+    @Override
+    public void onAttach(@NonNull Context context) {
+        super.onAttach(context);
+        iMain = (IMainActivity) getActivity();
     }
 }
