@@ -61,7 +61,7 @@
         </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
-            android:id="@+id/bAddToFav"
+            android:id="@+id/cardviewfav"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:layout_marginEnd="20dp"
@@ -70,6 +70,7 @@
             app:layout_constraintTop_toBottomOf="@id/guideline_30_percent">
 
             <ImageView
+                android:id="@+id/bAddToFav"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@drawable/fav1" />
@@ -84,7 +85,7 @@
             android:elevation="2dp"
             android:text="Kan jeg gøre noget ved det?"
             android:textSize="25dp"
-            app:layout_constraintEnd_toStartOf="@id/bAddToFav"
+            app:layout_constraintEnd_toStartOf="@id/cardviewfav"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/guideline_30_percent" />
 

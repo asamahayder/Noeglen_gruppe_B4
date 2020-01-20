@@ -36,7 +36,7 @@ public class ExerExerF extends Fragment implements View.OnClickListener {
     private Animation breatheAnimation;
     private Button bstartAnim;
     private IMainActivity iMain;
-    private CardView bAddToFav;
+    private ImageView bAddToFav;
     private List<FavoriteDTO> favList;
     private SharedPreferences sPref;
     private SharedPreferences.Editor sEdit;

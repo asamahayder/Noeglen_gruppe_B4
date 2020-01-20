@@ -33,7 +33,7 @@ public class ExerExerTwoF extends Fragment implements View.OnClickListener {
     private TextView tTitle, tDesc;
     private MediaPlayer mp;
     private IMainActivity iMain;
-    private CardView bAddToFav;
+    private ImageView bAddToFav;
     private int primaryDark;
     private List<FavoriteDTO> favList;
     private SharedPreferences sPref;
@@ -117,7 +117,6 @@ public class ExerExerTwoF extends Fragment implements View.OnClickListener {
         if(v == bAddToFav) {
             if (addORemoveFromFav()) {
                 bAddToFav.setBackground(getContext().getDrawable(resID2));
-                System.out.println("######################################");
             } else {
                 bAddToFav.setBackground(getContext().getDrawable(resID1));
             }
