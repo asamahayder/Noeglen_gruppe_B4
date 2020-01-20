@@ -38,7 +38,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:scaleType="centerCrop"
-                app:srcCompat="@drawable/exercise1head" />
+                app:srcCompat="@drawable/exercise_trees_in_forest" />
 
         </androidx.cardview.widget.CardView>
 
@@ -57,37 +57,28 @@
                 android:layout_height="match_parent"
                 android:scaleType="center"
                 android:background="@drawable/whitebar"/>
-
-            <ImageView
-                android:id="@+id/bAddToFav"
-                android:layout_gravity="right"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:layout_marginEnd="20dp"
-                android:scaleType="centerCrop"
-                android:background="@drawable/fav1"/>
         </androidx.cardview.widget.CardView>
 
         <TextView
             android:id="@+id/tExcerTitle"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:text="Vejrtrækningsøvelse"
             android:elevation="2dp"
             android:textSize="25dp"
+            android:layout_marginStart="50dp"
             app:layout_constraintTop_toBottomOf="@id/guideline_30_percent"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/cardviewfav"
             app:layout_constraintStart_toStartOf="parent" />
 
         <TextView
             android:id="@+id/tExerDesc"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:layout_marginEnd="20dp"
-            android:elevation="2dp"
+            android:layout_marginStart="50dp"
             android:text="Her skal du følge den blå cirkel. Du skal trække vejret ind når den bliver stor, og puste ud når den bliver mindre."
-            app:layout_constraintEnd_toEndOf="parent"
+            android:elevation="2dp"
+            app:layout_constraintEnd_toStartOf="@id/cardviewfav"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tExcerTitle" />
 
@@ -108,11 +99,27 @@
             android:layout_height="wrap_content"
             android:text="Start"
             android:layout_marginBottom="50dp"
+            android:textColor="@color/primaryDark"
+            android:background="@drawable/blue_border"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.498"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintVertical_bias="0.659" />
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardviewfav"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginEnd="20dp"
+            app:cardBackgroundColor="@color/transparent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/guideline_30_percent">
+
+            <ImageView
+                android:id="@+id/bAddToFav"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/fav1" />
+        </androidx.cardview.widget.CardView>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </LinearLayout>

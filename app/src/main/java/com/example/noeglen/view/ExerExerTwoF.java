@@ -1,6 +1,7 @@
 package com.example.noeglen.view;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.content.SharedPreferences;
 import android.media.MediaPlayer;
 import android.os.Bundle;
@@ -14,6 +15,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 
 import com.example.noeglen.R;
@@ -28,10 +30,11 @@ import java.util.List;
 
 public class ExerExerTwoF extends Fragment implements View.OnClickListener {
     private Button btnPlay;
-    private ImageView bFav;
     private TextView tTitle, tDesc;
     private MediaPlayer mp;
     private IMainActivity iMain;
+    private ImageView bAddToFav;
+    private int primaryDark;
     private List<FavoriteDTO> favList;
     private SharedPreferences sPref;
     private SharedPreferences.Editor sEdit;
@@ -55,13 +58,13 @@ public class ExerExerTwoF extends Fragment implements View.OnClickListener {
     }
 
     private void initializeView() {
-        bFav = getView().findViewById(R.id.bAddToFav);
+        bAddToFav = getView().findViewById(R.id.bAddToFav);
         btnPlay = getView().findViewById(R.id.btnPlay);
         btnPlay.setOnClickListener(this);
-        bFav.setOnClickListener(this);
+        bAddToFav.setOnClickListener(this);
 
-        tTitle = getView().findViewById(R.id.tExcerTitle);
-        tDesc  =getView().findViewById(R.id.tExerDesc);
+        tTitle = getView().findViewById(R.id.tExerTitle);
+        tDesc  = getView().findViewById(R.id.tExerDesc);
         currExercise = new ExerciseDTO(tTitle.getText().toString(),tDesc.getText().toString(),"https://i.imgur.com/HHTC6Eu.png");
 
         gson = new Gson();
@@ -94,35 +97,52 @@ public class ExerExerTwoF extends Fragment implements View.OnClickListener {
 
     @Override
     public void onClick(View v) {
-        if (mp == null) {
-            mp = MediaPlayer.create(getActivity(), R.raw.stressoevelselydfile);
-            btnPlay.setText("Stop");
-            mp.start();
-        } else if (mp != null){
+        if (v == btnPlay) {
+            if (mp == null) {
+                int primaryOrange = getResources().getColor(R.color.primaryOrange);
+                mp = MediaPlayer.create(getActivity(), R.raw.stressoevelselydfile);
+                btnPlay.setText("Stop");
+                btnPlay.setTextColor(primaryOrange);
+                btnPlay.setBackgroundResource(R.drawable.orange_border);
+                mp.start();
+                mp.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                    public void onCompletion(MediaPlayer mp) {
+                        stopMediaPlayer();
+                    }
+                });
+            } else if (mp != null) {
+                stopMediaPlayer();
+            }
+        }
+        if(v == bAddToFav) {
+            if (addORemoveFromFav()) {
+                bAddToFav.setBackground(getContext().getDrawable(resID2));
+            } else {
+                bAddToFav.setBackground(getContext().getDrawable(resID1));
+            }
+        }
+    }
+
+    public void stopMediaPlayer() {
+        if (mp != null) {
+            primaryDark = getResources().getColor(R.color.primaryDark);
             btnPlay.setText("Afspil");
-            mp.stop();
+            btnPlay.setTextColor(primaryDark);
+            btnPlay.setBackgroundResource(R.drawable.blue_border);
             mp.release();
             mp = null;
-        }
-        if (v == bFav){
-            if (addORemoveFromFav()){
-                bFav.setBackground(getContext().getDrawable(resID2));;
-            }
-            else {
-                bFav.setBackground(getContext().getDrawable(resID1));;
-            }
         }
     }
 
     private boolean checkIfCurrExerIsFav() {
         for (int i = 0; i < favList.size(); i++) {
             if (favList.get(i).getTitle().equals(currExercise.getTitle()) && favList.get(i).getCURRENT_TYPE() == 2){
-                bFav.setBackground(getContext().getDrawable(resID2));
+                bAddToFav.setBackground(getContext().getDrawable(resID2));
                 isFavorite = true;
                 break;
             }
             else {
-                bFav.setBackground(getContext().getDrawable(resID1));
+                bAddToFav.setBackground(getContext().getDrawable(resID1));
                 isFavorite = false;
             }
         }

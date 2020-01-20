@@ -97,8 +97,9 @@
                 android:id="@+id/bExer1"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@drawable/exercise_1"
-                android:scaleType="centerCrop" />
+                android:src="@drawable/exercise_trees_in_forest"
+                android:scaleType="centerCrop"
+                android:tint="@color/transparentPrimary"/>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -130,8 +131,9 @@
                 android:id="@+id/bExer2"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@drawable/exercise_1"
-                android:scaleType="centerCrop" />
+                android:src="@drawable/exercise_shallow_white_daisy"
+                android:scaleType="centerCrop"
+                android:tint="@color/transparentPrimary"/>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -165,8 +167,9 @@
                 android:id="@+id/bExer3"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@drawable/exercise_1"
-                android:scaleType="centerCrop" />
+                android:src="@drawable/exercise_palm_trees"
+                android:scaleType="centerCrop"
+                android:tint="@color/transparentPrimary"/>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -199,8 +202,9 @@
                 android:id="@+id/bExer4"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@drawable/exercise_1"
-                android:scaleType="centerCrop" />
+                android:src="@drawable/exercise_calm_water"
+                android:scaleType="centerCrop"
+                android:tint="@color/transparentPrimary"/>
 
             <TextView
                 android:layout_width="wrap_content"

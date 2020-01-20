@@ -15,6 +15,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 
 import com.example.noeglen.R;
@@ -30,11 +31,12 @@ import java.util.Objects;
 
 public class ExerExerF extends Fragment implements View.OnClickListener {
 
-    private ImageView iAnim, bFav;
+    private ImageView iAnim;
     private TextView tTitle, tDesc;
     private Animation breatheAnimation;
-    private Button bAnim;
+    private Button bstartAnim;
     private IMainActivity iMain;
+    private ImageView bAddToFav;
     private List<FavoriteDTO> favList;
     private SharedPreferences sPref;
     private SharedPreferences.Editor sEdit;
@@ -59,14 +61,14 @@ public class ExerExerF extends Fragment implements View.OnClickListener {
 
     private void initializeView(){
         iAnim = Objects.requireNonNull(getView()).findViewById(R.id.iExerAnim);
-        bAnim = getView().findViewById(R.id.bstartAnim);
-        bFav = getView().findViewById(R.id.bAddToFav);
-        bAnim.setOnClickListener(this);
-        bFav.setOnClickListener(this);
+        bstartAnim = getView().findViewById(R.id.bstartAnim);
+        bAddToFav = getView().findViewById(R.id.bAddToFav);
+        bstartAnim.setOnClickListener(this);
+        bAddToFav.setOnClickListener(this);
         breatheAnimation = AnimationUtils.loadAnimation(getContext(), R.anim.scale);
 
         tTitle = getView().findViewById(R.id.tExcerTitle);
-        tDesc  =getView().findViewById(R.id.tExerDesc);
+        tDesc  = getView().findViewById(R.id.tExerDesc);
         currExercise = new ExerciseDTO(tTitle.getText().toString(),tDesc.getText().toString(),"https://i.imgur.com/HHTC6Eu.png");
 
         gson = new Gson();
@@ -84,12 +86,12 @@ public class ExerExerF extends Fragment implements View.OnClickListener {
     private boolean checkIfCurrExerIsFav() {
         for (int i = 0; i < favList.size(); i++) {
             if (favList.get(i).getTitle().equals(currExercise.getTitle()) && favList.get(i).getCURRENT_TYPE() == 2){
-                bFav.setBackground(getContext().getDrawable(resID2));
+                bAddToFav.setBackground(getContext().getDrawable(resID2));
                 isFavorite = true;
                 break;
             }
             else {
-                bFav.setBackground(getContext().getDrawable(resID1));
+                bAddToFav.setBackground(getContext().getDrawable(resID1));
                 isFavorite = false;
             }
         }
@@ -148,14 +150,15 @@ public class ExerExerF extends Fragment implements View.OnClickListener {
 
     @Override
     public void onClick(View v) {
-        if(v == bFav) {
+        if(v == bAddToFav) {
             if (addORemoveFromFav()){
-                bFav.setBackground(getContext().getDrawable(resID2));;
+                bAddToFav.setBackground(getContext().getDrawable(resID2));
+                System.out.println("######################################");
             }
             else {
-                bFav.setBackground(getContext().getDrawable(resID1));;
+                bAddToFav.setBackground(getContext().getDrawable(resID1));
             }
-        } else if( v == bAnim){
+        } else if( v == bstartAnim){
             iAnim.startAnimation(breatheAnimation);
         }
 
