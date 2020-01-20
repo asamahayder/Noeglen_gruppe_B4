@@ -29,22 +29,17 @@ import java.util.List;
 public class Diary1F extends Fragment  implements View.OnClickListener{
 
     private IMainActivity iMain;
-
     private Button saveButton;
     private TextView dateText, question1,question2,question3, question4;
     private EditText answer1, answer2, answer3,answer4;
-
     private CurrentDate currentDate;
     private DiaryDTO diaryDTO;
-
     private Bundle bundle;
     private Gson gson;
     private SharedPreferences sPref;
     private SharedPreferences.Editor sEdit;
-
     private String[] answers,questions;
     private String date;
-
     private List<DiaryDTO> listOfEntries;
     private ImageView imageView;
     private String image;
@@ -128,11 +123,13 @@ public class Diary1F extends Fragment  implements View.OnClickListener{
                 //DiaryFCalendar diaryFCalendar = new DiaryFCalendar();
 
                 Bundle bundle1 = new Bundle();
+                bundle1.putString("date",date);
 
-                Gson gson = new Gson();
+               /* Gson gson = new Gson();
                 String json = gson.toJson(diaryDTO);
                 bundle1.putString("diaryDTO",json);
-                bundle1.putStringArray("questions", questions);
+                bundle1.putStringArray("questions", questions);      */
+
 
                iMain.setFragment(diary2F,tag,true, bundle1);
                // iMain.setFragment(diaryAffirmations,tag,true,bundle1);
