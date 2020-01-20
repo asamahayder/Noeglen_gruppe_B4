@@ -9,7 +9,7 @@ public class FavoriteDTO {
     private String bodyORweek;
     private String videoURL;
 
-    // KNOWLEDGE
+    // KNOWLEDGE OR EXERCISE
     public FavoriteDTO(int CURRENT_TYPE, String iamgeURL, String title, String bodyORweek) {
         this.CURRENT_TYPE = CURRENT_TYPE;
         this.iamgeURL = iamgeURL;
