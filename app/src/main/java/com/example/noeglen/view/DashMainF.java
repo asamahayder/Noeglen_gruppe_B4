@@ -319,7 +319,7 @@ public class DashMainF extends Fragment implements View.OnClickListener, DashMai
             }else{
                 Collections.sort(diaryList);
                 for (int i = 0; i < 3; i++) {
-                    if (diaryList.get(i) == null)break;
+                    if (diaryList.size() - 1 < i)break;
                     recentDiaries.add(diaryList.get(i));
                     showRecentDiaries(recentDiaries);
                 }
