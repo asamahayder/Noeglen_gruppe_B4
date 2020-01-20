@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layer-list   xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:drawable="@drawable/nav_bar_icon_background" android:height="50dp" android:width="50dp" android:gravity="center"/>
+    <item android:drawable="@drawable/ic_video_icon" android:gravity="center" android:width="35dp" android:height="35dp"/>
+</layer-list>
