@@ -57,6 +57,15 @@
                 android:layout_height="match_parent"
                 android:scaleType="center"
                 android:background="@drawable/whitebar"/>
+
+            <ImageView
+                android:id="@+id/bAddToFav"
+                android:layout_gravity="right"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginEnd="20dp"
+                android:scaleType="centerCrop"
+                android:background="@drawable/fav1"/>
         </androidx.cardview.widget.CardView>
 
         <TextView
@@ -74,10 +83,11 @@
             android:id="@+id/tExerDesc"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="50dp"
-            android:text="Her skal du følge den blå cirkel. Du skal trække vejret ind når den bliver stor, og puste ud når den bliver mindre."
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
             android:elevation="2dp"
-            app:layout_constraintEnd_toStartOf="@id/bAddToFav"
+            android:text="Her skal du følge den blå cirkel. Du skal trække vejret ind når den bliver stor, og puste ud når den bliver mindre."
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tExcerTitle" />
 
@@ -103,17 +113,6 @@
             app:layout_constraintHorizontal_bias="0.498"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintVertical_bias="0.659" />
-
-        <Button
-            android:id="@+id/bAddToFav"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:minHeight="0dp"
-            android:minWidth="0dp"
-            android:text="Fav"
-            android:layout_marginEnd="20dp"
-            app:layout_constraintTop_toBottomOf="@id/guideline_30_percent"
-            app:layout_constraintEnd_toEndOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </LinearLayout>
