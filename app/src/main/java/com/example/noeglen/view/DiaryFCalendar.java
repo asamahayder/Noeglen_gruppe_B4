@@ -63,7 +63,10 @@ public class DiaryFCalendar extends Fragment  {
                 Log.d(tag, "onSelectedDayChange: day/month/year:"+ date);
                 System.out.println(dato);
 
-
+                Bundle bundle = new Bundle();
+                bundle.putString("date",date);
+                Diary2F diary2F = new Diary2F();
+                iMain.setFragment(diary2F,getString(R.string.fragment_diary2),true,bundle);
             }
         });
 
