@@ -12,6 +12,7 @@ import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 
 import com.example.noeglen.R;
@@ -22,8 +23,9 @@ public class ExerExerF extends Fragment implements View.OnClickListener {
 
     private ImageView iAnim;
     private Animation breatheAnimation;
-    private Button bFav, bAnim;
+    private Button bstartAnim;
     private IMainActivity iMain;
+    private CardView bAddToFav;
 
 
     @Nullable
@@ -40,10 +42,10 @@ public class ExerExerF extends Fragment implements View.OnClickListener {
 
     private void initializeView(){
         iAnim = Objects.requireNonNull(getView()).findViewById(R.id.iExerAnim);
-        bAnim = getView().findViewById(R.id.bstartAnim);
-        bFav = getView().findViewById(R.id.bAddToFav);
-        bAnim.setOnClickListener(this);
-        bFav.setOnClickListener(this);
+        bstartAnim = getView().findViewById(R.id.bstartAnim);
+        bAddToFav = getView().findViewById(R.id.bAddToFav);
+        bstartAnim.setOnClickListener(this);
+        bAddToFav.setOnClickListener(this);
         breatheAnimation = AnimationUtils.loadAnimation(getContext(), R.anim.scale);
     }
 
@@ -55,12 +57,12 @@ public class ExerExerF extends Fragment implements View.OnClickListener {
 
     @Override
     public void onClick(View v) {
-        if(v == bFav) {
+        if(v == bstartAnim) {
             //TODO: Adding functionality to add the exercise to favourites but beaware of animations and stuff
             iAnim.startAnimation(breatheAnimation);
-        } else if( v == bAnim){
-            iAnim.startAnimation(breatheAnimation);
         }
+        if (v == bAddToFav){
 
+        }
     }
 }
