@@ -143,6 +143,8 @@ public class DashMainF extends Fragment implements View.OnClickListener, DashMai
             DashVidF videoF = new DashVidF();
             json = gson.toJson(favoriteList.get(position));
             bundle.putString("videoObject",json);
+            System.out.println("######################3" + favoriteList.get(position).getTitle());
+            System.out.println("######################" + favoriteList.get(position).getVideoURL());
             iMain.setFragment(videoF,getString(R.string.fragment_dashvid),true,bundle);
             iMain.visibilityGone();
         }

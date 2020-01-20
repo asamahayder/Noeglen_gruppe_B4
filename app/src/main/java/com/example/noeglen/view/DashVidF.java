@@ -93,6 +93,7 @@ public class DashVidF extends Fragment implements View.OnClickListener {
         }
         videoView.enableAutoStart();
         videoView.requestFocus();
+
     }
 
     @Override
@@ -221,7 +222,7 @@ public class DashVidF extends Fragment implements View.OnClickListener {
             favoriteButton.setImageDrawable(ContextCompat.getDrawable(getActivity(),R.drawable.fav1));
             isFavorite = false;
         }else{
-            favoriteList.add(new FavoriteDTO(1,video.getImageUrl(),video.getTitle(),video.getWeek(),video.getWeek()));
+            favoriteList.add(new FavoriteDTO(1,video.getImageUrl(),video.getTitle(),video.getWeek(),video.getVideoUrl()));
             favoriteButton.setImageDrawable(ContextCompat.getDrawable(getActivity(),R.drawable.fav2));
             isFavorite = true;
         }
