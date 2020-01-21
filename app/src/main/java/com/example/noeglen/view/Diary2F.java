@@ -89,7 +89,7 @@ public class Diary2F extends Fragment implements View.OnClickListener {
         image = "emoji" + diaryDTO.getSmiley();
         int rec = getResources().getIdentifier(image,"drawable", this.getContext().getPackageName());
         imageView = getView().findViewById(R.id.imageView6);
-        imageView.setImageDrawable(getContext().getDrawable(rec));
+       // imageView.setImageDrawable(getContext().getDrawable(rec));
 
 
 
@@ -110,6 +110,7 @@ public class Diary2F extends Fragment implements View.OnClickListener {
         editKnap.setOnClickListener(this);
         gem = getView().findViewById(R.id.gem);
         gem.setOnClickListener(this);
+        gem.setVisibility(Button.GONE);
 
         question1 = getView().findViewById(R.id.question1);
         question2 = getView().findViewById(R.id.question2);
@@ -139,6 +140,51 @@ public class Diary2F extends Fragment implements View.OnClickListener {
 
     }
 
+
+
+
+    @Override
+    public void onClick(View v) {
+        if (v == editKnap ) {
+
+            editKnap.setVisibility(Button.GONE);
+            gem.setVisibility(Button.VISIBLE);
+            answer1.setFocusableInTouchMode(true);
+            answer2.setFocusableInTouchMode(true);
+            answer3.setFocusableInTouchMode(true);
+            answer4.setFocusableInTouchMode(true);
+
+
+        }else if (v == gem){
+
+            saveDiaryDTO();
+
+            iMain.inflateFragment(getString(R.string.fragment_dashmain),true);
+
+        }
+    }
+
+    private void saveDiaryDTO() {
+        //for (int i = 0; i < listOfEntries.size(); i++) {
+            if (listOfEntries != null ){
+                String sPrefEditKey = "Diary";
+                getListOfEntries(sPrefEditKey);
+
+                answers[0] = answer1.getText().toString();
+                answers[1] = answer2.getText().toString();
+                answers[2] = answer3.getText().toString();
+                answers[3] = answer4.getText().toString();
+
+                diaryDTO  = new DiaryDTO(bundle.getInt("smiley"), answers,questions,date);
+
+                listOfEntries.add(diaryDTO);
+                saveSharedPref(sPrefEditKey);
+            }
+        }
+
+
+   // }
+
     private void getListOfEntries(String sPrefEditKey) {
         String json = sPref.getString(sPrefEditKey, null);
         System.out.println(json + "##########");
@@ -149,41 +195,6 @@ public class Diary2F extends Fragment implements View.OnClickListener {
             listOfEntries = new ArrayList<>();
         }
 
-    }
-    private void saveDiaryDTO() {
-        for (int i = 0; i < listOfEntries.size(); i++) {
-            if (listOfEntries == null ){
-                String sPrefEditKey = "Diary";
-                getListOfEntries(sPrefEditKey);
-                diaryDTO  = new DiaryDTO(bundle.getInt("smiley"), answers,questions,date);
-                listOfEntries.add(diaryDTO);
-                saveSharedPref(sPrefEditKey);
-            } else {
-                
-            }
-        }
-
-
-    }
-
-    @Override
-    public void onClick(View v) {
-        if (v == editKnap ) {
-            answer1.setFocusableInTouchMode(true);
-            answer2.setFocusableInTouchMode(true);
-            answer3.setFocusableInTouchMode(true);
-            answer4.setFocusableInTouchMode(true);
-
-        }else if (v == gem){
-
-
-            iMain.inflateFragment(getString(R.string.fragment_calendar),true);
-
-            /*String tag = getString(R.string.fragment_calendar);
-            DiaryFCalendar diaryFCalendar = new DiaryFCalendar();
-            Bundle bundle1 = new Bundle();
-            iMain.setFragment(diaryFCalendar,tag,true,bundle1);*/
-        }
     }
     private void saveSharedPref(String sPrefEditKey) {
         String json = gson.toJson(listOfEntries);

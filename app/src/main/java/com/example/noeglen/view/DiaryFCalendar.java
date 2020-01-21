@@ -16,8 +16,11 @@ import androidx.fragment.app.Fragment;
 
 import com.example.noeglen.R;
 import com.example.noeglen.data.DiaryDTO;
+import com.google.common.reflect.TypeToken;
 import com.google.gson.Gson;
 
+import java.lang.reflect.Type;
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -32,6 +35,7 @@ public class DiaryFCalendar extends Fragment  {
     private List<DiaryDTO> listOfEntries;
     private Gson gson;
     private IMainActivity iMain;
+    private Bundle bundle;
 
 
 
@@ -47,11 +51,11 @@ public class DiaryFCalendar extends Fragment  {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        initializeView();
+
         calendar = getView().findViewById(R.id.calendarView);
         dato = calendar.getDate();
         calendar.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
-
-
 
 
             @Override
@@ -61,14 +65,51 @@ public class DiaryFCalendar extends Fragment  {
                 year = Integer.parseInt(years);
                 String date = day + "/" + (month + 1) + "/" + year;
                 Log.d(tag, "onSelectedDayChange: day/month/year:"+ date);
-                System.out.println(dato);
 
                 Bundle bundle = new Bundle();
                 bundle.putString("date",date);
                 Diary2F diary2F = new Diary2F();
-                iMain.setFragment(diary2F,getString(R.string.fragment_diary2),true,bundle);
+
+                Boolean diaryExists = false;
+                for (int i = 0; i < listOfEntries.size(); i++) {
+                    if (listOfEntries.get(i).getDate().equals(date)){
+                        diaryExists = true;
+                    }
+                }
+                if (diaryExists){
+                    iMain.setFragment(diary2F,getString(R.string.fragment_diary2),true,bundle);
+                }
             }
+
         });
+
+
+
+
+
+    }
+    private void initializeView(){
+        gson = new Gson();
+        String sPrefKey = getString(R.string.sharedPreferencesKey);
+        sPref = getContext().getSharedPreferences(sPrefKey, Context.MODE_PRIVATE);
+        sEdit = sPref.edit();
+        bundle = getArguments();
+
+
+        getListOfEntries("Diary");
+
+    }
+
+
+    private void getListOfEntries(String sPrefEditKey) {
+        String json = sPref.getString(sPrefEditKey, null);
+        System.out.println(json + "##########");
+        Type type = new TypeToken<List<DiaryDTO>>() {
+        }.getType();
+        listOfEntries = gson.fromJson(json, type);
+        if (listOfEntries == null) {
+            listOfEntries = new ArrayList<>();
+        }
 
     }
 
