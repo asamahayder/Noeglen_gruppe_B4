@@ -4,8 +4,23 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:id="@+id/mainConstraint"
     android:background="#ffffff"
     tools:context=".view.MainActivity">
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/iconguide"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.85" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/textguide"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.9" />
 
     <androidx.drawerlayout.widget.DrawerLayout
         android:id="@+id/drawer_layout"
@@ -36,13 +51,13 @@
                     android:id="@+id/content_frame"
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
-                    app:layout_constraintBottom_toTopOf="@id/imageView"
+                    app:layout_constraintBottom_toTopOf="@id/blueNavImg"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <ImageView
-                    android:id="@+id/imageView"
+                    android:id="@+id/blueNavImg"
                     android:layout_width="match_parent"
                     android:layout_height="66.5dp"
                     app:layout_constraintBottom_toBottomOf="parent"
