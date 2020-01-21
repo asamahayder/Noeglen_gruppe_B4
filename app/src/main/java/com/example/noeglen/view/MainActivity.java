@@ -31,7 +31,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, View.OnClickListener, IMainActivity {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener, IMainActivity {
 
     private Animation in;
     private List<Button> navBarBtnList;
@@ -40,10 +40,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private FragmentManager fm;
     private CurrentDate currDate;
     private View currentView;
-    private Toolbar toolbar;
-    private DrawerLayout drawerLayout;
-    private ActionBarDrawerToggle toggle;
-    private static int Request = 4;
+
 
 
     @Override
@@ -52,19 +49,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         setContentView(R.layout.activity_mainactivity);
         initializeView();
 
-        toolbar = findViewById(R.id.toolBar);
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayShowTitleEnabled(false);
-
-        drawerLayout = findViewById(R.id.drawer_layout);
-        drawerLayout.setScrimColor(getResources().getColor(android.R.color.transparent));
-
-        NavigationView navigationView = findViewById(R.id.navigationView);
-        navigationView.setNavigationItemSelectedListener(this);
-
-        toggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-        drawerLayout.addDrawerListener(toggle);
-        toggle.syncState();
     }
 
     private void initializeView() {
@@ -275,71 +259,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         fm = this.getSupportFragmentManager();
     }
 
-    @Override
-    public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
-
-        int id = menuItem.getItemId();
-
-        switch (id) {
-            case R.id.phoneContact:
-                System.out.println("1");
-                phonePermission();
-                break;
-            case R.id.emailContact:
-                System.out.println("1");
-                openMail();
-                break;
-            case R.id.chat:
-                System.out.println("1");
-                Intent intent = new Intent(this, ChatActivity.class);
-                startActivity(intent);
-                break;
-            case R.id.logOut:
-                System.out.println("1");
-                FirebaseAuth.getInstance().signOut();
-                Intent login = new Intent(this, LoginActivity.class);
-                startActivity(login);
-                this.finish();
-                break;
-        }
-        return true;
-    }
-
-    private void phonePermission() {
-
-        if (ContextCompat.checkSelfPermission(this, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CALL_PHONE}, Request);
-        } else {
-            String phoneNumber = getResources().getString(R.string.phoneNumber);
-            String uri = "tel:" + phoneNumber;
-            Intent intent = new Intent(Intent.ACTION_DIAL);
-            intent.setData(Uri.parse(uri));
-            startActivity(intent);
-        }
-    }
-
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        if (requestCode == Request) {
-            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                phonePermission();
-            }
-        }
-    }
-
-    private void openMail() {
-        String emailAddress = getResources().getString(R.string.emailAddress);
-        System.out.println(emailAddress);
-        Intent intent = new Intent(Intent.ACTION_SEND);
-        intent.putExtra(Intent.EXTRA_EMAIL, new String[]{emailAddress});
-        intent.setType("message/rfc822");
-        startActivity(Intent.createChooser(intent, "Vælg en email klient"));
-    }
-    public void visibilityGone() {
+    /*public void visibilityGone() {
         toolbar.setVisibility(View.GONE);
     }
 
     public void visibilityShow() {
         toolbar.setVisibility(View.VISIBLE);
-    }
+    }*/
 }

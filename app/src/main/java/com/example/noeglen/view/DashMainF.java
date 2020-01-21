@@ -1,11 +1,16 @@
 package com.example.noeglen.view;
 
+import android.Manifest;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
@@ -15,9 +20,14 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.ActionBarDrawerToggle;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.cardview.widget.CardView;
 import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -27,6 +37,8 @@ import com.example.noeglen.R;
 import com.example.noeglen.data.DiaryDTO;
 import com.example.noeglen.data.FavoriteDTO;
 import com.example.noeglen.data.VideoDTO;
+import com.google.android.material.navigation.NavigationView;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
@@ -44,7 +56,7 @@ import java.util.Objects;
 
 import static android.content.Context.MODE_PRIVATE;
 
-public class DashMainF extends Fragment implements View.OnClickListener, DashMainRecyclerAdapter.OnFavoriteListener {
+public class DashMainF extends Fragment implements NavigationView.OnNavigationItemSelectedListener, View.OnClickListener, DashMainRecyclerAdapter.OnFavoriteListener {
 
     private IMainActivity iMain;
     private CardView iVidDash, iDiaryDash, iExerciseDash;
@@ -64,6 +76,10 @@ public class DashMainF extends Fragment implements View.OnClickListener, DashMai
     private ArrayList<DiaryDTO> diaryList;
     private TextView emptyDiaryContentFrameTextView;
     private LinearLayout recentDiariesLinearLayout;
+    private Toolbar toolbar;
+    private DrawerLayout drawerLayout;
+    private ActionBarDrawerToggle toggle;
+    private static int Request = 4;
 
     @Nullable
     @Override
@@ -75,7 +91,20 @@ public class DashMainF extends Fragment implements View.OnClickListener, DashMai
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         initializeView();
-        iMain.visibilityShow();
+        //iMain.visibilityShow();
+        toolbar = getView().findViewById(R.id.toolBar);
+        ((AppCompatActivity) getActivity()).setSupportActionBar(toolbar);
+        ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayShowTitleEnabled(false);
+
+        drawerLayout = getView().findViewById(R.id.drawer_layout);
+        drawerLayout.setScrimColor(getResources().getColor(android.R.color.transparent));
+
+        NavigationView navigationView = getView().findViewById(R.id.navigationView);
+        navigationView.setNavigationItemSelectedListener(this);
+
+        toggle = new ActionBarDrawerToggle(getActivity(), drawerLayout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        drawerLayout.addDrawerListener(toggle);
+        toggle.syncState();
     }
 
 
@@ -138,7 +167,7 @@ public class DashMainF extends Fragment implements View.OnClickListener, DashMai
                     bundle.putString("videoObject",videoInJSON);
                     bundle.putString("isPartOfDailyGoals","true");
                     iMain.setFragment(new DashVidF(), getString(R.string.fragment_dashvid),true, bundle);
-                    iMain.visibilityGone();
+                    //iMain.visibilityGone();
                 }else {
                     iMain.inflateFragment(getString(R.string.fragment_dashvidmain));
                 }
@@ -161,7 +190,7 @@ public class DashMainF extends Fragment implements View.OnClickListener, DashMai
     @Override
     public void onDetach() {
         super.onDetach();
-        iMain.visibilityGone();
+        //iMain.visibilityGone();
     }
 
     @Override
@@ -175,7 +204,7 @@ public class DashMainF extends Fragment implements View.OnClickListener, DashMai
             System.out.println("######################3" + favoriteList.get(position).getTitle());
             System.out.println("######################" + favoriteList.get(position).getVideoURL());
             iMain.setFragment(videoF,getString(R.string.fragment_dashvid),true,bundle);
-            iMain.visibilityGone();
+            //iMain.visibilityGone();
         }
         if (CURRENT_TYPE == 2){
             json = gson.toJson(favoriteList.get(position));
@@ -188,14 +217,14 @@ public class DashMainF extends Fragment implements View.OnClickListener, DashMai
                 ExerExerTwoF exerciseF = new ExerExerTwoF();
                 iMain.setFragment(exerciseF,getString(R.string.fragment_exerexer),true,bundle);
             }
-            iMain.visibilityGone();
+            //iMain.visibilityGone();
         }
         if (CURRENT_TYPE == 3){
             InfoKnowledgeF articleF = new InfoKnowledgeF();
             json = gson.toJson(favoriteList.get(position));
             bundle.putString("currentKnowledgeArticle",json);
             iMain.setFragment(articleF,getString(R.string.fragment_infoknowledge),true,bundle);
-            iMain.visibilityGone();
+            //iMain.visibilityGone();
         }
     }
 
@@ -355,7 +384,7 @@ public class DashMainF extends Fragment implements View.OnClickListener, DashMai
                     bundle.putString("date",diary.getDate());
                     Diary2F diary2F = new Diary2F();
                     iMain.setFragment(diary2F, getString(R.string.fragment_diary2),true,bundle);
-                    iMain.visibilityGone();
+                    //iMain.visibilityGone();
                 }
             });
 
@@ -363,5 +392,64 @@ public class DashMainF extends Fragment implements View.OnClickListener, DashMai
         }
     }
 
+    public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+
+        int id = menuItem.getItemId();
+
+        switch (id) {
+            case R.id.phoneContact:
+                System.out.println("1");
+                phonePermission();
+                break;
+            case R.id.emailContact:
+                System.out.println("1");
+                openMail();
+                break;
+            case R.id.chat:
+                System.out.println("1");
+                Intent intent = new Intent(getActivity(), ChatActivity.class);
+                startActivity(intent);
+                break;
+            case R.id.logOut:
+                System.out.println("1");
+                FirebaseAuth.getInstance().signOut();
+                Intent login = new Intent(getActivity(), LoginActivity.class);
+                startActivity(login);
+                getActivity().finish();
+                break;
+        }
+        return true;
+    }
+
+    private void phonePermission() {
+
+        if (ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.CALL_PHONE}, Request);
+        } else {
+            String phoneNumber = getResources().getString(R.string.phoneNumber);
+            String uri = "tel:" + phoneNumber;
+            Intent intent = new Intent(Intent.ACTION_DIAL);
+            intent.setData(Uri.parse(uri));
+            startActivity(intent);
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        if (requestCode == Request) {
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                phonePermission();
+            }
+        }
+    }
+
+    private void openMail() {
+        String emailAddress = getResources().getString(R.string.emailAddress);
+        System.out.println(emailAddress);
+        Intent intent = new Intent(Intent.ACTION_SEND);
+        intent.putExtra(Intent.EXTRA_EMAIL, new String[]{emailAddress});
+        intent.setType("message/rfc822");
+        startActivity(Intent.createChooser(intent, "Vælg en email klient"));
+    }
 
 }
