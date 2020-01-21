@@ -16,6 +16,7 @@
     <color name="secondaryNormal">#1de9b6</color>
     <color name="secondaryLight">#6effe8</color>
     <color name="secondaryDark">#00b686</color>
+    <color name="primaryOrange">#f46b45</color>
 
     //VIDEO COLORS
     <color name="vidNotWatched">#009AFF</color>

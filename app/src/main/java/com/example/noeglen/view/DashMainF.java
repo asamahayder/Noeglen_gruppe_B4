@@ -3,34 +3,46 @@ package com.example.noeglen.view;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.TypedValue;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.cardview.widget.CardView;
+import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 
 import com.example.noeglen.R;
+import com.example.noeglen.data.DiaryDTO;
 import com.example.noeglen.data.FavoriteDTO;
 import com.example.noeglen.data.VideoDTO;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
+import org.w3c.dom.Text;
+
 import java.lang.reflect.Type;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Objects;
+
+import static android.content.Context.MODE_PRIVATE;
 
 public class DashMainF extends Fragment implements View.OnClickListener, DashMainRecyclerAdapter.OnFavoriteListener {
 
@@ -48,6 +60,10 @@ public class DashMainF extends Fragment implements View.OnClickListener, DashMai
     private boolean isNewDay;
     private ArrayList<VideoDTO> videoList;
     private TextView emptyFavoriteListTextView;
+    private ConstraintLayout diaryContentFrame;
+    private ArrayList<DiaryDTO> diaryList;
+    private TextView emptyDiaryContentFrameTextView;
+    private LinearLayout recentDiariesLinearLayout;
 
     @Nullable
     @Override
@@ -71,12 +87,15 @@ public class DashMainF extends Fragment implements View.OnClickListener, DashMai
         markTodaysDiaryAsWrittenImage = getView().findViewById(R.id.markTodaysDiaryAsWrittenImage);
         markTodaysExerciseAsDoneImage = getView().findViewById(R.id.markTodaysExerciseAsDoneImage);
         emptyFavoriteListTextView = getView().findViewById(R.id.emptyFavoriteListText);
+        diaryContentFrame = getView().findViewById(R.id.diaryContentFrame);
+        emptyDiaryContentFrameTextView = getView().findViewById(R.id.emptyDiaryContentList);
+        recentDiariesLinearLayout = getView().findViewById(R.id.recentDiariesLinearLayout);
         iVidDash.setOnClickListener(this);
         iDiaryDash.setOnClickListener(this);
         iExerciseDash.setOnClickListener(this);
 
         gson = new Gson();
-        sPref = getContext().getSharedPreferences(getString(R.string.sharedPreferencesKey),Context.MODE_PRIVATE);
+        sPref = getContext().getSharedPreferences(getString(R.string.sharedPreferencesKey), MODE_PRIVATE);
         getFavoriteList();
 
         if (!favoriteList.isEmpty()){
@@ -93,6 +112,8 @@ public class DashMainF extends Fragment implements View.OnClickListener, DashMai
         handleNewDay();
         handleShowCheckMarks();
 
+        getDiaryList();
+        getRecentDiaries();
     }
 
     private void getFavoriteList() {
@@ -157,10 +178,16 @@ public class DashMainF extends Fragment implements View.OnClickListener, DashMai
             iMain.visibilityGone();
         }
         if (CURRENT_TYPE == 2){
-            ExerExerF exerciseF = new ExerExerF();
             json = gson.toJson(favoriteList.get(position));
             bundle.putString("currentExercise",json);
-            iMain.setFragment(exerciseF,getString(R.string.fragment_exerexer),true,bundle);
+            if (favoriteList.get(position).getTitle().equals("Vejrtrækningsøvelse")){
+                ExerExerF exerciseF = new ExerExerF();
+                iMain.setFragment(exerciseF,getString(R.string.fragment_exerexer),true,bundle);
+            }
+            else {
+                ExerExerTwoF exerciseF = new ExerExerTwoF();
+                iMain.setFragment(exerciseF,getString(R.string.fragment_exerexer),true,bundle);
+            }
             iMain.visibilityGone();
         }
         if (CURRENT_TYPE == 3){
@@ -177,7 +204,7 @@ public class DashMainF extends Fragment implements View.OnClickListener, DashMai
         String savedDateKey = getString(R.string.savedDateKey);
         String currentDate = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(new Date());
 
-        SharedPreferences preferences = getActivity().getSharedPreferences(preferenceKey, Context.MODE_PRIVATE);
+        SharedPreferences preferences = getActivity().getSharedPreferences(preferenceKey, MODE_PRIVATE);
         String savedDate = preferences.getString(savedDateKey,"2020-01-01");
 
         if (!currentDate.equals(savedDate)){
@@ -197,7 +224,7 @@ public class DashMainF extends Fragment implements View.OnClickListener, DashMai
             String isTodaysDiaryWrittenKey = getString(R.string.isTodaysDiaryWritten);
             String isTodaysExerciseDoneKey = getString(R.string.isTodaysExerciseDone);
 
-            SharedPreferences preferences = getActivity().getSharedPreferences(preferenceKey, Context.MODE_PRIVATE);
+            SharedPreferences preferences = getActivity().getSharedPreferences(preferenceKey, MODE_PRIVATE);
             SharedPreferences.Editor editor = preferences.edit();
             editor.putString(isTodaysVideoSeenKey,"false");
             editor.putString(isTodaysDiaryWrittenKey,"false");
@@ -216,7 +243,7 @@ public class DashMainF extends Fragment implements View.OnClickListener, DashMai
         String isTodaysDiaryWrittenKey = getString(R.string.isTodaysDiaryWritten);
         String isTodaysExerciseDoneKey = getString(R.string.isTodaysExerciseDone);
 
-        SharedPreferences preferences = getActivity().getSharedPreferences(preferenceKey, Context.MODE_PRIVATE);
+        SharedPreferences preferences = getActivity().getSharedPreferences(preferenceKey, MODE_PRIVATE);
 
         isVideoSeen = preferences.getString(isTodaysVideoSeenKey, "false");
         isDiaryWritten = preferences.getString(isTodaysDiaryWrittenKey, "false");
@@ -251,7 +278,7 @@ public class DashMainF extends Fragment implements View.OnClickListener, DashMai
         String preferenceKey = getString(R.string.sharedPreferencesKey);
         String listKey = getString(R.string.seenVideosListKey);
 
-        SharedPreferences preferences = getActivity().getSharedPreferences(preferenceKey, Context.MODE_PRIVATE);
+        SharedPreferences preferences = getActivity().getSharedPreferences(preferenceKey, MODE_PRIVATE);
         String listInJSON = preferences.getString(listKey, null);
         if (listInJSON == null){
             HashMap<String, Boolean> hashMap = new HashMap<>();
@@ -269,7 +296,7 @@ public class DashMainF extends Fragment implements View.OnClickListener, DashMai
         String preferenceKey = getString(R.string.sharedPreferencesKey);
         String videoListKey = getString(R.string.videoListKey);
 
-        SharedPreferences preferences = getActivity().getSharedPreferences(preferenceKey, Context.MODE_PRIVATE);
+        SharedPreferences preferences = getActivity().getSharedPreferences(preferenceKey, MODE_PRIVATE);
         String listInJSON = preferences.getString(videoListKey, null);
         if (listInJSON == null){
             System.out.println("##################### The video list was not retrieved from shared preferences");
@@ -277,6 +304,63 @@ public class DashMainF extends Fragment implements View.OnClickListener, DashMai
         }
         Type type = new TypeToken<ArrayList<VideoDTO>>(){}.getType(); //getting arrayList type for gson
         videoList = gson.fromJson(listInJSON, type);
+    }
+
+    private void getDiaryList(){
+        Gson gson = new Gson();
+        SharedPreferences preferences = getActivity().getSharedPreferences(getString(R.string.sharedPreferencesKey), MODE_PRIVATE);
+        String listInJSON = preferences.getString("Diary",null);
+        Type type = new TypeToken<ArrayList<DiaryDTO>>(){}.getType(); //getting arrayList type for gson
+        diaryList = gson.fromJson(listInJSON, type);
+        System.out.println("########################3" + diaryList);
+    }
+
+    private void getRecentDiaries(){
+        ArrayList<DiaryDTO> recentDiaries = new ArrayList<>();
+        if (diaryList == null){
+            emptyDiaryContentFrameTextView.setVisibility(View.VISIBLE);
+        }else{
+            if (diaryList.isEmpty()){
+                emptyDiaryContentFrameTextView.setVisibility(View.VISIBLE);
+            }else{
+                Collections.sort(diaryList);
+                for (int i = 0; i < 3; i++) {
+                    if (diaryList.size() - 1 < i)break;
+                    recentDiaries.add(diaryList.get(i));
+                    showRecentDiaries(recentDiaries);
+                }
+            }
+        }
+    }
+
+    private void showRecentDiaries(final ArrayList<DiaryDTO> recentDiaryList){
+        for (int i = 0; i < recentDiaryList.size(); i++) {
+            final DiaryDTO diary = recentDiaryList.get(i);
+            CardView cardView = new CardView(getActivity());
+            cardView.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,LinearLayout.LayoutParams.MATCH_PARENT));
+
+            TextView textView = new TextView(getActivity());
+            textView.setText(diary.getDate());
+            textView.setGravity(Gravity.CENTER);
+            textView.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+            textView.setTextSize(TypedValue.COMPLEX_UNIT_SP,20);
+            textView.setTextColor(ContextCompat.getColor(getActivity(),R.color.primaryDark));
+            textView.setLayoutParams(new CardView.LayoutParams(CardView.LayoutParams.MATCH_PARENT,CardView.LayoutParams.MATCH_PARENT));
+            cardView.addView(textView);
+
+            cardView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Bundle bundle = new Bundle();
+                    bundle.putString("date",diary.getDate());
+                    Diary2F diary2F = new Diary2F();
+                    iMain.setFragment(diary2F, getString(R.string.fragment_diary2),true,bundle);
+                    iMain.visibilityGone();
+                }
+            });
+
+            recentDiariesLinearLayout.addView(cardView);
+        }
     }
 
 
