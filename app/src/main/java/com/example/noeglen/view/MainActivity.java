@@ -1,7 +1,6 @@
 package com.example.noeglen.view;
 
 import android.Manifest;
-import android.animation.ObjectAnimator;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
@@ -39,11 +38,11 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, View.OnClickListener, IMainActivity {
 
     private Animation in;
-    private ObjectAnimator objAni;
     private List<Button> navBarBtnList;
     private List<TextView> navBarTxtList;
     private String fragmentTag, currDateString;
     private FragmentManager fm;
+    private FragmentTransaction ft;
     private CurrentDate currDate;
     private View currentView;
     private Toolbar toolbar;
@@ -62,11 +61,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mainactivity);
 
-
         toolbar = findViewById(R.id.toolBar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
-
 
         bluenav = findViewById(R.id.blueNavImg);
 
@@ -220,7 +217,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
 
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-
+        transaction.setCustomAnimations(R.anim.fade_in, R.anim.fade_out, R.anim.fade_in, R.anim.fade_out);
         transaction.replace(R.id.content_frame,f,tag);
 
         if (addToBackStack){
