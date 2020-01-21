@@ -5,18 +5,22 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
 import android.view.animation.DecelerateInterpolator;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.constraintlayout.widget.Guideline;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
@@ -39,12 +43,18 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private List<TextView> navBarTxtList;
     private String fragmentTag, currDateString;
     private FragmentManager fm;
+    private FragmentTransaction ft;
     private CurrentDate currDate;
     private View currentView;
     private Toolbar toolbar;
     private DrawerLayout drawerLayout;
     private ActionBarDrawerToggle toggle;
     private static int Request = 4;
+    ImageView bluenav;
+    float iconAnimationValue;
+    float textAnimationValue;
+    Guideline iconGuideLine;
+    Guideline textGuideLine;
 
 
 
@@ -52,11 +62,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mainactivity);
-        initializeView();
 
         toolbar = findViewById(R.id.toolBar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
+
+        bluenav = findViewById(R.id.blueNavImg);
+
+        iconGuideLine = findViewById(R.id.iconguide);
+        textGuideLine = findViewById(R.id.textguide);
 
         drawerLayout = findViewById(R.id.drawer_layout);
         drawerLayout.setScrimColor(getResources().getColor(android.R.color.transparent));
@@ -67,15 +81,29 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         toggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawerLayout.addDrawerListener(toggle);
         toggle.syncState();
+
+
+        float percent = ((ConstraintLayout.LayoutParams) iconGuideLine.getLayoutParams()).guidePercent;
+        float percent2= ((ConstraintLayout.LayoutParams) textGuideLine.getLayoutParams()).guidePercent;
+
+        DisplayMetrics metrics = new DisplayMetrics();
+        getWindowManager().getDefaultDisplay().getMetrics(metrics);
+        iconAnimationValue = -((1 - percent) * metrics.ydpi);
+        textAnimationValue = -((1 - percent2) * metrics.ydpi);
+        initializeView();
+
     }
 
     private void initializeView() {
+
         in = new AlphaAnimation(0.0f, 1.0f);
+
         in.setDuration(400);
 
         navBarBtnList = new ArrayList<>();
         navBarTxtList = new ArrayList<>();
         for (int i = 0; i < 5; i++) {
+
             String bID = "bNav" + i;
             String tID = "tNav" + i;
             int resbID = getResources().getIdentifier(bID,"id",getPackageName());
@@ -93,12 +121,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             navText.animate().translationY(0).setDuration(200).setInterpolator(new DecelerateInterpolator());
 
             if (bID.equals("bNav2")){
-                navButton.animate().translationY(-77).setDuration(200).setInterpolator(new DecelerateInterpolator());
-                navButton.setTranslationY(-77);
+                navButton.animate().translationY(iconAnimationValue).setDuration(200).setInterpolator(new DecelerateInterpolator());
+                navButton.setTranslationY(iconAnimationValue);
                 navButton.setSelected(true);
 
                 navText.setVisibility(View.VISIBLE);
-                navText.animate().translationY(-40).setDuration(200).setInterpolator(new DecelerateInterpolator());
+                navText.animate().translationY(textAnimationValue).setDuration(200).setInterpolator(new DecelerateInterpolator());
                 navText.startAnimation(in);
             }
         }
@@ -131,19 +159,18 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             t.setVisibility(View.INVISIBLE);
 
             if (v == b){
-                b.animate().translationY(-77).setDuration(200).setInterpolator(new DecelerateInterpolator());
-                b.setTranslationY(-77);
+                b.animate().translationY(iconAnimationValue).setDuration(200).setInterpolator(new DecelerateInterpolator());
+                b.setTranslationY(iconAnimationValue);
                 b.setSelected(true);
-
                 t.setVisibility(View.VISIBLE);
-                t.animate().translationY(-40).setDuration(200).setInterpolator(new DecelerateInterpolator());
+                t.animate().translationY(textAnimationValue).setDuration(200).setInterpolator(new DecelerateInterpolator());
                 t.startAnimation(in);
-
                 selectedFragment = checkNavBarFragment(selectedFragment, i);
             }
         }
         clearBackStack();
         setFragment(selectedFragment,fragmentTag,false,null);
+
     }
 
     private Fragment checkNavBarFragment(Fragment selectedFragment, int i) {
@@ -194,7 +221,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
 
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-
+        transaction.setCustomAnimations(R.anim.fade_in, R.anim.fade_out, R.anim.fade_in, R.anim.fade_out);
         transaction.replace(R.id.content_frame,f,tag);
 
         if (addToBackStack){
