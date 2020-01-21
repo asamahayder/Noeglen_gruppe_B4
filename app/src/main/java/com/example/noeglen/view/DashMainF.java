@@ -318,10 +318,10 @@ public class DashMainF extends Fragment implements View.OnClickListener, DashMai
                 emptyDiaryContentFrameTextView.setVisibility(View.VISIBLE);
             }else{
                 Collections.sort(diaryList);
-                for (int i = 0; i < 3; i++) {
-                    if (diaryList.get(i) == null)break;
+                for (int i = 0; i < diaryList.size(); i++) {
                     recentDiaries.add(diaryList.get(i));
                     showRecentDiaries(recentDiaries);
+                    if (i == 3)break;
                 }
             }
         }
@@ -332,6 +332,7 @@ public class DashMainF extends Fragment implements View.OnClickListener, DashMai
             final DiaryDTO diary = recentDiaryList.get(i);
             CardView cardView = new CardView(getActivity());
             cardView.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,LinearLayout.LayoutParams.MATCH_PARENT));
+            cardView.setBackgroundColor(ContextCompat.getColor(getActivity(),R.color.primaryNormal));
 
             TextView textView = new TextView(getActivity());
             textView.setText(diary.getDate());
@@ -341,6 +342,8 @@ public class DashMainF extends Fragment implements View.OnClickListener, DashMai
             textView.setTextColor(ContextCompat.getColor(getActivity(),R.color.primaryDark));
             textView.setLayoutParams(new CardView.LayoutParams(CardView.LayoutParams.MATCH_PARENT,CardView.LayoutParams.MATCH_PARENT));
             cardView.addView(textView);
+            cardView.setRadius(20);
+
 
             cardView.setOnClickListener(new View.OnClickListener() {
                 @Override
