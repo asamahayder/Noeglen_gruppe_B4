@@ -160,7 +160,15 @@ public class ExerExerF extends Fragment implements View.OnClickListener {
             }
         } else if( v == bstartAnim){
             iAnim.startAnimation(breatheAnimation);
+            markTodayExerciseAsDone();
         }
 
+    }
+
+    public void markTodayExerciseAsDone(){
+        SharedPreferences preferences = getActivity().getSharedPreferences(getString(R.string.sharedPreferencesKey), Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.putString(getString(R.string.isTodaysExerciseDone),"true");
+        editor.apply();
     }
 }

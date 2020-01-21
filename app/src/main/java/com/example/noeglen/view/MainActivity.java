@@ -2,6 +2,7 @@ package com.example.noeglen.view;
 
 import android.Manifest;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
@@ -176,8 +177,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 fragmentTag = getString(R.string.fragment_infoknowledgemain);
                 break;
             case 1:
-                selectedFragment = new DiaryMainF();
-                fragmentTag = getString(R.string.fragment_diarymain);
+                selectedFragment = handleDiaryFragmentChange();
                 break;
             case 2:
                 selectedFragment = new DashMainF();
@@ -368,5 +368,24 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     public void visibilityShow() {
         toolbar.setVisibility(View.VISIBLE);
+    }
+
+
+    //Denne metode undersøger om der allerede er lavet en dagbog for dagen. Hvis der er, så skipper den dairy_main hvor man vælger humør.
+    public Fragment handleDiaryFragmentChange(){
+
+        SharedPreferences preferences = getSharedPreferences(getString(R.string.sharedPreferencesKey), MODE_PRIVATE);
+        String isTodaysDiaryWritten = preferences.getString(getString(R.string.isTodaysDiaryWritten), "false");
+
+        Fragment selectedFragment;
+        if (isTodaysDiaryWritten.equals("true")){
+            selectedFragment = new Diary2F();
+            fragmentTag = getString(R.string.fragment_diary2);
+        }else{
+            selectedFragment = new DiaryMainF();
+            fragmentTag = getString(R.string.fragment_diarymain);
+        }
+
+        return selectedFragment;
     }
 }
