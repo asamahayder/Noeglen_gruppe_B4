@@ -3,12 +3,9 @@ package com.example.noeglen.view;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.util.TypedValue;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -17,7 +14,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.cardview.widget.CardView;
 import androidx.constraintlayout.widget.ConstraintLayout;
-import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -27,10 +23,9 @@ import com.example.noeglen.R;
 import com.example.noeglen.data.DiaryDTO;
 import com.example.noeglen.data.FavoriteDTO;
 import com.example.noeglen.data.VideoDTO;
+import com.example.noeglen.logic.CurrentDate;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-
-import org.w3c.dom.Text;
 
 import java.lang.reflect.Type;
 import java.text.SimpleDateFormat;
@@ -64,6 +59,13 @@ public class DashMainF extends Fragment implements View.OnClickListener, DashMai
     private ArrayList<DiaryDTO> diaryList;
     private TextView emptyDiaryContentFrameTextView;
     private LinearLayout recentDiariesLinearLayout;
+    private CardView recentDiary1;
+    private CardView recentDiary2;
+    private CardView recentDiary3;
+    private TextView recentDiary1Text;
+    private TextView recentDiary2Text;
+    private TextView recentDiary3Text;
+
 
     @Nullable
     @Override
@@ -90,6 +92,12 @@ public class DashMainF extends Fragment implements View.OnClickListener, DashMai
         diaryContentFrame = getView().findViewById(R.id.diaryContentFrame);
         emptyDiaryContentFrameTextView = getView().findViewById(R.id.emptyDiaryContentList);
         recentDiariesLinearLayout = getView().findViewById(R.id.recentDiariesLinearLayout);
+        recentDiary1 = getView().findViewById(R.id.recentDiary1);
+        recentDiary2 = getView().findViewById(R.id.recentDiary2);
+        recentDiary3 = getView().findViewById(R.id.recentDiary3);
+        recentDiary1Text = getView().findViewById(R.id.recentDiary1Text);
+        recentDiary2Text = getView().findViewById(R.id.recentDiary2Text);
+        recentDiary3Text = getView().findViewById(R.id.recentDiary3Text);
         iVidDash.setOnClickListener(this);
         iDiaryDash.setOnClickListener(this);
         iExerciseDash.setOnClickListener(this);
@@ -141,13 +149,28 @@ public class DashMainF extends Fragment implements View.OnClickListener, DashMai
                     iMain.setFragment(new DashVidF(), getString(R.string.fragment_dashvid),true, bundle);
                 }else {
                     iMain.inflateFragment(getString(R.string.fragment_dashvidmain));
+                    iMain.visibilityGone();
                 }
                 break;
             case R.id.iDashDiary:
-                iMain.inflateFragment(getString(R.string.fragment_diarymain));
+                if (markTodaysDiaryAsWrittenImage.getVisibility() != View.VISIBLE){
+                    iMain.inflateFragment(getString(R.string.fragment_diarymain));
+                }else{
+                    Bundle bundle = new Bundle();
+                    CurrentDate currentDate = CurrentDate.getInstance();
+                    String date = new SimpleDateFormat("dd/M/yyyy").format(currentDate.getDate());
+                    bundle.putString("date", date);
+                    iMain.setFragment(new Diary2F(), getString(R.string.fragment_diary2),true,bundle);
+                }
                 break;
             case R.id.iDashExercise:
-                iMain.inflateFragment(getString(R.string.fragment_exermain));
+                if (markTodaysExerciseAsDoneImage.getVisibility() != View.VISIBLE){
+                    iMain.inflateFragment(getString(R.string.fragment_exerexer));
+                    iMain.visibilityGone();
+                }else{
+                    iMain.inflateFragment(getString(R.string.fragment_exermain));
+                    iMain.visibilityGone();
+                }
                 break;
         }
     }
@@ -312,7 +335,6 @@ public class DashMainF extends Fragment implements View.OnClickListener, DashMai
         String listInJSON = preferences.getString("Diary",null);
         Type type = new TypeToken<ArrayList<DiaryDTO>>(){}.getType(); //getting arrayList type for gson
         diaryList = gson.fromJson(listInJSON, type);
-        System.out.println("########################3" + diaryList);
     }
 
     private void getRecentDiaries(){
@@ -324,42 +346,60 @@ public class DashMainF extends Fragment implements View.OnClickListener, DashMai
                 emptyDiaryContentFrameTextView.setVisibility(View.VISIBLE);
             }else{
                 Collections.sort(diaryList);
-                for (int i = 0; i < 3; i++) {
-                    if (diaryList.size() - 1 < i)break;
+                for (int i = 0; i < diaryList.size(); i++) {
                     recentDiaries.add(diaryList.get(i));
-                    showRecentDiaries(recentDiaries);
+                    if (i == 3)break;
                 }
+                showRecentDiaries(recentDiaries);
             }
         }
     }
 
     private void showRecentDiaries(final ArrayList<DiaryDTO> recentDiaryList){
-        for (int i = 0; i < recentDiaryList.size(); i++) {
-            final DiaryDTO diary = recentDiaryList.get(i);
-            CardView cardView = new CardView(getActivity());
-            cardView.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,LinearLayout.LayoutParams.MATCH_PARENT));
-
-            TextView textView = new TextView(getActivity());
-            textView.setText(diary.getDate());
-            textView.setGravity(Gravity.CENTER);
-            textView.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
-            textView.setTextSize(TypedValue.COMPLEX_UNIT_SP,20);
-            textView.setTextColor(ContextCompat.getColor(getActivity(),R.color.primaryDark));
-            textView.setLayoutParams(new CardView.LayoutParams(CardView.LayoutParams.MATCH_PARENT,CardView.LayoutParams.MATCH_PARENT));
-            cardView.addView(textView);
-
-            cardView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Bundle bundle = new Bundle();
-                    bundle.putString("date",diary.getDate());
-                    Diary2F diary2F = new Diary2F();
-                    iMain.setFragment(diary2F, getString(R.string.fragment_diary2),true,bundle);
-                    iMain.visibilityGone();
-                }
-            });
-
-            recentDiariesLinearLayout.addView(cardView);
+        switch (recentDiaryList.size()){
+            case 3:
+                recentDiary3Text.setText(recentDiaryList.get(2).getDate());
+                recentDiary3.setVisibility(View.VISIBLE);
+                recentDiary3.setClickable(true);
+                recentDiary3.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Bundle bundle = new Bundle();
+                        bundle.putString("date",recentDiaryList.get(2).getDate());
+                        Diary2F diary2F = new Diary2F();
+                        iMain.setFragment(diary2F, getString(R.string.fragment_diary2),true,bundle);
+                        iMain.visibilityGone();
+                    }
+                });
+            case 2:
+                recentDiary2Text.setText(recentDiaryList.get(1).getDate());
+                recentDiary2.setVisibility(View.VISIBLE);
+                recentDiary2.setClickable(true);
+                recentDiary2.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Bundle bundle = new Bundle();
+                        bundle.putString("date",recentDiaryList.get(1).getDate());
+                        Diary2F diary2F = new Diary2F();
+                        iMain.setFragment(diary2F, getString(R.string.fragment_diary2),true,bundle);
+                        iMain.visibilityGone();
+                    }
+                });
+            case 1:
+                recentDiary1Text.setText(recentDiaryList.get(0).getDate());
+                recentDiary1.setVisibility(View.VISIBLE);
+                recentDiary1.setClickable(true);
+                recentDiary1.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Bundle bundle = new Bundle();
+                        bundle.putString("date",recentDiaryList.get(0).getDate());
+                        Diary2F diary2F = new Diary2F();
+                        iMain.setFragment(diary2F, getString(R.string.fragment_diary2),true,bundle);
+                        iMain.visibilityGone();
+                    }
+                });
+            default: break;
         }
     }
 

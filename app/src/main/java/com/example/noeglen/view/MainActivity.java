@@ -2,6 +2,7 @@ package com.example.noeglen.view;
 
 import android.Manifest;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
@@ -27,7 +28,6 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
-
 import com.example.noeglen.R;
 import com.example.noeglen.logic.CurrentDate;
 import com.google.android.material.navigation.NavigationView;
@@ -55,7 +55,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     float textAnimationValue;
     Guideline iconGuideLine;
     Guideline textGuideLine;
-
 
 
     @Override
@@ -138,8 +137,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         currDate = CurrentDate.getInstance();
         currDateString = currDate.createCurrentDate();
-
-
     }
 
     @Override
@@ -180,8 +177,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 fragmentTag = getString(R.string.fragment_infoknowledgemain);
                 break;
             case 1:
-                selectedFragment = new DiaryMainF();
-                fragmentTag = getString(R.string.fragment_diarymain);
+                selectedFragment = handleDiaryFragmentChange();
                 break;
             case 2:
                 selectedFragment = new DashMainF();
@@ -247,7 +243,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             selectedFragment = new InfoKnowledgeMainF();
             v = findViewById(R.id.bNav0);
         }
-
         if (tag.equals(getString(R.string.fragment_diarymain))){
             selectedFragment = new DiaryMainF();
             v = findViewById(R.id.bNav1);
@@ -375,4 +370,22 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         toolbar.setVisibility(View.VISIBLE);
     }
 
+
+    //Denne metode undersøger om der allerede er lavet en dagbog for dagen. Hvis der er, så skipper den dairy_main hvor man vælger humør.
+    public Fragment handleDiaryFragmentChange(){
+
+        SharedPreferences preferences = getSharedPreferences(getString(R.string.sharedPreferencesKey), MODE_PRIVATE);
+        String isTodaysDiaryWritten = preferences.getString(getString(R.string.isTodaysDiaryWritten), "false");
+
+        Fragment selectedFragment;
+        if (isTodaysDiaryWritten.equals("true")){
+            selectedFragment = new Diary2F();
+            fragmentTag = getString(R.string.fragment_diary2);
+        }else{
+            selectedFragment = new DiaryMainF();
+            fragmentTag = getString(R.string.fragment_diarymain);
+        }
+
+        return selectedFragment;
+    }
 }
