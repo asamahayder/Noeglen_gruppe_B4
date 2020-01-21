@@ -84,7 +84,6 @@ public class Diary2F extends Fragment implements View.OnClickListener {
                 diaryDTO = listOfEntries.get(i);
             }
         }
-        System.out.println(diaryDTO + "#######################");
         questions = diaryDTO.getQuestions();
         answers = diaryDTO.getAnswers();
         image = "emoji" + diaryDTO.getSmiley();
@@ -140,10 +139,6 @@ public class Diary2F extends Fragment implements View.OnClickListener {
 
     }
 
-
-
-
-
     private void getListOfEntries(String sPrefEditKey) {
         String json = sPref.getString(sPrefEditKey, null);
         System.out.println(json + "##########");
@@ -156,12 +151,18 @@ public class Diary2F extends Fragment implements View.OnClickListener {
 
     }
     private void saveDiaryDTO() {
-        String sPrefEditKey = "Diary";
-        getListOfEntries(sPrefEditKey);
-        diaryDTO  = new DiaryDTO(bundle.getInt("smiley"), answers,questions,date);
+        for (int i = 0; i < listOfEntries.size(); i++) {
+            if (listOfEntries == null ){
+                String sPrefEditKey = "Diary";
+                getListOfEntries(sPrefEditKey);
+                diaryDTO  = new DiaryDTO(bundle.getInt("smiley"), answers,questions,date);
+                listOfEntries.add(diaryDTO);
+                saveSharedPref(sPrefEditKey);
+            } else {
+                
+            }
+        }
 
-        listOfEntries.add(diaryDTO);
-        saveSharedPref(sPrefEditKey);
 
     }
 
@@ -173,10 +174,8 @@ public class Diary2F extends Fragment implements View.OnClickListener {
             answer3.setFocusableInTouchMode(true);
             answer4.setFocusableInTouchMode(true);
 
-
-
-
         }else if (v == gem){
+
 
             iMain.inflateFragment(getString(R.string.fragment_calendar),true);
 
