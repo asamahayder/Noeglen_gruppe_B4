@@ -355,6 +355,7 @@ public class DashMainF extends Fragment implements View.OnClickListener, DashMai
                     bundle.putString("date",diary.getDate());
                     Diary2F diary2F = new Diary2F();
                     iMain.setFragment(diary2F, getString(R.string.fragment_diary2),true,bundle);
+                    iMain.visibilityGone();
                 }
             });
 
