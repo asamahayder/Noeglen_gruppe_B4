@@ -3,8 +3,6 @@ package com.example.noeglen.view;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.util.TypedValue;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,7 +14,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.cardview.widget.CardView;
 import androidx.constraintlayout.widget.ConstraintLayout;
-import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -26,6 +23,7 @@ import com.example.noeglen.R;
 import com.example.noeglen.data.DiaryDTO;
 import com.example.noeglen.data.FavoriteDTO;
 import com.example.noeglen.data.VideoDTO;
+import com.example.noeglen.logic.CurrentDate;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
@@ -151,13 +149,28 @@ public class DashMainF extends Fragment implements View.OnClickListener, DashMai
                     iMain.visibilityGone();
                 }else {
                     iMain.inflateFragment(getString(R.string.fragment_dashvidmain));
+                    iMain.visibilityGone();
                 }
                 break;
             case R.id.iDashDiary:
-                iMain.inflateFragment(getString(R.string.fragment_diarymain));
+                if (markTodaysDiaryAsWrittenImage.getVisibility() != View.VISIBLE){
+                    iMain.inflateFragment(getString(R.string.fragment_diarymain));
+                }else{
+                    Bundle bundle = new Bundle();
+                    CurrentDate currentDate = CurrentDate.getInstance();
+                    String date = new SimpleDateFormat("dd/M/yyyy").format(currentDate.getDate());
+                    bundle.putString("date", date);
+                    iMain.setFragment(new Diary2F(), getString(R.string.fragment_diary2),true,bundle);
+                }
                 break;
             case R.id.iDashExercise:
-                iMain.inflateFragment(getString(R.string.fragment_exermain));
+                if (markTodaysExerciseAsDoneImage.getVisibility() != View.VISIBLE){
+                    iMain.inflateFragment(getString(R.string.fragment_exerexer));
+                    iMain.visibilityGone();
+                }else{
+                    iMain.inflateFragment(getString(R.string.fragment_exermain));
+                    iMain.visibilityGone();
+                }
                 break;
         }
     }
@@ -337,47 +350,12 @@ public class DashMainF extends Fragment implements View.OnClickListener, DashMai
                     recentDiaries.add(diaryList.get(i));
                     if (i == 3)break;
                 }
-                //showRecentDiaries(recentDiaries);
-                showRecentDiariesVersion2(recentDiaries);
+                showRecentDiaries(recentDiaries);
             }
         }
     }
 
     private void showRecentDiaries(final ArrayList<DiaryDTO> recentDiaryList){
-        System.out.println("################################# recent diary list: " + recentDiaryList);
-        for (int i = 0; i < recentDiaryList.size(); i++) {
-            final DiaryDTO diary = recentDiaryList.get(i);
-            CardView cardView = new CardView(getActivity());
-            cardView.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,LinearLayout.LayoutParams.MATCH_PARENT));
-            cardView.setBackgroundColor(ContextCompat.getColor(getActivity(),R.color.primaryNormal));
-            cardView.setContentPadding(10,10,10,10);
-
-            TextView textView = new TextView(getActivity());
-            textView.setText(diary.getDate());
-            textView.setGravity(Gravity.CENTER);
-            textView.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
-            textView.setTextSize(TypedValue.COMPLEX_UNIT_SP,20);
-            textView.setTextColor(ContextCompat.getColor(getActivity(),R.color.primaryDark));
-            textView.setLayoutParams(new CardView.LayoutParams(CardView.LayoutParams.MATCH_PARENT,CardView.LayoutParams.MATCH_PARENT));
-            cardView.addView(textView);
-            cardView.setRadius(20);
-
-            cardView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Bundle bundle = new Bundle();
-                    bundle.putString("date",diary.getDate());
-                    Diary2F diary2F = new Diary2F();
-                    iMain.setFragment(diary2F, getString(R.string.fragment_diary2),true,bundle);
-                    iMain.visibilityGone();
-                }
-            });
-
-            recentDiariesLinearLayout.addView(cardView);
-        }
-    }
-
-    private void showRecentDiariesVersion2(final ArrayList<DiaryDTO> recentDiaryList){
         switch (recentDiaryList.size()){
             case 3:
                 recentDiary3Text.setText(recentDiaryList.get(2).getDate());
