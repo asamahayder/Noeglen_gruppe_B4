@@ -114,6 +114,10 @@ public class Diary1F extends Fragment  implements View.OnClickListener{
     public void onClick(View view) {
         if (view == saveButton){
                 saveDiaryDTO();
+                SharedPreferences preferences = getActivity().getSharedPreferences(getString(R.string.sharedPreferencesKey), Context.MODE_PRIVATE);
+                SharedPreferences.Editor editor = preferences.edit();
+                editor.putString(getString(R.string.isTodaysDiaryWritten),"true");
+                editor.apply();
                 //String tag = getString(R.string.fragment_diary2);
                 //Diary2F diary2F = new Diary2F();
 
@@ -174,4 +178,10 @@ public class Diary1F extends Fragment  implements View.OnClickListener{
         super.onAttach(context);
         iMain = (IMainActivity) getActivity();
     }
+
+    public void handleSetTodaysDiaryAsWritten(){
+
+    }
+
+
 }
