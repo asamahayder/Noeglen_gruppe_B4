@@ -23,6 +23,7 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
+
 import com.example.noeglen.R;
 import com.example.noeglen.logic.CurrentDate;
 import com.google.android.material.navigation.NavigationView;
@@ -44,6 +45,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private DrawerLayout drawerLayout;
     private ActionBarDrawerToggle toggle;
     private static int Request = 4;
+
 
 
     @Override
@@ -108,6 +110,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         currDate = CurrentDate.getInstance();
         currDateString = currDate.createCurrentDate();
+
+
     }
 
     @Override
@@ -216,6 +220,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             selectedFragment = new InfoKnowledgeMainF();
             v = findViewById(R.id.bNav0);
         }
+
         if (tag.equals(getString(R.string.fragment_diarymain))){
             selectedFragment = new DiaryMainF();
             v = findViewById(R.id.bNav1);
@@ -342,4 +347,5 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     public void visibilityShow() {
         toolbar.setVisibility(View.VISIBLE);
     }
+
 }

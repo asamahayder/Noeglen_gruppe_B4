@@ -69,6 +69,7 @@ public class Diary1F extends Fragment  implements View.OnClickListener{
         answers = new String[4];
 
         dateText = getView().findViewById(R.id.textView3);
+        dateText.setText(date);
 
         saveButton = getView().findViewById(R.id.gem);
         saveButton.setOnClickListener(this);
@@ -98,7 +99,7 @@ public class Diary1F extends Fragment  implements View.OnClickListener{
         question3 = getView().findViewById(R.id.textView10);
         question4 = getView().findViewById(R.id.textView11);
 
-        dateText.setText(date);
+
         question1.setText(questions[0]);
         question2.setText(questions[1]);
         question3.setText(questions[2]);
