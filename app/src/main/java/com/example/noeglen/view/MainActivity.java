@@ -172,7 +172,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 v = findViewById(R.id.bNav3);
             }else if (tag.equals(getString(R.string.fragment_dashmain))){
                 v = findViewById(R.id.bNav2);
-            }else if (tag.equals(getString(R.string.fragment_diarymain)) || tag.equals(getString(R.string.fragment_diary1)) || tag.equals(getString(R.string.fragment_diary2)) || tag.equals(getString(R.string.fragment_calendar)) || tag.equals(R.string.fragment_affirmationer)) {
+            }else if (tag.equals(getString(R.string.fragment_diarymain)) || tag.equals(getString(R.string.fragment_diary1)) || tag.equals(getString(R.string.fragment_diary2)) || tag.equals(getString(R.string.fragment_calendar)) || tag.equals(getString(R.string.fragment_affirmationer))) {
                 v = findViewById(R.id.bNav1);
             }else if (tag.equals(getString(R.string.fragment_infoknowledgemain)) || tag.equals(getString(R.string.fragment_infoknowledge))) {
                 v = findViewById(R.id.bNav0);
@@ -281,8 +281,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         Fragment selectedFragment;
         if (isTodaysDiaryWritten.equals("true")){
-            selectedFragment = new Diary2F();
-            fragmentTag = getString(R.string.fragment_diary2);
+            selectedFragment = new DiaryFCalendar();
+            fragmentTag = getString(R.string.fragment_calendar);
         }else{
             selectedFragment = new DiaryMainF();
             fragmentTag = getString(R.string.fragment_diarymain);

@@ -46,5 +46,6 @@
     <string name="isTodaysExerciseDone">getIsTodaysExerciseDone</string>
     <string name="sPref_favorites">favorites</string>
     <string name="diaryListKey">Diary</string>
+    <string name="todaysVideo">todays video</string>
 
 </resources>
