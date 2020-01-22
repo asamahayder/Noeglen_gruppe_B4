@@ -80,7 +80,7 @@ public class Diary2F extends Fragment implements View.OnClickListener {
         }
 
 
-      //  questions = bundle.getStringArray("questions");
+
         getListOfEntries(getString(R.string.diaryListKey));
 
         for (int i = 0; i < listOfEntries.size(); i++) {
@@ -93,20 +93,7 @@ public class Diary2F extends Fragment implements View.OnClickListener {
         image = "emoji" + diaryDTO.getSmiley();
         int rec = getResources().getIdentifier(image,"drawable", this.getContext().getPackageName());
         imageView = getView().findViewById(R.id.imageView6);
-       // imageView.setImageDrawable(getContext().getDrawable(rec));
 
-
-
-      /*  for (int i = 0; i < listOfEntries.size(); i++) {
-            if (listOfEntries.get(i).getQuestions()[0].equals(questions[0])) {
-                answers = listOfEntries.get(i).getAnswers();
-                image = "emoji" + listOfEntries.get(i).getSmiley();
-                int rec = getResources().getIdentifier(image,"drawable", this.getContext().getPackageName());
-                imageView = getView().findViewById(R.id.imageView6);
-                imageView.setImageDrawable(getContext().getDrawable(rec));
-
-            }
-        }  */
 
 
         dateText = getView().findViewById(R.id.textView3);
