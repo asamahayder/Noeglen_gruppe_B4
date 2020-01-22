@@ -75,12 +75,12 @@ public class Diary2F extends Fragment implements View.OnClickListener {
             date = bundle.getString("date");
         }else{
             currentDate = CurrentDate.getInstance();
-            date = new SimpleDateFormat("dd/M/yyyy").format(currentDate.getDate());
+            date = new SimpleDateFormat("dd/MM/yyyy").format(currentDate.getDate());
         }
 
 
       //  questions = bundle.getStringArray("questions");
-        getListOfEntries("Diary");
+        getListOfEntries(getString(R.string.diaryListKey));
 
         for (int i = 0; i < listOfEntries.size(); i++) {
             if (listOfEntries.get(i).getDate().equals(date)){

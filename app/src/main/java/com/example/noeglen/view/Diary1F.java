@@ -65,7 +65,7 @@ public class Diary1F extends Fragment  implements View.OnClickListener{
         bundle = getArguments();
 
         currentDate = CurrentDate.getInstance();
-        date = new SimpleDateFormat("dd/M/yyyy").format(currentDate.getDate());
+        date = new SimpleDateFormat("dd/MM/yyyy").format(currentDate.getDate());
         answers = new String[4];
 
         dateText = getView().findViewById(R.id.textView3);
@@ -131,7 +131,7 @@ public class Diary1F extends Fragment  implements View.OnClickListener{
     }
 
     private void saveDiaryDTO() {
-        String sPrefEditKey = "Diary";
+        String sPrefEditKey = getString(R.string.diaryListKey);
         getListOfEntries(sPrefEditKey);
 
         answers[0] = answer1.getText().toString();
@@ -142,6 +142,7 @@ public class Diary1F extends Fragment  implements View.OnClickListener{
 
         listOfEntries.add(diaryDTO);
         saveSharedPref(sPrefEditKey);
+        handleMarkTodaysDiaryAsDone();
     }
 
     private void getListOfEntries(String sPrefEditKey) {
@@ -166,5 +167,12 @@ public class Diary1F extends Fragment  implements View.OnClickListener{
     public void onAttach(@NonNull Context context) {
         super.onAttach(context);
         iMain = (IMainActivity) getActivity();
+    }
+
+    public void handleMarkTodaysDiaryAsDone(){
+        SharedPreferences preferences = getActivity().getSharedPreferences(getString(R.string.sharedPreferencesKey), Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.putString(getString(R.string.isTodaysDiaryWritten),"true");
+        editor.apply();
     }
 }

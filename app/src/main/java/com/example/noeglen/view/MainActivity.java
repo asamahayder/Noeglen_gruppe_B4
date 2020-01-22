@@ -94,7 +94,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             navBarBtnList.add(navButton);
             navBarTxtList.add(navText);
 
-
             navButton.setStateListAnimator(null);
             navButton.setOnClickListener(this);
             navText.setVisibility(View.INVISIBLE);
@@ -201,6 +200,19 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             View v = findViewById(R.id.bNav1);
             onClick(v);
         }
+        if (tag.equals(getString(R.string.fragment_exerexer))){
+            View v = findViewById(R.id.bNav4);
+            onClick(v);
+        }
+        if (tag.equals(getString(R.string.fragment_exer_2))){
+            View v = findViewById(R.id.bNav4);
+            onClick(v);
+        }
+        if (tag.equals(getString(R.string.fragment_infoknowledge))){
+            View v = findViewById(R.id.bNav0);
+            onClick(v);
+        }
+
 
         if (bundle != null){
             f.setArguments(bundle);
@@ -287,21 +299,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
-
     @Override
     public void onBackPressed() {
         super.onBackPressed();
         fm = this.getSupportFragmentManager();
     }
-
-    /*public void visibilityGone() {
-        toolbar.setVisibility(View.GONE);
-    }
-
-    public void visibilityShow() {
-        toolbar.setVisibility(View.VISIBLE);
-    }*/
-
 
     //Denne metode undersøger om der allerede er lavet en dagbog for dagen. Hvis der er, så skipper den dairy_main hvor man vælger humør.
     public Fragment handleDiaryFragmentChange(){
