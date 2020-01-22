@@ -72,20 +72,19 @@ public class DiaryFCalendar extends Fragment  {
 
                 Boolean diaryExists = false;
                 for (int i = 0; i < listOfEntries.size(); i++) {
+
                     if (listOfEntries.get(i).getDate().equals(date)){
+
                         diaryExists = true;
                     }
                 }
                 if (diaryExists){
                     iMain.setFragment(diary2F,getString(R.string.fragment_diary2),true,bundle);
                 }
+
             }
 
         });
-
-
-
-
 
     }
     private void initializeView(){
@@ -103,7 +102,7 @@ public class DiaryFCalendar extends Fragment  {
 
     private void getListOfEntries(String sPrefEditKey) {
         String json = sPref.getString(sPrefEditKey, null);
-        System.out.println(json + "##########");
+
         Type type = new TypeToken<List<DiaryDTO>>() {
         }.getType();
         listOfEntries = gson.fromJson(json, type);

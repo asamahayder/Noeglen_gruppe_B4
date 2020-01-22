@@ -65,7 +65,7 @@ public class Diary1F extends Fragment  implements View.OnClickListener{
         bundle = getArguments();
 
         currentDate = CurrentDate.getInstance();
-        date = new SimpleDateFormat("dd/MM/yyyy").format(currentDate.getDate());
+        date = new SimpleDateFormat("dd/M/yyyy").format(currentDate.getDate());
         answers = new String[4];
 
         dateText = getView().findViewById(R.id.textView3);
@@ -79,12 +79,6 @@ public class Diary1F extends Fragment  implements View.OnClickListener{
         imageView = getView().findViewById(R.id.imageView6);
 
 
-
-        //System.out.println(bundle.getInt("smiley"));
-        //System.out.println(rec);
-        //System.out.println(image);
-
-       // imageView.setBackground(getContext().getDrawable(rec));
         imageView.setImageDrawable(getContext().getDrawable(rec));
 
         questions = bundle.getStringArray("questions");
@@ -98,6 +92,8 @@ public class Diary1F extends Fragment  implements View.OnClickListener{
         question2 = getView().findViewById(R.id.question2);
         question3 = getView().findViewById(R.id.question3);
         question4 = getView().findViewById(R.id.question4);
+
+
 
 
         question1.setText(questions[0]);
