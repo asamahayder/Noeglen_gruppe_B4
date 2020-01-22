@@ -196,10 +196,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             View v = findViewById(R.id.bNav3);
             onClick(v);
         }
-        if (tag.equals(getString(R.string.fragment_diary2))){
-            View v = findViewById(R.id.bNav1);
-            onClick(v);
-        }
         if (tag.equals(getString(R.string.fragment_exerexer))){
             View v = findViewById(R.id.bNav4);
             onClick(v);
@@ -212,7 +208,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             View v = findViewById(R.id.bNav0);
             onClick(v);
         }
-
 
         if (bundle != null){
             f.setArguments(bundle);
@@ -284,6 +279,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             selectedFragment = new ExerExerTwoF();
             v = findViewById(R.id.bNav4);
         }
+
 
         // CLEAR BACKSTACK / CHANGE NAVBAR ANIMATION
         if (!addToBackStack){
