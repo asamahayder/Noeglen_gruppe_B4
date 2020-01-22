@@ -12,6 +12,8 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
+import com.bumptech.glide.request.RequestOptions;
 import com.example.noeglen.R;
 import com.example.noeglen.data.KnowledgeDTO;
 
@@ -47,9 +49,12 @@ public class InfoKnowledgeMainAdapter extends RecyclerView.Adapter<InfoKnowledge
 
             Log.d(TAG, "onBindViewHolder: context = " + context.toString());
 
+            RequestOptions requestOptions = new RequestOptions();
+            requestOptions.transform(new RoundedCorners(40));
             Glide
                     .with(context)
                     .load(articles.get(position).getImage())
+                    .apply(requestOptions)
                     .into(holder.image);
             holder.image.setBackground(context.getDrawable(android.R.color.transparent));
 

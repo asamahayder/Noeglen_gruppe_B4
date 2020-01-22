@@ -192,9 +192,9 @@ public class DashMainF extends Fragment implements NavigationView.OnNavigationIt
                 break;
             case R.id.iDashExercise:
                 if (markTodaysExerciseAsDoneImage.getVisibility() != View.VISIBLE){
-                    iMain.inflateFragment(getString(R.string.fragment_exerexer));
-                }else{
                     iMain.inflateFragment(getString(R.string.fragment_exermain));
+                }else{
+                    iMain.inflateFragment(getString(R.string.fragment_exerexer));
                 }
                 break;
         }
@@ -232,7 +232,7 @@ public class DashMainF extends Fragment implements NavigationView.OnNavigationIt
             }
             else {
                 ExerExerTwoF exerciseF = new ExerExerTwoF();
-                iMain.setFragment(exerciseF,getString(R.string.fragment_exerexer),true,bundle);
+                iMain.setFragment(exerciseF,getString(R.string.fragment_exer_2),true,bundle);
             }
         }
         if (CURRENT_TYPE == 3){

@@ -193,6 +193,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public void setFragment(Fragment f, String tag, boolean addToBackStack, Bundle bundle){
 
+        if (tag.equals(getString(R.string.fragment_dashvid))){
+            View v = findViewById(R.id.bNav3);
+            onClick(v);
+        }
+        if (tag.equals(getString(R.string.fragment_diary2))){
+            View v = findViewById(R.id.bNav1);
+            onClick(v);
+        }
+
         if (bundle != null){
             f.setArguments(bundle);
         }
@@ -257,9 +266,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
         if (tag.equals(getString(R.string.fragment_exerexer))){
             selectedFragment = new ExerExerF();
+            v = findViewById(R.id.bNav4);
         }
         if (tag.equals(getString(R.string.fragment_exer_2))){
             selectedFragment = new ExerExerTwoF();
+            v = findViewById(R.id.bNav4);
         }
 
         // CLEAR BACKSTACK / CHANGE NAVBAR ANIMATION
