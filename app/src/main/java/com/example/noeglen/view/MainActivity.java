@@ -117,60 +117,36 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         currDate = CurrentDate.getInstance();
         currDateString = currDate.createCurrentDate();
+        currentView = navBarBtnList.get(2);
     }
 
     @Override
     public void onClick(View v) {
-        Fragment selectedFragment = null;
-        currentView = v;
-
-        for (int i = 0; i < 5; i++) {
-            Button b = navBarBtnList.get(i);
-            TextView t = navBarTxtList.get(i);
-
-            b.animate().translationY(0).setDuration(200).setInterpolator(new DecelerateInterpolator());
-            b.setTranslationY(0);
-            b.setSelected(false);
-
-            t.animate().translationY(0).setDuration(200).setInterpolator(new DecelerateInterpolator());
-            t.setVisibility(View.INVISIBLE);
-
-            if (v == b){
-                b.animate().translationY(iconAnimationValue).setDuration(200).setInterpolator(new DecelerateInterpolator());
-                b.setTranslationY(iconAnimationValue);
-                b.setSelected(true);
-                t.setVisibility(View.VISIBLE);
-                t.animate().translationY(textAnimationValue).setDuration(200).setInterpolator(new DecelerateInterpolator());
-                t.startAnimation(in);
-                selectedFragment = checkNavBarFragment(selectedFragment, i);
-            }
-        }
+        boolean isSame = false;
+        if (v == currentView)isSame = true;
+        handleAnimation(v);
+        Fragment selectedFragment = checkNavBarFragment(v);
         clearBackStack();
-        setFragment(selectedFragment,fragmentTag,false,null);
+        setFragment(selectedFragment,fragmentTag,false,null, isSame);
 
     }
 
-    private Fragment checkNavBarFragment(Fragment selectedFragment, int i) {
-        switch (i){
-            case 0:
-                selectedFragment = new InfoKnowledgeMainF();
-                fragmentTag = getString(R.string.fragment_infoknowledgemain);
-                break;
-            case 1:
-                selectedFragment = handleDiaryFragmentChange();
-                break;
-            case 2:
-                selectedFragment = new DashMainF();
-                fragmentTag = getString(R.string.fragment_dashmain);
-                break;
-            case 3:
-                selectedFragment = new DashVidMainF();
-                fragmentTag = getString(R.string.fragment_dashvidmain);
-                break;
-            case 4:
-                selectedFragment = new ExerMainF();
-                fragmentTag = getString(R.string.fragment_exermain);
-                break;
+    private Fragment checkNavBarFragment(View v) {
+        Fragment selectedFragment = null;
+        if (v == navBarBtnList.get(0)){
+            selectedFragment = new InfoKnowledgeMainF();
+            fragmentTag = getString(R.string.fragment_infoknowledgemain);
+        }else if (v == navBarBtnList.get(1)){
+            selectedFragment = handleDiaryFragmentChange();
+        }else if (v == navBarBtnList.get(2)){
+            selectedFragment = new DashMainF();
+            fragmentTag = getString(R.string.fragment_dashmain);
+        }else if (v == navBarBtnList.get(3)){
+            selectedFragment = new DashVidMainF();
+            fragmentTag = getString(R.string.fragment_dashvidmain);
+        }else if (v == navBarBtnList.get(4)){
+            selectedFragment = new ExerMainF();
+            fragmentTag = getString(R.string.fragment_exermain);
         }
         return selectedFragment;
     }
@@ -191,35 +167,68 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public void setFragment(Fragment f, String tag, boolean addToBackStack, Bundle bundle){
-
         if (tag.equals(getString(R.string.fragment_dashvid))){
             View v = findViewById(R.id.bNav3);
-            onClick(v);
+            handleAnimation(v);
         }
         if (tag.equals(getString(R.string.fragment_diary2))){
             View v = findViewById(R.id.bNav1);
-            onClick(v);
+            handleAnimation(v);
         }
         if (tag.equals(getString(R.string.fragment_exerexer))){
             View v = findViewById(R.id.bNav4);
-            onClick(v);
+            handleAnimation(v);
         }
         if (tag.equals(getString(R.string.fragment_exer_2))){
             View v = findViewById(R.id.bNav4);
-            onClick(v);
+            handleAnimation(v);
         }
         if (tag.equals(getString(R.string.fragment_infoknowledge))){
             View v = findViewById(R.id.bNav0);
-            onClick(v);
+            handleAnimation(v);
         }
-
-
         if (bundle != null){
             f.setArguments(bundle);
         }
 
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.setCustomAnimations(R.anim.fade_in, R.anim.fade_out, R.anim.fade_in, R.anim.fade_out);
+        transaction.replace(R.id.content_frame,f,tag);
+
+        if (addToBackStack){
+            transaction.addToBackStack(tag);
+        }
+        transaction.commit();
+    }
+
+    private void setFragment(Fragment f, String tag, boolean addToBackStack, Bundle bundle, boolean isSame){
+        if (tag.equals(getString(R.string.fragment_dashvid))){
+            View v = findViewById(R.id.bNav3);
+            handleAnimation(v);
+        }
+        if (tag.equals(getString(R.string.fragment_diary2))){
+            View v = findViewById(R.id.bNav1);
+            handleAnimation(v);
+        }
+        if (tag.equals(getString(R.string.fragment_exerexer))){
+            View v = findViewById(R.id.bNav4);
+            handleAnimation(v);
+        }
+        if (tag.equals(getString(R.string.fragment_exer_2))){
+            View v = findViewById(R.id.bNav4);
+            handleAnimation(v);
+        }
+        if (tag.equals(getString(R.string.fragment_infoknowledge))){
+            View v = findViewById(R.id.bNav0);
+            handleAnimation(v);
+        }
+        if (bundle != null){
+            f.setArguments(bundle);
+        }
+
+
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        if (!isSame)transaction.setCustomAnimations(R.anim.fade_in, R.anim.fade_out, R.anim.fade_in, R.anim.fade_out);
         transaction.replace(R.id.content_frame,f,tag);
 
         if (addToBackStack){
@@ -237,8 +246,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void inflateFragment(String tag, boolean addToBackStack) {
 
         Fragment selectedFragment = null;
-        View v = currentView;
-
+        View v = null;
 
         // NAVBAR
         if (tag.equals(getString(R.string.fragment_infoknowledgemain))){
@@ -291,7 +299,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
 
         if (currentView != v){
-            onClick(v);
             setFragment(selectedFragment,tag,false,null);
         }
         else if (selectedFragment != null){
@@ -321,5 +328,31 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
 
         return selectedFragment;
+    }
+
+    public void handleAnimation(View v){
+        if (v != currentView){
+            for (int i = 0; i < 5; i++) {
+                Button b = navBarBtnList.get(i);
+                TextView t = navBarTxtList.get(i);
+
+                b.animate().translationY(0).setDuration(200).setInterpolator(new DecelerateInterpolator());
+                b.setTranslationY(0);
+                b.setSelected(false);
+
+                t.animate().translationY(0).setDuration(200).setInterpolator(new DecelerateInterpolator());
+                t.setVisibility(View.INVISIBLE);
+
+                if (v == b){
+                    b.animate().translationY(iconAnimationValue).setDuration(200).setInterpolator(new DecelerateInterpolator());
+                    b.setTranslationY(iconAnimationValue);
+                    b.setSelected(true);
+                    t.setVisibility(View.VISIBLE);
+                    t.animate().translationY(textAnimationValue).setDuration(200).setInterpolator(new DecelerateInterpolator());
+                    t.startAnimation(in);
+                }
+            }
+            currentView = v;
+        }
     }
 }
