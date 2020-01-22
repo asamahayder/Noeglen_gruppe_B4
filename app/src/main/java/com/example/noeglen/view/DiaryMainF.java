@@ -14,16 +14,19 @@ import androidx.fragment.app.Fragment;
 import com.example.noeglen.R;
 import com.example.noeglen.logic.CurrentDate;
 
+import java.text.SimpleDateFormat;
 
-  public class DiaryMainF extends Fragment implements View.OnClickListener{
 
-   private TextView date;
+public class DiaryMainF extends Fragment implements View.OnClickListener{
+
+   private TextView datefelt;
    private CurrentDate currentDate;
    private SeekBar seekBar;
    private ImageView imageView;
    private IMainActivity iMain;
    private int  smiley;
    private String [] questions;
+   private String date;
 
 
 
@@ -36,9 +39,10 @@ import com.example.noeglen.logic.CurrentDate;
     @Override
     public void onViewCreated(@NonNull final View view, @Nullable Bundle savedInstanceState) {
 
-        date = getView().findViewById(R.id.textView4);
-        date.setText(currentDate.getDateString());
-        date.setOnClickListener(this);
+        datefelt = getView().findViewById(R.id.currDate);
+        date = new SimpleDateFormat("dd/M/yyyy").format(currentDate.getDate());
+        datefelt.setText(date);
+        datefelt.setOnClickListener(this);
 
         seekBar = getView().findViewById(R.id.simpleSeekBar);
 
@@ -158,7 +162,7 @@ import com.example.noeglen.logic.CurrentDate;
         String tag ="";
 
 
-        if (view == date){
+        if (view == datefelt){
             DiaryFCalendar diaryFCalendar = new DiaryFCalendar();
             iMain.inflateFragment(getString(R.string.fragment_calendar));
 

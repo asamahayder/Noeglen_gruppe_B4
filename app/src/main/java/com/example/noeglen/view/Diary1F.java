@@ -69,6 +69,7 @@ public class Diary1F extends Fragment  implements View.OnClickListener{
         answers = new String[4];
 
         dateText = getView().findViewById(R.id.textView3);
+        dateText.setText(date);
 
         saveButton = getView().findViewById(R.id.gem);
         saveButton.setOnClickListener(this);
@@ -93,12 +94,12 @@ public class Diary1F extends Fragment  implements View.OnClickListener{
         answer3 = getView().findViewById(R.id.answer3);
         answer4 = getView().findViewById(R.id.answer4);
 
-        question1 = getView().findViewById(R.id.textView8);
-        question2 = getView().findViewById(R.id.textView9);
-        question3 = getView().findViewById(R.id.textView10);
-        question4 = getView().findViewById(R.id.textView11);
+        question1 = getView().findViewById(R.id.question1);
+        question2 = getView().findViewById(R.id.question2);
+        question3 = getView().findViewById(R.id.question3);
+        question4 = getView().findViewById(R.id.question4);
 
-        dateText.setText(date);
+
         question1.setText(questions[0]);
         question2.setText(questions[1]);
         question3.setText(questions[2]);
@@ -114,17 +115,8 @@ public class Diary1F extends Fragment  implements View.OnClickListener{
     public void onClick(View view) {
         if (view == saveButton){
                 saveDiaryDTO();
-                SharedPreferences preferences = getActivity().getSharedPreferences(getString(R.string.sharedPreferencesKey), Context.MODE_PRIVATE);
-                SharedPreferences.Editor editor = preferences.edit();
-                editor.putString(getString(R.string.isTodaysDiaryWritten),"true");
-                editor.apply();
-                //String tag = getString(R.string.fragment_diary2);
-                //Diary2F diary2F = new Diary2F();
-
                 String tag = getString(R.string.fragment_affirmationer);
                 DiaryAffirmations diaryAffirmations = new DiaryAffirmations();
-
-                //DiaryFCalendar diaryFCalendar = new DiaryFCalendar();
 
                 Bundle bundle1 = new Bundle();
                 bundle1.putString("date",date);
@@ -134,8 +126,6 @@ public class Diary1F extends Fragment  implements View.OnClickListener{
                 bundle1.putString("diaryDTO",json);
                 bundle1.putStringArray("questions", questions);
 
-
-                //iMain.setFragment(diary2F,tag,true, bundle1);
                 iMain.setFragment(diaryAffirmations,tag,true,bundle1);
             }
     }
@@ -166,7 +156,6 @@ public class Diary1F extends Fragment  implements View.OnClickListener{
 
     private void saveSharedPref(String sPrefEditKey) {
         String json = gson.toJson(listOfEntries);
-        System.out.println("##############################" + json);
         sEdit.putString(sPrefEditKey,json);
         sEdit.commit();
 
@@ -178,10 +167,4 @@ public class Diary1F extends Fragment  implements View.OnClickListener{
         super.onAttach(context);
         iMain = (IMainActivity) getActivity();
     }
-
-    public void handleSetTodaysDiaryAsWritten(){
-
-    }
-
-
 }
