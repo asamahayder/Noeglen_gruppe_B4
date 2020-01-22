@@ -72,11 +72,12 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="40dp"
-                android:text="TextView"
-                android:textColor="@color/primaryDark"
-                android:paddingEnd="20dp"
+                android:layout_weight="5"
                 android:paddingStart="20dp"
-                android:layout_weight="5"/>
+                android:paddingEnd="20dp"
+                android:text="TextView"
+                android:textColor="@color/comeback_green_dark"
+                android:textSize="24sp" />
 
             <EditText
                 android:id="@+id/answer1"
@@ -96,11 +97,12 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
-                android:text="TextView"
-                android:textColor="@color/primaryDark"
-                android:paddingEnd="20dp"
+                android:layout_weight="5"
                 android:paddingStart="20dp"
-                android:layout_weight="5"/>
+                android:paddingEnd="20dp"
+                android:text="TextView"
+                android:textColor="@color/comeback_green_dark"
+                android:textSize="24sp" />
 
             <EditText
                 android:id="@+id/answer2"
@@ -120,13 +122,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
-                android:text="TextView"
-                android:textColor="@color/primaryDark"
-                app:layout_constraintTop_toBottomOf="@+id/answer2"
-                tools:layout_editor_absoluteX="0dp"
-                android:paddingEnd="20dp"
+                android:layout_weight="5"
                 android:paddingStart="20dp"
-                android:layout_weight="5"/>
+                android:paddingEnd="20dp"
+                android:text="TextView"
+                android:textColor="@color/comeback_green_dark"
+                android:textSize="24sp"
+                app:layout_constraintTop_toBottomOf="@+id/answer2"
+                tools:layout_editor_absoluteX="0dp" />
 
             <EditText
                 android:id="@+id/answer3"
@@ -146,19 +149,19 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
-                android:text="TextView"
-                android:textColor="@color/primaryDark"
-                app:layout_constraintTop_toBottomOf="@+id/answer3"
-                android:paddingEnd="20dp"
+                android:layout_weight="5"
                 android:paddingStart="20dp"
-                android:layout_weight="5"/>
+                android:paddingEnd="20dp"
+                android:text="TextView"
+                android:textColor="@color/comeback_green_dark"
+                android:textSize="24sp"
+                app:layout_constraintTop_toBottomOf="@+id/answer3" />
 
             <EditText
                 android:id="@+id/answer4"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="30dp"
-
                 android:background="@drawable/rounded_edittext"
                 android:ems="10"
                 android:inputType="textMultiLine"
@@ -177,7 +180,7 @@
                 android:layout_marginBottom="30dp"
                 android:background="@drawable/blue_border"
                 android:text="Gem"
-                android:textColor="@color/primaryDark"
+                android:textColor="@color/comeback_green_dark"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/answer4"
                 android:layout_weight="5"/>

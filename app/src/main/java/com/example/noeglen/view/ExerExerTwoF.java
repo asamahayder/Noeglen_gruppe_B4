@@ -125,7 +125,7 @@ public class ExerExerTwoF extends Fragment implements View.OnClickListener {
 
     public void stopMediaPlayer() {
         if (mp != null) {
-            primaryDark = getResources().getColor(R.color.primaryDark);
+            primaryDark = getResources().getColor(R.color.comeback_green_dark);
             btnPlay.setText("Afspil");
             btnPlay.setTextColor(primaryDark);
             btnPlay.setBackgroundResource(R.drawable.blue_border);
