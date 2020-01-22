@@ -109,7 +109,7 @@
             android:paddingStart="40dp"
             android:text="Afspil"
             android:textColor="@color/comeback_green_dark"
-            android:background="@drawable/blue_border"
+            android:background="@drawable/dark_green_border"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

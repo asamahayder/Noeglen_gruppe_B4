@@ -17,7 +17,7 @@
 
     <style name="DrawerArrowStyle" parent="@style/Widget.AppCompat.DrawerArrowToggle">
         <item name="spinBars">true</item>
-        <item name="color">@color/primaryDark</item>
+        <item name="color">@color/comeback_green_dark</item>
     </style>
 
     <style name="shadoweffect">
