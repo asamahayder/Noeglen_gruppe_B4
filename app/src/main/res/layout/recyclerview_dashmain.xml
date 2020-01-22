@@ -53,7 +53,7 @@
             <View
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@color/primaryNormal"
+                android:background="@color/comeback_light_dark_green"
                 android:alpha="0.3"
                 />
 
