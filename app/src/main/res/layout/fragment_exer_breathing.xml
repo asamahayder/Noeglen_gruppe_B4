@@ -76,7 +76,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="50dp"
-            android:text="Her skal du følge den blå cirkel. Du skal trække vejret ind når den bliver stor, og puste ud når den bliver mindre."
+            android:text="Her skal du følge den grønne cirkel. Du skal trække vejret ind når den bliver stor, og puste ud når den bliver mindre."
             android:elevation="2dp"
             app:layout_constraintEnd_toStartOf="@id/cardviewfav"
             app:layout_constraintStart_toStartOf="parent"

@@ -43,6 +43,7 @@ public class ExerExerF extends Fragment implements View.OnClickListener {
     private ExerciseDTO currExercise;
     private int resID1, resID2;
     private boolean isFavorite;
+    private int animationPlayer = 0;
 
     private static final String TAG = "ExerExerF";
 
@@ -157,9 +158,21 @@ public class ExerExerF extends Fragment implements View.OnClickListener {
             else {
                 bAddToFav.setBackground(getContext().getDrawable(resID1));
             }
-        } else if( v == bstartAnim){
+        } else if( v == bstartAnim && animationPlayer == 0){
+            int primaryOrange = getResources().getColor(R.color.primaryOrange);
             iAnim.startAnimation(breatheAnimation);
+            bstartAnim.setText("Stop");
+            bstartAnim.setTextColor(primaryOrange);
+            bstartAnim.setBackgroundResource(R.drawable.orange_border);
+            animationPlayer = 1;
             markTodayExerciseAsDone();
+        } else if (v == bstartAnim && animationPlayer == 1){
+            int primaryDark = getResources().getColor(R.color.comeback_green_dark);
+            bstartAnim.setText("Start");
+            bstartAnim.setTextColor(primaryDark);
+            bstartAnim.setBackgroundResource(R.drawable.dark_green_border);
+            iAnim.clearAnimation();
+            animationPlayer = 0;
         }
 
     }
