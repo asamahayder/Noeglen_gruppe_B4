@@ -2,11 +2,14 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="10dp"
+    android:layout_marginStart="5dp"
+    android:layout_marginEnd="5dp">
 
     <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="78dp">
+        android:layout_height="75dp">
 
         <ImageView
             android:id="@+id/infoknowledgemain_recyclerview_image"
@@ -18,18 +21,24 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@drawable/gradient"
-            android:soundEffectsEnabled="true" />
+            android:soundEffectsEnabled="true"
+            android:alpha="0.3"/>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/transparentPrimary"/>
 
         <TextView
             android:id="@+id/infoknowledgemain_recyclerview_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="16dp"
-            android:layout_marginTop="39dp"
+            android:layout_marginTop="44dp"
             android:layout_marginRight="16dp"
             android:text="Article Title Placeholder"
             android:textColor="#ffffff"
             android:textSize="20sp"
+            style="@style/shadoweffect"
             tools:ignore="HardcodedText" />
 
     </FrameLayout>

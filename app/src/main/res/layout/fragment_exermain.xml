@@ -139,15 +139,15 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
                 android:shadowColor="@android:color/black"
                 android:shadowDx="5"
                 android:shadowDy="5"
                 android:shadowRadius="6"
-                android:text="Kan jeg gøre noget ved det?"
+                android:text="Afstressende lydfil"
                 android:textColor="#ffffff"
-                android:textSize="25sp"
-                android:layout_marginStart="10dp"
-                android:layout_marginEnd="10dp"/>
+                android:textSize="25sp" />
 
         </androidx.cardview.widget.CardView>
 

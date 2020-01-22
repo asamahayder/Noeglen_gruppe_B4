@@ -2,6 +2,7 @@ package com.example.noeglen.view;
 
 import android.Manifest;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
@@ -27,7 +28,6 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
-
 import com.example.noeglen.R;
 import com.example.noeglen.logic.CurrentDate;
 import com.google.android.material.navigation.NavigationView;
@@ -36,7 +36,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, View.OnClickListener, IMainActivity {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener, IMainActivity {
 
     private Animation in;
     private List<Button> navBarBtnList;
@@ -46,10 +46,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private FragmentTransaction ft;
     private CurrentDate currDate;
     private View currentView;
-    private Toolbar toolbar;
-    private DrawerLayout drawerLayout;
-    private ActionBarDrawerToggle toggle;
-    private static int Request = 4;
     ImageView bluenav;
     float iconAnimationValue;
     float textAnimationValue;
@@ -57,31 +53,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     Guideline textGuideLine;
 
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mainactivity);
 
-        toolbar = findViewById(R.id.toolBar);
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayShowTitleEnabled(false);
-
         bluenav = findViewById(R.id.blueNavImg);
 
         iconGuideLine = findViewById(R.id.iconguide);
         textGuideLine = findViewById(R.id.textguide);
-
-        drawerLayout = findViewById(R.id.drawer_layout);
-        drawerLayout.setScrimColor(getResources().getColor(android.R.color.transparent));
-
-        NavigationView navigationView = findViewById(R.id.navigationView);
-        navigationView.setNavigationItemSelectedListener(this);
-
-        toggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-        drawerLayout.addDrawerListener(toggle);
-        toggle.syncState();
-
 
         float percent = ((ConstraintLayout.LayoutParams) iconGuideLine.getLayoutParams()).guidePercent;
         float percent2= ((ConstraintLayout.LayoutParams) textGuideLine.getLayoutParams()).guidePercent;
@@ -114,7 +94,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             navBarBtnList.add(navButton);
             navBarTxtList.add(navText);
 
-
             navButton.setStateListAnimator(null);
             navButton.setOnClickListener(this);
             navText.setVisibility(View.INVISIBLE);
@@ -138,63 +117,36 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         currDate = CurrentDate.getInstance();
         currDateString = currDate.createCurrentDate();
-
-
+        currentView = navBarBtnList.get(2);
     }
 
     @Override
     public void onClick(View v) {
-        Fragment selectedFragment = null;
-        currentView = v;
-
-        for (int i = 0; i < 5; i++) {
-            Button b = navBarBtnList.get(i);
-            TextView t = navBarTxtList.get(i);
-
-            b.animate().translationY(0).setDuration(200).setInterpolator(new DecelerateInterpolator());
-            b.setTranslationY(0);
-            b.setSelected(false);
-
-            t.animate().translationY(0).setDuration(200).setInterpolator(new DecelerateInterpolator());
-            t.setVisibility(View.INVISIBLE);
-
-            if (v == b){
-                b.animate().translationY(iconAnimationValue).setDuration(200).setInterpolator(new DecelerateInterpolator());
-                b.setTranslationY(iconAnimationValue);
-                b.setSelected(true);
-                t.setVisibility(View.VISIBLE);
-                t.animate().translationY(textAnimationValue).setDuration(200).setInterpolator(new DecelerateInterpolator());
-                t.startAnimation(in);
-                selectedFragment = checkNavBarFragment(selectedFragment, i);
-            }
-        }
+        boolean isSame = false;
+        if (v == currentView)isSame = true;
+        handleAnimation(v);
+        Fragment selectedFragment = checkNavBarFragment(v);
         clearBackStack();
-        setFragment(selectedFragment,fragmentTag,false,null);
+        setFragment(selectedFragment,fragmentTag,false,null, isSame);
 
     }
 
-    private Fragment checkNavBarFragment(Fragment selectedFragment, int i) {
-        switch (i){
-            case 0:
-                selectedFragment = new InfoKnowledgeMainF();
-                fragmentTag = getString(R.string.fragment_infoknowledgemain);
-                break;
-            case 1:
-                selectedFragment = new DiaryMainF();
-                fragmentTag = getString(R.string.fragment_diarymain);
-                break;
-            case 2:
-                selectedFragment = new DashMainF();
-                fragmentTag = getString(R.string.fragment_dashmain);
-                break;
-            case 3:
-                selectedFragment = new DashVidMainF();
-                fragmentTag = getString(R.string.fragment_dashvidmain);
-                break;
-            case 4:
-                selectedFragment = new ExerMainF();
-                fragmentTag = getString(R.string.fragment_exermain);
-                break;
+    private Fragment checkNavBarFragment(View v) {
+        Fragment selectedFragment = null;
+        if (v == navBarBtnList.get(0)){
+            selectedFragment = new InfoKnowledgeMainF();
+            fragmentTag = getString(R.string.fragment_infoknowledgemain);
+        }else if (v == navBarBtnList.get(1)){
+            selectedFragment = handleDiaryFragmentChange();
+        }else if (v == navBarBtnList.get(2)){
+            selectedFragment = new DashMainF();
+            fragmentTag = getString(R.string.fragment_dashmain);
+        }else if (v == navBarBtnList.get(3)){
+            selectedFragment = new DashVidMainF();
+            fragmentTag = getString(R.string.fragment_dashvidmain);
+        }else if (v == navBarBtnList.get(4)){
+            selectedFragment = new ExerMainF();
+            fragmentTag = getString(R.string.fragment_exermain);
         }
         return selectedFragment;
     }
@@ -215,13 +167,68 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     @Override
     public void setFragment(Fragment f, String tag, boolean addToBackStack, Bundle bundle){
-
+        if (tag.equals(getString(R.string.fragment_dashvid))){
+            View v = findViewById(R.id.bNav3);
+            handleAnimation(v);
+        }
+        if (tag.equals(getString(R.string.fragment_diary2))){
+            View v = findViewById(R.id.bNav1);
+            handleAnimation(v);
+        }
+        if (tag.equals(getString(R.string.fragment_exerexer))){
+            View v = findViewById(R.id.bNav4);
+            handleAnimation(v);
+        }
+        if (tag.equals(getString(R.string.fragment_exer_2))){
+            View v = findViewById(R.id.bNav4);
+            handleAnimation(v);
+        }
+        if (tag.equals(getString(R.string.fragment_infoknowledge))){
+            View v = findViewById(R.id.bNav0);
+            handleAnimation(v);
+        }
         if (bundle != null){
             f.setArguments(bundle);
         }
 
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.setCustomAnimations(R.anim.fade_in, R.anim.fade_out, R.anim.fade_in, R.anim.fade_out);
+        transaction.replace(R.id.content_frame,f,tag);
+
+        if (addToBackStack){
+            transaction.addToBackStack(tag);
+        }
+        transaction.commit();
+    }
+
+    private void setFragment(Fragment f, String tag, boolean addToBackStack, Bundle bundle, boolean isSame){
+        if (tag.equals(getString(R.string.fragment_dashvid))){
+            View v = findViewById(R.id.bNav3);
+            handleAnimation(v);
+        }
+        if (tag.equals(getString(R.string.fragment_diary2))){
+            View v = findViewById(R.id.bNav1);
+            handleAnimation(v);
+        }
+        if (tag.equals(getString(R.string.fragment_exerexer))){
+            View v = findViewById(R.id.bNav4);
+            handleAnimation(v);
+        }
+        if (tag.equals(getString(R.string.fragment_exer_2))){
+            View v = findViewById(R.id.bNav4);
+            handleAnimation(v);
+        }
+        if (tag.equals(getString(R.string.fragment_infoknowledge))){
+            View v = findViewById(R.id.bNav0);
+            handleAnimation(v);
+        }
+        if (bundle != null){
+            f.setArguments(bundle);
+        }
+
+
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        if (!isSame)transaction.setCustomAnimations(R.anim.fade_in, R.anim.fade_out, R.anim.fade_in, R.anim.fade_out);
         transaction.replace(R.id.content_frame,f,tag);
 
         if (addToBackStack){
@@ -239,15 +246,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     public void inflateFragment(String tag, boolean addToBackStack) {
 
         Fragment selectedFragment = null;
-        View v = currentView;
-
+        View v = null;
 
         // NAVBAR
         if (tag.equals(getString(R.string.fragment_infoknowledgemain))){
             selectedFragment = new InfoKnowledgeMainF();
             v = findViewById(R.id.bNav0);
         }
-
         if (tag.equals(getString(R.string.fragment_diarymain))){
             selectedFragment = new DiaryMainF();
             v = findViewById(R.id.bNav1);
@@ -281,9 +286,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
         if (tag.equals(getString(R.string.fragment_exerexer))){
             selectedFragment = new ExerExerF();
+            v = findViewById(R.id.bNav4);
         }
         if (tag.equals(getString(R.string.fragment_exer_2))){
             selectedFragment = new ExerExerTwoF();
+            v = findViewById(R.id.bNav4);
         }
 
         // CLEAR BACKSTACK / CHANGE NAVBAR ANIMATION
@@ -292,7 +299,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
 
         if (currentView != v){
-            onClick(v);
             setFragment(selectedFragment,tag,false,null);
         }
         else if (selectedFragment != null){
@@ -300,79 +306,53 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
     }
 
-
     @Override
     public void onBackPressed() {
         super.onBackPressed();
         fm = this.getSupportFragmentManager();
     }
 
-    @Override
-    public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+    //Denne metode undersøger om der allerede er lavet en dagbog for dagen. Hvis der er, så skipper den dairy_main hvor man vælger humør.
+    public Fragment handleDiaryFragmentChange(){
 
-        int id = menuItem.getItemId();
+        SharedPreferences preferences = getSharedPreferences(getString(R.string.sharedPreferencesKey), MODE_PRIVATE);
+        String isTodaysDiaryWritten = preferences.getString(getString(R.string.isTodaysDiaryWritten), "false");
 
-        switch (id) {
-            case R.id.phoneContact:
-                System.out.println("1");
-                phonePermission();
-                break;
-            case R.id.emailContact:
-                System.out.println("1");
-                openMail();
-                break;
-            case R.id.chat:
-                System.out.println("1");
-                Intent intent = new Intent(this, ChatActivity.class);
-                startActivity(intent);
-                break;
-            case R.id.logOut:
-                System.out.println("1");
-                FirebaseAuth.getInstance().signOut();
-                Intent login = new Intent(this, LoginActivity.class);
-                startActivity(login);
-                this.finish();
-                break;
+        Fragment selectedFragment;
+        if (isTodaysDiaryWritten.equals("true")){
+            selectedFragment = new Diary2F();
+            fragmentTag = getString(R.string.fragment_diary2);
+        }else{
+            selectedFragment = new DiaryMainF();
+            fragmentTag = getString(R.string.fragment_diarymain);
         }
-        return true;
+
+        return selectedFragment;
     }
 
-    private void phonePermission() {
+    public void handleAnimation(View v){
+        if (v != currentView){
+            for (int i = 0; i < 5; i++) {
+                Button b = navBarBtnList.get(i);
+                TextView t = navBarTxtList.get(i);
 
-        if (ContextCompat.checkSelfPermission(this, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CALL_PHONE}, Request);
-        } else {
-            String phoneNumber = getResources().getString(R.string.phoneNumber);
-            String uri = "tel:" + phoneNumber;
-            Intent intent = new Intent(Intent.ACTION_DIAL);
-            intent.setData(Uri.parse(uri));
-            startActivity(intent);
-        }
-    }
+                b.animate().translationY(0).setDuration(200).setInterpolator(new DecelerateInterpolator());
+                b.setTranslationY(0);
+                b.setSelected(false);
 
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        if (requestCode == Request) {
-            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                phonePermission();
+                t.animate().translationY(0).setDuration(200).setInterpolator(new DecelerateInterpolator());
+                t.setVisibility(View.INVISIBLE);
+
+                if (v == b){
+                    b.animate().translationY(iconAnimationValue).setDuration(200).setInterpolator(new DecelerateInterpolator());
+                    b.setTranslationY(iconAnimationValue);
+                    b.setSelected(true);
+                    t.setVisibility(View.VISIBLE);
+                    t.animate().translationY(textAnimationValue).setDuration(200).setInterpolator(new DecelerateInterpolator());
+                    t.startAnimation(in);
+                }
             }
+            currentView = v;
         }
     }
-
-    private void openMail() {
-        String emailAddress = getResources().getString(R.string.emailAddress);
-        System.out.println(emailAddress);
-        Intent intent = new Intent(Intent.ACTION_SEND);
-        intent.putExtra(Intent.EXTRA_EMAIL, new String[]{emailAddress});
-        intent.setType("message/rfc822");
-        startActivity(Intent.createChooser(intent, "Vælg en email klient"));
-    }
-    public void visibilityGone() {
-        toolbar.setVisibility(View.GONE);
-    }
-
-    public void visibilityShow() {
-        toolbar.setVisibility(View.VISIBLE);
-    }
-
 }
