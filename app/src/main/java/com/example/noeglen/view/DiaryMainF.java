@@ -59,7 +59,7 @@ public class DiaryMainF extends Fragment implements View.OnClickListener{
                     imageView.setBackground(getView().getResources().getDrawable(R.drawable.emoji5));
                     smiley = 5;
                     questions[0] = "Hvad gik dårligt i dag? ";
-                    questions[1] = "Hvad gik mindre godt ?";
+                    questions[1] = "Hvordan havde du håndteret det?";
                     questions[2] = "Hvordan vil du indgår de dårlige ting fremover?";
                     questions[3] = "Andet du vil tilføje?";
 
@@ -67,15 +67,15 @@ public class DiaryMainF extends Fragment implements View.OnClickListener{
                     imageView.setBackground(getView().getResources().getDrawable(R.drawable.emoji4));
                     smiley = 4;
                     questions[0] = "Hvad gik dårligt i dag? ";
-                    questions[1] = "Hvad gik mindre godt ?";
+                    questions[1] = "Hvordan havde du håndteret det?";
                     questions[2] = "Hvordan vil du indgår de dårlige ting fremover?";
                     questions[3] = "Andet du vil tilføje?";
 
                 }else if (seekBar.getProgress() > 40 && seekBar.getProgress() <= 60){
                     imageView.setBackground(getView().getResources().getDrawable(R.drawable.emoji3));
                     smiley = 3;
-                    questions[0] = "Hvorfor er du ligeglad? ";
-                    questions[1] = "Hvad gik mindre godt ?";
+                    questions[0] = "Hvorfor føler du denne følse? ";
+                    questions[1] = "Hvordan vil du være OK ?";
                     questions[2] = "Hvordan vil du indgår de dårlige ting fremover?";
                     questions[3] = "Andet du vil tilføje?";
                 }else if (seekBar.getProgress() > 60 && seekBar.getProgress() <= 80){
