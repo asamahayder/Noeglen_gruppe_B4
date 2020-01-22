@@ -63,6 +63,7 @@ public class Diary2F extends Fragment implements View.OnClickListener {
 
     private void initializeView() {
         dateText = getView().findViewById(R.id.textView3);
+        dateText.setOnClickListener(this);
 
         questions = new String[4];
         answers = new String[4];
@@ -79,7 +80,7 @@ public class Diary2F extends Fragment implements View.OnClickListener {
         }
 
 
-      //  questions = bundle.getStringArray("questions");
+
         getListOfEntries(getString(R.string.diaryListKey));
 
         for (int i = 0; i < listOfEntries.size(); i++) {
@@ -92,20 +93,7 @@ public class Diary2F extends Fragment implements View.OnClickListener {
         image = "emoji" + diaryDTO.getSmiley();
         int rec = getResources().getIdentifier(image,"drawable", this.getContext().getPackageName());
         imageView = getView().findViewById(R.id.imageView6);
-       // imageView.setImageDrawable(getContext().getDrawable(rec));
 
-
-
-      /*  for (int i = 0; i < listOfEntries.size(); i++) {
-            if (listOfEntries.get(i).getQuestions()[0].equals(questions[0])) {
-                answers = listOfEntries.get(i).getAnswers();
-                image = "emoji" + listOfEntries.get(i).getSmiley();
-                int rec = getResources().getIdentifier(image,"drawable", this.getContext().getPackageName());
-                imageView = getView().findViewById(R.id.imageView6);
-                imageView.setImageDrawable(getContext().getDrawable(rec));
-
-            }
-        }  */
 
 
         dateText = getView().findViewById(R.id.textView3);
@@ -164,11 +152,14 @@ public class Diary2F extends Fragment implements View.OnClickListener {
 
             iMain.inflateFragment(getString(R.string.fragment_dashmain),true);
 
+        }else if (v == dateText){
+            iMain.inflateFragment(getString(R.string.fragment_calendar),true);
         }
+
     }
 
     private void saveDiaryDTO() {
-        //for (int i = 0; i < listOfEntries.size(); i++) {
+
             if (listOfEntries != null ){
                 String sPrefEditKey = "Diary";
                 getListOfEntries(sPrefEditKey);
@@ -180,17 +171,21 @@ public class Diary2F extends Fragment implements View.OnClickListener {
 
                 diaryDTO  = new DiaryDTO(bundle.getInt("smiley"), answers,questions,date);
 
-                listOfEntries.add(diaryDTO);
+                for (int i = 0; i < listOfEntries.size(); i++) {
+                    if (listOfEntries.get(i).getDate().equals(date)){
+                        listOfEntries.get(i).setAnswers(diaryDTO.getAnswers());
+                        listOfEntries.get(i).setDate(diaryDTO.getDate());
+                        listOfEntries.get(i).setQuestions(diaryDTO.getQuestions());
+                        listOfEntries.get(i).setSmiley(diaryDTO.getSmiley());
+                    }
+                }
                 saveSharedPref(sPrefEditKey);
             }
         }
 
 
-   // }
-
     private void getListOfEntries(String sPrefEditKey) {
         String json = sPref.getString(sPrefEditKey, null);
-        System.out.println(json + "##########");
         Type type = new TypeToken<List<DiaryDTO>>() {
         }.getType();
         listOfEntries = gson.fromJson(json, type);
