@@ -94,7 +94,6 @@ public class DashMainF extends Fragment implements NavigationView.OnNavigationIt
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         initializeView();
-        //iMain.visibilityShow();
         toolbar = getView().findViewById(R.id.toolBar);
         ((AppCompatActivity) getActivity()).setSupportActionBar(toolbar);
         ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayShowTitleEnabled(false);
@@ -176,7 +175,6 @@ public class DashMainF extends Fragment implements NavigationView.OnNavigationIt
                     bundle.putString("videoObject",videoInJSON);
                     bundle.putString("isPartOfDailyGoals","true");
                     iMain.setFragment(new DashVidF(), getString(R.string.fragment_dashvid),true, bundle);
-                    //iMain.visibilityGone();
                 }else {
                     iMain.inflateFragment(getString(R.string.fragment_dashvidmain));
                 }
@@ -195,10 +193,8 @@ public class DashMainF extends Fragment implements NavigationView.OnNavigationIt
             case R.id.iDashExercise:
                 if (markTodaysExerciseAsDoneImage.getVisibility() != View.VISIBLE){
                     iMain.inflateFragment(getString(R.string.fragment_exerexer));
-                    //iMain.visibilityGone();
                 }else{
                     iMain.inflateFragment(getString(R.string.fragment_exermain));
-                    //iMain.visibilityGone();
                 }
                 break;
         }
@@ -213,7 +209,6 @@ public class DashMainF extends Fragment implements NavigationView.OnNavigationIt
     @Override
     public void onDetach() {
         super.onDetach();
-        //iMain.visibilityGone();
     }
 
     @Override
@@ -227,7 +222,6 @@ public class DashMainF extends Fragment implements NavigationView.OnNavigationIt
             System.out.println("######################3" + favoriteList.get(position).getTitle());
             System.out.println("######################" + favoriteList.get(position).getVideoURL());
             iMain.setFragment(videoF,getString(R.string.fragment_dashvid),true,bundle);
-            //iMain.visibilityGone();
         }
         if (CURRENT_TYPE == 2){
             json = gson.toJson(favoriteList.get(position));
@@ -240,14 +234,12 @@ public class DashMainF extends Fragment implements NavigationView.OnNavigationIt
                 ExerExerTwoF exerciseF = new ExerExerTwoF();
                 iMain.setFragment(exerciseF,getString(R.string.fragment_exerexer),true,bundle);
             }
-            //iMain.visibilityGone();
         }
         if (CURRENT_TYPE == 3){
             InfoKnowledgeF articleF = new InfoKnowledgeF();
             json = gson.toJson(favoriteList.get(position));
             bundle.putString("currentKnowledgeArticle",json);
             iMain.setFragment(articleF,getString(R.string.fragment_infoknowledge),true,bundle);
-            //iMain.visibilityGone();
         }
     }
 
@@ -397,7 +389,6 @@ public class DashMainF extends Fragment implements NavigationView.OnNavigationIt
                         bundle.putString("date",recentDiaryList.get(2).getDate());
                         Diary2F diary2F = new Diary2F();
                         iMain.setFragment(diary2F, getString(R.string.fragment_diary2),true,bundle);
-                        //iMain.visibilityGone();
                     }
                 });
             case 2:
@@ -411,7 +402,6 @@ public class DashMainF extends Fragment implements NavigationView.OnNavigationIt
                         bundle.putString("date",recentDiaryList.get(1).getDate());
                         Diary2F diary2F = new Diary2F();
                         iMain.setFragment(diary2F, getString(R.string.fragment_diary2),true,bundle);
-                        //iMain.visibilityGone();
                     }
                 });
             case 1:
@@ -425,7 +415,6 @@ public class DashMainF extends Fragment implements NavigationView.OnNavigationIt
                         bundle.putString("date",recentDiaryList.get(0).getDate());
                         Diary2F diary2F = new Diary2F();
                         iMain.setFragment(diary2F, getString(R.string.fragment_diary2),true,bundle);
-                        //iMain.visibilityGone();
                     }
                 });
             default: break;

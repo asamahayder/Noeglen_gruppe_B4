@@ -290,7 +290,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void visibilityShow() {
         toolbar.setVisibility(View.VISIBLE);
     }*/
-    }
 
 
     //Denne metode undersøger om der allerede er lavet en dagbog for dagen. Hvis der er, så skipper den dairy_main hvor man vælger humør.

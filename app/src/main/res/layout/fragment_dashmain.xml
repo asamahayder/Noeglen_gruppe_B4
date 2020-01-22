@@ -6,6 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#ffffff">
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -24,18 +25,18 @@
             android:orientation="horizontal"
             app:layout_constraintGuide_percent="0.66" />
 
-    <LinearLayout
-        android:id="@+id/linear_layout_toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
-
-        <androidx.appcompat.widget.Toolbar
-            android:id="@+id/toolBar"
+        <LinearLayout
+            android:id="@+id/linear_layout_toolbar"
             android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize" />
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
-    </LinearLayout>
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolBar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize" />
+
+        </LinearLayout>
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/toDoList"
@@ -239,159 +240,158 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/feature_titel">
 
-        <LinearLayout
-            android:id="@+id/recentDiariesLinearLayout"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_margin="10dp"
-            android:showDividers="middle"
-            android:divider="@drawable/divider"
-            android:orientation="horizontal"/>
-
-
-        <TextView
-            android:id="@+id/emptyDiaryContentList"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:textAlignment="center"
-            android:textColor="@color/primaryDark"
-            android:textSize="20sp"
-            android:text="@string/emptyRecentDiaryList"
-            app:layout_constraintRight_toRightOf="@id/diaryContentFrame"
-            app:layout_constraintLeft_toLeftOf="@id/diaryContentFrame"
-            app:layout_constraintTop_toTopOf="@id/diaryContentFrame"
-            app:layout_constraintBottom_toBottomOf="@id/diaryContentFrame"
-            android:visibility="gone"/>
-
-        <androidx.cardview.widget.CardView
-            android:id="@+id/recentDiary1"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintRight_toLeftOf="@id/recentDiary2"
-            app:layout_constraintLeft_toLeftOf="parent"
-            android:layout_marginStart="10dp"
-            app:cardBackgroundColor="@color/primaryDark"
-            app:cardCornerRadius="20dp"
-            android:visibility="invisible"
-            android:clickable="false"
-            android:elevation="8dp">
-
-            <ImageView
+            <LinearLayout
+                android:id="@+id/recentDiariesLinearLayout"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:src="@drawable/diary_image"
-                android:tint="@color/transparentSecondary"
-                android:scaleType="centerCrop"/>
+                android:layout_margin="10dp"
+                android:divider="@drawable/divider"
+                android:orientation="horizontal"
+                android:showDividers="middle" />
+
 
             <TextView
-                android:id="@+id/recentDiary1Text"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:id="@+id/emptyDiaryContentList"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:gravity="center"
+                android:text="@string/emptyRecentDiaryList"
                 android:textAlignment="center"
-                android:padding="10dp"
-                android:maxLines="1"
-                app:autoSizeTextType="uniform"
-                android:shadowColor="@android:color/black"
-                android:shadowDx="5"
-                android:shadowDy="5"
-                android:shadowRadius="6"
-                android:text="dagbog"
-                android:textColor="#ffffff"
-                android:textSize="25sp"
-                tools:ignore="HardcodedText" />
+                android:textColor="@color/primaryDark"
+                android:textSize="20sp"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="@id/diaryContentFrame"
+                app:layout_constraintLeft_toLeftOf="@id/diaryContentFrame"
+                app:layout_constraintRight_toRightOf="@id/diaryContentFrame"
+                app:layout_constraintTop_toTopOf="@id/diaryContentFrame" />
 
-        </androidx.cardview.widget.CardView>
-
-        <androidx.cardview.widget.CardView
-            android:id="@+id/recentDiary2"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintLeft_toRightOf="@id/recentDiary1"
-            app:layout_constraintRight_toLeftOf="@id/recentDiary3"
-            android:layout_marginStart="10dp"
-            android:layout_marginEnd="10dp"
-            app:cardBackgroundColor="@color/primaryDark"
-            app:cardCornerRadius="20dp"
-            android:visibility="invisible"
-            android:clickable="false"
-            android:elevation="8dp">
-
-            <ImageView
-                android:layout_width="match_parent"
+            <androidx.cardview.widget.CardView
+                android:id="@+id/recentDiary1"
+                android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:src="@drawable/diary_image"
-                android:tint="@color/transparentSecondary"
-                android:scaleType="centerCrop"/>
+                android:layout_marginStart="10dp"
+                android:clickable="false"
+                android:elevation="8dp"
+                android:visibility="invisible"
+                app:cardBackgroundColor="@color/primaryDark"
+                app:cardCornerRadius="20dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toLeftOf="@id/recentDiary2"
+                app:layout_constraintTop_toTopOf="parent">
 
-            <TextView
-                android:id="@+id/recentDiary2Text"
-                android:layout_width="match_parent"
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/diary_image"
+                    android:tint="@color/transparentSecondary" />
+
+                <TextView
+                    android:id="@+id/recentDiary1Text"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:maxLines="1"
+                    android:padding="10dp"
+                    android:shadowColor="@android:color/black"
+                    android:shadowDx="5"
+                    android:shadowDy="5"
+                    android:shadowRadius="6"
+                    android:text="dagbog"
+                    android:textAlignment="center"
+                    android:textColor="#ffffff"
+                    android:textSize="25sp"
+                    app:autoSizeTextType="uniform"
+                    tools:ignore="HardcodedText" />
+
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/recentDiary2"
+                android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:gravity="center"
-                android:textAlignment="center"
-                android:maxLines="1"
-                android:padding="10dp"
-                android:shadowColor="@android:color/black"
-                android:shadowDx="5"
-                android:shadowDy="5"
-                android:shadowRadius="6"
-                android:text="Dagbog"
-                android:textColor="#ffffff"
-                android:textSize="25sp"
-                tools:ignore="HardcodedText"
-                app:autoSizeTextType="uniform"/>
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:clickable="false"
+                android:elevation="8dp"
+                android:visibility="invisible"
+                app:cardBackgroundColor="@color/primaryDark"
+                app:cardCornerRadius="20dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toRightOf="@id/recentDiary1"
+                app:layout_constraintRight_toLeftOf="@id/recentDiary3"
+                app:layout_constraintTop_toTopOf="parent">
 
-        </androidx.cardview.widget.CardView>
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/diary_image"
+                    android:tint="@color/transparentSecondary" />
 
-        <androidx.cardview.widget.CardView
-            android:id="@+id/recentDiary3"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintLeft_toRightOf="@id/recentDiary2"
-            app:layout_constraintRight_toRightOf="parent"
-            android:layout_marginEnd="10dp"
-            app:cardBackgroundColor="@color/primaryDark"
-            app:cardCornerRadius="20dp"
-            android:visibility="invisible"
-            android:clickable="false"
-            android:elevation="8dp">
+                <TextView
+                    android:id="@+id/recentDiary2Text"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:maxLines="1"
+                    android:padding="10dp"
+                    android:shadowColor="@android:color/black"
+                    android:shadowDx="5"
+                    android:shadowDy="5"
+                    android:shadowRadius="6"
+                    android:text="Dagbog"
+                    android:textAlignment="center"
+                    android:textColor="#ffffff"
+                    android:textSize="25sp"
+                    app:autoSizeTextType="uniform"
+                    tools:ignore="HardcodedText" />
 
-            <ImageView
-                android:layout_width="match_parent"
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/recentDiary3"
+                android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:src="@drawable/diary_image"
-                android:tint="@color/transparentSecondary"
-                android:scaleType="centerCrop"/>
+                android:layout_marginEnd="10dp"
+                android:clickable="false"
+                android:elevation="8dp"
+                android:visibility="invisible"
+                app:cardBackgroundColor="@color/primaryDark"
+                app:cardCornerRadius="20dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toRightOf="@id/recentDiary2"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
 
-            <TextView
-                android:id="@+id/recentDiary3Text"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:gravity="center"
-                android:textAlignment="center"
-                android:maxLines="1"
-                android:padding="10dp"
-                android:shadowColor="@android:color/black"
-                android:shadowDx="5"
-                android:shadowDy="5"
-                android:shadowRadius="6"
-                android:text="Dagbog"
-                android:textColor="#ffffff"
-                android:textSize="25sp"
-                tools:ignore="HardcodedText"
-                app:autoSizeTextType="uniform"/>
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/diary_image"
+                    android:tint="@color/transparentSecondary" />
 
-        </androidx.cardview.widget.CardView>
+                <TextView
+                    android:id="@+id/recentDiary3Text"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:maxLines="1"
+                    android:padding="10dp"
+                    android:shadowColor="@android:color/black"
+                    android:shadowDx="5"
+                    android:shadowDy="5"
+                    android:shadowRadius="6"
+                    android:text="Dagbog"
+                    android:textAlignment="center"
+                    android:textColor="#ffffff"
+                    android:textSize="25sp"
+                    app:autoSizeTextType="uniform"
+                    tools:ignore="HardcodedText" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            </androidx.cardview.widget.CardView>
+
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -455,5 +455,6 @@
         app:headerLayout="@layout/fragment_navigation_drawer"
         app:itemIconTint="@color/primaryDark"
         app:menu="@menu/navigation_drawer" />
+
 
 </androidx.drawerlayout.widget.DrawerLayout>
