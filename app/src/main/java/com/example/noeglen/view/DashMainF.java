@@ -185,7 +185,7 @@ public class DashMainF extends Fragment implements NavigationView.OnNavigationIt
                 }else{
                     Bundle bundle = new Bundle();
                     CurrentDate currentDate = CurrentDate.getInstance();
-                    String date = new SimpleDateFormat("dd/M/yyyy").format(currentDate.getDate());
+                    String date = new SimpleDateFormat("dd/MM/yyyy").format(currentDate.getDate());
                     bundle.putString("date", date);
                     iMain.setFragment(new Diary2F(), getString(R.string.fragment_diary2),true,bundle);
                 }
@@ -246,10 +246,11 @@ public class DashMainF extends Fragment implements NavigationView.OnNavigationIt
     public void checkIfNewDay(){
         String preferenceKey = getString(R.string.sharedPreferencesKey);
         String savedDateKey = getString(R.string.savedDateKey);
-        String currentDate = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(new Date());
+        String currentDate = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).format(new Date());
 
         SharedPreferences preferences = getActivity().getSharedPreferences(preferenceKey, MODE_PRIVATE);
-        String savedDate = preferences.getString(savedDateKey,"2020-01-01");
+        String savedDate = preferences.getString(savedDateKey,"01-01-2020");
+
 
         if (!currentDate.equals(savedDate)){
             isNewDay = true;
