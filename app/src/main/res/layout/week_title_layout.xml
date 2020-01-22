@@ -11,6 +11,6 @@
     android:padding="20dp"
     android:textSize="30sp"
     android:text="loading"
-    android:textColor="@color/primaryDark"
+    android:textColor="@color/comeback_green_dark"
     />
 

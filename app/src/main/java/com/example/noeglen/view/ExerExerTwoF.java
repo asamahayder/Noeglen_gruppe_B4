@@ -1,7 +1,6 @@
 package com.example.noeglen.view;
 
 import android.content.Context;
-import android.graphics.Color;
 import android.content.SharedPreferences;
 import android.media.MediaPlayer;
 import android.os.Bundle;
@@ -15,7 +14,6 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 
 import com.example.noeglen.R;
@@ -48,7 +46,7 @@ public class ExerExerTwoF extends Fragment implements View.OnClickListener {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_exer_2, container, false);
+        return inflater.inflate(R.layout.fragment_exer_soundfile, container, false);
     }
 
     @Override
@@ -128,7 +126,7 @@ public class ExerExerTwoF extends Fragment implements View.OnClickListener {
             primaryDark = getResources().getColor(R.color.comeback_green_dark);
             btnPlay.setText("Afspil");
             btnPlay.setTextColor(primaryDark);
-            btnPlay.setBackgroundResource(R.drawable.blue_border);
+            btnPlay.setBackgroundResource(R.drawable.dark_green_border);
             mp.release();
             mp = null;
         }

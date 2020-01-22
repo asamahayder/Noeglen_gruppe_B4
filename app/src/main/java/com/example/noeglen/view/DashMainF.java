@@ -428,20 +428,16 @@ public class DashMainF extends Fragment implements NavigationView.OnNavigationIt
 
         switch (id) {
             case R.id.phoneContact:
-                System.out.println("1");
                 phonePermission();
                 break;
             case R.id.emailContact:
-                System.out.println("1");
                 openMail();
                 break;
             case R.id.chat:
-                System.out.println("1");
                 Intent intent = new Intent(getActivity(), ChatActivity.class);
                 startActivity(intent);
                 break;
             case R.id.logOut:
-                System.out.println("1");
                 FirebaseAuth.getInstance().signOut();
                 Intent login = new Intent(getActivity(), LoginActivity.class);
                 startActivity(login);

@@ -3,6 +3,6 @@
 <shape xmlns:android="http://schemas.android.com/apk/res/android"
     android:shape="oval">
     <size android:height="20dp" android:width="20dp"> </size>
-    <solid android:color="#489cff"> </solid>
+    <solid android:color="@color/comeback_green_dark"> </solid>
     <corners android:radius="60dp"> </corners>
 </shape>

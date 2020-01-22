@@ -7,16 +7,6 @@
     android:layout_centerHorizontal="true"
     android:background="#ffffff">
 
-    <ImageView
-        android:id="@+id/returnToDashVidMainButton"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/arrow_right"
-        android:rotation="-180"/>
-
     <bg.devlabs.fullscreenvideoview.FullscreenVideoView
         android:id="@+id/videoView"
         android:layout_width="match_parent"
@@ -24,13 +14,13 @@
         android:elevation="8dp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/returnToDashVidMainButton" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/videoTitle"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
+        android:layout_marginStart="50dp"
         android:layout_marginTop="30dp"
         android:layout_marginEnd="10dp"
         android:fontFamily="@font/karla_regular"
@@ -40,8 +30,8 @@
         app:autoSizeMaxTextSize="100sp"
         app:autoSizeStepGranularity="2sp"
         android:text="Title"
-        android:textColor="@color/primaryDark"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:textColor="@color/comeback_green_dark"
+        app:layout_constraintEnd_toStartOf="@id/dashVidFavoriteButton"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/videoView" />
 
@@ -55,7 +45,7 @@
         android:fontFamily="@font/karla_regular"
         android:gravity="center"
         android:text="this will hold the video description. We need to add a description field to firestore"
-        android:textColor="@color/babyBlue"
+        android:textColor="@color/comeback_light_dark_green"
         android:textSize="15sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -65,7 +55,6 @@
         android:id="@+id/markSeenButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="100dp"
         android:background="@drawable/mark_as_seen_button_background"
         android:elevation="5dp"
         android:fontFamily="@font/karla_regular"
@@ -83,7 +72,6 @@
         android:id="@+id/markUnseenButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="100dp"
         android:background="@drawable/mark_as_unseen_button_background"
         android:elevation="5dp"
         android:fontFamily="@font/karla_regular"
@@ -101,10 +89,11 @@
         android:id="@+id/dashVidFavoriteButton"
         android:layout_width="40dp"
         android:layout_height="0dp"
-        app:layout_constraintBottom_toTopOf="@id/videoView"
+        android:layout_marginEnd="10dp"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:scaleType="centerInside"
+        app:layout_constraintLeft_toRightOf="@id/videoTitle"
+        app:layout_constraintTop_toBottomOf="@+id/videoView"
+        app:layout_constraintBottom_toTopOf="@id/videoDescription"
         app:srcCompat="@drawable/fav1" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
