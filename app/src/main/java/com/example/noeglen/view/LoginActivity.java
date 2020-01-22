@@ -66,6 +66,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         if (mUser != null) {
             Intent welcome = new Intent(LoginActivity.this, MainActivity.class);
             startActivity(welcome);
+            finish();
         }
 
         progressBar = findViewById(R.id.progressBar);
@@ -281,7 +282,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         // Sign in success, update UI with the signed-in user's information
         Intent intent = new Intent(LoginActivity.this, MainActivity.class);
         startActivity(intent);
-        finish();
+        this.finish();
     }
 
     public void saveVideoList(){
@@ -295,6 +296,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         editor.putString(videoListKey, listInJSON);
         editor.apply();
     }
+
+
 
     //------------------------------------------------------------------------------------------------------------
 }
