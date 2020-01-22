@@ -21,6 +21,14 @@
     //VIDEO COLORS
     <color name="vidNotWatched">#009AFF</color>
     <color name="vidIsWatched">#24FF00</color>
+    
+    //COME-BACK COLORS
+    <color name="comeback_green_dark">#2C6975</color>
+    <color name="comeback_light_dark_green">#68B2A0</color>
+    <color name="comeback_dark_lime_green">#CDE0C9</color>
+    <color name="comeback_light_lime_green">#E0ECDE</color>
+    <color name="comeback_white">#FFFFFF</color>
+
 
 
 </resources>
