@@ -56,8 +56,6 @@ public class DiaryFCalendar extends Fragment  {
         calendar = getView().findViewById(R.id.calendarView);
         dato = calendar.getDate();
         calendar.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
-
-
             @Override
             public void onSelectedDayChange(@NonNull CalendarView calendarView, int year, int month, int day) {
                 String years = Integer.toString(year);

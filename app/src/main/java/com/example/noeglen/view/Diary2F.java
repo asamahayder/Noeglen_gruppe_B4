@@ -76,7 +76,7 @@ public class Diary2F extends Fragment implements View.OnClickListener {
             date = bundle.getString("date");
         }else{
             currentDate = CurrentDate.getInstance();
-            date = new SimpleDateFormat("dd/MM/yyyy").format(currentDate.getDate());
+            date = new SimpleDateFormat("dd/M/yyyy").format(currentDate.getDate());
         }
 
 

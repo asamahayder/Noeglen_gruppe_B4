@@ -165,16 +165,27 @@ public class DashMainF extends Fragment implements NavigationView.OnNavigationIt
 
         switch (v.getId()) {
             case R.id.iDashVid:
+                SharedPreferences preferences = getActivity().getSharedPreferences(getString(R.string.sharedPreferencesKey),MODE_PRIVATE);
                 if (markTodaysVideoAsSeenImage.getVisibility() != View.VISIBLE){
-                    VideoDTO videoDTO = handleGetNextVideo();
-                    Gson gson = new Gson();
-                    String videoInJSON = gson.toJson(videoDTO);
                     Bundle bundle = new Bundle();
+                    Gson gson = new Gson();
+                    SharedPreferences.Editor editor = preferences.edit();
+                    VideoDTO videoDTO = handleGetNextVideo();
+                    String videoInJSON = gson.toJson(videoDTO);
+                    editor.putString(getString(R.string.todaysVideo), videoInJSON);
+                    editor.apply();
                     bundle.putString("videoObject",videoInJSON);
                     bundle.putString("isPartOfDailyGoals","true");
                     iMain.setFragment(new DashVidF(), getString(R.string.fragment_dashvid),true, bundle);
                 }else {
-                    iMain.inflateFragment(getString(R.string.fragment_dashvidmain));
+                    Bundle bundle = new Bundle();
+                    String videoInJSON = preferences.getString(getString(R.string.todaysVideo), null);
+                    if (videoInJSON == null){
+                        System.out.println("something went wrong at onClick iDashvideo. videoInJSON is null");
+                        return;
+                    }
+                    bundle.putString("videoObject",videoInJSON);
+                    iMain.setFragment(new DashVidF(),getString(R.string.fragment_dashvid), true,bundle);
                 }
                 break;
             case R.id.iDashDiary:
@@ -183,17 +194,13 @@ public class DashMainF extends Fragment implements NavigationView.OnNavigationIt
                 }else{
                     Bundle bundle = new Bundle();
                     CurrentDate currentDate = CurrentDate.getInstance();
-                    String date = new SimpleDateFormat("dd/MM/yyyy").format(currentDate.getDate());
+                    String date = new SimpleDateFormat("dd/M/yyyy").format(currentDate.getDate());
                     bundle.putString("date", date);
                     iMain.setFragment(new Diary2F(), getString(R.string.fragment_diary2),true,bundle);
                 }
                 break;
             case R.id.iDashExercise:
-                if (markTodaysExerciseAsDoneImage.getVisibility() != View.VISIBLE){
                     iMain.inflateFragment(getString(R.string.fragment_exerexer));
-                }else{
-                    iMain.inflateFragment(getString(R.string.fragment_exermain));
-                }
                 break;
         }
     }
@@ -239,10 +246,10 @@ public class DashMainF extends Fragment implements NavigationView.OnNavigationIt
     public void checkIfNewDay(){
         String preferenceKey = getString(R.string.sharedPreferencesKey);
         String savedDateKey = getString(R.string.savedDateKey);
-        String currentDate = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).format(new Date());
+        String currentDate = new SimpleDateFormat("dd-M-yyyy", Locale.getDefault()).format(new Date());
 
         SharedPreferences preferences = getActivity().getSharedPreferences(preferenceKey, MODE_PRIVATE);
-        String savedDate = preferences.getString(savedDateKey,"01-01-2020");
+        String savedDate = preferences.getString(savedDateKey,"01-1-2020");
 
 
         if (!currentDate.equals(savedDate)){
