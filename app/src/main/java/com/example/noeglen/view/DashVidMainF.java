@@ -27,14 +27,13 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class DashVidMainF extends Fragment implements View.OnClickListener {
+public class DashVidMainF extends Fragment {
 
     private IMainActivity mainActivity;
     private RecyclerView recyclerView;
     private ArrayList<VideoDTO> videoList;
     private ArrayList<Integer> weekPositionList;
     private ArrayList<Object> itemList;
-    private ImageView returnButton;
     private ProgressBar videoListBufferSign;
 
     @Override
@@ -56,11 +55,9 @@ public class DashVidMainF extends Fragment implements View.OnClickListener {
 
     private void initializeView() {
         recyclerView = getView().findViewById(R.id.videoRecyclerView);
-        returnButton = getView().findViewById(R.id.returnToDashButton);
         videoListBufferSign = getView().findViewById(R.id.videoListBufferSign);
 
         getAllVideosFromDataBase();
-        returnButton.setOnClickListener(this);
     }
 
     @Override
@@ -68,15 +65,6 @@ public class DashVidMainF extends Fragment implements View.OnClickListener {
         super.onAttach(context);
         mainActivity = (IMainActivity) getActivity();
     }
-
-    @Override
-    public void onClick(View view) {
-        if (view == returnButton){
-            System.out.println("##################333333 hey");
-            mainActivity.inflateFragment(getString(R.string.fragment_dashmain), false);
-        }
-    }
-
 
     public void setVideoList(ArrayList<VideoDTO> videoList){
         this.videoList = videoList;

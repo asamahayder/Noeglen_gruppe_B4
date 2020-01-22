@@ -63,7 +63,7 @@
                 android:layout_height="match_parent"
                 android:layout_gravity="center"
                 android:scaleType="centerCrop"
-                android:tint="@color/transparentPrimary"
+                android:tint="@color/comeback_light_dark_green_trans"
                 app:srcCompat="@android:drawable/stat_notify_sync"
                 app:layout_constraintTop_toTopOf="@id/videoItemConstraintLayout"
                 app:layout_constraintLeft_toLeftOf="@id/videoItemConstraintLayout"
