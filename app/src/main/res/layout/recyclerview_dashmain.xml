@@ -47,7 +47,8 @@
             <View
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@drawable/gradient"/>
+                android:background="@drawable/gradient"
+                android:alpha="0.3"/>
 
             <View
                 android:layout_width="match_parent"
@@ -62,7 +63,11 @@
                 android:layout_height="wrap_content"
                 android:text="Title Placeholder"
                 android:textColor="#ffffff"
+                style="@style/shadoweffect"
                 android:textSize="12sp"
+                android:shadowDx="5"
+                android:shadowDy="5"
+                android:shadowRadius="6"
                 android:gravity="center_horizontal"
                 android:layout_marginBottom="6dp"
                 android:layout_gravity="bottom"/>
