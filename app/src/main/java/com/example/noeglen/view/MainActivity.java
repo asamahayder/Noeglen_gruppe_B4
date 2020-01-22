@@ -187,6 +187,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             View v = findViewById(R.id.bNav0);
             handleAnimation(v);
         }
+
         if (bundle != null){
             f.setArguments(bundle);
         }
