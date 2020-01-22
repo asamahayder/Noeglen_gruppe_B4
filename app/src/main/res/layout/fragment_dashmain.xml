@@ -87,7 +87,7 @@
                     android:contentDescription="Video"
                     android:scaleType="centerCrop"
                     android:src="@drawable/thumbnail"
-                    android:tint="@color/transparentPrimary"
+                    android:tint="@color/comeback_light_dark_green_trans"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -127,7 +127,8 @@
                     android:layout_height="match_parent"
                     android:scaleType="centerCrop"
                     android:src="@drawable/diary_image"
-                    android:tint="@color/transparentPrimary" />
+                    android:tint="@color/comeback_light_dark_green_trans"
+                    />
 
                 <TextView
                     android:id="@+id/tDashDiary"
@@ -161,7 +162,7 @@
                     android:layout_height="match_parent"
                     android:scaleType="centerCrop"
                     android:src="@drawable/exercise_image"
-                    android:tint="@color/transparentPrimary" />
+                    android:tint="@color/comeback_light_dark_green_trans" />
 
                 <TextView
                     android:id="@+id/tDashExercise"
@@ -288,7 +289,7 @@
                     android:layout_height="match_parent"
                     android:scaleType="centerCrop"
                     android:src="@drawable/diary_image"
-                    android:tint="@color/transparentSecondary" />
+                    android:tint="@color/comeback_light_dark_green_trans" />
 
                 <TextView
                     android:id="@+id/recentDiary1Text"
@@ -331,7 +332,7 @@
                     android:layout_height="match_parent"
                     android:scaleType="centerCrop"
                     android:src="@drawable/diary_image"
-                    android:tint="@color/transparentSecondary" />
+                    android:tint="@color/comeback_light_dark_green_trans" />
 
                 <TextView
                     android:id="@+id/recentDiary2Text"
@@ -373,7 +374,7 @@
                     android:layout_height="match_parent"
                     android:scaleType="centerCrop"
                     android:src="@drawable/diary_image"
-                    android:tint="@color/transparentSecondary" />
+                    android:tint="@color/comeback_light_dark_green_trans" />
 
                 <TextView
                     android:id="@+id/recentDiary3Text"
