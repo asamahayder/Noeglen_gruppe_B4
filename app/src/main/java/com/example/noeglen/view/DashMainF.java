@@ -78,7 +78,6 @@ public class DashMainF extends Fragment implements NavigationView.OnNavigationIt
     private TextView recentDiary1Text;
     private TextView recentDiary2Text;
     private TextView recentDiary3Text;
-
     private Toolbar toolbar;
     private DrawerLayout drawerLayout;
     private ActionBarDrawerToggle toggle;
@@ -143,7 +142,6 @@ public class DashMainF extends Fragment implements NavigationView.OnNavigationIt
             rView.setAdapter(adapter);
         }
 
-
         getVideoList();
         checkIfNewDay();
         handleNewDay();
@@ -192,9 +190,9 @@ public class DashMainF extends Fragment implements NavigationView.OnNavigationIt
                 break;
             case R.id.iDashExercise:
                 if (markTodaysExerciseAsDoneImage.getVisibility() != View.VISIBLE){
-                    iMain.inflateFragment(getString(R.string.fragment_exermain));
-                }else{
                     iMain.inflateFragment(getString(R.string.fragment_exerexer));
+                }else{
+                    iMain.inflateFragment(getString(R.string.fragment_exermain));
                 }
                 break;
         }
@@ -204,11 +202,6 @@ public class DashMainF extends Fragment implements NavigationView.OnNavigationIt
     public void onAttach(Context context) {
         super.onAttach(context);
         iMain = (IMainActivity) getActivity();
-    }
-
-    @Override
-    public void onDetach() {
-        super.onDetach();
     }
 
     @Override
