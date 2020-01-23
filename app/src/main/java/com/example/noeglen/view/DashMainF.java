@@ -12,7 +12,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -21,7 +20,6 @@ import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.cardview.widget.CardView;
-import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
@@ -36,7 +34,7 @@ import com.example.noeglen.data.FavoriteDTO;
 import com.example.noeglen.data.VideoDTO;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
-import com.example.noeglen.logic.CurrentDate;
+import com.example.noeglen.data.CurrentDate;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
@@ -55,7 +53,6 @@ public class DashMainF extends Fragment implements NavigationView.OnNavigationIt
 
     private IMainActivity iMain;
     private CardView iVidDash, iDiaryDash, iExerciseDash;
-    private String fragmentTag;
     private RecyclerView rView;
     private DashMainRecyclerAdapter adapter;
     private List<FavoriteDTO> favoriteList;
@@ -67,10 +64,8 @@ public class DashMainF extends Fragment implements NavigationView.OnNavigationIt
     private boolean isNewDay;
     private ArrayList<VideoDTO> videoList;
     private TextView emptyFavoriteListTextView;
-    private ConstraintLayout diaryContentFrame;
     private ArrayList<DiaryDTO> diaryList;
     private TextView emptyDiaryContentFrameTextView;
-    private LinearLayout recentDiariesLinearLayout;
     private CardView recentDiary1;
     private CardView recentDiary2;
     private CardView recentDiary3;
@@ -116,6 +111,7 @@ public class DashMainF extends Fragment implements NavigationView.OnNavigationIt
 
 
     private void initializeView() {
+
         iVidDash = Objects.requireNonNull(getView()).findViewById(R.id.iDashVid);
         iDiaryDash = Objects.requireNonNull(getView()).findViewById(R.id.iDashDiary);
         iExerciseDash = Objects.requireNonNull(getView()).findViewById(R.id.iDashExercise);
@@ -123,9 +119,7 @@ public class DashMainF extends Fragment implements NavigationView.OnNavigationIt
         markTodaysDiaryAsWrittenImage = getView().findViewById(R.id.markTodaysDiaryAsWrittenImage);
         markTodaysExerciseAsDoneImage = getView().findViewById(R.id.markTodaysExerciseAsDoneImage);
         emptyFavoriteListTextView = getView().findViewById(R.id.emptyFavoriteListText);
-        diaryContentFrame = getView().findViewById(R.id.diaryContentFrame);
         emptyDiaryContentFrameTextView = getView().findViewById(R.id.emptyDiaryContentList);
-        recentDiariesLinearLayout = getView().findViewById(R.id.recentDiariesLinearLayout);
         recentDiary1 = getView().findViewById(R.id.recentDiary1);
         recentDiary2 = getView().findViewById(R.id.recentDiary2);
         recentDiary3 = getView().findViewById(R.id.recentDiary3);
@@ -172,7 +166,8 @@ public class DashMainF extends Fragment implements NavigationView.OnNavigationIt
         switch (v.getId()) {
             case R.id.iDashVid:
                 SharedPreferences preferences = getActivity().getSharedPreferences(getString(R.string.sharedPreferencesKey),MODE_PRIVATE);
-                if (markTodaysVideoAsSeenImage.getVisibility() != View.VISIBLE){
+                if (markTodaysVideoAsSeenImage.getVisibility() != View.VISIBLE){ //Tjekker om video-gøremålet er lavet
+                    //hvis dagens video ikke er set, så åbner vi den næste video i listen som ikke er set
                     Bundle bundle = new Bundle();
                     Gson gson = new Gson();
                     SharedPreferences.Editor editor = preferences.edit();
@@ -184,6 +179,7 @@ public class DashMainF extends Fragment implements NavigationView.OnNavigationIt
                     bundle.putString("isPartOfDailyGoals","true");
                     iMain.setFragment(new DashVidF(), getString(R.string.fragment_dashvid),true, bundle);
                 }else {
+                    //Åbner dagens video igen
                     Bundle bundle = new Bundle();
                     String videoInJSON = preferences.getString(getString(R.string.todaysVideo), null);
                     if (videoInJSON == null){
@@ -195,9 +191,11 @@ public class DashMainF extends Fragment implements NavigationView.OnNavigationIt
                 }
                 break;
             case R.id.iDashDiary:
-                if (markTodaysDiaryAsWrittenImage.getVisibility() != View.VISIBLE){
+                if (markTodaysDiaryAsWrittenImage.getVisibility() != View.VISIBLE){ //tjekker om dagens diary er lavet
+                    //åbner dagens dagbog
                     iMain.inflateFragment(getString(R.string.fragment_diarymain));
                 }else{
+                    //åbner kalenderen
                     Bundle bundle = new Bundle();
                     CurrentDate currentDate = CurrentDate.getInstance();
                     String date = new SimpleDateFormat("dd/M/yyyy").format(currentDate.getDate());
@@ -205,7 +203,7 @@ public class DashMainF extends Fragment implements NavigationView.OnNavigationIt
                     iMain.setFragment(new Diary2F(), getString(R.string.fragment_diary2),true,bundle);
                 }
                 break;
-            case R.id.iDashExercise:
+            case R.id.iDashExercise: //Åbner altid vejrtrækningsøvelse
                     iMain.inflateFragment(getString(R.string.fragment_exerexer));
                 break;
         }
@@ -225,8 +223,6 @@ public class DashMainF extends Fragment implements NavigationView.OnNavigationIt
             DashVidF videoF = new DashVidF();
             json = gson.toJson(favoriteList.get(position));
             bundle.putString("videoObject",json);
-            System.out.println("######################3" + favoriteList.get(position).getTitle());
-            System.out.println("######################" + favoriteList.get(position).getVideoURL());
             iMain.setFragment(videoF,getString(R.string.fragment_dashvid),true,bundle);
         }
         if (CURRENT_TYPE == 2){
@@ -268,6 +264,7 @@ public class DashMainF extends Fragment implements NavigationView.OnNavigationIt
         }
     }
 
+    //Denne metode undersøger om det er en ny dag. Hvis ja, så nulstiller den dagens gøremål.
     public void handleNewDay(){
         if (isNewDay){
             String preferenceKey = getString(R.string.sharedPreferencesKey);
@@ -284,6 +281,7 @@ public class DashMainF extends Fragment implements NavigationView.OnNavigationIt
         }
     }
 
+    //Viser CheckMarks ved de gøremål der er udført
     public void handleShowCheckMarks(){
         String isVideoSeen;
         String isDiaryWritten;
@@ -311,6 +309,7 @@ public class DashMainF extends Fragment implements NavigationView.OnNavigationIt
         }
     }
 
+    //Denne metode finder den næste usete video i listen
     public VideoDTO handleGetNextVideo(){
         HashMap<String, Boolean> seenVideosList = getSeenVideosList();
         for (int i = 0; i < videoList.size(); i++) {
@@ -322,6 +321,7 @@ public class DashMainF extends Fragment implements NavigationView.OnNavigationIt
         return null;
     }
 
+    //Denne metode laver en hashmap hvor man kan slå op om en video er set eller ikke set.
     public HashMap<String, Boolean> getSeenVideosList(){
         HashMap<String, Boolean> seenVideosList;
         Gson gson = new Gson();
@@ -342,6 +342,7 @@ public class DashMainF extends Fragment implements NavigationView.OnNavigationIt
         }
     }
 
+    //Denne metode henter video-listen fra shared preferences
     public void getVideoList(){
         Gson gson = new Gson();
         String preferenceKey = getString(R.string.sharedPreferencesKey);
@@ -357,6 +358,7 @@ public class DashMainF extends Fragment implements NavigationView.OnNavigationIt
         videoList = gson.fromJson(listInJSON, type);
     }
 
+    //Denne metode henter listen for alle skrevne dagbøger
     private void getDiaryList(){
         Gson gson = new Gson();
         SharedPreferences preferences = getActivity().getSharedPreferences(getString(R.string.sharedPreferencesKey), MODE_PRIVATE);
@@ -365,15 +367,16 @@ public class DashMainF extends Fragment implements NavigationView.OnNavigationIt
         diaryList = gson.fromJson(listInJSON, type);
     }
 
+    //Denne metode henter de senest skrevne dagbøger
     private void getRecentDiaries(){
         ArrayList<DiaryDTO> recentDiaries = new ArrayList<>();
         if (diaryList == null){
-            emptyDiaryContentFrameTextView.setVisibility(View.VISIBLE);
+            emptyDiaryContentFrameTextView.setVisibility(View.VISIBLE); //Viser text for at der ikke er nogen dagbøger
         }else{
             if (diaryList.isEmpty()){
-                emptyDiaryContentFrameTextView.setVisibility(View.VISIBLE);
+                emptyDiaryContentFrameTextView.setVisibility(View.VISIBLE); //se foroven
             }else{
-                //traversing list in reverse order to get the most recently added diaries
+                //itererer igennem listen baglænds for at få de seneste/nyeste dagbøger. Stopper ved 3
                 for (int i = diaryList.size()-1; i >= 0 ; i--) {
                     recentDiaries.add(diaryList.get(i));
                     if (i == diaryList.size()-3)break;
@@ -383,6 +386,7 @@ public class DashMainF extends Fragment implements NavigationView.OnNavigationIt
         }
     }
 
+    //Denne metode viser de senest skrevne dagbøger
     private void showRecentDiaries(final ArrayList<DiaryDTO> recentDiaryList){
         switch (recentDiaryList.size()){
             case 3:

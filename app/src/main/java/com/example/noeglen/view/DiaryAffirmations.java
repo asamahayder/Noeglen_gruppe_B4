@@ -31,9 +31,10 @@ public class DiaryAffirmations extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-/**
- *  hver enste gang den bliver kaldt, bliver så der valgt en random sætning ud ad de sætninger der er inde i Arrayet
- */
+
+        /**
+        *  hver enste gang den bliver kaldt, bliver så der valgt en random sætning ud ad de sætninger der er inde i Arrayet
+        */
 
         String[] arr = new String[]{"Det bliver en fantastisk dag", "Hvor er jeg heldig – jeg trækker vejret, lever og elsker", "Alt er muligt, jeg ved det og jeg kan mærke det",
         "Jeg er elsket", "Der er så meget at være taknemmelig over", "Jeg mærker en styrke og en kraft vokse indeni mig", "Der er så meget at glæde sig over",

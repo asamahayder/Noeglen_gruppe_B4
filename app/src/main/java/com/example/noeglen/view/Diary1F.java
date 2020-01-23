@@ -17,7 +17,7 @@ import androidx.fragment.app.Fragment;
 
 import com.example.noeglen.R;
 import com.example.noeglen.data.DiaryDTO;
-import com.example.noeglen.logic.CurrentDate;
+import com.example.noeglen.data.CurrentDate;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 

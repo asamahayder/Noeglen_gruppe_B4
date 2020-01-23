@@ -1,8 +1,6 @@
 package com.example.noeglen.data;
 
 import androidx.annotation.NonNull;
-
-import com.example.noeglen.view.DashVidMainRecyclerAdapter;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
@@ -20,7 +18,6 @@ public class VideoDAO {
     List<String> weekList;
     VideoDTO video;
     ArrayList<VideoDTO> videoList = null;
-    boolean videoListDone = false;
 
     public VideoDTO getVideo(String week, String videoName){
         FirebaseFirestore db = FirebaseFirestore.getInstance();
@@ -46,7 +43,6 @@ public class VideoDAO {
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                 DocumentSnapshot snapshot = task.getResult();
                 List<String> weekList = (List<String>) snapshot.get("list");
-                System.out.println("####################");
                 for (String week : weekList) {
                     System.out.println(week);
                     getAllVideosFromWeek(week);
@@ -89,9 +85,7 @@ public class VideoDAO {
                             task.getResult()) {
                         VideoDTO videoDTO = snapshot.toObject(VideoDTO.class);
                         videoList.add(videoDTO);
-                        System.out.println("#################favmain3" + videoDTO);
                     }
-                    //System.out.println("#########" + videoList);
                     callBack.onCallBack(videoList);
                 }
             }
@@ -107,7 +101,6 @@ public class VideoDAO {
     }
 
     public void addToVideo(VideoDTO videoDTO){
-        System.out.println("###############" + videoDTO.getTitle());
         videoList.add(videoDTO);
     }
 
@@ -115,18 +108,8 @@ public class VideoDAO {
         this.video = video;
     }
 
-    public void printList(){
-        /*for (VideoDTO video:
-             videoList) {
-            System.out.println(video.getTitle());
-        }*/
-    }
-
     public ArrayList<VideoDTO> getVideoList() {
         return videoList;
     }
 
-    public void setVideoListDone(boolean videoListDone) {
-        this.videoListDone = videoListDone;
-    }
 }

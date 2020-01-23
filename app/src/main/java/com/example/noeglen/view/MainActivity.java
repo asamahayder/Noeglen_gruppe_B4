@@ -8,7 +8,6 @@ import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
 import android.view.animation.DecelerateInterpolator;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -18,7 +17,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import com.example.noeglen.R;
-import com.example.noeglen.logic.CurrentDate;
+import com.example.noeglen.data.CurrentDate;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -100,6 +99,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
      */
 
     private void initializeView() {
+
+        CurrentDate currentDate = CurrentDate.getInstance();
+        currentDate.createCurrentDate();
 
         //laver animationen
         in = new AlphaAnimation(0.0f, 1.0f);
