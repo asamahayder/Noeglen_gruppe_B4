@@ -93,6 +93,13 @@ public class DashMainF extends Fragment implements NavigationView.OnNavigationIt
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         initializeView();
+        /**
+         * Det kode som er nedeunder er kode som bliver brugt til navigation drawer.
+         * Det som det gør, er primært noget grafisk som at den ikke skal vise titlen, når den åbnes så skal det bagved den ikke blive mørkt.
+         * Derudover så bliver drawerListener brugt til hoppe mellem om draweren er åben eller lukket.
+         * SyncState roterer ikonet.
+         */
+
         toolbar = getView().findViewById(R.id.toolBar);
         ((AppCompatActivity) getActivity()).setSupportActionBar(toolbar);
         ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayShowTitleEnabled(false);
@@ -422,6 +429,10 @@ public class DashMainF extends Fragment implements NavigationView.OnNavigationIt
         }
     }
 
+    /**
+     * Dette bliver brugt til tjekke mellem de knapper som der er i selve navigations draweren.
+     */
+
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
 
         int id = menuItem.getItemId();
@@ -447,6 +458,11 @@ public class DashMainF extends Fragment implements NavigationView.OnNavigationIt
         return true;
     }
 
+    /**
+     * Når man klikker på telefon nummert i navigation drawer, så bliver dette kode kørt
+     * Det som der sker her er at den tjekker om man allerede har givet den tillades til at åbne op for opkald på telefonen.
+     * Hvis man har, så vil den åbne op for aktiviteten, og indsætte telefon nummeret.
+     */
     private void phonePermission() {
 
         if (ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
@@ -469,9 +485,12 @@ public class DashMainF extends Fragment implements NavigationView.OnNavigationIt
         }
     }
 
+    /**
+     * Her vil den åbne op for mail klienterne på ens telefon alt efter hvilken man har valgt.
+     * Derudover så vil den indsætte den email som der står ind i email programmet.
+     */
     private void openMail() {
         String emailAddress = getResources().getString(R.string.emailAddress);
-        System.out.println(emailAddress);
         Intent intent = new Intent(Intent.ACTION_SEND);
         intent.putExtra(Intent.EXTRA_EMAIL, new String[]{emailAddress});
         intent.setType("message/rfc822");
@@ -479,3 +498,9 @@ public class DashMainF extends Fragment implements NavigationView.OnNavigationIt
     }
 
 }
+/*
+Lavet af gruppe B4 for ComeBack
+Kursus: 62550 62550 Brugerinteraktion og udvikling på mobile enheder
+Medlemmer af gruppen:
+Simon Andersen (s185083), Asama Hayder(s185099), Jákup Viljam Dam(s185095), Christoffer Adrian Detlef(s185117) & Thaer Almalla(s170727)
+*/
