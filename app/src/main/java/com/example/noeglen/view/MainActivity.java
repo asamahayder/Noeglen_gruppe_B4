@@ -95,6 +95,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     }
 
+    /**
+     * Initialiserer viewet
+     */
+
     private void initializeView() {
 
         //laver animationen
