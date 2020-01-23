@@ -45,15 +45,6 @@ public class ExerExerF extends Fragment implements View.OnClickListener {
     private boolean isFavorite;
     private int animationPlayer = 0;
 
-    /**
-     * De her bliver brugt til at skifte mellem to forskellige farver til start og stop knappen.
-     */
-    int primaryOrange = getResources().getColor(R.color.primaryOrange);
-    int primaryDark = getResources().getColor(R.color.comeback_green_dark);
-
-
-
-
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -112,6 +103,7 @@ public class ExerExerF extends Fragment implements View.OnClickListener {
          * Derudover så starter og stopper de også animationen.
          */
         else if( v == bstartAnim && animationPlayer == 0){
+            int primaryOrange = getResources().getColor(R.color.primaryOrange);
             iAnim.startAnimation(breatheAnimation);
             bstartAnim.setText("Stop");
             bstartAnim.setTextColor(primaryOrange);
@@ -119,6 +111,7 @@ public class ExerExerF extends Fragment implements View.OnClickListener {
             animationPlayer = 1;
             markTodayExerciseAsDone();
         } else if (v == bstartAnim && animationPlayer == 1){
+            int primaryDark = getResources().getColor(R.color.comeback_green_dark);
             bstartAnim.setText("Start");
             bstartAnim.setTextColor(primaryDark);
             bstartAnim.setBackgroundResource(R.drawable.dark_green_border);
