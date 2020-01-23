@@ -153,7 +153,6 @@ public class ExerExerF extends Fragment implements View.OnClickListener {
         if(v == bAddToFav) {
             if (addORemoveFromFav()){
                 bAddToFav.setBackground(getContext().getDrawable(resID2));
-                System.out.println("######################################");
             }
             else {
                 bAddToFav.setBackground(getContext().getDrawable(resID1));
