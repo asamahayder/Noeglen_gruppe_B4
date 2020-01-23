@@ -39,7 +39,7 @@ public class Diary2F extends Fragment implements View.OnClickListener {
     private List<DiaryDTO> listOfEntries;
     private Gson gson;
     private CurrentDate currentDate;
-    private String image;
+    private String imageString;
     private IMainActivity iMain;
     private ImageView editKnap;
     private Button gem;
@@ -83,18 +83,20 @@ public class Diary2F extends Fragment implements View.OnClickListener {
 
         getListOfEntries(getString(R.string.diaryListKey));
 
+        diaryDTO = null;
+
         for (int i = 0; i < listOfEntries.size(); i++) {
             if (listOfEntries.get(i).getDate().equals(date)){
                 diaryDTO = listOfEntries.get(i);
             }
         }
+
         questions = diaryDTO.getQuestions();
         answers = diaryDTO.getAnswers();
-        image = "emoji" + diaryDTO.getSmiley();
-        int rec = getResources().getIdentifier(image,"drawable", this.getContext().getPackageName());
+        imageString = "emoji" + diaryDTO.getSmiley();
+        int rec = getResources().getIdentifier(imageString,"drawable", this.getContext().getPackageName());
         imageView = getView().findViewById(R.id.imageView6);
-
-
+        imageView.setImageResource(rec);
 
         dateText = getView().findViewById(R.id.textView3);
         editKnap = getView().findViewById(R.id.editKnap);
@@ -127,8 +129,6 @@ public class Diary2F extends Fragment implements View.OnClickListener {
         answer2.setText(answers[1]);
         answer3.setText(answers[2]);
         answer4.setText(answers[3]);
-
-
     }
 
 
@@ -149,7 +149,6 @@ public class Diary2F extends Fragment implements View.OnClickListener {
         }else if (v == gem){
 
             saveDiaryDTO();
-
             iMain.inflateFragment(getString(R.string.fragment_dashmain),true);
 
         }else if (v == dateText){
@@ -169,7 +168,7 @@ public class Diary2F extends Fragment implements View.OnClickListener {
                 answers[2] = answer3.getText().toString();
                 answers[3] = answer4.getText().toString();
 
-                diaryDTO  = new DiaryDTO(bundle.getInt("smiley"), answers,questions,date);
+                diaryDTO  = new DiaryDTO(diaryDTO.getSmiley(), answers,questions,date);
 
                 for (int i = 0; i < listOfEntries.size(); i++) {
                     if (listOfEntries.get(i).getDate().equals(date)){

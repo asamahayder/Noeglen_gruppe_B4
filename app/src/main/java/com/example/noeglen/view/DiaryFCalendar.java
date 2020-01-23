@@ -1,7 +1,10 @@
 package com.example.noeglen.view;
 
 
+import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
@@ -12,10 +15,13 @@ import android.widget.CalendarView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
 import com.example.noeglen.R;
 import com.example.noeglen.data.DiaryDTO;
+import com.example.noeglen.data.MyCallBack;
 import com.google.common.reflect.TypeToken;
 import com.google.gson.Gson;
 
@@ -55,29 +61,39 @@ public class DiaryFCalendar extends Fragment  {
 
         calendar = getView().findViewById(R.id.calendarView);
         dato = calendar.getDate();
+        bundle = new Bundle();
         calendar.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
             @Override
             public void onSelectedDayChange(@NonNull CalendarView calendarView, int year, int month, int day) {
                 String years = Integer.toString(year);
                 years.substring(0,1);
                 year = Integer.parseInt(years);
-                String date = day + "/" + (month + 1) + "/" + year;
+                date = day + "/" + (month + 1) + "/" + year;
                 Log.d(tag, "onSelectedDayChange: day/month/year:"+ date);
-
-                Bundle bundle = new Bundle();
                 bundle.putString("date",date);
-                Diary2F diary2F = new Diary2F();
+                final Diary2F diary2F = new Diary2F();
 
                 Boolean diaryExists = false;
                 for (int i = 0; i < listOfEntries.size(); i++) {
 
                     if (listOfEntries.get(i).getDate().equals(date)){
-
                         diaryExists = true;
                     }
                 }
+
                 if (diaryExists){
                     iMain.setFragment(diary2F,getString(R.string.fragment_diary2),true,bundle);
+                }else{
+                    CreateDiaryOnEmptyDayDialog dialog = new CreateDiaryOnEmptyDayDialog(new MyCallBack() {
+                        @Override
+                        public void onCallBack(Object object) {
+                            boolean a = (boolean)object;
+                            if (a){
+                                iMain.setFragment(new DiaryMainF(),getString(R.string.fragment_diarymain),true,bundle);
+                            }
+                        }
+                    });
+                    dialog.show(getFragmentManager(),"dialog");
                 }
 
             }
@@ -121,6 +137,37 @@ public class DiaryFCalendar extends Fragment  {
     public void onAttach(@NonNull Context context) {
         super.onAttach(context);
         iMain = (IMainActivity) getActivity();
+    }
+
+    public static class CreateDiaryOnEmptyDayDialog extends DialogFragment {
+
+        MyCallBack myCallBack;
+
+        public CreateDiaryOnEmptyDayDialog(MyCallBack callBack) {
+            myCallBack = callBack;
+        }
+
+        @NonNull
+        @Override
+        public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
+            AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+            builder.setMessage(R.string.emptyDayDiaryDialog).setPositiveButton(R.string.emptyDayDiaryPositiveOption, new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    //iMain.setFragment(new Diary2F(),getString(R.string.fragment_diary2),true,bundle);
+                    System.out.println("###########################################33jaer");
+                    myCallBack.onCallBack(true);
+                }
+            }).setNegativeButton(R.string.emptyDayDiaryNegativeOption, new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    System.out.println("###########################################33naej");
+                    myCallBack.onCallBack(false);
+                }
+            });
+
+            return builder.create();
+        }
     }
 
 
