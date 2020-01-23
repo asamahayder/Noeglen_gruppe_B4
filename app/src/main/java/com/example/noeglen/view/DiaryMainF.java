@@ -40,7 +40,6 @@ public class DiaryMainF extends Fragment implements View.OnClickListener{
         datefelt = getView().findViewById(R.id.currDate);
         Bundle bundle = getArguments();
 
-
         if (bundle != null){
             date = bundle.getString("date");
             if (date == null){

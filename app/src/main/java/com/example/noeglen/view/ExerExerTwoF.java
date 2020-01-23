@@ -165,6 +165,7 @@ public class ExerExerTwoF extends Fragment implements View.OnClickListener {
 
     /**
      * Det som denne metode gør, er at tilføje eller fjerne øvelsen fra favoritter.
+     * Den tager imod et image, title, desc og sætter current_type til at være 2 hvis den er favorit.
      */
 
     private boolean addORemoveFromFav() {

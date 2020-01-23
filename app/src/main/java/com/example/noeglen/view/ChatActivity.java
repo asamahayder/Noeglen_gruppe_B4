@@ -30,6 +30,7 @@ public class ChatActivity extends AppCompatActivity implements View.OnClickListe
         startActivity(intent);
     }
 }
+
 /*
 Lavet af gruppe B4 for ComeBack
 Kursus: 62550 62550 Brugerinteraktion og udvikling på mobile enheder
