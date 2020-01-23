@@ -99,7 +99,7 @@
                 android:layout_height="match_parent"
                 android:src="@drawable/exercise_trees_in_forest"
                 android:scaleType="centerCrop"
-                android:tint="@color/transparentPrimary"/>
+                android:tint="@color/comeback_light_dark_green_trans"/>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -133,7 +133,7 @@
                 android:layout_height="match_parent"
                 android:src="@drawable/exercise_shallow_white_daisy"
                 android:scaleType="centerCrop"
-                android:tint="@color/transparentPrimary"/>
+                android:tint="@color/comeback_light_dark_green_trans"/>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -169,7 +169,7 @@
                 android:layout_height="match_parent"
                 android:src="@drawable/exercise_palm_trees"
                 android:scaleType="centerCrop"
-                android:tint="@color/transparentPrimary"/>
+                android:tint="@color/comeback_light_dark_green_trans"/>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -204,7 +204,7 @@
                 android:layout_height="match_parent"
                 android:src="@drawable/exercise_calm_water"
                 android:scaleType="centerCrop"
-                android:tint="@color/transparentPrimary"/>
+                android:tint="@color/comeback_light_dark_green_trans"/>
 
             <TextView
                 android:layout_width="wrap_content"

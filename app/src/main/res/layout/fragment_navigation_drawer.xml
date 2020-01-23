@@ -11,6 +11,6 @@
         android:layout_height="wrap_content"
         android:text="Nøglen"
         android:textSize="28sp"
-        android:textColor="@color/primaryDark"/>
+        android:textColor="@color/comeback_green_dark"/>
 
 </LinearLayout>

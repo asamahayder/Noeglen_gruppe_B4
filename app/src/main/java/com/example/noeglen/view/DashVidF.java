@@ -31,7 +31,6 @@ import bg.devlabs.fullscreenvideoview.FullscreenVideoView;
 public class DashVidF extends Fragment implements View.OnClickListener {
     private TextView videoDescription;
     private TextView videoTitle;
-    private ImageView returnButton;
     private Button markSeenButton;
     private Button markUnseenButton;
     private FullscreenVideoView videoView;
@@ -55,13 +54,11 @@ public class DashVidF extends Fragment implements View.OnClickListener {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         videoView = getView().findViewById(R.id.videoView);
-        returnButton = getView().findViewById(R.id.returnToDashVidMainButton);
         videoDescription = getView().findViewById(R.id.videoDescription);
         videoTitle = getView().findViewById(R.id.videoTitle);
         markSeenButton = getView().findViewById(R.id.markSeenButton);
         markUnseenButton = getView().findViewById(R.id.markUnseenButton);
         favoriteButton = getView().findViewById(R.id.dashVidFavoriteButton);
-        returnButton.setOnClickListener(this);
         markSeenButton.setOnClickListener(this);
         markUnseenButton.setOnClickListener(this);
         favoriteButton.setOnClickListener(this);
@@ -104,9 +101,7 @@ public class DashVidF extends Fragment implements View.OnClickListener {
 
     @Override
     public void onClick(View view) {
-        if (view == returnButton){
-            iMain.inflateFragment(getString(R.string.fragment_dashvidmain));
-        }else if (view == markSeenButton){
+        if (view == markSeenButton){
             isPartOfDailyGoals = bundle.getString("isPartOfDailyGoals");
             if (isPartOfDailyGoals != null && isPartOfDailyGoals.equals("true")){
                 handlePartOfDailyGoals();
