@@ -149,7 +149,6 @@ public class Diary2F extends Fragment implements View.OnClickListener {
         }else if (v == gem){
 
             saveDiaryDTO();
-
             iMain.inflateFragment(getString(R.string.fragment_dashmain),true);
 
         }else if (v == dateText){
@@ -169,7 +168,7 @@ public class Diary2F extends Fragment implements View.OnClickListener {
                 answers[2] = answer3.getText().toString();
                 answers[3] = answer4.getText().toString();
 
-                diaryDTO  = new DiaryDTO(bundle.getInt("smiley"), answers,questions,date);
+                diaryDTO  = new DiaryDTO(diaryDTO.getSmiley(), answers,questions,date);
 
                 for (int i = 0; i < listOfEntries.size(); i++) {
                     if (listOfEntries.get(i).getDate().equals(date)){
