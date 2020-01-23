@@ -26,13 +26,12 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
+
 public class Diary1F extends Fragment  implements View.OnClickListener{
 
     private IMainActivity iMain;
     private Button saveButton;
-    private TextView dateText, question1,question2,question3, question4;
     private EditText answer1, answer2, answer3,answer4;
-    private CurrentDate currentDateInstace;
     private DiaryDTO diaryDTO;
     private Bundle bundle;
     private Gson gson;
@@ -42,8 +41,6 @@ public class Diary1F extends Fragment  implements View.OnClickListener{
     private String date;
     private String currentDate;
     private List<DiaryDTO> listOfEntries;
-    private ImageView imageView;
-    private String image;
 
 
     @Nullable
@@ -65,7 +62,7 @@ public class Diary1F extends Fragment  implements View.OnClickListener{
     private void initializeView() {
         bundle = getArguments();
         date = bundle.getString("date");
-        currentDateInstace = CurrentDate.getInstance();
+        CurrentDate currentDateInstace = CurrentDate.getInstance();
         currentDate = new SimpleDateFormat("dd/M/yyyy").format(currentDateInstace.getDate());
 
 
@@ -75,16 +72,16 @@ public class Diary1F extends Fragment  implements View.OnClickListener{
 
         answers = new String[4];
 
-        dateText = getView().findViewById(R.id.textView3);
+        TextView dateText = getView().findViewById(R.id.textView3);
         dateText.setText(date);
 
         saveButton = getView().findViewById(R.id.gem);
         saveButton.setOnClickListener(this);
 
-        image = "emoji" + bundle.getInt("smiley");
+        String image = "emoji" + bundle.getInt("smiley");
         int rec = getResources().getIdentifier(image,"drawable", this.getContext().getPackageName());
 
-        imageView = getView().findViewById(R.id.imageView6);
+        ImageView imageView = getView().findViewById(R.id.imageView6);
         imageView.setImageDrawable(getContext().getDrawable(rec));
 
         questions = bundle.getStringArray("questions");
@@ -94,10 +91,10 @@ public class Diary1F extends Fragment  implements View.OnClickListener{
         answer3 = getView().findViewById(R.id.answer3);
         answer4 = getView().findViewById(R.id.answer4);
 
-        question1 = getView().findViewById(R.id.question1);
-        question2 = getView().findViewById(R.id.question2);
-        question3 = getView().findViewById(R.id.question3);
-        question4 = getView().findViewById(R.id.question4);
+        TextView question1 = getView().findViewById(R.id.question1);
+        TextView question2 = getView().findViewById(R.id.question2);
+        TextView question3 = getView().findViewById(R.id.question3);
+        TextView question4 = getView().findViewById(R.id.question4);
 
         question1.setText(questions[0]);
         question2.setText(questions[1]);

@@ -34,11 +34,12 @@ public class InfoKnowledgeMainAdapter extends RecyclerView.Adapter<InfoKnowledge
      * @variable context
      * en context variabel til den nuværende view
      */
+
     private List<KnowledgeDTO> articles;
     private OnArticleListener onArticleListener;
     private Context context;
 
-    public InfoKnowledgeMainAdapter(Context context, List<KnowledgeDTO> articles, OnArticleListener onArticleListener) {
+    InfoKnowledgeMainAdapter(Context context, List<KnowledgeDTO> articles, OnArticleListener onArticleListener) {
         this.context = context;
         this.articles = articles;
         this.onArticleListener = onArticleListener;
