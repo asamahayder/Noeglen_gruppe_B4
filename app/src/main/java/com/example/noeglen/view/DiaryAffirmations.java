@@ -20,10 +20,7 @@ import java.util.Random;
 
 public class DiaryAffirmations extends Fragment {
 
-    private TextView affirmation;
     private IMainActivity iMain;
-
-
 
     @Nullable
     @Override
@@ -43,7 +40,7 @@ public class DiaryAffirmations extends Fragment {
         Random random = new Random();
         int randomAffir = random.nextInt(arr.length);
 
-        affirmation = getView().findViewById(R.id.affirmation);
+        TextView affirmation = getView().findViewById(R.id.affirmation);
         affirmation.setText(arr[randomAffir]);
 
         Handler mainLooperHandler = new Handler(Looper.getMainLooper());
