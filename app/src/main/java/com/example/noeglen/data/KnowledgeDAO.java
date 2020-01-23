@@ -16,15 +16,41 @@ import com.google.firebase.firestore.QuerySnapshot;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Klassen der henter data fra databasen når der tales om artikler. Laver en forbindelse med firebase og gemmer dataet som et objekt
+ */
+
 public class KnowledgeDAO implements IKnowledgeDAO {
+
+    /**
+     * @variable knowledgeArticle
+     * Bliver brugt til at gemme det inviduelle objekt af artiklen som kan findes i databasen
+     * @variable listOfKnowledgeArticles
+     * Bliver brugt til at hente en liste af objekter af type artikel.
+     * @variable db
+     * Bliver brugt til at hente en instans af firebase, som bruges senere i Dref
+     * @variable dRef
+     * Bliver brugt til at hente en referance fra firebase til at hente data fra databasen
+     */
 
     private KnowledgeDTO knowledgeArticle;
     private List<KnowledgeDTO> listOfKnowledgeArticles;
 
     private FirebaseFirestore db;
     private DocumentReference dRef;
-
-    private static final String TAG = "INFO_MAIN_ARTICLES";
+    /**
+     * Henter en specifik artikel fra databasen, ved brug af firebase variablerne db og dRef.
+     *
+     * @param collection
+     * Firebase bruger en collection til at holde en liste a forskellige ting i. Derfor skal metoden bruge en parameter som finder
+     * hvilken collection denne artikel ligger i.
+     *
+     * @param articleTitle
+     * Selve artikelen som skal findes har brug for en parameter, det er så denne. Leder i collectionen for at finde denne artikel
+     *
+     * @return
+     * Returnerer artikel objektet sum blev fundet på databasen
+     */
 
     @Override
     public KnowledgeDTO getArticle(String collection, String articleTitle) {
@@ -36,12 +62,21 @@ public class KnowledgeDAO implements IKnowledgeDAO {
             @Override
             public void onSuccess(DocumentSnapshot documentSnapshot) {
                 knowledgeArticle = documentSnapshot.toObject(KnowledgeDTO.class);
-                Log.d(TAG, "onSuccess: SUCCESSFULLY RETRIEVED FROM FIREBASE");
             }
         });
 
         return knowledgeArticle;
     }
+
+    /**
+     * Henter en liste af objekter fra en specifik collection
+     *
+     * @param collection
+     * collectionen er hvor alle objekter ligger i, som derefter bliver brugt til at lede i databasen med den parameter
+     *
+     * @return
+     * returnerer listen af artikler fundet i databasen
+     */
 
     @Override
     public List<KnowledgeDTO> getListOfArticles(final String collection) {
@@ -56,9 +91,6 @@ public class KnowledgeDAO implements IKnowledgeDAO {
                         knowledgeArticle = snapshot.toObject(KnowledgeDTO.class);
                         listOfKnowledgeArticles.add(knowledgeArticle);
                     }
-                }
-                else {
-                    Log.d(TAG, "onComplete: could not fetch articles from " + collection);
                 }
             }
         });

@@ -136,8 +136,10 @@ public class InfoKnowledgeF extends Fragment implements View.OnClickListener {
             Type type1 = new TypeToken<FavoriteDTO>(){}.getType();
             FavoriteDTO currentArticle = gson.fromJson(bundle.getString("currentKnowledgeArticle"),type1);
             textTITLE.setText(currentArticle.getTitle());
-            textBODY.setText(Html.fromHtml(currentArticle.getBodyORweek(),Html.FROM_HTML_MODE_LEGACY));
-            imageURL = currentArticle.getIamgeURL();
+            if (currentArticle.getBodyORweek() != null){
+                textBODY.setText(Html.fromHtml(currentArticle.getBodyORweek(),Html.FROM_HTML_MODE_LEGACY));
+                imageURL = currentArticle.getIamgeURL();
+            }
         }
         else {
             textTITLE.setText(currentKnowledgeArticle.getTitle());

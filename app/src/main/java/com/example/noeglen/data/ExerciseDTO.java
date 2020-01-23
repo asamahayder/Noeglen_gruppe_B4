@@ -1,7 +1,19 @@
 package com.example.noeglen.data;
 
+/**
+ * Øvelse objektet bliver brugt til at gemme data i sharedpreferences
+ */
+
 public class ExerciseDTO {
 
+    /**
+     * @variable title
+     * Bliver brugt til at gemme titlen i sharedpreferences og hente den senere hen
+     * @variable desc
+     * Bliver brugt til at gemme i sharedpreferences ligesom titel
+     * @variable image
+     * Bliver brugt til at loade en specifik URL og gemt i sharedpreferences
+     */
     private String title;
     private String desc;
     private String image;
