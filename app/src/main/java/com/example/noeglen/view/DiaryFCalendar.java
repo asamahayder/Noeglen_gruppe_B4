@@ -154,14 +154,13 @@ public class DiaryFCalendar extends Fragment  {
             builder.setMessage(R.string.emptyDayDiaryDialog).setPositiveButton(R.string.emptyDayDiaryPositiveOption, new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
-                    //iMain.setFragment(new Diary2F(),getString(R.string.fragment_diary2),true,bundle);
-                    System.out.println("###########################################33jaer");
+
                     myCallBack.onCallBack(true);
                 }
             }).setNegativeButton(R.string.emptyDayDiaryNegativeOption, new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
-                    System.out.println("###########################################33naej");
+
                     myCallBack.onCallBack(false);
                 }
             });
