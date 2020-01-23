@@ -3,6 +3,7 @@
     package="com.example.noeglen">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.CALL_PHONE" />
 
     <application
         android:allowBackup="true"
@@ -11,9 +12,18 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".view.MainActivity" android:screenOrientation="portrait" android:configChanges="orientation|screenSize" android:windowSoftInputMode="adjustPan"></activity>
-        <activity android:name=".view.ChatActivity" android:screenOrientation="portrait"></activity>
-        <activity android:name=".view.LoginActivity" android:screenOrientation="portrait">
+        <activity android:name=".view.WelcomeTextActivity"></activity>
+        <activity
+            android:name=".view.MainActivity"
+            android:configChanges="orientation|screenSize"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan" />
+        <activity
+            android:name=".view.ChatActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".view.LoginActivity"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -22,5 +32,4 @@
         </activity>
     </application>
 
-    <uses-permission android:name="android.permission.CALL_PHONE"/>
 </manifest>

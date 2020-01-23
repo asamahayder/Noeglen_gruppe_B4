@@ -105,6 +105,10 @@ public class Diary2F extends Fragment implements View.OnClickListener {
         gem.setOnClickListener(this);
         gem.setVisibility(Button.GONE);
 
+
+
+
+
         question1 = getView().findViewById(R.id.question1);
         question2 = getView().findViewById(R.id.question2);
         question3 = getView().findViewById(R.id.question3);
@@ -121,6 +125,12 @@ public class Diary2F extends Fragment implements View.OnClickListener {
 
         dateText.setText(date);
 
+        if (diaryDTO.getSmiley() == 3) {
+            System.out.println("##########################€€€€€€€€€€€€€€€€€€€€€");
+            question4.setVisibility(View.GONE);
+            answer4.setVisibility(View.GONE);
+        }
+
         question1.setText(questions[0]);
         question2.setText(questions[1]);
         question3.setText(questions[2]);
@@ -129,6 +139,9 @@ public class Diary2F extends Fragment implements View.OnClickListener {
         answer2.setText(answers[1]);
         answer3.setText(answers[2]);
         answer4.setText(answers[3]);
+
+
+
     }
 
 
@@ -149,7 +162,6 @@ public class Diary2F extends Fragment implements View.OnClickListener {
         }else if (v == gem){
 
             saveDiaryDTO();
-
             iMain.inflateFragment(getString(R.string.fragment_dashmain),true);
 
         }else if (v == dateText){
@@ -169,7 +181,7 @@ public class Diary2F extends Fragment implements View.OnClickListener {
                 answers[2] = answer3.getText().toString();
                 answers[3] = answer4.getText().toString();
 
-                diaryDTO  = new DiaryDTO(bundle.getInt("smiley"), answers,questions,date);
+                diaryDTO  = new DiaryDTO(diaryDTO.getSmiley(), answers,questions,date);
 
                 for (int i = 0; i < listOfEntries.size(); i++) {
                     if (listOfEntries.get(i).getDate().equals(date)){

@@ -32,7 +32,16 @@
     <string name="emptyDayDiaryDialog">Der er ingen dagbog på denne dag. Vil du oprette en ny?</string>
     <string name="emptyDayDiaryPositiveOption">Ja</string>
     <string name="emptyDayDiaryNegativeOption">Nej</string>
-
+    <string name="continueText">Fortsæt</string>
+    <string name="welcomeText">Velkommen til Noeglen. Dette er din helt egen stress coach app.
+En simpel video app.
+Den hjælper dig til at forstå og reducere stress.
+En erfaren stress coach guider dig igennem
+et stress reducerende forløb.
+Vi anbefaler, at du ser videoerne i rækkefølge.
+Du kan se antal af videoer efter dit eget behov.
+Du kan med fordel gense dine favoritvideoer.
+God fornøjelse. </string>
 
     <!-- navigation drawer -->
     <string name="navigation_drawer_open">navigation drawer open</string>
@@ -51,5 +60,6 @@
     <string name="sPref_favorites">favorites</string>
     <string name="diaryListKey">Diary</string>
     <string name="todaysVideo">todays video</string>
+    <string name="firstTimeKey">firsttimeKey</string>
 
 </resources>

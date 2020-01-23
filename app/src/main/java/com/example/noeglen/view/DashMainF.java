@@ -374,10 +374,10 @@ public class DashMainF extends Fragment implements NavigationView.OnNavigationIt
             if (diaryList.isEmpty()){
                 emptyDiaryContentFrameTextView.setVisibility(View.VISIBLE);
             }else{
-                Collections.sort(diaryList);
-                for (int i = 0; i < diaryList.size(); i++) {
+                //traversing list in reverse order to get the most recently added diaries
+                for (int i = diaryList.size()-1; i >= 0 ; i--) {
                     recentDiaries.add(diaryList.get(i));
-                    if (i == 3)break;
+                    if (i == diaryList.size()-3)break;
                 }
                 showRecentDiaries(recentDiaries);
             }
