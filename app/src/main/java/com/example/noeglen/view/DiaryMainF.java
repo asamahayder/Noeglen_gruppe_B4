@@ -27,6 +27,7 @@ public class DiaryMainF extends Fragment implements View.OnClickListener{
    private int  smiley;
    private String [] questions;
    private String date;
+   private Bundle bundle;
 
 
 
@@ -40,7 +41,23 @@ public class DiaryMainF extends Fragment implements View.OnClickListener{
     public void onViewCreated(@NonNull final View view, @Nullable Bundle savedInstanceState) {
 
         datefelt = getView().findViewById(R.id.currDate);
-        date = new SimpleDateFormat("dd/M/yyyy").format(currentDate.getDate());
+        bundle = getArguments();
+
+
+        if (bundle != null){
+            System.out.println("##############3 Bundle er ikke null");
+            date = bundle.getString("date");
+            if (date == null){
+                System.out.println("##############3 Date ER null!");
+                date = new SimpleDateFormat("dd/M/yyyy").format(currentDate.getDate());
+            }
+        }else{
+            System.out.println("##############3 Bundle ER null");
+            date = new SimpleDateFormat("dd/M/yyyy").format(currentDate.getDate());
+        }
+
+        System.out.println("################## Date er: " + date);
+
         datefelt.setText(date);
         datefelt.setOnClickListener(this);
 
@@ -49,6 +66,7 @@ public class DiaryMainF extends Fragment implements View.OnClickListener{
         imageView = getView().findViewById(R.id.imageView3);
 
         questions = new String[4];
+
 
         seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
@@ -111,6 +129,7 @@ public class DiaryMainF extends Fragment implements View.OnClickListener{
                     Bundle bundle = new Bundle();
                     bundle.putInt("smiley", smiley);
                     bundle.putStringArray("questions",questions);
+                    bundle.putString("date", date);
                     Diary1F diary1F = new Diary1F();
                     iMain.setFragment(diary1F,mm,true,bundle);
                 }else if ((seekBar.getProgress() > 20 && seekBar.getProgress() <= 40)){
@@ -118,6 +137,7 @@ public class DiaryMainF extends Fragment implements View.OnClickListener{
                     Bundle bundle = new Bundle();
                     bundle.putInt("smiley", smiley);
                     bundle.putStringArray("questions",questions);
+                    bundle.putString("date", date);
                     Diary1F diary1F = new Diary1F();
                     iMain.setFragment(diary1F,mm,true,bundle);
                 }else if (seekBar.getProgress() > 40 && seekBar.getProgress() <= 60){
@@ -125,6 +145,7 @@ public class DiaryMainF extends Fragment implements View.OnClickListener{
                     Bundle bundle = new Bundle();
                     bundle.putInt("smiley", smiley);
                     bundle.putStringArray("questions",questions);
+                    bundle.putString("date", date);
                     Diary1F diary1F = new Diary1F();
                     iMain.setFragment(diary1F,mm,true,bundle);
                 }else if (seekBar.getProgress() > 60 && seekBar.getProgress() <= 80){
@@ -132,6 +153,7 @@ public class DiaryMainF extends Fragment implements View.OnClickListener{
                     Bundle bundle = new Bundle();
                     bundle.putInt("smiley", smiley);
                     bundle.putStringArray("questions",questions);
+                    bundle.putString("date", date);
                     Diary1F diary1F = new Diary1F();
                     iMain.setFragment(diary1F,mm,true,bundle);
                 }else if (seekBar.getProgress() > 80 && seekBar.getProgress() <= 120){
@@ -139,6 +161,7 @@ public class DiaryMainF extends Fragment implements View.OnClickListener{
                     Bundle bundle = new Bundle();
                     bundle.putInt("smiley", smiley);
                     bundle.putStringArray("questions",questions);
+                    bundle.putString("date", date);
                     Diary1F diary1F = new Diary1F();
                     iMain.setFragment(diary1F,mm,true,bundle);
                 }

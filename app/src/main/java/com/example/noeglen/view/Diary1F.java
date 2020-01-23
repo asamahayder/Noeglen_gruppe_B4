@@ -32,7 +32,7 @@ public class Diary1F extends Fragment  implements View.OnClickListener{
     private Button saveButton;
     private TextView dateText, question1,question2,question3, question4;
     private EditText answer1, answer2, answer3,answer4;
-    private CurrentDate currentDate;
+    private CurrentDate currentDateInstace;
     private DiaryDTO diaryDTO;
     private Bundle bundle;
     private Gson gson;
@@ -40,6 +40,7 @@ public class Diary1F extends Fragment  implements View.OnClickListener{
     private SharedPreferences.Editor sEdit;
     private String[] answers,questions;
     private String date;
+    private String currentDate;
     private List<DiaryDTO> listOfEntries;
     private ImageView imageView;
     private String image;
@@ -63,9 +64,14 @@ public class Diary1F extends Fragment  implements View.OnClickListener{
 
     private void initializeView() {
         bundle = getArguments();
+        date = bundle.getString("date");
+        currentDateInstace = CurrentDate.getInstance();
+        currentDate = new SimpleDateFormat("dd/M/yyyy").format(currentDateInstace.getDate());
 
-        currentDate = CurrentDate.getInstance();
-        date = new SimpleDateFormat("dd/M/yyyy").format(currentDate.getDate());
+        if(date == null){
+            date = currentDate;
+        }
+
         answers = new String[4];
 
         dateText = getView().findViewById(R.id.textView3);
@@ -166,9 +172,11 @@ public class Diary1F extends Fragment  implements View.OnClickListener{
     }
 
     public void handleMarkTodaysDiaryAsDone(){
-        SharedPreferences preferences = getActivity().getSharedPreferences(getString(R.string.sharedPreferencesKey), Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = preferences.edit();
-        editor.putString(getString(R.string.isTodaysDiaryWritten),"true");
-        editor.apply();
+        if (date.equals(currentDate)) {
+            SharedPreferences preferences = getActivity().getSharedPreferences(getString(R.string.sharedPreferencesKey), Context.MODE_PRIVATE);
+            SharedPreferences.Editor editor = preferences.edit();
+            editor.putString(getString(R.string.isTodaysDiaryWritten), "true");
+            editor.apply();
+        }
     }
 }
