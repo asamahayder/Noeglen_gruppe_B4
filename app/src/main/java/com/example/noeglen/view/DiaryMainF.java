@@ -58,9 +58,9 @@ public class DiaryMainF extends Fragment implements View.OnClickListener{
                 if (seekBar.getProgress() > 0 && seekBar.getProgress() <= 20) {
                     imageView.setBackground(getView().getResources().getDrawable(R.drawable.emoji5));
                     smiley = 5;
-                    questions[0] = "Hvad gik dårligt i dag? ";
-                    questions[1] = "Hvordan havde du håndteret det?";
-                    questions[2] = "Hvordan vil du indgår de dårlige ting fremover?";
+                    questions[0] = "Hvad har været den største årsag? ";
+                    questions[1] = "Hvordan reagerede du til denne årsag?";
+                    questions[2] = "Hvordan blev situationen bedre efter din reaktion?";
                     questions[3] = "Andet du vil tilføje?";
 
                 }else if (seekBar.getProgress() > 20 && seekBar.getProgress() <= 40){
@@ -69,29 +69,30 @@ public class DiaryMainF extends Fragment implements View.OnClickListener{
                     questions[0] = "Hvad gik dårligt i dag? ";
                     questions[1] = "Hvordan havde du håndteret det?";
                     questions[2] = "Hvordan vil du indgår de dårlige ting fremover?";
-                    questions[3] = "Andet du vil tilføje?";
+                    questions[3] = "Hvad kan du gøre anderledes næste gang du oplever samme negative årsag for at gøre situationen bedre?";
 
                 }else if (seekBar.getProgress() > 40 && seekBar.getProgress() <= 60){
                     imageView.setBackground(getView().getResources().getDrawable(R.drawable.emoji3));
                     smiley = 3;
-                    questions[0] = "Hvorfor føler du denne følse? ";
-                    questions[1] = "Hvordan vil du være OK ?";
-                    questions[2] = "Hvordan vil du indgår de dårlige ting fremover?";
-                    questions[3] = "Andet du vil tilføje?";
+                    questions[0] = "Hvad gik godt i dag? ";
+                    questions[1] = "Hvordan fik dette dig til at føle?";
+                    questions[2] = "Hvordan kan du genskabe denne gode følelse i morgen?";
+
+
                 }else if (seekBar.getProgress() > 60 && seekBar.getProgress() <= 80){
                     imageView.setBackground(getView().getResources().getDrawable(R.drawable.emoji2));
                     smiley = 2;
-                    questions[0] = "Hvad gik godt i dag? ";
-                    questions[1] = "Hvad gik mindre godt ?";
-                    questions[2] = "Hvordan vil du indgår de dårlige ting fremover?";
-                    questions[3] = "Andet du vil tilføje?";
+                    questions[0] = " Hvad har været den bedste del af dagen? ";
+                    questions[1] = "Hvad har du gjort anderledes i dag end andre dage?";
+                    questions[2] = "Hvordan ville du have det, hvis du også havde en god dag i morgen?";
+                    questions[3] = "Hvad kan du gøre for at få endnu en god dag i morgen?";
                 }else if (seekBar.getProgress() > 80 && seekBar.getProgress() <= 100){
                     imageView.setBackground(getView().getResources().getDrawable(R.drawable.emoji1));
                     smiley = 1;
-                    questions[0] = "Hvad gik godt i dag? ";
-                    questions[1] = "Hvad gik mindre godt ?";
-                    questions[2] = "Hvordan vil du indgår de dårlige ting fremover?";
-                    questions[3] = "Andet du vil tilføje?";
+                    questions[0] = " Hvad har været den bedste del af dagen? ";
+                    questions[1] = "Hvad har du gjort anderledes i dag end andre dage?";
+                    questions[2] = "Hvordan ville du have det, hvis du også havde en god dag i morgen?";
+                    questions[3] = "Hvad kan du gøre for at få endnu en god dag i morgen?";
                 }
 
 

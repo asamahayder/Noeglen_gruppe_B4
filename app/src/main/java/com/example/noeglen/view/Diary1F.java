@@ -88,10 +88,15 @@ public class Diary1F extends Fragment  implements View.OnClickListener{
         answer3 = getView().findViewById(R.id.answer3);
         answer4 = getView().findViewById(R.id.answer4);
 
+
+
         question1 = getView().findViewById(R.id.question1);
         question2 = getView().findViewById(R.id.question2);
         question3 = getView().findViewById(R.id.question3);
         question4 = getView().findViewById(R.id.question4);
+
+
+
 
 
 
