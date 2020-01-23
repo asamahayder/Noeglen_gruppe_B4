@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.media.MediaPlayer;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -41,7 +40,6 @@ public class ExerExerTwoF extends Fragment implements View.OnClickListener {
     private int resID1, resID2;
     private boolean isFavorite;
 
-    private static final String TAG = "ExerExerF";
 
     @Nullable
     @Override
@@ -82,7 +80,10 @@ public class ExerExerTwoF extends Fragment implements View.OnClickListener {
         super.onAttach(context);
         iMain = (IMainActivity) getActivity();
     }
-
+    /**
+     *
+     * Denne er lavet for at stoppe lydfilen, når man klikker videre til et andet fragment i navbaren.
+     */
     @Override
     public void onDetach() {
         super.onDetach();
@@ -92,6 +93,14 @@ public class ExerExerTwoF extends Fragment implements View.OnClickListener {
             mp = null;
         }
     }
+
+    /**
+     * Onclick gør to forskellige ting, alt efter hvilken knap man klikker på
+     * Den første som er start knappen for lyden, her skifter den designet af knappen, og starter/stopper lydfilen
+     *
+     * Den anden del, er til favorit knappen. Den skifter så mellem hvordan imageviewet skal se ud (den skifter mellem to drawabels).
+     * @param
+     */
 
     @Override
     public void onClick(View v) {
@@ -121,6 +130,10 @@ public class ExerExerTwoF extends Fragment implements View.OnClickListener {
         }
     }
 
+    /**
+     * Denne metode sørger for at stoppe lydfilen og ændre designet af knappen.
+     */
+
     public void stopMediaPlayer() {
         if (mp != null) {
             primaryDark = getResources().getColor(R.color.comeback_green_dark);
@@ -131,7 +144,10 @@ public class ExerExerTwoF extends Fragment implements View.OnClickListener {
             mp = null;
         }
     }
-
+    /**
+     * Det som denne metode gør, er at tjekke om man har øvelsen til favorit eller ej.
+     * Her gemmer den omkring hvilken drawable der skal vise, alt efter om man har valgt den som favorit eller ej
+     */
     private boolean checkIfCurrExerIsFav() {
         for (int i = 0; i < favList.size(); i++) {
             if (favList.get(i).getTitle().equals(currExercise.getTitle()) && favList.get(i).getCURRENT_TYPE() == 2){
@@ -144,14 +160,12 @@ public class ExerExerTwoF extends Fragment implements View.OnClickListener {
                 isFavorite = false;
             }
         }
-        if (isFavorite){
-            Log.d(TAG, "checkIfCurrExerIsFav: RED");
-        }
-        else {
-            Log.d(TAG, "checkIfCurrExerIsFav: BLUE");
-        }
         return isFavorite;
     }
+
+    /**
+     * Det som denne metode gør, er at tilføje eller fjerne øvelsen fra favoritter.
+     */
 
     private boolean addORemoveFromFav() {
         getSharedPref();
@@ -160,7 +174,6 @@ public class ExerExerTwoF extends Fragment implements View.OnClickListener {
                 if (favList.get(i).getTitle().equals(currExercise.getTitle()) && favList.get(i).getCURRENT_TYPE() == 2){
                     favList.remove(i);
                     isFavorite = false;
-                    Log.d(TAG, "addORemoveFromFav: BLUE");
                     break;
                 }
             }
@@ -168,7 +181,6 @@ public class ExerExerTwoF extends Fragment implements View.OnClickListener {
         else {
             favList.add(new FavoriteDTO(2,currExercise.getImage(),currExercise.getTitle(),currExercise.getDesc()));
             isFavorite = true;
-            Log.d(TAG, "addORemoveFromFav: RED");
         }
         saveSharedPref();
         return isFavorite;
@@ -181,13 +193,17 @@ public class ExerExerTwoF extends Fragment implements View.OnClickListener {
         if (favList == null){
             favList = new ArrayList<>();
         }
-        Log.d(TAG, "getSharedPref: favListSize = " + favList.size());
     }
 
     private void saveSharedPref(){
         String json = gson.toJson(favList);
         sEdit.putString(getString(R.string.sPref_favorites),json);
         sEdit.commit();
-        Log.d(TAG, "saveSharedPref: favListSize = " + favList.size());
     }
 }
+/*
+Lavet af gruppe B4 for ComeBack
+Kursus: 62550 62550 Brugerinteraktion og udvikling på mobile enheder
+Medlemmer af gruppen:
+Simon Andersen (s185083), Asama Hayder(s185099), Jákup Viljam Dam(s185095), Christoffer Adrian Detlef(s185117) & Thaer Almalla(s170727)
+*/

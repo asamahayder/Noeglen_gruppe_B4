@@ -70,15 +70,15 @@
             android:layout_height="0dp"
             app:cardBackgroundColor="@color/transparent"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/guideline_25_percent"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent">
+            app:layout_constraintTop_toBottomOf="@id/guideline_25_percent">
 
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:scaleType="center"
-                android:background="@drawable/whitebar"/>
+                android:background="@drawable/whitebar"
+                android:scaleType="center" />
         </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
@@ -97,9 +97,9 @@
                 android:id="@+id/bExer1"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:src="@drawable/exercise_trees_in_forest"
                 android:scaleType="centerCrop"
-                android:tint="@color/comeback_light_dark_green_trans"/>
+                android:src="@drawable/exercise_trees_in_forest"
+                android:tint="@color/comeback_light_dark_green_trans" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -118,9 +118,9 @@
             android:id="@+id/exer_2"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:layout_marginEnd="10dp"
             android:layout_marginStart="10dp"
             android:layout_marginTop="10dp"
+            android:layout_marginEnd="10dp"
             app:cardCornerRadius="20dp"
             app:layout_constraintBottom_toTopOf="@id/guideline_50_percent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -131,9 +131,9 @@
                 android:id="@+id/bExer2"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:src="@drawable/exercise_shallow_white_daisy"
                 android:scaleType="centerCrop"
-                android:tint="@color/comeback_light_dark_green_trans"/>
+                android:src="@drawable/exercise_shallow_white_daisy"
+                android:tint="@color/comeback_light_dark_green_trans" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -167,9 +167,9 @@
                 android:id="@+id/bExer3"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:src="@drawable/exercise_palm_trees"
                 android:scaleType="centerCrop"
-                android:tint="@color/comeback_light_dark_green_trans"/>
+                android:src="@drawable/exercise_palm_trees"
+                android:tint="@color/comeback_light_dark_green_trans" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -189,9 +189,9 @@
             android:id="@+id/exer_4"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:layout_marginEnd="10dp"
             android:layout_marginStart="10dp"
             android:layout_marginTop="10dp"
+            android:layout_marginEnd="10dp"
             app:cardCornerRadius="20dp"
             app:layout_constraintBottom_toTopOf="@id/guideline_70_percent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -202,9 +202,9 @@
                 android:id="@+id/bExer4"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:src="@drawable/exercise_calm_water"
                 android:scaleType="centerCrop"
-                android:tint="@color/comeback_light_dark_green_trans"/>
+                android:src="@drawable/exercise_calm_water"
+                android:tint="@color/comeback_light_dark_green_trans" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -220,3 +220,8 @@
         </androidx.cardview.widget.CardView>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </LinearLayout>
+
+    <!--Lavet af gruppe B4 for ComeBack
+    Kursus: 62550 62550 Brugerinteraktion og udvikling på mobile enheder
+    Medlemmer af gruppen:
+    Simon Andersen (s185083), Asama Hayder(s185099), Jákup Viljam Dam(s185095), Christoffer Adrian Detlef(s185117) & Thaer Almalla(s170727) -->

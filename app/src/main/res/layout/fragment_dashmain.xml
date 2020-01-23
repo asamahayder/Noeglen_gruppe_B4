@@ -11,6 +11,11 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+        <!-- For at få alting til at passe på forskellige skærm størrelser så vi har gjort brug af guidelines
+         Det som guidelines gør, er at tage en procent del af skærmen og så sætte en linje igennem.
+         Dette kan både være vandret og lodret.
+         Vi bruger det til at sætte constraints til elementer til de her guidelines. Det gør så at den vil bevæge sig i størrelsen alt efter størrelsen af telefonen  -->
+
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline_45_percent"
             android:layout_width="wrap_content"
@@ -24,6 +29,8 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             app:layout_constraintGuide_percent="0.66" />
+
+        <!-- Dette bliver brugt til nav drawer. -->
 
         <LinearLayout
             android:id="@+id/linear_layout_toolbar"
@@ -461,4 +468,7 @@
         app:menu="@menu/navigation_drawer" />
 
 
-</androidx.drawerlayout.widget.DrawerLayout>
+</androidx.drawerlayout.widget.DrawerLayout><!--Lavet af gruppe B4 for ComeBack
+Kursus: 62550 62550 Brugerinteraktion og udvikling på mobile enheder
+Medlemmer af gruppen:
+Simon Andersen (s185083), Asama Hayder(s185099), Jákup Viljam Dam(s185095), Christoffer Adrian Detlef(s185117) & Thaer Almalla(s170727) -->

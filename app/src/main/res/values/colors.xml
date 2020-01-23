@@ -3,25 +3,15 @@
     <color name="colorPrimary">#4E75A8</color>
     <color name="colorPrimaryDark">#00574B</color>
     <color name="colorAccent">#D81B60</color>
-    <color name="backGround">#8dcdff</color>
-    <color name="babyBlue">#0797FF</color>
-    <color name="transparentPrimary">#5040c4ff</color>
-    <color name="transparentSecondary">#501de9b6</color>
     <color name="markAsUnSeen">#FF896E</color>
 
     //MATERIAL COLORS
     <color name="primaryNormal">#40c4ff</color>
-    <color name="primaryLight">#82f7ff</color>
     <color name="primaryDark">#0094cc</color>
     <color name="secondaryNormal">#1de9b6</color>
     <color name="secondaryLight">#6effe8</color>
-    <color name="secondaryDark">#00b686</color>
     <color name="primaryOrange">#f46b45</color>
 
-    //VIDEO COLORS
-    <color name="vidNotWatched">#009AFF</color>
-    <color name="vidIsWatched">#24FF00</color>
-    
     //COME-BACK COLORS
     <color name="comeback_green_dark">#2C6975</color>
     <color name="comeback_light_dark_green">#68B2A0</color>
@@ -29,8 +19,5 @@
     <color name="comeback_light_lime_green">#E0ECDE</color>
     <color name="comeback_white">#FFFFFF</color>
     <color name="comeback_light_dark_green_trans">#5068B2A0</color>
-
-
-
 
 </resources>

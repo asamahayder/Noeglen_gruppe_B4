@@ -28,33 +28,32 @@
             android:layout_height="match_parent">
 
             <androidx.constraintlayout.widget.Guideline
-                android:orientation="horizontal"
                 android:id="@+id/horizontalTopGuide"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:layout_constraintGuide_percent=".30"/>
+                android:orientation="horizontal"
+                app:layout_constraintGuide_percent=".30" />
 
             <androidx.constraintlayout.widget.Guideline
-                android:orientation="horizontal"
                 android:id="@+id/horizontalBottomGuide"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:layout_constraintGuide_percent=".70"/>
+                android:orientation="horizontal"
+                app:layout_constraintGuide_percent=".70" />
 
             <androidx.constraintlayout.widget.Guideline
-                android:orientation="vertical"
                 android:id="@+id/verticalLeftGuide"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:layout_constraintGuide_percent=".10"/>
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent=".10" />
 
             <androidx.constraintlayout.widget.Guideline
-                android:orientation="vertical"
                 android:id="@+id/verticalRightGuide"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:layout_constraintGuide_percent=".90"/>
-
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent=".90" />
 
 
             <ImageView
@@ -64,12 +63,11 @@
                 android:layout_gravity="center"
                 android:scaleType="centerCrop"
                 android:tint="@color/comeback_light_dark_green_trans"
-                app:srcCompat="@android:drawable/stat_notify_sync"
-                app:layout_constraintTop_toTopOf="@id/videoItemConstraintLayout"
+                app:layout_constraintBottom_toBottomOf="@id/videoItemConstraintLayout"
                 app:layout_constraintLeft_toLeftOf="@id/videoItemConstraintLayout"
                 app:layout_constraintRight_toRightOf="@id/videoItemConstraintLayout"
-                app:layout_constraintBottom_toBottomOf="@id/videoItemConstraintLayout"
-                />
+                app:layout_constraintTop_toTopOf="@id/videoItemConstraintLayout"
+                app:srcCompat="@android:drawable/stat_notify_sync" />
 
             <TextView
                 android:id="@+id/videoItemName"
@@ -152,3 +150,7 @@
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 
+    <!--Lavet af gruppe B4 for ComeBack
+    Kursus: 62550 62550 Brugerinteraktion og udvikling på mobile enheder
+    Medlemmer af gruppen:
+    Simon Andersen (s185083), Asama Hayder(s185099), Jákup Viljam Dam(s185095), Christoffer Adrian Detlef(s185117) & Thaer Almalla(s170727) -->

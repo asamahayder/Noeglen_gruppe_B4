@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".view.WelcomeTextActivity"
-    android:padding="20dp">
+    android:padding="20dp"
+    tools:context=".view.WelcomeTextActivity">
 
 
     <TextView
@@ -26,8 +26,8 @@
         android:id="@+id/welcomeButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/continueText"
         android:background="@drawable/dark_green_border"
+        android:text="@string/continueText"
         android:textColor="@color/comeback_green_dark"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -35,3 +35,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/welcomeTextView" />
 </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <!--Lavet af gruppe B4 for ComeBack
+    Kursus: 62550 62550 Brugerinteraktion og udvikling på mobile enheder
+    Medlemmer af gruppen:
+    Simon Andersen (s185083), Asama Hayder(s185099), Jákup Viljam Dam(s185095), Christoffer Adrian Detlef(s185117) & Thaer Almalla(s170727) -->

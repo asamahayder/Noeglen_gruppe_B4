@@ -83,9 +83,8 @@ public class Diary1F extends Fragment  implements View.OnClickListener{
 
         image = "emoji" + bundle.getInt("smiley");
         int rec = getResources().getIdentifier(image,"drawable", this.getContext().getPackageName());
+
         imageView = getView().findViewById(R.id.imageView6);
-
-
         imageView.setImageDrawable(getContext().getDrawable(rec));
 
         questions = bundle.getStringArray("questions");
@@ -107,7 +106,6 @@ public class Diary1F extends Fragment  implements View.OnClickListener{
 
 
         if (bundle.getInt("smiley") == 3) {
-            System.out.println("##########################€€€€€€€€€€€€€€€€€€€€€");
             question4.setVisibility(View.GONE);
             answer4.setVisibility(View.GONE);
         }

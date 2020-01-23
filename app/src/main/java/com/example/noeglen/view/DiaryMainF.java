@@ -45,30 +45,25 @@ public class DiaryMainF extends Fragment implements View.OnClickListener{
 
 
         if (bundle != null){
-            System.out.println("##############3 Bundle er ikke null");
             date = bundle.getString("date");
             if (date == null){
-                System.out.println("##############3 Date ER null!");
                 date = new SimpleDateFormat("dd/M/yyyy").format(currentDate.getDate());
             }
         }else{
-            System.out.println("##############3 Bundle ER null");
             date = new SimpleDateFormat("dd/M/yyyy").format(currentDate.getDate());
         }
 
-        System.out.println("################## Date er: " + date);
 
         datefelt.setText(date);
         datefelt.setOnClickListener(this);
-
-        seekBar = getView().findViewById(R.id.simpleSeekBar);
 
         imageView = getView().findViewById(R.id.imageView3);
 
         questions = new String[4];
 
-
+        seekBar = getView().findViewById(R.id.simpleSeekBar);
         seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            // Bestemmer emojien og spørgsmålerne efter brugernes humør-valg
             @Override
             public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
 
@@ -121,7 +116,7 @@ public class DiaryMainF extends Fragment implements View.OnClickListener{
             public void onStartTrackingTouch(SeekBar seekBar) {
 
             }
-
+            // Åbner Diary1 og gemmer emojien, spørgsmålerne, og datoen
             @Override
             public void onStopTrackingTouch(SeekBar seekBar) {
                 String mm = "";
@@ -173,18 +168,16 @@ public class DiaryMainF extends Fragment implements View.OnClickListener{
 
     }
 
-
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
         currentDate = CurrentDate.getInstance();
         iMain = (IMainActivity) getActivity();
     }
-
+    // Åbner kalendaren hvis brugeren trykker på Datofeltet
     @Override
     public void onClick(View view) {
         String tag ="";
-
 
         if (view == datefelt){
             DiaryFCalendar diaryFCalendar = new DiaryFCalendar();
