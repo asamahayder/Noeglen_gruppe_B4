@@ -37,7 +37,7 @@ public class Diary2F extends Fragment implements View.OnClickListener {
     private List<DiaryDTO> listOfEntries;
     private Gson gson;
     private IMainActivity iMain;
-    private ImageView editKnap;
+    private ImageView editButton;
     private Button gem;
     private DiaryDTO diaryDTO;
 
@@ -99,8 +99,8 @@ public class Diary2F extends Fragment implements View.OnClickListener {
         dateText = getView().findViewById(R.id.textView3);
         dateText.setText(date);
 
-        editKnap = getView().findViewById(R.id.editKnap);
-        editKnap.setOnClickListener(this);
+        editButton = getView().findViewById(R.id.editKnap);
+        editButton.setOnClickListener(this);
 
         gem = getView().findViewById(R.id.gem);
         gem.setOnClickListener(this);
@@ -120,7 +120,10 @@ public class Diary2F extends Fragment implements View.OnClickListener {
         answer4 = getView().findViewById(R.id.answer4);
         answer4.setFocusable(false);
 
-        // Tjekker hvis man har valgt den 3. emoji, da der er kun 3 spørgsmål, så bliver spørgsmål og svar nr 4 fjernet.
+        /**
+         * Tjekker hvis man har valgt den 3. emoji, da der er kun 3 spørgsmål, så bliver spørgsmål og svar nr 4 fjernet.
+          */
+
         if (diaryDTO.getSmiley() == 3) {
             question4.setVisibility(View.GONE);
             answer4.setVisibility(View.GONE);
@@ -136,10 +139,20 @@ public class Diary2F extends Fragment implements View.OnClickListener {
         answer4.setText(answers[3]);
     }
 
+    /**
+     * Hvis brugeren trykker på editknappen, får brugeren muligheden for at ændre på ens indtastninger, og gemknappen bliver også visuelt
+     *
+     *
+     * Når brugeren trykker på gemKnappen, bliver så de ændringer brugeren havde oíndtastet og så bliver brugeren sendt til Dashboardet
+     *
+     * Ved at trykkes på Datoen, så åbner kalendaren
+     * @param v
+     */
+
     @Override
     public void onClick(View v) {
-        if (v == editKnap ) {
-            editKnap.setVisibility(Button.GONE);
+        if (v == editButton) {
+            editButton.setVisibility(Button.GONE);
             gem.setVisibility(Button.VISIBLE);
 
             answer1.setFocusableInTouchMode(true);
@@ -158,6 +171,9 @@ public class Diary2F extends Fragment implements View.OnClickListener {
 
     }
 
+    /**
+     * Gemmer ændreingerne i listOfEntries
+     */
     private void saveDiaryDTO() {
 
             if (listOfEntries != null ){
@@ -186,6 +202,7 @@ public class Diary2F extends Fragment implements View.OnClickListener {
         }
 
 
+
     private void getListOfEntries(String sPrefEditKey) {
         String json = sPref.getString(sPrefEditKey, null);
         Type type = new TypeToken<List<DiaryDTO>>() {
@@ -196,6 +213,12 @@ public class Diary2F extends Fragment implements View.OnClickListener {
         }
 
     }
+
+    /**
+     * Gemmer data inde i telefonen
+     * @param sPrefEditKey
+     */
+
     private void saveSharedPref(String sPrefEditKey) {
         String json = gson.toJson(listOfEntries);
         sEdit.putString(sPrefEditKey,json);

@@ -19,7 +19,7 @@ import java.text.SimpleDateFormat;
 
 public class DiaryMainF extends Fragment implements View.OnClickListener{
 
-   private TextView datefelt;
+   private TextView dateView;
    private CurrentDate currentDate;
    private ImageView imageView;
    private IMainActivity iMain;
@@ -37,7 +37,7 @@ public class DiaryMainF extends Fragment implements View.OnClickListener{
     @Override
     public void onViewCreated(@NonNull final View view, @Nullable Bundle savedInstanceState) {
 
-        datefelt = getView().findViewById(R.id.currDate);
+        dateView = getView().findViewById(R.id.currDate);
         Bundle bundle = getArguments();
         currentDate = CurrentDate.getInstance();
 
@@ -51,8 +51,8 @@ public class DiaryMainF extends Fragment implements View.OnClickListener{
         }
 
 
-        datefelt.setText(date);
-        datefelt.setOnClickListener(this);
+        dateView.setText(date);
+        dateView.setOnClickListener(this);
 
         imageView = getView().findViewById(R.id.imageView3);
 
@@ -60,7 +60,10 @@ public class DiaryMainF extends Fragment implements View.OnClickListener{
 
         SeekBar seekBar = getView().findViewById(R.id.simpleSeekBar);
         seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
-            // Bestemmer emojien og spørgsmålerne efter brugernes humør-valg
+            /**
+             *  Bestemmer emojien og spørgsmålerne efter brugernes humør-valg
+              */
+
             @Override
             public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
 
@@ -113,7 +116,11 @@ public class DiaryMainF extends Fragment implements View.OnClickListener{
             public void onStartTrackingTouch(SeekBar seekBar) {
 
             }
-            // Åbner Diary1 og gemmer emojien, spørgsmålerne, og datoen
+
+            /**
+             *  Åbner Diary1 og gemmer emojien, spørgsmålerne, og datoen
+             * @param seekBar
+             */
             @Override
             public void onStopTrackingTouch(SeekBar seekBar) {
                 String mm = "";
@@ -171,12 +178,16 @@ public class DiaryMainF extends Fragment implements View.OnClickListener{
         currentDate = CurrentDate.getInstance();
         iMain = (IMainActivity) getActivity();
     }
-    // Åbner kalendaren hvis brugeren trykker på Datofeltet
+
+    /**
+     * Åbner kalendaren hvis brugeren trykker på Datofeltet
+     */
+
     @Override
     public void onClick(View view) {
         String tag ="";
 
-        if (view == datefelt){
+        if (view == dateView){
             DiaryFCalendar diaryFCalendar = new DiaryFCalendar();
             iMain.inflateFragment(getString(R.string.fragment_calendar));
 
