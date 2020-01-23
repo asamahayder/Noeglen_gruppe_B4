@@ -17,28 +17,43 @@ import com.example.noeglen.data.FavoriteDTO;
 
 import java.util.List;
 
+/**
+ * Adapteren der indsætter favoritter på dashmain fragmentet
+ */
+
 public class DashMainRecyclerAdapter extends RecyclerView.Adapter<DashMainRecyclerAdapter.ViewHolder> {
 
+    /**
+     * @variable favorites
+     * Listen af favoritter der bliver brugt i adapteren til at blive indsat
+     * @variable context
+     * Selve contexten vi er i, som er det view der skal bruges til at indsætte eller opdatere ting i
+     * @variable onFavoriteListener
+     * Er et interface der håndterer onclick hændelser
+     */
     private List<FavoriteDTO> favorites;
 
     private Context context;
     private OnFavoriteListener onFavoriteListener;
 
-    private static final String TAG = "DashMainRecyclerAdapter";
-
-
     public DashMainRecyclerAdapter(List<FavoriteDTO> favorites, Context context, OnFavoriteListener onFavoriteListener) {
         this.favorites = favorites;
         this.context = context;
         this.onFavoriteListener = onFavoriteListener;
-
-        if (favorites != null){
-            Log.d(TAG, "DashMainRecyclerAdapter: favoriteListSize = " + favorites.size());
-        }
-        else {
-            Log.d(TAG, "DashMainRecyclerAdapter: listOfKnowledgeArticles = NULL");
-        }
     }
+
+    /**
+     * Laver det nye view som skal indsættes i recyclerviewet
+     *
+     * @param parent
+     *
+     *
+     * @param viewType
+     * Den type af view man er i lige nu. Hvis man har forskellige views der skal indsættes bliver denne brugt til at håndtere hvilket view skal bruges
+     *
+     * @return
+     * Returner ViewHolderen der indeholder alle variablerne fra layoutet som skal indsættes i
+     */
 
     @Override
     public DashMainRecyclerAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -46,17 +61,27 @@ public class DashMainRecyclerAdapter extends RecyclerView.Adapter<DashMainRecycl
         return new ViewHolder(view,onFavoriteListener);
     }
 
+    /**
+     * Dette er metoden der indsætter i recyclerviewet, hvor den itererer igennem alle objekter der ligger i favorites
+     *
+     * @param holder
+     * dette er ViewHolderen som kaldes for at hente textViews og ImageViews der skal indsættes i
+     * @param position
+     * position er hvilken position man er i selve listen hos favorites. Det er noget adapteren holder styr på selv
+     */
+
     @Override
     public void onBindViewHolder(@NonNull DashMainRecyclerAdapter.ViewHolder holder, int position) {
         try {
 
             holder.favTitle.setText(favorites.get(position).getTitle());
+            // Glide bliver brugt til at loade billedet hos favoritten
             Glide
                     .with(context)
                     .load(favorites.get(position).getIamgeURL())
                     .into(holder.favImage);
 
-            //FIXME ADD ICONS FOR VIDEO AND EXERCISE
+            // Adder et lille icon ovenfor billedet alt efter hvilken type af favorit det er (video, øvelse eller artikel)
             switch (favorites.get(position).getCURRENT_TYPE()){
                 case 1:
                     holder.iconImage.setBackgroundResource(R.drawable.ic_video_icon);
@@ -72,12 +97,16 @@ public class DashMainRecyclerAdapter extends RecyclerView.Adapter<DashMainRecycl
                     break;
             }
 
-        } catch (NullPointerException e){
-            Log.d(TAG, "onBindViewHolder: NULLPOINTEREXCEPTION = " + e.getMessage());
+        } catch (NullPointerException ignored){
         }
     }
 
-
+    /**
+     * Metoden tjekker hvor mange elementer der er i favorit listen
+     *
+     * @return
+     * returner hvor mange der var i selve listen
+     */
     @Override
     public int getItemCount() {
         if (favorites != null){
@@ -88,14 +117,30 @@ public class DashMainRecyclerAdapter extends RecyclerView.Adapter<DashMainRecycl
         }
     }
 
+    /**
+     * ViewHolder klassen definerer alle textviews, imageviews og om der skal være en onclick metode eller ikke på viewet
+     */
+
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
+        /**
+         * @variable onFavoriteListener
+         * Interfacet der håndterer om der var trykket på en favorit
+         * @variable favImage
+         * Dette er selve imageview baggrunden af favoritten der bliver loadet ind i recyclerviewet
+         * @variable iconImage
+         * Dette er icon imageviewet der skal loades ind i på recyclerviewet
+         * @variable iconCircle
+         * Også en del af iconet som skal loades på viewet
+         * @variable favTitle
+         * Textviewet hos titlen der skal loades ind på viewet
+         */
         private OnFavoriteListener onFavoriteListener;
         private ImageView favImage, iconImage, iconCircle;
         private TextView favTitle;
 
 
-        public ViewHolder(@NonNull View itemView, OnFavoriteListener onFavoriteListener) {
+        ViewHolder(@NonNull View itemView, OnFavoriteListener onFavoriteListener) {
             super(itemView);
             this.onFavoriteListener = onFavoriteListener;
             this.favImage = itemView.findViewById(R.id.dashmain_fav_image);

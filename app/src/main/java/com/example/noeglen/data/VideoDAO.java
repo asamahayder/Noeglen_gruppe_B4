@@ -15,7 +15,7 @@ import com.google.firebase.firestore.QuerySnapshot;
 import java.util.ArrayList;
 import java.util.List;
 
-public class VideoDAO implements IVideoDAO{
+public class VideoDAO {
 
     List<String> weekList;
     VideoDTO video;

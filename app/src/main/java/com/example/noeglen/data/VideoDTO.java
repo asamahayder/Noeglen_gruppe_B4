@@ -1,7 +1,21 @@
 package com.example.noeglen.data;
 
+/**
+ * Objektet der bruges til at hente fra databasen og også loade videor på videosiden. Gemmes også i sharedpreferences
+ */
+
 public class VideoDTO {
 
+    /**
+     * @variable videoURL
+     * Er selve URLen som skal streames i videoafspilleren
+     * @variable imageURL
+     * Er videons billede der loades ind i listen der vises i et af fragmenterne
+     * @variable title
+     * Selve titlen af videon
+     * @variable week
+     * Ugen hvor denne video finder sig i. Bliver brugt til at finde videon i databasen også
+     */
     private String videoUrl;
     private String imageUrl;
     private String title;

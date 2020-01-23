@@ -1,6 +1,19 @@
 package com.example.noeglen.data;
 
+/**
+ * Objektet der bliver hentet fra databasen og senere hen gemt i sharedpreferences og i favoritter
+ */
+
 public class KnowledgeDTO {
+
+    /**
+     * @variable title
+     * Bliver brugt til at holde styr på hvilken artikel det er og er selve titlen for artiklen
+     * @variable body
+     * Er brødteskten i artiklen
+     * @variable image
+     * Er billede URLen og bliver brugt til at loade billede imageview senere hen
+     */
 
     private String title;
     private String body;

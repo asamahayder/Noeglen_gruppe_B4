@@ -12,7 +12,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.Map;
 
-public class LicenseDAO implements ILicenseDAO {
+public class LicenseDAO {
 
     private LicenseDTO license;
     private FirebaseFirestore db;

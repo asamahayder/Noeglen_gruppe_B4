@@ -30,7 +30,7 @@ import java.util.List;
 public class InfoKnowledgeF extends Fragment implements View.OnClickListener {
 
     private TextView textTITLE, textBODY;
-    private ImageView backButton, favButton, backgroundImage;
+    private ImageView favButton, backgroundImage;
 
     private KnowledgeDTO currentKnowledgeArticle;
     private List<FavoriteDTO> favoriteList;
@@ -41,8 +41,6 @@ public class InfoKnowledgeF extends Fragment implements View.OnClickListener {
     private SharedPreferences.Editor sEdit;
 
     private int resID1, resID2;
-
-    private IMainActivity iMain;
 
     @Nullable
     @Override
@@ -62,8 +60,6 @@ public class InfoKnowledgeF extends Fragment implements View.OnClickListener {
 
         textTITLE = view.findViewById(R.id.infoarticle_title);
         textBODY = view.findViewById(R.id.infoarticle_body);
-        //backButton = getView().findViewById(R.id.infoarticle_backbutton);
-        //backButton.setOnClickListener(this);
         favButton = getView().findViewById(R.id.infoarticle_favbutton);
         favButton.setOnClickListener(this);
         backgroundImage = getView().findViewById(R.id.infoknowledge_backgroundimage);
@@ -82,7 +78,6 @@ public class InfoKnowledgeF extends Fragment implements View.OnClickListener {
     @Override
     public void onAttach(@NonNull Context context) {
         super.onAttach(context);
-        iMain = (IMainActivity) getActivity();
     }
 
     @Override
@@ -109,14 +104,6 @@ public class InfoKnowledgeF extends Fragment implements View.OnClickListener {
             System.out.println(favoriteList.size());
             saveSharedPref();
         }
-        if (v == backButton){
-            FragmentManager manager = getActivity().getSupportFragmentManager();
-            FragmentTransaction trans = manager.beginTransaction();
-            trans.remove(InfoKnowledgeF.this);
-            trans.commit();
-            manager.popBackStack();
-            iMain.inflateFragment(getString(R.string.fragment_infoknowledgemain), false);
-        }
     }
 
     private void checkWhichKnowledgeArticle() {
@@ -136,8 +123,10 @@ public class InfoKnowledgeF extends Fragment implements View.OnClickListener {
             Type type1 = new TypeToken<FavoriteDTO>(){}.getType();
             FavoriteDTO currentArticle = gson.fromJson(bundle.getString("currentKnowledgeArticle"),type1);
             textTITLE.setText(currentArticle.getTitle());
-            textBODY.setText(Html.fromHtml(currentArticle.getBodyORweek(),Html.FROM_HTML_MODE_LEGACY));
-            imageURL = currentArticle.getIamgeURL();
+            if (currentArticle.getBodyORweek() != null){
+                textBODY.setText(Html.fromHtml(currentArticle.getBodyORweek(),Html.FROM_HTML_MODE_LEGACY));
+                imageURL = currentArticle.getIamgeURL();
+            }
         }
         else {
             textTITLE.setText(currentKnowledgeArticle.getTitle());
