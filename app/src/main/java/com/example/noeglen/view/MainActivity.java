@@ -272,6 +272,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             transaction.setCustomAnimations(R.anim.fade_in, R.anim.fade_out, R.anim.fade_in, R.anim.fade_out);
             transaction.replace(R.id.content_frame, f, tag);
 
+            if (tag.equals(getString(R.string.fragment_exerexer)) || tag.equals(getString(R.string.fragment_exer_2))){
+                clearBackStack();
+                transaction.addToBackStack(getString(R.string.fragment_exermain));
+            }
+
             //adder til backstack om variablen er true
             if (addToBackStack) {
                 transaction.addToBackStack(tag);

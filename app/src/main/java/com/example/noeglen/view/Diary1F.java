@@ -26,7 +26,6 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
-
 public class Diary1F extends Fragment  implements View.OnClickListener{
 
     private IMainActivity iMain;
