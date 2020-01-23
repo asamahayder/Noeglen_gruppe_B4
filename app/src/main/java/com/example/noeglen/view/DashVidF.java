@@ -29,7 +29,6 @@ import java.util.List;
 import bg.devlabs.fullscreenvideoview.FullscreenVideoView;
 
 public class DashVidF extends Fragment implements View.OnClickListener {
-    private TextView videoDescription;
     private TextView videoTitle;
     private Button markSeenButton;
     private Button markUnseenButton;
@@ -54,7 +53,7 @@ public class DashVidF extends Fragment implements View.OnClickListener {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         videoView = getView().findViewById(R.id.videoView);
-        videoDescription = getView().findViewById(R.id.videoDescription);
+        //videoDescription = getView().findViewById(R.id.videoDescription);
         videoTitle = getView().findViewById(R.id.videoTitle);
         markSeenButton = getView().findViewById(R.id.markSeenButton);
         markUnseenButton = getView().findViewById(R.id.markUnseenButton);
@@ -80,7 +79,7 @@ public class DashVidF extends Fragment implements View.OnClickListener {
         }
 
         videoTitle.setText(video.getTitle());
-        //videoDescription.setText(video.getDescription);
+        //videoDescription.setText(video.getDescription); //This will show the videos description. But due to lack of time, it got okutcommented.
 
         if (video.getImageUrl() == null){
             videoView.videoUrl(currentFav.getVideoURL());
@@ -103,11 +102,11 @@ public class DashVidF extends Fragment implements View.OnClickListener {
     public void onClick(View view) {
         if (view == markSeenButton){
             isPartOfDailyGoals = bundle.getString("isPartOfDailyGoals");
-            if (isPartOfDailyGoals != null && isPartOfDailyGoals.equals("true")){
+            if (isPartOfDailyGoals != null && isPartOfDailyGoals.equals("true")){  //Undersøger om denne video blev åbnet som dagens gøremål
                 handlePartOfDailyGoals();
-                iMain.inflateFragment(getString(R.string.fragment_dashmain));
+                iMain.inflateFragment(getString(R.string.fragment_dashmain)); //går tilbage til dashboardet
             }else{
-                iMain.inflateFragment(getString(R.string.fragment_dashvidmain));
+                iMain.inflateFragment(getString(R.string.fragment_dashvidmain)); //går til videolist
             }
             handleMarkAsSeen(true);
 
@@ -119,6 +118,7 @@ public class DashVidF extends Fragment implements View.OnClickListener {
         }
     }
 
+    //Henter den enkelte video fra bundle
     public void handleGetVideo(){
         Gson gson = new Gson();
         bundle = this.getArguments();
@@ -132,8 +132,10 @@ public class DashVidF extends Fragment implements View.OnClickListener {
 
     public void showErrorMessage(){
         //TODO show error message
+        //Grundet mangel på tid er dette ikke implementeret
     }
 
+    //Denne metode markere en video som set.
     public void handleMarkAsSeen(Boolean isSeen){
         Gson gson = new Gson();
         String preferenceKey = getString(R.string.sharedPreferencesKey);
@@ -153,6 +155,7 @@ public class DashVidF extends Fragment implements View.OnClickListener {
         editor.apply();
     }
 
+    //Henter listen over alle sete videoer.
     public void handleGetSeenList(){
         Gson gson = new Gson();
 
@@ -177,6 +180,7 @@ public class DashVidF extends Fragment implements View.OnClickListener {
         this.seenVideosList = seenVideosList;
     }
 
+    //Undersøger om videoen allerede er set
     public Boolean handleCheckIfSeen(){
         Boolean isSeen = seenVideosList.get(video.getTitle());
 
@@ -187,6 +191,7 @@ public class DashVidF extends Fragment implements View.OnClickListener {
         return isSeen;
     }
 
+    //Undersøger om videoen er åbnet som del af dagens gøremål. Dette styrer om man bagefter går tilbage til dashboardet eller videoList.
     public void handlePartOfDailyGoals(){
         SharedPreferences preferences = getActivity().getSharedPreferences(getString(R.string.sharedPreferencesKey),Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = preferences.edit();
@@ -194,6 +199,7 @@ public class DashVidF extends Fragment implements View.OnClickListener {
         editor.apply();
     }
 
+    //Denne metode markere videoen som favorit ved at modificere et favorit-object i shared preferences og derefter gemme det igen.
     public void handleFavorite(){
         Gson gson = new Gson();
         SharedPreferences preferences = getActivity().getSharedPreferences(getString(R.string.sharedPreferencesKey),Context.MODE_PRIVATE);
@@ -228,6 +234,7 @@ public class DashVidF extends Fragment implements View.OnClickListener {
         editor.apply();
     }
 
+    //Undersøger om videoen allerede er markeret som favorit
     public void checkIfFavorite(){
         Gson gson = new Gson();
         SharedPreferences preferences = getActivity().getSharedPreferences(getString(R.string.sharedPreferencesKey),Context.MODE_PRIVATE);

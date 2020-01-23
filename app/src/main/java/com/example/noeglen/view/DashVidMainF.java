@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.ProgressBar;
 
 import androidx.annotation.NonNull;
@@ -70,6 +69,8 @@ public class DashVidMainF extends Fragment {
         this.videoList = videoList;
     }
 
+
+    //Henter alle videoer fra firebase
     public void getAllVideosFromDataBase(){
         VideoDAO videoDAO = new VideoDAO();
         videoDAO.getAllVideos(new MyCallBack() {
@@ -97,6 +98,7 @@ public class DashVidMainF extends Fragment {
 
 
 
+    //Viser videoerne i recyclerview
     public void displayVideos(DashVidMainRecyclerAdapter adapter){
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this.getContext()));
@@ -105,8 +107,10 @@ public class DashVidMainF extends Fragment {
 
     public void showErrorMessage(){
         //TODO show error message in case Async fails
+        //På grund af mangel på tid, er dette ikke blevet implementeret
     }
 
+    //Henter listen af sete videoer
     public HashMap<String, Boolean> getSeenVideosList(){
         HashMap<String, Boolean> seenVideosList;
         Gson gson = new Gson();

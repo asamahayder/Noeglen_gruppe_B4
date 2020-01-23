@@ -1,4 +1,4 @@
-package com.example.noeglen.logic;
+package com.example.noeglen.data;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -41,7 +41,7 @@ public class CurrentDate {
 
     public String createCurrentDate(){
      this.date= new Date();
-     this.format = new SimpleDateFormat("dd/MM/yy");
+     this.format = new SimpleDateFormat("dd/M/yyyy");
      this.dateString = format.format(date);
      return dateString;
     }

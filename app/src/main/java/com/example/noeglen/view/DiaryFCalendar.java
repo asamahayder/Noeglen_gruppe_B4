@@ -1,6 +1,5 @@
 package com.example.noeglen.view;
 
-
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
@@ -17,7 +16,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
 
 import com.example.noeglen.R;
 import com.example.noeglen.data.DiaryDTO;
@@ -52,6 +50,7 @@ public class DiaryFCalendar extends Fragment  {
 
     }
 
+
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
@@ -69,6 +68,10 @@ public class DiaryFCalendar extends Fragment  {
                 Log.d(tag, "onSelectedDayChange: day/month/year:"+ date);
                 bundle.putString("date",date);
                 final Diary2F diary2F = new Diary2F();
+
+                /**
+                 * Tjekker om der er skrevet noget inde in Diary, og hvis det er så bliver den åbnet og hvis ik så bliver CreateDiaryOnEmptyDayDialog kaldt
+                 */
 
                 Boolean diaryExists = false;
                 for (int i = 0; i < listOfEntries.size(); i++) {
@@ -123,18 +126,17 @@ public class DiaryFCalendar extends Fragment  {
 
     }
 
-    private void saveSharedPref(String sPrefEditKey) {
-        String json = gson.toJson(listOfEntries);
-        sEdit.putString(sPrefEditKey,json);
-        sEdit.commit();
-    }
-
 
     @Override
     public void onAttach(@NonNull Context context) {
         super.onAttach(context);
         iMain = (IMainActivity) getActivity();
     }
+
+    /**
+     * Hvis der ikke er skrevet noget inde i dagbogen for den kaldte dato, kommer der så en besked der spørger om brugern gerne vil tilføje noget til dagbogen
+     */
+
 
     public static class CreateDiaryOnEmptyDayDialog extends DialogFragment {
 

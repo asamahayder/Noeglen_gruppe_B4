@@ -8,7 +8,6 @@ import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
 import android.view.animation.DecelerateInterpolator;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -18,7 +17,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import com.example.noeglen.R;
-import com.example.noeglen.logic.CurrentDate;
+import com.example.noeglen.data.CurrentDate;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -95,7 +94,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     }
 
+    /**
+     * Initialiserer viewet
+     */
+
     private void initializeView() {
+
+        CurrentDate currentDate = CurrentDate.getInstance();
+        currentDate.createCurrentDate();
 
         //laver animationen
         in = new AlphaAnimation(0.0f, 1.0f);
@@ -267,6 +273,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
             transaction.setCustomAnimations(R.anim.fade_in, R.anim.fade_out, R.anim.fade_in, R.anim.fade_out);
             transaction.replace(R.id.content_frame, f, tag);
+
+            if (tag.equals(getString(R.string.fragment_exerexer)) || tag.equals(getString(R.string.fragment_exer_2))){
+                clearBackStack();
+                transaction.addToBackStack(getString(R.string.fragment_exermain));
+            }
 
             //adder til backstack om variablen er true
             if (addToBackStack) {
