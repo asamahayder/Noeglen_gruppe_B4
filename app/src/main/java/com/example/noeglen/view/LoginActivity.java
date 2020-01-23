@@ -121,8 +121,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             loginBtn.setVisibility(View.VISIBLE);
             loginMenuBtn.setVisibility(View.GONE);
             registerSelect.setVisibility(View.GONE);
-            insertPass.setText("");
-            insertEmail.setText("");
+            insertPass.setText("123456");
+            insertEmail.setText("test@user.com");
             insertLicense.setVisibility(View.GONE);
             TVlicense.setVisibility(View.GONE);
 
