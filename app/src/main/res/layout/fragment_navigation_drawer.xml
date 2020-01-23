@@ -1,16 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginStart="10dp"
-    android:layout_marginTop="10dp">
+    android:layout_marginTop="10dp"
+    android:orientation="vertical">
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Nøglen"
-        android:textSize="28sp"
-        android:textColor="@color/comeback_green_dark"/>
+        android:textColor="@color/comeback_green_dark"
+        android:textSize="28sp" />
 
 </LinearLayout>
+
+    <!--Lavet af gruppe B4 for ComeBack
+    Kursus: 62550 62550 Brugerinteraktion og udvikling på mobile enheder
+    Medlemmer af gruppen:
+    Simon Andersen (s185083), Asama Hayder(s185099), Jákup Viljam Dam(s185095), Christoffer Adrian Detlef(s185117) & Thaer Almalla(s170727) -->

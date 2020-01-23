@@ -45,7 +45,14 @@ public class ExerExerF extends Fragment implements View.OnClickListener {
     private boolean isFavorite;
     private int animationPlayer = 0;
 
-    private static final String TAG = "ExerExerF";
+    /**
+     * De her bliver brugt til at skifte mellem to forskellige farver til start og stop knappen.
+     */
+    int primaryOrange = getResources().getColor(R.color.primaryOrange);
+    int primaryDark = getResources().getColor(R.color.comeback_green_dark);
+
+
+
 
     @Nullable
     @Override
@@ -83,64 +90,6 @@ public class ExerExerF extends Fragment implements View.OnClickListener {
         checkIfCurrExerIsFav();
     }
 
-    private boolean checkIfCurrExerIsFav() {
-        for (int i = 0; i < favList.size(); i++) {
-            if (favList.get(i).getTitle().equals(currExercise.getTitle()) && favList.get(i).getCURRENT_TYPE() == 2){
-                bAddToFav.setBackground(getContext().getDrawable(resID2));
-                isFavorite = true;
-                break;
-            }
-            else {
-                bAddToFav.setBackground(getContext().getDrawable(resID1));
-                isFavorite = false;
-            }
-        }
-        if (isFavorite){
-            Log.d(TAG, "checkIfCurrExerIsFav: RED");
-        }
-        else {
-            Log.d(TAG, "checkIfCurrExerIsFav: BLUE");
-        }
-        return isFavorite;
-    }
-
-    private boolean addORemoveFromFav() {
-        getSharedPref();
-        if (isFavorite){
-            for (int i = 0; i < favList.size(); i++) {
-                if (favList.get(i).getTitle().equals(currExercise.getTitle()) && favList.get(i).getCURRENT_TYPE() == 2){
-                    favList.remove(i);
-                    isFavorite = false;
-                    Log.d(TAG, "addORemoveFromFav: BLUE");
-                    break;
-                }
-            }
-        }
-        else {
-            favList.add(new FavoriteDTO(2,currExercise.getImage(),currExercise.getTitle(),currExercise.getDesc()));
-            isFavorite = true;
-            Log.d(TAG, "addORemoveFromFav: RED");
-        }
-        saveSharedPref();
-        return isFavorite;
-    }
-
-    private void getSharedPref() {
-        String json = sPref.getString(getString(R.string.sPref_favorites),null);
-        Type type = new TypeToken<List<FavoriteDTO>>(){}.getType();
-        favList = gson.fromJson(json,type);
-        if (favList == null){
-            favList = new ArrayList<>();
-        }
-        Log.d(TAG, "getSharedPref: favListSize = " + favList.size());
-    }
-
-    private void saveSharedPref(){
-        String json = gson.toJson(favList);
-        sEdit.putString(getString(R.string.sPref_favorites),json);
-        sEdit.commit();
-        Log.d(TAG, "saveSharedPref: favListSize = " + favList.size());
-    }
 
     @Override
     public void onAttach(Context context) {
@@ -157,8 +106,12 @@ public class ExerExerF extends Fragment implements View.OnClickListener {
             else {
                 bAddToFav.setBackground(getContext().getDrawable(resID1));
             }
-        } else if( v == bstartAnim && animationPlayer == 0){
-            int primaryOrange = getResources().getColor(R.color.primaryOrange);
+        }
+        /**
+         * De her to else if statements bliver brugt til at skifte designet på knappen som starter og stopper animationen.
+         * Derudover så starter og stopper de også animationen.
+         */
+        else if( v == bstartAnim && animationPlayer == 0){
             iAnim.startAnimation(breatheAnimation);
             bstartAnim.setText("Stop");
             bstartAnim.setTextColor(primaryOrange);
@@ -166,14 +119,68 @@ public class ExerExerF extends Fragment implements View.OnClickListener {
             animationPlayer = 1;
             markTodayExerciseAsDone();
         } else if (v == bstartAnim && animationPlayer == 1){
-            int primaryDark = getResources().getColor(R.color.comeback_green_dark);
             bstartAnim.setText("Start");
             bstartAnim.setTextColor(primaryDark);
             bstartAnim.setBackgroundResource(R.drawable.dark_green_border);
             iAnim.clearAnimation();
             animationPlayer = 0;
         }
+    }
 
+    /**
+     * Det som denne metode gør, er at tjekke om man har øvelsen til favorit eller ej.
+     * Her gemmer den omkring hvilken drawable der skal vise, alt efter om man har valgt den som favorit eller ej
+     */
+    private boolean checkIfCurrExerIsFav() {
+        for (int i = 0; i < favList.size(); i++) {
+            if (favList.get(i).getTitle().equals(currExercise.getTitle()) && favList.get(i).getCURRENT_TYPE() == 2){
+                bAddToFav.setBackground(getContext().getDrawable(resID2));
+                isFavorite = true;
+                break;
+            }
+            else {
+                bAddToFav.setBackground(getContext().getDrawable(resID1));
+                isFavorite = false;
+            }
+        }
+        return isFavorite;
+    }
+
+    /**
+     * Det som denne metode gør, er at tilføje eller fjerne øvelsen fra favoritter.
+     */
+    private boolean addORemoveFromFav() {
+        getSharedPref();
+        if (isFavorite){
+            for (int i = 0; i < favList.size(); i++) {
+                if (favList.get(i).getTitle().equals(currExercise.getTitle()) && favList.get(i).getCURRENT_TYPE() == 2){
+                    favList.remove(i);
+                    isFavorite = false;
+                    break;
+                }
+            }
+        }
+        else {
+            favList.add(new FavoriteDTO(2,currExercise.getImage(),currExercise.getTitle(),currExercise.getDesc()));
+            isFavorite = true;
+        }
+        saveSharedPref();
+        return isFavorite;
+    }
+
+    private void getSharedPref() {
+        String json = sPref.getString(getString(R.string.sPref_favorites),null);
+        Type type = new TypeToken<List<FavoriteDTO>>(){}.getType();
+        favList = gson.fromJson(json,type);
+        if (favList == null){
+            favList = new ArrayList<>();
+        }
+    }
+
+    private void saveSharedPref(){
+        String json = gson.toJson(favList);
+        sEdit.putString(getString(R.string.sPref_favorites),json);
+        sEdit.commit();
     }
 
     public void markTodayExerciseAsDone(){
@@ -183,3 +190,10 @@ public class ExerExerF extends Fragment implements View.OnClickListener {
         editor.apply();
     }
 }
+
+/*
+Lavet af gruppe B4 for ComeBack
+Kursus: 62550 62550 Brugerinteraktion og udvikling på mobile enheder
+Medlemmer af gruppen:
+Simon Andersen (s185083), Asama Hayder(s185099), Jákup Viljam Dam(s185095), Christoffer Adrian Detlef(s185117) & Thaer Almalla(s170727)
+*/

@@ -30,3 +30,9 @@ public class ChatActivity extends AppCompatActivity implements View.OnClickListe
         startActivity(intent);
     }
 }
+/*
+Lavet af gruppe B4 for ComeBack
+Kursus: 62550 62550 Brugerinteraktion og udvikling på mobile enheder
+Medlemmer af gruppen:
+Simon Andersen (s185083), Asama Hayder(s185099), Jákup Viljam Dam(s185095), Christoffer Adrian Detlef(s185117) & Thaer Almalla(s170727)
+*/
