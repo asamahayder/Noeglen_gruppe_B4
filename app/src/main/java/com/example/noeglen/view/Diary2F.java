@@ -39,7 +39,7 @@ public class Diary2F extends Fragment implements View.OnClickListener {
     private List<DiaryDTO> listOfEntries;
     private Gson gson;
     private CurrentDate currentDate;
-    private String image;
+    private String imageString;
     private IMainActivity iMain;
     private ImageView editKnap;
     private Button gem;
@@ -93,11 +93,10 @@ public class Diary2F extends Fragment implements View.OnClickListener {
 
         questions = diaryDTO.getQuestions();
         answers = diaryDTO.getAnswers();
-        image = "emoji" + diaryDTO.getSmiley();
-        int rec = getResources().getIdentifier(image,"drawable", this.getContext().getPackageName());
+        imageString = "emoji" + diaryDTO.getSmiley();
+        int rec = getResources().getIdentifier(imageString,"drawable", this.getContext().getPackageName());
         imageView = getView().findViewById(R.id.imageView6);
-
-
+        imageView.setImageResource(rec);
 
         dateText = getView().findViewById(R.id.textView3);
         editKnap = getView().findViewById(R.id.editKnap);
@@ -130,8 +129,6 @@ public class Diary2F extends Fragment implements View.OnClickListener {
         answer2.setText(answers[1]);
         answer3.setText(answers[2]);
         answer4.setText(answers[3]);
-
-
     }
 
 

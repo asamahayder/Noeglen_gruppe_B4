@@ -68,7 +68,7 @@ public class DiaryFCalendar extends Fragment  {
                 String years = Integer.toString(year);
                 years.substring(0,1);
                 year = Integer.parseInt(years);
-                String date = day + "/" + (month + 1) + "/" + year;
+                date = day + "/" + (month + 1) + "/" + year;
                 Log.d(tag, "onSelectedDayChange: day/month/year:"+ date);
                 bundle.putString("date",date);
                 final Diary2F diary2F = new Diary2F();
@@ -89,11 +89,10 @@ public class DiaryFCalendar extends Fragment  {
                         public void onCallBack(Object object) {
                             boolean a = (boolean)object;
                             if (a){
-                                iMain.setFragment(diary2F, getString(R.string.fragment_diary2),true,bundle);
+                                iMain.setFragment(new DiaryMainF(),getString(R.string.fragment_diarymain),true,bundle);
                             }
                         }
                     });
-                    FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
                     dialog.show(getFragmentManager(),"dialog");
                 }
 
