@@ -12,7 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import com.example.noeglen.R;
-import com.example.noeglen.logic.CurrentDate;
+import com.example.noeglen.data.CurrentDate;
 
 import java.text.SimpleDateFormat;
 
@@ -39,7 +39,7 @@ public class DiaryMainF extends Fragment implements View.OnClickListener{
 
         datefelt = getView().findViewById(R.id.currDate);
         Bundle bundle = getArguments();
-
+        currentDate = CurrentDate.getInstance();
 
         if (bundle != null){
             date = bundle.getString("date");
