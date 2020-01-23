@@ -62,10 +62,8 @@
             android:id="@+id/simpleSeekBar"
             android:layout_width="271dp"
             android:layout_height="57dp"
-
             android:max="100"
             android:progress="50"
-
             android:progressDrawable="@drawable/custom_progress"
             android:scrollbarSize="100dp"
             android:splitTrack="false"

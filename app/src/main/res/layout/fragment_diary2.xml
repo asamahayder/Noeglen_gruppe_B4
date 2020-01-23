@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-
     android:background="#ffffff"
     android:orientation="vertical">
 
@@ -41,7 +40,6 @@
 
         </FrameLayout>
 
-
     </LinearLayout>
 
     <ScrollView
@@ -74,7 +72,6 @@
                 android:layout_weight="5"
                 android:paddingStart="20dp"
                 android:paddingEnd="20dp"
-                android:text="TextView"
                 android:textColor="@color/comeback_green_dark"
                 android:textSize="24sp" />
 
@@ -99,7 +96,6 @@
                 android:layout_weight="5"
                 android:paddingStart="20dp"
                 android:paddingEnd="20dp"
-                android:text="TextView"
                 android:textColor="@color/comeback_green_dark"
                 android:textSize="24sp" />
 
@@ -124,7 +120,6 @@
                 android:layout_weight="5"
                 android:paddingStart="20dp"
                 android:paddingEnd="20dp"
-                android:text="TextView"
                 android:textColor="@color/comeback_green_dark"
                 android:textSize="24sp"
                 app:layout_constraintTop_toBottomOf="@+id/answer2"
@@ -151,7 +146,6 @@
                 android:layout_weight="5"
                 android:paddingStart="20dp"
                 android:paddingEnd="20dp"
-                android:text="TextView"
                 android:textColor="@color/comeback_green_dark"
                 android:textSize="24sp"
                 app:layout_constraintTop_toBottomOf="@+id/answer3" />

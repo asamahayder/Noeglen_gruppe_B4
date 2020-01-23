@@ -72,6 +72,8 @@ public class Diary2F extends Fragment implements View.OnClickListener {
         sPref = getContext().getSharedPreferences(sPrefKey, Context.MODE_PRIVATE);
         sEdit = sPref.edit();
         bundle = getArguments();
+
+
         if (bundle != null){
             date = bundle.getString("date");
         }else{
@@ -99,15 +101,14 @@ public class Diary2F extends Fragment implements View.OnClickListener {
         imageView.setImageResource(rec);
 
         dateText = getView().findViewById(R.id.textView3);
+        dateText.setText(date);
+
         editKnap = getView().findViewById(R.id.editKnap);
         editKnap.setOnClickListener(this);
+
         gem = getView().findViewById(R.id.gem);
         gem.setOnClickListener(this);
         gem.setVisibility(Button.GONE);
-
-
-
-
 
         question1 = getView().findViewById(R.id.question1);
         question2 = getView().findViewById(R.id.question2);
@@ -123,10 +124,8 @@ public class Diary2F extends Fragment implements View.OnClickListener {
         answer4 = getView().findViewById(R.id.answer4);
         answer4.setFocusable(false);
 
-        dateText.setText(date);
-
+        // Tjekker hvis man har valgt den 3. emoji, da der er kun 3 spørgsmål, så bliver spørgsmål og svar nr 4 fjernet.
         if (diaryDTO.getSmiley() == 3) {
-            System.out.println("##########################€€€€€€€€€€€€€€€€€€€€€");
             question4.setVisibility(View.GONE);
             answer4.setVisibility(View.GONE);
         }
@@ -139,20 +138,14 @@ public class Diary2F extends Fragment implements View.OnClickListener {
         answer2.setText(answers[1]);
         answer3.setText(answers[2]);
         answer4.setText(answers[3]);
-
-
-
     }
-
-
-
 
     @Override
     public void onClick(View v) {
         if (v == editKnap ) {
-
             editKnap.setVisibility(Button.GONE);
             gem.setVisibility(Button.VISIBLE);
+
             answer1.setFocusableInTouchMode(true);
             answer2.setFocusableInTouchMode(true);
             answer3.setFocusableInTouchMode(true);
@@ -160,7 +153,6 @@ public class Diary2F extends Fragment implements View.OnClickListener {
 
 
         }else if (v == gem){
-
             saveDiaryDTO();
             iMain.inflateFragment(getString(R.string.fragment_dashmain),true);
 
@@ -184,7 +176,9 @@ public class Diary2F extends Fragment implements View.OnClickListener {
                 diaryDTO  = new DiaryDTO(diaryDTO.getSmiley(), answers,questions,date);
 
                 for (int i = 0; i < listOfEntries.size(); i++) {
+
                     if (listOfEntries.get(i).getDate().equals(date)){
+
                         listOfEntries.get(i).setAnswers(diaryDTO.getAnswers());
                         listOfEntries.get(i).setDate(diaryDTO.getDate());
                         listOfEntries.get(i).setQuestions(diaryDTO.getQuestions());
