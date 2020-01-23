@@ -2,10 +2,11 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_centerHorizontal="true"
-    android:background="#ffffff">
+    android:background="#ffffff"
+    android:orientation="vertical">
 
     <bg.devlabs.fullscreenvideoview.FullscreenVideoView
         android:id="@+id/videoView"
@@ -25,12 +26,12 @@
         android:layout_marginEnd="10dp"
         android:fontFamily="@font/karla_regular"
         android:gravity="center"
-        app:autoSizeTextType="uniform"
-        app:autoSizeMinTextSize="12sp"
-        app:autoSizeMaxTextSize="100sp"
-        app:autoSizeStepGranularity="2sp"
         android:text="Title"
         android:textColor="@color/comeback_green_dark"
+        app:autoSizeMaxTextSize="100sp"
+        app:autoSizeMinTextSize="12sp"
+        app:autoSizeStepGranularity="2sp"
+        app:autoSizeTextType="uniform"
         app:layout_constraintEnd_toStartOf="@id/dashVidFavoriteButton"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/videoView" />
@@ -90,10 +91,15 @@
         android:layout_width="40dp"
         android:layout_height="0dp"
         android:layout_marginEnd="10dp"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintLeft_toRightOf="@id/videoTitle"
-        app:layout_constraintTop_toBottomOf="@+id/videoView"
         app:layout_constraintBottom_toTopOf="@id/videoDescription"
+        app:layout_constraintLeft_toRightOf="@id/videoTitle"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/videoView"
         app:srcCompat="@drawable/fav1" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <!--Lavet af gruppe B4 for ComeBack
+    Kursus: 62550 62550 Brugerinteraktion og udvikling på mobile enheder
+    Medlemmer af gruppen:
+    Simon Andersen (s185083), Asama Hayder(s185099), Jákup Viljam Dam(s185095), Christoffer Adrian Detlef(s185117) & Thaer Almalla(s170727) -->

@@ -2,10 +2,10 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical"
     android:layout_width="match_parent"
+    android:layout_height="match_parent"
     android:background="#ffffff"
-    android:layout_height="match_parent">
+    android:orientation="vertical">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -19,11 +19,11 @@
             app:layout_constraintGuide_percent="0.15" />
 
         <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline_5_percent"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.05" />
+            android:id="@+id/guideline_5_percent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.05" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline_75_percent"
@@ -37,17 +37,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            app:layout_constraintGuide_percent="0.08"/>
+            app:layout_constraintGuide_percent="0.08" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline_92_percent_vertical"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            app:layout_constraintGuide_percent="0.92"/>
-
-
-
+            app:layout_constraintGuide_percent="0.92" />
 
         <TextView
             android:id="@+id/textView2"
@@ -83,8 +80,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="30dp"
-            android:text="TextView"
             android:background="@drawable/dark_green_border"
+            android:text="TextView"
             android:textColor="@color/comeback_light_dark_green"
             app:layout_constraintBottom_toTopOf="@+id/guideline_5_percent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -124,3 +121,8 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </LinearLayout>
+
+    <!--Lavet af gruppe B4 for ComeBack
+    Kursus: 62550 62550 Brugerinteraktion og udvikling på mobile enheder
+    Medlemmer af gruppen:
+    Simon Andersen (s185083), Asama Hayder(s185099), Jákup Viljam Dam(s185095), Christoffer Adrian Detlef(s185117) & Thaer Almalla(s170727) -->

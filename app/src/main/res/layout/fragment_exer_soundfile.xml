@@ -105,11 +105,11 @@
             android:id="@+id/btnPlay"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:paddingEnd="40dp"
+            android:background="@drawable/dark_green_border"
             android:paddingStart="40dp"
+            android:paddingEnd="40dp"
             android:text="Afspil"
             android:textColor="@color/comeback_green_dark"
-            android:background="@drawable/dark_green_border"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -117,3 +117,8 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </LinearLayout>
+
+    <!--Lavet af gruppe B4 for ComeBack
+    Kursus: 62550 62550 Brugerinteraktion og udvikling på mobile enheder
+    Medlemmer af gruppen:
+    Simon Andersen (s185083), Asama Hayder(s185099), Jákup Viljam Dam(s185095), Christoffer Adrian Detlef(s185117) & Thaer Almalla(s170727) -->

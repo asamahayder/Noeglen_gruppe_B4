@@ -3,13 +3,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/dashVidMain_customLayoutList"
-    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingTop="40dp"
+    android:background="#ffffff"
+    android:orientation="vertical"
     android:paddingLeft="10dp"
-    android:paddingRight="10dp"
-    android:background="#ffffff">
+    android:paddingTop="40dp"
+    android:paddingRight="10dp">
 
     <TextView
         android:id="@+id/dashVidMain_customLayoutList_progressTitle"
@@ -21,9 +21,9 @@
 
     <RelativeLayout
         android:id="@+id/dashVidMain_customLayoutList_relative1"
-        android:layout_alignTop="@+id/dashVidMain_customLayoutList_progressTitle"
         android:layout_width="match_parent"
         android:layout_height="160dp"
+        android:layout_alignTop="@+id/dashVidMain_customLayoutList_progressTitle"
         android:layout_alignParentTop="false"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="70dp"
@@ -100,3 +100,8 @@
     </RelativeLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <!--Lavet af gruppe B4 for ComeBack
+    Kursus: 62550 62550 Brugerinteraktion og udvikling på mobile enheder
+    Medlemmer af gruppen:
+    Simon Andersen (s185083), Asama Hayder(s185099), Jákup Viljam Dam(s185095), Christoffer Adrian Detlef(s185117) & Thaer Almalla(s170727) -->

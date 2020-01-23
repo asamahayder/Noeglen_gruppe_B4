@@ -1,16 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 
-<app:TextView xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<app:TextView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/weekTitle"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:fontFamily="@font/karla_regular"
     android:gravity="center"
     android:padding="20dp"
-    android:textSize="30sp"
     android:text="loading"
     android:textColor="@color/comeback_green_dark"
-    />
+    android:textSize="30sp" />
 
+    <!--Lavet af gruppe B4 for ComeBack
+    Kursus: 62550 62550 Brugerinteraktion og udvikling på mobile enheder
+    Medlemmer af gruppen:
+    Simon Andersen (s185083), Asama Hayder(s185099), Jákup Viljam Dam(s185095), Christoffer Adrian Detlef(s185117) & Thaer Almalla(s170727) -->
