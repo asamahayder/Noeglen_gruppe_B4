@@ -62,6 +62,10 @@ public class Diary1F extends Fragment  implements View.OnClickListener{
 
     }
 
+    /**
+     * Henter dato, srørgsmålene og emojis som er allerede blevet gemt i DiaryMaimF.
+     */
+
     private void initializeView() {
         bundle = getArguments();
         date = bundle.getString("date");
@@ -104,6 +108,9 @@ public class Diary1F extends Fragment  implements View.OnClickListener{
         question3.setText(questions[2]);
         question4.setText(questions[3]);
 
+        /**
+         * Spørgsmål og svar nr 4 plads bliver fjernet, da der er kun 3 spørgsmål efter dette humørvalg
+         */
 
         if (bundle.getInt("smiley") == 3) {
             question4.setVisibility(View.GONE);
@@ -150,6 +157,11 @@ public class Diary1F extends Fragment  implements View.OnClickListener{
         handleMarkTodaysDiaryAsDone();
     }
 
+    /**
+     * Henter listOfEntries, og laver en hvis den er null
+     * @param sPrefEditKey
+     */
+
     private void getListOfEntries(String sPrefEditKey) {
         String json = sPref.getString(sPrefEditKey,null);
         Type type = new TypeToken<List<DiaryDTO>>(){}.getType();
@@ -173,6 +185,10 @@ public class Diary1F extends Fragment  implements View.OnClickListener{
         super.onAttach(context);
         iMain = (IMainActivity) getActivity();
     }
+
+    /**
+     * Markerer dagens dagbog hvis den er skrevet
+     */
 
     public void handleMarkTodaysDiaryAsDone(){
         if (date.equals(currentDate)) {
