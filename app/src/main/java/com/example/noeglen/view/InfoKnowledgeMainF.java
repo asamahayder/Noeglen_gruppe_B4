@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -31,6 +32,7 @@ public class InfoKnowledgeMainF extends Fragment implements InfoKnowledgeMainAda
     private static List<KnowledgeDTO> listOfKnowledgeArticles;
     private RecyclerView rView;
     private InfoKnowledgeMainAdapter adapter;
+    private ProgressBar infoKnowledgeMainProgressBar;
 
     private static final String TAG = "INFO_MAIN_ARTICLES";
 
@@ -46,6 +48,7 @@ public class InfoKnowledgeMainF extends Fragment implements InfoKnowledgeMainAda
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        infoKnowledgeMainProgressBar = getView().findViewById(R.id.infoKnowledgeMainProgressBar);
     }
 
     @Override
@@ -79,6 +82,7 @@ public class InfoKnowledgeMainF extends Fragment implements InfoKnowledgeMainAda
         @Override
         protected void onPostExecute(Void aVoid) {
             setRecyclerview();
+            infoKnowledgeMainProgressBar.setVisibility(View.GONE);
         }
     }
 
