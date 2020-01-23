@@ -169,6 +169,11 @@ public class Diary1F extends Fragment  implements View.OnClickListener{
 
     }
 
+    /**
+     * Gemmer data inde i telefonens hukommelse
+     * @param sPrefEditKey
+     */
+
     private void saveSharedPref(String sPrefEditKey) {
         String json = gson.toJson(listOfEntries);
         sEdit.putString(sPrefEditKey,json);

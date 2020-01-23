@@ -126,12 +126,6 @@ public class DiaryFCalendar extends Fragment  {
 
     }
 
-    private void saveSharedPref(String sPrefEditKey) {
-        String json = gson.toJson(listOfEntries);
-        sEdit.putString(sPrefEditKey,json);
-        sEdit.commit();
-    }
-
 
     @Override
     public void onAttach(@NonNull Context context) {

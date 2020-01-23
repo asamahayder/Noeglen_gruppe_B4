@@ -202,6 +202,7 @@ public class Diary2F extends Fragment implements View.OnClickListener {
         }
 
 
+
     private void getListOfEntries(String sPrefEditKey) {
         String json = sPref.getString(sPrefEditKey, null);
         Type type = new TypeToken<List<DiaryDTO>>() {
@@ -212,6 +213,12 @@ public class Diary2F extends Fragment implements View.OnClickListener {
         }
 
     }
+
+    /**
+     * Gemmer data inde i telefonen
+     * @param sPrefEditKey
+     */
+
     private void saveSharedPref(String sPrefEditKey) {
         String json = gson.toJson(listOfEntries);
         sEdit.putString(sPrefEditKey,json);
