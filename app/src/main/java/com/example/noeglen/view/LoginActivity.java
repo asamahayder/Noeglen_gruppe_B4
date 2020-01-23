@@ -45,12 +45,10 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     TextView TVlicense;
     ProgressBar progressBar;
     private ArrayList<VideoDTO> videoList;
-
     private FirebaseAuth mAuth;
     private FirebaseUser mUser;
     ILicenseDAO iLicenseDAO;
     Map<String, String> licenseInfo = new HashMap<>();
-    Map<String, String> userInfo = new HashMap<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,9 +58,11 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
         setContentView(R.layout.activity_login);
 
+        /** Henter firebase instans samt bruger info */
         mAuth = FirebaseAuth.getInstance();
         mUser = mAuth.getCurrentUser();
 
+        /** Hvis brugeren er logget ind og lukkede applikationen tjekker nedenstående kode for om brugeren behøver at logge ind eller ej. */
         if (mUser != null) {
             Intent welcome = new Intent(LoginActivity.this, MainActivity.class);
             startActivity(welcome);
@@ -80,7 +80,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         TVlicense = findViewById(R.id.LicenseTV);
         TVlicense.setVisibility(View.GONE);
 
-
         registerSelect = findViewById(R.id.RegisterTV);
         registerSelect.setVisibility(View.GONE);
         loginBtn = findViewById(R.id.LoginTV);
@@ -88,21 +87,21 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         loginMenuBtn = findViewById(R.id.LoginBtn);
         registerMenuBtn = findViewById(R.id.RegBtn);
 
-        // Skift ud med hinanden
+        /** Skifter ud med hinanden */
         registerSelect.setOnClickListener(this);
         loginBtn.setOnClickListener(this);
         registerMenuBtn.setOnClickListener(this);
         loginMenuBtn.setOnClickListener(this);
-
         registerSelect.setVisibility(View.GONE);
         loginMenuBtn.setVisibility(View.GONE);
-
+        /** Henter licens objekt der bruges til at tjekke om licensen der bruges til at lave en bruger er gyldig */
         iLicenseDAO = new LicenseDAO();
     }
 
     @Override
     public void onClick(View v) {
 
+        /** Register indsætnings form */
         if (v.equals(registerMenuBtn)) {
 
             registerMenuBtn.setVisibility(View.GONE);
@@ -115,6 +114,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             insertLicense.setVisibility(View.VISIBLE);
             TVlicense.setVisibility(View.VISIBLE);
 
+            /** Login indsætnings form */
         } else if (v.equals(loginMenuBtn)) {
 
             registerMenuBtn.setVisibility(View.VISIBLE);
@@ -126,10 +126,12 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             insertLicense.setVisibility(View.GONE);
             TVlicense.setVisibility(View.GONE);
 
+            /** Log in metode */
         } else if (v.equals(loginBtn) && registerSelect.getVisibility() == View.GONE) {
 
             signIn(insertEmail.getText().toString(), insertPass.getText().toString());
 
+            /** Register metode og licenstjek*/
         } else if (v.equals(registerSelect) && loginBtn.getVisibility() == View.GONE){
 
             licenseCheck(insertLicense.getText().toString(), insertEmail.getText().toString(), insertPass.getText().toString());
@@ -137,14 +139,30 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         }
     }
 
-
+    /**
+     * Denne metode bruges til at tjekke om licensen der bruges til at lave en bruger er gyldig
+     * @param license = licensen som fås fra virksomheden når man køber appen
+     * @param email = brugerens e-mail
+     * @param password = brugerens kodeord
+     */
     private void licenseCheck(final String license, final String email, final String password ) {
+
+        /**
+         * Tjekker om der er indsat de rette informationer
+         */
 
         if (!validateForm()) {
             return;
         }
+
         progressBar.setVisibility(View.VISIBLE);
         registerSelect.setVisibility(View.GONE);
+
+        /**
+         * Henter call back metoden. Denne bruges til at sikre at den information vi skal bruge er hentet inden koden den fortsætter.
+         * Først tjekker den om den indtastede licens findes i databasen. Hvis ikke er den ugyldig. Næst tjekker den for om den indtastede
+         * Licens bruges af en anden person. Hvis ikke kører den vores lav en bruger metode.
+         */
 
         final LicenseDAO licenseDAO = new LicenseDAO();
         licenseDAO.getLicense(license, new MyCallBack() {
@@ -174,6 +192,13 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     //--- Disse metoder er taget fra Googles firebase preset authentication med lidt ændringer
     //--- https://github.com/firebase/quickstart-android/blob/90389865dc8a64495b1698c4793cd4deecc4d0ee/auth/app/src/main/java/com/google/firebase/quickstart/auth/java/CustomAuthActivity.java#L98-L115
+    //---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    /**
+     * Som sagt er disse metoder taget fra firebase egne presets der virker med deres database.
+     * Denne tager imod to text felter der indeholder e-mail og kodeord og pass'er dem videre
+     * til firebase authentication metode som tjekker om der findes et user objekt med samme informatioer
+     */
+
     private void signIn(String email, String password) {
 
         if (!validateForm()) {
@@ -191,7 +216,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                             getAllVideosFromDataBase();
 
                         } else {
-                            // If sign in fails, display a message to the user.
+
                             Toast.makeText(LoginActivity.this, "Authentication failed.", Toast.LENGTH_SHORT).show();
                             System.out.println("failure");
                             progressBar.setVisibility(View.GONE);
@@ -201,26 +226,29 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 });
     }
 
+
+    /** Igen virker denne på samme måde som sign in metoden hvor i stedet for at tjekker om der findes den
+     * specifikke information indsætter den hvad der står i diverse EditText views i deres user database
+     * bestående af en email og et kodeord.
+     *
+     * En anden ting som sker i denne metode som vi har valgt at indsætte er det Map objekt som indeholder
+     * userID og licens. Dette tilføjes til vores eget table i databasen og holder styr på når en licens bliver brugt.
+     * Her indsætter vi et bruger ID hos den respektive licens.**/
     private void createAccount(String email, String password, final String license) {
 
         mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (task.isSuccessful()) {
-                    System.out.println("success");
-
-                    System.out.println(mAuth.getUid());
                     licenseInfo.put("UserID", mAuth.getUid());
                     licenseInfo.put("license", license);
                     final LicenseDAO licenseDAO = new LicenseDAO();
                     licenseDAO.insertLicense(license, licenseInfo);
 
-                    // Sign in success, update UI with the signed-in user's information
                     Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                     startActivity(intent);
                     finish();
                 } else {
-                    // If sign in fails, display a message to the user.
                     Toast.makeText(LoginActivity.this, "Authentication failed.", Toast.LENGTH_SHORT).show();
                     progressBar.setVisibility(View.GONE);
                     registerSelect.setVisibility(View.VISIBLE);
@@ -230,6 +258,10 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     }
 
+    /**
+     * Igen en brugt metode fra firebases eget bibliotek som bare tjekker om diverse EditText view indeholder noget text
+     * @return
+     */
     private boolean validateForm() {
         boolean valid = true;
 
@@ -261,7 +293,12 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
         return valid;
     }
+    //---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
+    /**
+     * For at gøre det bedre for brugeren at bruge applikationen henter vi videoerne der skal bruges ved login
+     * Dette forsager et lidt længere tidsforbrug ved login men sker så kun ved login i stedet for inde i appen
+     */
     public void getAllVideosFromDataBase(){
         VideoDAO videoDAO = new VideoDAO();
         videoDAO.getAllVideos(new MyCallBack() {
@@ -278,13 +315,18 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         this.videoList = videoList;
     }
 
+    /**
+     * Når brugeren signer in kaldes denne metode for at sende dem hen til vores dashboard
+     */
     public void handleGoToDashBoard(){
-        // Sign in success, update UI with the signed-in user's information
         Intent intent = new Intent(LoginActivity.this, MainActivity.class);
         startActivity(intent);
         this.finish();
     }
 
+    /**
+     *
+     */
     public void saveVideoList(){
         Gson gson = new Gson();
         String listInJSON = gson.toJson(videoList);
@@ -297,6 +339,10 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         editor.apply();
     }
 
+    /**
+     * Her tjekkes om brugeren logger ind for første gang. Vi henter bare en boolean værdi og bagefter indsætter
+     * værdien til at det ikke er første gang brugeren logger ind.
+     */
     public void handleCheckWelcomeScreen(){
         SharedPreferences sharedPreferences = getSharedPreferences(getString(R.string.sharedPreferencesKey),MODE_PRIVATE);
         String isFirstTime = sharedPreferences.getString(getString(R.string.firstTimeKey),null);
@@ -312,8 +358,4 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             handleGoToDashBoard();
         }
     }
-
-
-
-    //------------------------------------------------------------------------------------------------------------
 }

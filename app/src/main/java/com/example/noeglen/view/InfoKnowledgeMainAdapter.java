@@ -56,7 +56,6 @@ public class InfoKnowledgeMainAdapter extends RecyclerView.Adapter<InfoKnowledge
             Glide
                     .with(context)
                     .load(articles.get(position).getImage())
-                    .apply(requestOptions)
                     .into(holder.image);
 
 

@@ -14,23 +14,27 @@
         android:layout_height="75dp"
         app:cardCornerRadius="15dp">
 
-        <ImageView
-            android:id="@+id/infoknowledgemain_recyclerview_image"
+        <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:scaleType="centerCrop"/>
+            android:layout_height="match_parent">
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@drawable/gradient"
-            android:soundEffectsEnabled="true"
-            android:alpha="0.3"/>
-        <View
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@color/comeback_light_dark_green_trans"
-            />
+            <ImageView
+                android:id="@+id/infoknowledgemain_recyclerview_image"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="centerCrop"/>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/gradient"
+                android:soundEffectsEnabled="true"
+                android:alpha="0.3"/>
+            <View
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@color/comeback_light_dark_green_trans"
+                />
+        </FrameLayout>
 
         <TextView
             android:id="@+id/infoknowledgemain_recyclerview_title"
