@@ -30,16 +30,12 @@ public class Diary2F extends Fragment implements View.OnClickListener {
 
     private String[] questions, answers;
     private String date;
-    private TextView dateText, question1, question2, question3, question4;
+    private TextView dateText;
     private EditText answer1, answer2, answer3, answer4;
-    private Bundle bundle;
-    private ImageView imageView;
     private SharedPreferences sPref;
     private SharedPreferences.Editor sEdit;
     private List<DiaryDTO> listOfEntries;
     private Gson gson;
-    private CurrentDate currentDate;
-    private String imageString;
     private IMainActivity iMain;
     private ImageView editButton;
     private Button gem;
@@ -71,13 +67,13 @@ public class Diary2F extends Fragment implements View.OnClickListener {
         String sPrefKey = getString(R.string.sharedPreferencesKey);
         sPref = getContext().getSharedPreferences(sPrefKey, Context.MODE_PRIVATE);
         sEdit = sPref.edit();
-        bundle = getArguments();
+        Bundle bundle = getArguments();
 
 
         if (bundle != null){
             date = bundle.getString("date");
         }else{
-            currentDate = CurrentDate.getInstance();
+            CurrentDate currentDate = CurrentDate.getInstance();
             date = new SimpleDateFormat("dd/M/yyyy").format(currentDate.getDate());
         }
 
@@ -95,9 +91,9 @@ public class Diary2F extends Fragment implements View.OnClickListener {
 
         questions = diaryDTO.getQuestions();
         answers = diaryDTO.getAnswers();
-        imageString = "emoji" + diaryDTO.getSmiley();
+        String imageString = "emoji" + diaryDTO.getSmiley();
         int rec = getResources().getIdentifier(imageString,"drawable", this.getContext().getPackageName());
-        imageView = getView().findViewById(R.id.imageView6);
+        ImageView imageView = getView().findViewById(R.id.imageView6);
         imageView.setImageResource(rec);
 
         dateText = getView().findViewById(R.id.textView3);
@@ -110,10 +106,10 @@ public class Diary2F extends Fragment implements View.OnClickListener {
         gem.setOnClickListener(this);
         gem.setVisibility(Button.GONE);
 
-        question1 = getView().findViewById(R.id.question1);
-        question2 = getView().findViewById(R.id.question2);
-        question3 = getView().findViewById(R.id.question3);
-        question4 = getView().findViewById(R.id.question4);
+        TextView question1 = getView().findViewById(R.id.question1);
+        TextView question2 = getView().findViewById(R.id.question2);
+        TextView question3 = getView().findViewById(R.id.question3);
+        TextView question4 = getView().findViewById(R.id.question4);
 
         answer1 = getView().findViewById(R.id.answer1);
         answer1.setFocusable(false);

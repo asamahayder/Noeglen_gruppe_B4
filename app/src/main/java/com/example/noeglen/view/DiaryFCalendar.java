@@ -31,8 +31,6 @@ import java.util.List;
 public class DiaryFCalendar extends Fragment  {
 
     private static final String tag ="DiaryFCalendar";
-    private CalendarView calendar;
-    private Long dato;
     private String date;
     private SharedPreferences sPref;
     private SharedPreferences.Editor sEdit;
@@ -58,8 +56,7 @@ public class DiaryFCalendar extends Fragment  {
         super.onViewCreated(view, savedInstanceState);
         initializeView();
 
-        calendar = getView().findViewById(R.id.calendarView);
-        dato = calendar.getDate();
+        CalendarView calendar = getView().findViewById(R.id.calendarView);
         bundle = new Bundle();
         calendar.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
             @Override

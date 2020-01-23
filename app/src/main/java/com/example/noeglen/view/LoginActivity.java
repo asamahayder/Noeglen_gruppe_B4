@@ -15,7 +15,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.noeglen.R;
-import com.example.noeglen.data.ILicenseDAO;
 import com.example.noeglen.data.MyCallBack;
 import com.example.noeglen.data.LicenseDAO;
 import com.example.noeglen.data.LicenseDTO;
@@ -47,7 +46,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private ArrayList<VideoDTO> videoList;
     private FirebaseAuth mAuth;
     private FirebaseUser mUser;
-    ILicenseDAO iLicenseDAO;
+    LicenseDAO iLicenseDAO;
     Map<String, String> licenseInfo = new HashMap<>();
 
     @Override

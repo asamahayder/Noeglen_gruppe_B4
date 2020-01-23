@@ -21,14 +21,11 @@ public class DiaryMainF extends Fragment implements View.OnClickListener{
 
    private TextView datefelt;
    private CurrentDate currentDate;
-   private SeekBar seekBar;
    private ImageView imageView;
    private IMainActivity iMain;
    private int  smiley;
    private String [] questions;
    private String date;
-   private Bundle bundle;
-
 
 
     @Nullable
@@ -41,7 +38,7 @@ public class DiaryMainF extends Fragment implements View.OnClickListener{
     public void onViewCreated(@NonNull final View view, @Nullable Bundle savedInstanceState) {
 
         datefelt = getView().findViewById(R.id.currDate);
-        bundle = getArguments();
+        Bundle bundle = getArguments();
 
 
         if (bundle != null){
@@ -61,7 +58,7 @@ public class DiaryMainF extends Fragment implements View.OnClickListener{
 
         questions = new String[4];
 
-        seekBar = getView().findViewById(R.id.simpleSeekBar);
+        SeekBar seekBar = getView().findViewById(R.id.simpleSeekBar);
         seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             // Bestemmer emojien og spørgsmålerne efter brugernes humør-valg
             @Override

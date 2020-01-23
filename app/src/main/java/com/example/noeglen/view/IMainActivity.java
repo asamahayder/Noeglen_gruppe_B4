@@ -4,6 +4,10 @@ import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
+/**
+ * Main aktivitetens interface der håndterer når man skal ændre fra et fragment til et andet
+ */
+
 public interface IMainActivity {
 
     void inflateFragment(String tag);
