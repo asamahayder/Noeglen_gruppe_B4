@@ -68,6 +68,7 @@ public class Diary1F extends Fragment  implements View.OnClickListener{
         currentDateInstace = CurrentDate.getInstance();
         currentDate = new SimpleDateFormat("dd/M/yyyy").format(currentDateInstace.getDate());
 
+
         if(date == null){
             date = currentDate;
         }
@@ -94,23 +95,22 @@ public class Diary1F extends Fragment  implements View.OnClickListener{
         answer3 = getView().findViewById(R.id.answer3);
         answer4 = getView().findViewById(R.id.answer4);
 
-
-
         question1 = getView().findViewById(R.id.question1);
         question2 = getView().findViewById(R.id.question2);
         question3 = getView().findViewById(R.id.question3);
         question4 = getView().findViewById(R.id.question4);
 
-
-
-
-
-
-
         question1.setText(questions[0]);
         question2.setText(questions[1]);
         question3.setText(questions[2]);
         question4.setText(questions[3]);
+
+
+        if (bundle.getInt("smiley") == 3) {
+            System.out.println("##########################€€€€€€€€€€€€€€€€€€€€€");
+            question4.setVisibility(View.GONE);
+            answer4.setVisibility(View.GONE);
+        }
 
         gson = new Gson();
         String sPrefKey = getString(R.string.sharedPreferencesKey);
