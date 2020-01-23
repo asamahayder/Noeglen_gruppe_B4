@@ -269,7 +269,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             public void onCallBack(Object object) {
                 setVideoList((ArrayList<VideoDTO>) object);
                 saveVideoList();
-                handleGoToDashBoard();
+                handleCheckWelcomeScreen();
             }
         });
     }
@@ -295,6 +295,22 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putString(videoListKey, listInJSON);
         editor.apply();
+    }
+
+    public void handleCheckWelcomeScreen(){
+        SharedPreferences sharedPreferences = getSharedPreferences(getString(R.string.sharedPreferencesKey),MODE_PRIVATE);
+        String isFirstTime = sharedPreferences.getString(getString(R.string.firstTimeKey),null);
+
+        if (isFirstTime == null || isFirstTime.equals("true")){
+            SharedPreferences.Editor editor = sharedPreferences.edit();
+            editor.putString(getString(R.string.firstTimeKey),"false");
+            editor.apply();
+            Intent intent = new Intent(LoginActivity.this,WelcomeTextActivity.class);
+            startActivity(intent);
+            this.finish();
+        }else{
+            handleGoToDashBoard();
+        }
     }
 
 
